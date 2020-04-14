@@ -1,0 +1,317 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+}
+.carousel-indicators {
+  list-style-type: none !important;
+}
+
+.carousel-control-next, .carousel-control-prev {
+  display: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.no-exists {
+ display: none;
+}
+.main-theme-color {
+  color: #3577d4 !important;
+}
+.main-theme-text {
+  color: #434c5f !important;
+}
+.red-text {
+  color: #b00020 !important;
+}
+.full-width {
+  width: 100%;
+}
+.half-width {
+  width: 50%;
+}
+
+.spacing-less {
+  padding: 0rem 0rem !important;
+  margin: 0px !important;
+}
+
+.strong {
+  font-weight: bold !important;
+}
+.bg-white {
+  background-color: #ffffff;
+}
+.font-14 {
+  font-size: 14px;
+}
+.font-32 {
+  font-size: 32px;
+}
+.margin-left {
+  margin-left: 5px;
+}
+
+.width-5 {
+  width: 6%;
+}
+
+
+.middle {
+  vertical-align: middle !important;
+}
+.top-10 {
+  padding-top: 10px !important;
+}
+.right-10 {
+  padding-right: 10px !important;
+}
+.width-20 {
+  width: 20%;
+}
+.socials {
+  padding-left: 5px;
+}
+.footer-side-right {
+  min-width: 20%;
+}
+.main-layout {
+  min-height: 100vh;
+}
+.full-height {
+  height: 100%;
+}
+.vertical-bottom {
+  min-height: 100%;
+}
+.footer-nav-ex {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+}
+.footer-nav-ex-fix {
+  height: 88px;
+}
+.footer-cover {
+  min-height: 90px;
+}
+.swagup-big-banner {
+  width: 172;
+    height: 40px;
+}
+
+.empty-section-svg {
+  width: 180px;
+  height: 180px;
+}
+
+.submit-button {
+  background-color: #3577d4 !important;
+  color: #ffffff !important;
+  text-decoration-line: none !important;
+  width: 80%;
+  padding-top: 14px !important;
+  padding-bottom: 15px !important;
+ 
+}
+
+.carousel-indicators{
+  margin: 0px !important;
+}
+
+.submit-button:hover {
+  background-color: #2466c3 !important;
+  color: #ffffff !important;
+  font-weight: bold;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    bottom: 0%;
+    left: 50%;
+  }
+
+  100% {
+    opacity: 1;
+    bottom: 0%;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+    -ms-transform: translateX(0px);
+    transform: translateX(0px);
+  }
+}
+
+
+.category-paper:hover .bottom-button {
+  -webkit-animation-name: fadeInRight;
+  animation-name: fadeInRight;
+}
+
+.bottom-button {
+  width: 100%;
+  opacity:0;
+  position: absolute;
+  bottom: 10px;
+}
+
+@keyframes moveUp {
+  0% {
+    
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+  100% {
+     
+    -webkit-transform: translateY(-350%);
+    -ms-transform: translateY(-350%);
+    transform: translateY(-350%);
+   
+   
+  }
+}
+
+.fadeInUp {
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp;
+}
+.category-tittle {
+  width: 100%;
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffffff;
+text-align: center;
+position: absolute;
+top: 50%;
+text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75)
+}
+.icon-path {
+  -webkit-filter: drop-shadow( 0px 0px 12px #188218);
+  filter: drop-shadow( 0px 0px 12px #188218);
+}
+
+
+.button-path {
+  -webkit-filter: drop-shadow( 1px 1px 13px #188218);
+  filter: drop-shadow( 1px 1px 13px #188218);
+}
+
+.category-paper:hover .category-tittle { 
+  
+  -webkit-animation-name: moveUp;
+  animation-name: moveUp;
+}
+
+.category-slogan {
+  width: 100%;
+  top: 50%;
+text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75);
+  font-size: 18px;
+  font-weight: normal;
+  color: #ffffff;
+text-align: center;
+position: absolute;
+opacity: 0;
+}
+
+.category-paper:hover .category-slogan {
+ 
+  
+  -webkit-animation-name: fadeInLeft;
+  animation-name: fadeInLeft;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+@media (max-width: 767px) {
+
+  .swagup-big-banner {
+    width: 92;
+    height: 24px;
+  }
+  .logoBanner {
+    width: 80px;
+    height: 18px;
+  }
+
+  .swagupBanner {
+    width: 70px;
+    height: 18px;
+  }
+
+  .mobile-no {
+    visibility: collapse !important;
+    width: 0px !important;
+  }
+  .mobile-expand {
+    width: 100%;
+  }
+  .mobile-easy-margin {
+    margin: 0px 5% !important;
+  }
+  .mobile-socials {
+    width: 15px;
+    height: 15px;
+    padding-left: 2px;
+    margin-top: 10px;
+  }
+}
+
+.delete-icon:hover {
+  color: red
+}

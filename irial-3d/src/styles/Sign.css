@@ -1,0 +1,62 @@
+.right-pic {
+  max-height: 440px;
+  text-align: right;
+  width: 90%;
+}
+.right-frame {
+  text-align: right;
+  width: 50%;
+  vertical-align: top;
+}
+.left-frame {
+  text-align: left;
+  width: 50%;
+  vertical-align: middle;
+  padding-left: 10%;
+  padding-right: 5%;
+}
+
+.grow-height {
+  max-height: 100%;
+}
+
+.forgot {
+  font-size: 13px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.submit-button { 
+  margin-top: 40px !important;
+  margin-bottom: 20px !important;
+}
+
+
+@media (max-width: 767px) {
+  .right-frame {
+    visibility: collapse;
+    width: 0;
+  }
+  .left-frame {
+    width: 100%;
+  }
+  .forgot {
+    text-align: left;
+  }
+}
+
+.carousel-control-next {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  cursor: pointer;
+}
+
+
+.carousel-control-prev {
+
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+  left: 0
+}

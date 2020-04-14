@@ -1,0 +1,17 @@
+{
+  "name": "vinalestraveler",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "next": "^9.1.1",
+    "react": "16.10.2",
+    "react-dom": "16.10.2"
+  }
+}

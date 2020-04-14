@@ -1,0 +1,82 @@
+/* @import url("//hello.myfonts.net/count/3842d3");
+@font-face {
+  font-family: "Futura-PT, sans-serifLTPro";
+  src: url("webfonts/3842D3_0_0.eot");
+  src: url("webfonts/3842D3_0_0.eot?#iefix") format("embedded-opentype"),
+    url("webfonts/3842D3_0_0.woff2") format("woff2"),
+    url("webfonts/3842D3_0_0.woff") format("woff"),
+    url("webfonts/3842D3_0_0.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Futura";
+  src: url("webfonts/3842F8_0_0.eot");
+  src: url("webfonts/3842F8_0_0.eot?#iefix") format("embedded-opentype"),
+    url("webfonts/3842F8_0_0.woff2") format("woff2"),
+    url("webfonts/3842F8_0_0.woff") format("woff"),
+    url("webfonts/3842F8_0_0.ttf") format("truetype");
+} */
+
+/* body {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+} */
+html {
+  max-width: 100vw;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  min-height: 100%;
+  width: 100% !important;
+  padding-right: 0 !important;
+  overflow-y: scroll !important;
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+p {
+  margin: 0px;
+  font-family: "Roboto";
+  font-size: 18px;
+}
+
+a {
+  color: #3577d4;
+  text-decoration-line: none;
+}
+
+iframe {
+  max-width: 340px !important;
+  width: 340px !important;
+}
+
+.fb-like span {
+  
+  max-width: 340px !important;
+  width: 340px !important;
+}

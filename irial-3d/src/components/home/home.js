@@ -1,0 +1,70 @@
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import PromoField from "./promoField";
+import FrontTourPromo from "./frontTourPromo";
+import FrontAttractions from "./frontAttractions"
+import FrontLodgingPromo from "./frontLodgingPromo"
+import AboutContact from "./aboutContact"
+import { connect } from "react-redux";
+import {Helmet} from 'react-helmet';
+import {getLanguage, isServer} from "../../apis/tools";
+import { fetchSections } from "../../actions";
+
+
+class HomeOut extends Component {
+  state = {};
+  componentWillMount() {
+    if(!isServer)
+    {
+      const { fetchSections } = this.props;
+      fetchSections();
+    }
+    
+  }
+  render() {
+    const { classes, sections, language } = this.props;
+
+    if(sections === undefined || sections.length < 3)
+     return <div/>
+     
+    return (
+
+         <div className={classes.container}>
+            <Helmet>
+              <meta name="language" content={getLanguage()}/>
+              <title>{language.PageTittle} | {language.HomePageTittle} </title>
+              <meta name="description" content={language.HomePageDescription} />
+              <meta name="keywords" content={language.HomePageTags} /> 
+            </Helmet>
+          <PromoField />
+          <FrontTourPromo  section={sections[0]} reverse={true}/>
+          <FrontAttractions section={sections[1]}/>
+          <FrontLodgingPromo  section={sections[2]} reverse={false}/>
+          <AboutContact></AboutContact>
+        </div>
+    );
+  }
+}
+const styles = theme => ({
+  container: {
+    paddingBottom: 130
+  }
+});
+
+
+
+
+HomeOut.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+
+const mapStateTopProps = state => {
+  return {
+    sections: state.sections,
+    language: state.language
+  };
+};
+
+export default connect(mapStateTopProps, { fetchSections })(withStyles(styles)(HomeOut));
