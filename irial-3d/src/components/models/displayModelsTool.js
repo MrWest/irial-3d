@@ -3,19 +3,19 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
 import _ from "lodash";
-import { AttractionCardLeft, AttractionImageLeft, AttractionCardRight, AttractionImageRight} from './modelsSections';
+import { ModelCardLeft, ModelImageLeft, ModelCardRight, ModelImageRight} from './modelsSections';
 
-class DisplayAttractionsTool extends Component {
+class DisplayModelsTool extends Component {
  
   handleSelectPack = pack => {
    
   };
 
   render() {
-    const { classes , attractions, language} = this.props;
+    const { classes , models, language} = this.props;
     return (
       <main className={classes.container}>
-        {attractions.filter( a => parseInt(a.status) > 0).map((attraction, index) => (
+        {models.filter( a => parseInt(a.status) > 0).map((model, index) => (
           <section key={index} 
             className={
               index % 2 === 1 ? classes.grayBackground : classes.whiteBackground
@@ -26,18 +26,18 @@ class DisplayAttractionsTool extends Component {
                 <Grid container spacing={0}>
                   {index % 2 === 0 ? (
                      <Fragment>
-                        <AttractionCardLeft classes={classes} attraction={attraction} language={language}/>
-                        <AttractionImageLeft classes={classes} attraction={attraction}/>
+                        <ModelCardLeft classes={classes} model={model} language={language}/>
+                        <ModelImageLeft classes={classes} model={model}/>
                    </Fragment>
                   ) : (
                      <Fragment>
                         <Grid container spacing={0} className={classes.noMobile}>
-                          <AttractionImageRight classes={classes} attraction={attraction}/>
-                          <AttractionCardRight classes={classes} attraction={attraction} language={language}/>
+                          <ModelImageRight classes={classes} model={model}/>
+                          <ModelCardRight classes={classes} model={model} language={language}/>
                         </Grid>
                         <Grid container spacing={0} className={classes.onMobile}>
-                          <AttractionCardRight classes={classes} attraction={attraction} language={language}/>
-                          <AttractionImageRight classes={classes} attraction={attraction}/>
+                          <ModelCardRight classes={classes} model={model} language={language}/>
+                          <ModelImageRight classes={classes} model={model}/>
                         </Grid>
                     </Fragment>
 
@@ -187,4 +187,4 @@ const mapStateTopProps = state => {
   };
 };
 
-export default connect(mapStateTopProps)(withStyles(styles)(DisplayAttractionsTool));
+export default connect(mapStateTopProps)(withStyles(styles)(DisplayModelsTool));

@@ -15,4 +15,6 @@ export * from "./tourActionsServer";
 export * from "./attractionsActionsServer";
 export * from "./lodgingsActionsServer";
 export * from "./postActionsServer";
+export * from "./modelsActions";
+export * from "./modelsActionsServer";
 

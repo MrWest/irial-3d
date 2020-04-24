@@ -32,6 +32,8 @@ import LodgingEditForm from "../src/components/forms/lodgingEditForm";
 import BlogHome from "../src/components/blog/BlogHome";
 import BlogExpanded from "../src/components/blog/BlogExpanded";
 import Helmet from 'react-helmet'
+import ModelsHome from "../src/components/models/modelsHome";
+import ModelDetails from "../src/components/models/modelsDetails";
 
 
 const isServer = typeof window === 'undefined';
@@ -70,6 +72,8 @@ class Layout extends React.Component {
         <Route path="/blog" component={BlogHome}  />
         <Route path="/posts/:slug" component={BlogExpanded} exact />
         <Route component={Home} exact /> 
+        <Route path="/models/:category" component={ModelsHome} exact />
+        <Route path="/model/:id" component={ModelDetails} exact />
         
       </Switch>
     )}

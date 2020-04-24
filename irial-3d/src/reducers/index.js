@@ -24,6 +24,7 @@ import ServiceRateReducer from "./serviceRateReducer";
 import PostsReducer from "./postsReducer";
 import SelectedPostReducer from "./selectedPostReducer";
 import BlogCategoriesReducer from "./blogCategoriesReducer";
+import ModelsReducer from "./modelsReducer";
 
 export default combineReducers({
   accountView: AccountViewReducer,
@@ -46,7 +47,8 @@ export default combineReducers({
   serviceRate: ServiceRateReducer,
   posts: PostsReducer,
   selectedPost: SelectedPostReducer,
-  blogCategories: BlogCategoriesReducer
+  blogCategories: BlogCategoriesReducer,
+  models: ModelsReducer
 });
 
 //Will Change

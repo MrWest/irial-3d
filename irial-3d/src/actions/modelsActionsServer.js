@@ -1,7 +1,7 @@
-import { FETCH_MODELS, SELECT_MODEL , DELETE_MODEL, UPDATE_MODEL, ADD_MODEL, ADD_MODEL_COMMENT, DELETE_MODEL_COMMENT, CHANGE_MODEL_COMMENT, SET_USER_SERVICE_RATE} from "./types";
+import { FETCH_MODELS, SELECT_MODEL } from "./types";
 
 import DashBoard from "../apis/DashBoard";
-import {generatePHPParameters, getLanguage, generateAppendParameters} from "../apis/tools";
+import {generatePHPParameters, getLanguage} from "../apis/tools";
 
 
 export const fetchModelsServer = async reduxStore => {

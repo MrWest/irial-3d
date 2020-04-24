@@ -4,11 +4,11 @@ import { Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { selectAttraction, addAttractionComment, updateAttractionComment,
-   deleteAttractionComment, rateAttraction, getCategory } from "../../actions";
+import { selectModel, addModelComment, updateModelComment,
+   deleteModelComment, rateModel, getCategory } from "../../actions";
 
 import ResourceTabs from "../tools/resourceTabs"
-import  AttractionBookingForm  from "../forms/attractionBookingForm";
+//import  ModelBookingForm  from "../forms/modelBookingForm";
 import CommentsTool from "../tools/commentsTool";
 import {Helmet} from 'react-helmet';
 import Loader from '../global/loader';
@@ -19,9 +19,9 @@ import { isServer } from '../../apis/tools';
 
 
 
-class AttractionDetails extends Component {
+class ModelDetails extends Component {
   state = {
-    idAttraction: -1,
+    idModel: -1,
     category: {},
     busy: true
   };
@@ -30,7 +30,7 @@ class AttractionDetails extends Component {
 
      if(!isServer) {
       const { id } = this.props.match.params;
-      this.props.selectAttraction(id).then(rslt => {
+      this.props.selectModel(id).then(rslt => {
         this.props.getCategory(rslt.id_category).then(()=>{
           this.setState({ busy: false });
         });      
@@ -47,10 +47,10 @@ class AttractionDetails extends Component {
   componentDidUpdate(){
     
     const { id } = this.props.match.params;
-    if(parseInt(this.state.idAttraction) !== parseInt(id)){
-      this.props.selectAttraction(id)
-      this.setState({idAttraction: id})
-     // alert(this.state.idattraction)
+    if(parseInt(this.state.idModel) !== parseInt(id)){
+      this.props.selectModel(id)
+      this.setState({idModel: id})
+     // alert(this.state.idmodel)
     }
     
    //alert(id)
@@ -70,22 +70,22 @@ class AttractionDetails extends Component {
  }
 
  handleOnRateClick = value => {
-  const { rateAttraction, attraction, sign } = this.props;
-  rateAttraction({id_attraction: attraction.id, id_user: sign.loginInfo.id, rate: value })
+  const { rateModel, model, sign } = this.props;
+  rateModel({id_model: model.id, id_user: sign.loginInfo.id, rate: value })
  }
 
   render() {
-    const { classes, attraction, category } = this.props;   
+    const { classes, model, category } = this.props;   
     const { busy } = this.state;
     
-    if(attraction.name === undefined)
+    if(model.name === undefined)
      return <div/>
 
     return (
       <main className={classes.container}>
          <Helmet>
-              <title>Viñales Traveler | {attraction.name}</title>
-              <meta name="description" content={attraction.general_description} />
+              <title>Lumion Models | {model.name}</title>
+              <meta name="description" content={model.general_description} />
            </Helmet>
       <Grid container justify="center" spacing={0}>
       <Grid item className={classes.center}>
@@ -93,17 +93,17 @@ class AttractionDetails extends Component {
               <Grid item xs={12} md={8} >
               <p style={{fontSize: 16, lineHeight: 1.3, color: '#0f2440 !important', fontFamily: 'Roboto !important'}}>
                       <h1 variant="p" align="left" className={classes.categoryTittle} style={{ display: 'inline'}}>
-                        {attraction.name+ " "}
+                        {model.name+ " "}
                       </h1>
-                    {attraction.full_description}
+                    {model.full_description}
               </p>
               </Grid>
               <Grid item xs={12}  md={4}>
                 <div  className={classes.mobileAlign}>
                 {this.props.sign.isLogged && this.props.sign.loginInfo &&
-                     (this.props.sign.loginInfo.type === "admin" || parseInt(this.props.sign.loginInfo.id, 10) === parseInt(attraction.id_user)) &&
+                     (this.props.sign.loginInfo.type === "admin" || parseInt(this.props.sign.loginInfo.id, 10) === parseInt(model.id_user)) &&
                       <p style={{textAlign: "left"}}>
-                          <Link to={"/attractionedit/" + attraction.id} style={{background: "#ffffff", fontSize: 14}}>
+                          <Link to={"/modeledit/" + model.id} style={{background: "#ffffff", fontSize: 14}}>
                                {this.props.language.Edit}
                           </Link>
                    </p>
@@ -116,20 +116,20 @@ class AttractionDetails extends Component {
               <Grid item xs={12} md={6}>
               <Grid container >
                 <Grid item xs={12} md={8}>
-                    <p  style={{paddingBottom: 16}}><strong>{this.props.language.Price}:</strong> ${attraction.price} {attraction.currency} {attraction.price_specifics}</p>
-                    <p><strong>{this.props.language.Languages}:</strong> {attraction.languages}</p>
+                    <p  style={{paddingBottom: 16}}><strong>{this.props.language.Price}:</strong> ${model.price} {model.currency} {model.price_specifics}</p>
+                    <p><strong>{this.props.language.Languages}:</strong> {model.languages}</p>
                 </Grid>
                 <Grid item xs={12} md={6} className={classes.onMoblie}>
-                    <p><strong>{this.props.language.Duration}:</strong> {attraction.how_long}</p>
+                    <p><strong>{this.props.language.Duration}:</strong> {model.how_long}</p>
                     
                 </Grid>
                </Grid>
               
-               {attraction.program.length > 0 && (
+               {model.program.length > 0 && (
                 <Fragment>
                  <p style={{fontWeight: "bold", marginTop: 20, fontSize: 18}} >{this.props.language.Program}:</p>
                <ul>
-                 {attraction.program.map(prg => (
+                 {model.program.map(prg => (
                    <li><p style={{ color: '#0f2440 !important'}}>{prg.content}</p></li>
                  ))}
                </ul>
@@ -138,18 +138,18 @@ class AttractionDetails extends Component {
               
                
 
-                <div style={{paddingTop: 20}}>
-                 <AttractionBookingForm attraction={attraction}></AttractionBookingForm>
-               </div>
+                {/*<div style={{paddingTop: 20}}>
+                 <AttractionBookingForm model={model}></AttractionBookingForm>
+                 </div>*/}
               </Grid>
               <Grid item xs={12} md={6} style={{marginTop: -20, marginBottom: 20, paddingBottom: 24}}>
 
-              <ResourceTabs images={attraction.images}  videos={attraction.videos}  tabs={["Images", "Videos"]} ></ResourceTabs>
+              <ResourceTabs images={model.images}  videos={model.videos}  tabs={["Images", "Videos"]} ></ResourceTabs>
               
               <div style={{paddingTop: 20}}>
                 {/* <h3 style={{fontWeight: "bold"}}>{this.props.language.Comments}:</h3> */}
-                <CommentsTool service="attraction" comments={attraction.comments} idService={attraction.id} serviceUrl={"/attraction/"}  onRate={this.handleOnRateClick}
-                rate={attraction.rate} addComment={this.props.addAttractionComment} updateComment={this.props.updateAttractionComment} deleteComment={this.props.deleteAttractionComment}></CommentsTool>
+                <CommentsTool service="model" comments={model.comments} idService={model.id} serviceUrl={"/model/"}  onRate={this.handleOnRateClick}
+                rate={model.rate} addComment={this.props.addModelComment} updateComment={this.props.updateModelComment} deleteComment={this.props.deleteModelComment}></CommentsTool>
                </div>
               </Grid>
 
@@ -266,13 +266,13 @@ const styles = theme => ({
   }
 });
 
-AttractionDetails.propTypes = {
+ModelDetails.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
 const mapStateTopProps = state => {
   return {
-    attraction: state.selectedAttraction,
+    model: state.selectedModel,
     categories: state.sections[1]? state.sections[1].categories : [],
     category: state.selectedCategory,
     language:  state.language,
@@ -280,5 +280,5 @@ const mapStateTopProps = state => {
   };
 };
 
-export default connect(mapStateTopProps, {selectAttraction, addAttractionComment,
-   updateAttractionComment, deleteAttractionComment, rateAttraction, getCategory })(withStyles(styles)(AttractionDetails));
+export default connect(mapStateTopProps, {selectModel, addModelComment,
+   updateModelComment, deleteModelComment, rateModel, getCategory })(withStyles(styles)(ModelDetails));

@@ -139,7 +139,11 @@ const strings = {
       Uploading: "Uploading",
       MAX_FILE_SIZE: 'You tried to exceed the maximum file size of {0}',
       UPLOAD_FAILED: "Unable to upload this specific file. Try another one.",
-      Models: "Models"
+      Models: "Models",
+      ModelsPageDescription: "Contact guides with mastery in several languages and specialized in hiking, horseback riding, climbing, diving and traditional dances.",
+      ModelsPageTags: "viñales tour company, ecological tour, horseback riding, hiking, climbs, dance class, restaurant, viñales, vinales tour, viñales tour, vinales tour company",
+      ModelsPageTittle: "Lumion Models Catalog"
+     
     },
     es: {
       welcome:"Bienvenido a Viñales Traveler",
@@ -281,7 +285,11 @@ const strings = {
       Uploading: "Subiendo",
       MAX_FILE_SIZE: 'Esta tratando de exceder el tamaño maximo de archivo de {0}',
       UPLOAD_FAILED: "Error al intentar subir el archivo. Pruebe con otro.",
-      Models: "Modelos"
+      Models: "Modelos",
+      ModelsPageDescription: "Contacte con guías con dominio en varios idiomas y especializados en senderismo, monta de caballo, escalada, Buceo y bailes tradicionales",
+      ModelsPageTags: "turismo, viñales, vinales tour, viñales turismo,  compañía de turismo, turismo ecológico,  reservar, paseos a caballo, caminatas, escaladas, comida local",
+      ModelsPageTittle: "Catálogo de Modelos de Lumion",
+      
 
     }
    }

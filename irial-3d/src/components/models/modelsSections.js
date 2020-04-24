@@ -5,7 +5,7 @@ import { CoolLink, ImageLink } from "../buttons";
 import StarRatingComponent from 'react-star-rating-component';
 
 
-export const AttractionCardLeft = ({attraction, classes, language}) => {
+export const ModelCardLeft = ({model, classes, language}) => {
   return (
     <Grid item sm={12} md={7}>
     <div style={{ paddingLeft: 40, paddingRight: 40, textAlign: "left" }}>
@@ -16,7 +16,7 @@ export const AttractionCardLeft = ({attraction, classes, language}) => {
       component="p"
       className={classes.packNameText}
     >
-      {attraction.name}
+      {model.name}
     </p>
   
      </Grid>
@@ -27,7 +27,7 @@ export const AttractionCardLeft = ({attraction, classes, language}) => {
               name="rate1" 
               editing={false}
               starCount={5}
-              value={attraction.rate}
+              value={model.rate}
               emptyStarColor={"#ccc"} /* color of non-selected icons, default `#333` */
               // onStarClick={this.onStarClick.bind(this)}
             />
@@ -43,7 +43,7 @@ export const AttractionCardLeft = ({attraction, classes, language}) => {
       style={{ marginTop: 3 }}
     />
      <p className={classes.packPriceText} >
-      <span style={{fontSize: 20}}>$</span><span className={classes.numberText}>{attraction.price}</span>  {attraction.currency} {attraction.price_specifics} 
+      <span style={{fontSize: 20}}>$</span><span className={classes.numberText}>{model.price}</span>  {model.currency} {model.price_specifics} 
     </p>
   
     <p
@@ -52,13 +52,13 @@ export const AttractionCardLeft = ({attraction, classes, language}) => {
       className={classes.descriptionText}
       style={{ fontSize: 16, color: '#0f2440 !important', fontFamily: 'Roboto !important' }}
     >
-      {attraction.general_description}
+      {model.general_description}
     </p>
     </div>
 
     <div align="left" style={{ paddingTop: 40, paddingLeft: 40 }}>
       <CoolLink
-        href={"/attraction/"+attraction.id}
+        href={"/model/"+model.id}
         height={56} width={225} fill={"#188218"} color={"#ffffff"}
       >
         {language.ViewOffer}
@@ -68,7 +68,7 @@ export const AttractionCardLeft = ({attraction, classes, language}) => {
         component="p"
         className={classes.packDisclaimer}
       >
-        {(attraction.note && attraction.note !== "") && <span><sup>*</sup>{attraction.note}</span>}
+        {(model.note && model.note !== "") && <span><sup>*</sup>{model.note}</span>}
       </p>
     </div>
   </Grid>
@@ -76,19 +76,19 @@ export const AttractionCardLeft = ({attraction, classes, language}) => {
 }
 
 
-export const AttractionImageLeft = ({attraction, classes}) =>{
+export const ModelImageLeft = ({model, classes}) =>{
 
   return (
     <Grid item sm={12} md={5} className={classes.textLeft}>
-    {attraction.images.length> 0 && 
-    <ImageLink href={"/attraction/"+attraction.id}>
-     <img  alt={attraction.name} 
-       src={attraction.images && attraction.images.length > 0 ? attraction.images[0].url: ""}
+    {model.images.length> 0 && 
+    <ImageLink href={"/model/"+model.id}>
+     <img  alt={model.name} 
+       src={model.images && model.images.length > 0 ? model.images[0].url: ""}
        className={classNames(
          classes.packImg,
          classes.textLeft
        )}
-       alt={attraction.name}
+       alt={model.name}
      />
      </ImageLink>}
    </Grid>
@@ -96,7 +96,7 @@ export const AttractionImageLeft = ({attraction, classes}) =>{
 }
 
 
-export const AttractionCardRight = ({attraction, classes, language}) =>{
+export const ModelCardRight = ({model, classes, language}) =>{
 
   return (
     <Grid item sm={12} md={7} align="right">
@@ -112,7 +112,7 @@ export const AttractionCardRight = ({attraction, classes, language}) =>{
                       name="rate1" 
                       editing={false}
                       starCount={5}
-                      value={attraction.rate}
+                      value={model.rate}
                       emptyStarColor={"#ccc"} /* color of non-selected icons, default `#333` */
                       // onStarClick={this.onStarClick.bind(this)}
                     />
@@ -127,7 +127,7 @@ export const AttractionCardRight = ({attraction, classes, language}) =>{
               component="p"
               className={classes.packNameText}
             >
-              {attraction.name}
+              {model.name}
             </p>
 
             </Grid>
@@ -146,7 +146,7 @@ export const AttractionCardRight = ({attraction, classes, language}) =>{
     </Grid>
      
     <p className={classes.packPriceText} style={{textAlign: "right"}}>
-        <span style={{fontSize: 20}}>$</span><span className={classes.numberText}>{attraction.price}</span> {attraction.currency}  {attraction.price_specifics} 
+        <span style={{fontSize: 20}}>$</span><span className={classes.numberText}>{model.price}</span> {model.currency}  {model.price_specifics} 
       </p>
     
       <p
@@ -155,7 +155,7 @@ export const AttractionCardRight = ({attraction, classes, language}) =>{
         className={classes.descriptionText}
         style={{ fontSize: 16, color: '#0f2440 !important', fontFamily: 'Roboto !important' }}
       >
-        {attraction.general_description}
+        {model.general_description}
       </p>
     </div>
 
@@ -164,7 +164,7 @@ export const AttractionCardRight = ({attraction, classes, language}) =>{
        
         <Grid xs={12} item align="right" >
         <CoolLink
-              href={"/attraction/"+attraction.id}                   
+              href={"/model/"+model.id}                   
             
               height={56} width={225} fill={"#188218"} color={"#ffffff"}
             >
@@ -181,7 +181,7 @@ export const AttractionCardRight = ({attraction, classes, language}) =>{
           component="p"
           className={classes.packDisclaimer}
         >
-          {(attraction.note && attraction.note !== "") && <span><sup>*</sup>{attraction.note}</span>}
+          {(model.note && model.note !== "") && <span><sup>*</sup>{model.note}</span>}
         </p>
       </div>
     </Grid>
@@ -189,12 +189,12 @@ export const AttractionCardRight = ({attraction, classes, language}) =>{
 }
 
 
-export const AttractionImageRight = ({attraction, classes}) =>{
+export const ModelImageRight = ({model, classes}) =>{
 
   return (
     <Grid item sm={12} md={5} className={classes.textRight}>
-      <ImageLink href={"/attraction/"+attraction.id}>
-          <img alt={attraction.name} src={attraction.images && attraction.images.length > 0 ? attraction.images[0].url: ""} className={classes.packImg} alt={attraction.name}/>
+      <ImageLink href={"/model/"+model.id}>
+          <img alt={model.name} src={model.images && model.images.length > 0 ? model.images[0].url: ""} className={classes.packImg} alt={model.name}/>
       </ImageLink>
     </Grid>
   );

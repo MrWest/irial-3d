@@ -12,14 +12,14 @@ import {
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchAttractions, sortAttractions } from "../../actions";
+import { fetchModels, sortModels } from "../../actions";
 import {Helmet} from 'react-helmet';
 import Loader from '../global/loader';
-import DisplayAttractionsTool from "./displayAttractionsTool";
+import DisplayModelsTool from "./displayModelsTool";
 import {getLanguage} from "../../apis/tools";
 import { isServer } from '../../apis/tools';
 
-class AttractionsHome extends Component {
+class ModelsHome extends Component {
   state = {
     sort: "all",
     category: {},
@@ -30,7 +30,7 @@ class AttractionsHome extends Component {
     if(!isServer) {
       const { category } = this.props.match.params;
       this.setState({sort: category})
-      this.props.sortAttractions(category).then(() => {
+      this.props.sortModels(category).then(() => {
         this.setState({ busy: false });
       });
       this.props.categories.map(c =>{
@@ -50,7 +50,7 @@ class AttractionsHome extends Component {
     if(this.state.sort !==  event.target.value)
     {
         this.setState({ sort: event.target.value, busy: true });
-        this.props.sortAttractions(event.target.value).then(() => {
+        this.props.sortModels(event.target.value).then(() => {
           this.setState({ busy: false });
         });
 
@@ -59,7 +59,7 @@ class AttractionsHome extends Component {
             this.setState({category: c})
 
       });
-      this.props.history.push("/attractions/"+event.target.value);
+      this.props.history.push("/models/"+event.target.value);
     }
     
   };
@@ -73,9 +73,9 @@ class AttractionsHome extends Component {
       <main  ref={this.myRef} className={classes.container}>
           <Helmet>
               <meta name="language" content={getLanguage()}/>
-              <title>{language.PageTittle} | {language.AttractionsPageTittle} </title>
-              <meta name="description" content={language.AttractionsPageDescription} />
-              <meta name="keywords" content={language.AttractionsPageTags}  /> 
+              <title>{language.PageTittle} | {language.ModelsPageTittle} </title>
+              <meta name="description" content={language.ModelsPageDescription} />
+              <meta name="keywords" content={language.ModelsPageTags}  /> 
             </Helmet>
       <Grid container justify="center" spacing={0}>
         <Grid item className={classes.center}>
@@ -125,8 +125,8 @@ class AttractionsHome extends Component {
             </Grid>
             <Grid item xs={12}>
                
-               <DisplayAttractionsTool
-                 attractions={this.props.attractions}
+               <DisplayModelsTool
+                 models={this.props.models}
                />
             
            </Grid>
@@ -240,17 +240,17 @@ const styles = theme => ({
   }
 });
 
-AttractionsHome.propTypes = {
+ModelsHome.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
 const mapStateTopProps = state => {
   return {
-    attractions: state.attractions,
+    models: state.models,
     categories: state.sections[1]? state.sections[1].categories : [],
     section: state.sections[1],
     language: state.language
   };
 };
 
-export default connect(mapStateTopProps, {fetchAttractions, sortAttractions })(withStyles(styles)(AttractionsHome));
+export default connect(mapStateTopProps, {fetchModels, sortModels })(withStyles(styles)(ModelsHome));
