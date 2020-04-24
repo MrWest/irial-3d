@@ -138,7 +138,8 @@ const strings = {
       Yes: "Yes",
       Uploading: "Uploading",
       MAX_FILE_SIZE: 'You tried to exceed the maximum file size of {0}',
-      UPLOAD_FAILED: "Unable to upload this specific file. Try another one."
+      UPLOAD_FAILED: "Unable to upload this specific file. Try another one.",
+      Models: "Models"
     },
     es: {
       welcome:"Bienvenido a Viñales Traveler",
@@ -279,7 +280,8 @@ const strings = {
       Yes: "Si",
       Uploading: "Subiendo",
       MAX_FILE_SIZE: 'Esta tratando de exceder el tamaño maximo de archivo de {0}',
-      UPLOAD_FAILED: "Error al intentar subir el archivo. Pruebe con otro."
+      UPLOAD_FAILED: "Error al intentar subir el archivo. Pruebe con otro.",
+      Models: "Modelos"
 
     }
    }

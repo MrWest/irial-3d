@@ -27,6 +27,8 @@ import LodgingEditForm from "./forms/lodgingEditForm";
 import AccountHome from "./account/accountHome";
 import BlogHome from "./blog/BlogHome";
 import BlogExpanded from "./blog/BlogExpanded";
+import ModelsHome from "./models/modelsHome";
+import ModelsDetails from "./models/modelsDetails"
 
 // import "../styles/App.css";
 // import "../styles/video-react.css"; // import css
@@ -65,6 +67,8 @@ class App extends Component {
             <Route path="/lodgingedit/:id" component={LodgingEditForm} exact />
             <Route path="/blog" component={BlogHome}  />
             <Route path="/posts/:slug" component={BlogExpanded} exact />
+            <Route path="/models/:category" component={ModelsHome} exact />
+            <Route path="/models/:id" component={ModelsDetails} exact />
 
 
             <Route component={Home} exact />

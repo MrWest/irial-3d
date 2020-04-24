@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://www.solutiontriangle.com/backend/ajax"
+  baseURL: "http://localhost:8080/ibackend/ajax"
 });
