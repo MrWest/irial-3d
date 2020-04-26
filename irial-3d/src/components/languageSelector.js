@@ -1,15 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { Grid, Select, MenuItem, InputLabel } from '@material-ui/core';
 import {setLanguageEn, setLanguageEs,
-   sortTours, selectTour, sortAttractions, selectAttraction, sortLodgings, selectLodging, 
+   sortTours, selectTour, sortAttractions, selectAttraction, 
    getSection, fetchSections, getCategory, getCategories, fetchPosts, selectPost } from "../actions/index";
 
 import { withRouter } from "react-router-dom";
@@ -87,19 +83,7 @@ class LanguageSelector extends React.Component {
       })
     }
 
-    if(view === "lodgings")
-    {
-      this.props.fetchSections()      
-      this.props.getCategories();
-      this.props.sortLodgings(param)
-    }
-    if(view === "lodging" || view === "lodgingedit")
-    {
-      this.props.selectLodging(param).then(resp => {
-        this.props.getCategory(resp.id_category);
-      })
-     
-    }
+  
 
     if(view === "sectionedit" )
     {
@@ -211,6 +195,6 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { setLanguageEn, setLanguageEs, sortTours, selectTour, sortAttractions, selectAttraction, sortLodgings, selectLodging,
+  { setLanguageEn, setLanguageEs, sortTours, selectTour, sortAttractions, selectAttraction,
     getSection ,fetchSections , getCategory, getCategories, selectPost, fetchPosts}
 )(withStyles(styles)(withRouter(LanguageSelector)));

@@ -15,8 +15,6 @@ import SelectedAttractionsReducer from "./selectedAttractionReducer";
 import CategoriesReducer from "./categoriesReducer";
 import SelectedSectionReducer from "./selectedSectionReducer"
 import SelectedCategoryReducer from "./selectedCategoryReducer"
-import LodgingsReducer from "./lodgingsReducer"
-import SelectedLodgingReducer from "./selectedLodgingReducer";
 import LanguageReducer from "./languageReducer";
 import SignFacebookReducer from "./signFacebookReducer";
 import RedirectUrlReducer from "./redirectUrlReducer";
@@ -40,8 +38,6 @@ export default combineReducers({
   categories: CategoriesReducer,
   selectedSection: SelectedSectionReducer,
   selectedCategory: SelectedCategoryReducer,
-  lodgings: LodgingsReducer,
-  selectedLodging: SelectedLodgingReducer,
   language: LanguageReducer,
   signFacebook: SignFacebookReducer,
   redirectUrl: RedirectUrlReducer,

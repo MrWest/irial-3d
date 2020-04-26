@@ -9,7 +9,7 @@ import SectionEditForm from "../../forms/sectionEditForm";
 import Nameable from "./nameable";
 import { connect } from "react-redux";
 import nameable from "./nameable";
-import {getCategories, sortTours, deleteCategory, deleteTour, filterLodgings, deleteLodging, sortAttractions, deleteAttraction, deleteModel, sortModels} from "../../../actions";
+import {getCategories, sortTours, deleteCategory, deleteTour, sortAttractions, deleteAttraction, deleteModel, sortModels} from "../../../actions";
 import AddIcon from "@material-ui/icons/AddCircle";
 import {RoundedButtonLink} from "../../buttons";
 import { withRouter } from "react-router-dom";
@@ -58,8 +58,7 @@ class Administration extends Component {
     if(this.state.services === "attractions")
      this.props.sortAttractions(event.currentTarget.id)
 
-     if(this.state.services === "lodgings")
-     this.props.filterLodgings(event.currentTarget.id)
+     
      if(this.state.services === "models")
      this.props.sortModels(event.currentTarget.id)
   }
@@ -95,10 +94,7 @@ class Administration extends Component {
 
     this.props.deleteAttraction(event.currentTarget.id)
    }
-   handleDeleteLodging = event => {
-
-    this.props.deleteLodging(event.currentTarget.id)
-   }
+  
    handleDeleteModel = event => {
 
     this.props.deleteModel(event.currentTarget.id)
@@ -108,10 +104,7 @@ class Administration extends Component {
     // console.log("jajaja",event.currentTarget)
     this.props.history.push("/attractionedit/"+ event.currentTarget.id)
   }
-  editLodging = event => {
-    // console.log("jajaja",event.currentTarget)
-    this.props.history.push("/lodgingedit/"+ event.currentTarget.id)
-  }
+
   editModel = event => {
     // console.log("jajaja",event.currentTarget)
     this.props.history.push("/modeledit/"+ event.currentTarget.id)
@@ -194,11 +187,7 @@ class Administration extends Component {
                                 </RoundedButtonLink>
                               }
                               
-                              {this.state.services === "lodgings" &&
-                                <RoundedButtonLink  color={"#ffffff"} size={40} border={0}  to={this.state.categoryIndex != -1? "/lodgingadd/"+this.state.categoryIndex: "#"}>
-                                                    <AddIcon color="#188218" style={{fontSize: 34, color: "#188218"}}></AddIcon>
-                                </RoundedButtonLink>
-                              }
+                             
 
                               {this.state.services === "models" &&
                                 <RoundedButtonLink  color={"#ffffff"} size={40} border={0}  to={this.state.categoryIndex != -1? "/modeladd/"+this.state.categoryIndex: "#"}>
@@ -221,11 +210,7 @@ class Administration extends Component {
               <Nameable nameable = {attraction}  size="small" selected = { parseInt(this.state.serviceIndex) === parseInt(attraction.id)} onClick={this.selectService} onEdit={this.editAttraction}  onDelete={this.handleDeleteAttraction}  id={attraction.id}></Nameable>
               ))}
 
-               {this.state.services === "lodgings" && this.props.lodgings.map(lodging => (
-
-                <Nameable nameable = {lodging}  size="small" selected = { parseInt(this.state.serviceIndex) === parseInt(lodging.id)} onClick={this.selectService} onEdit={this.editLodging}  onDelete={this.handleDeleteLodging}  id={lodging.id}></Nameable>
-                ))}
-                
+              
               {this.state.services === "models" && this.props.models.map(model => (
 
                 <Nameable nameable = {model}  size="small" selected = { parseInt(this.state.serviceIndex) === parseInt(model.id)} onClick={this.selectService} onEdit={this.editModel}  onDelete={this.handleDeleteModel}  id={model.id}></Nameable>
@@ -328,12 +313,11 @@ const mapStateToProps = state => {
     categories: state.categories,
     tours: state.tours,
     attractions: state.attractions,
-    lodgings: state.lodgings,
     models: state.models,
     language: state.language
   };
 };
 export default connect(
-  mapStateToProps, {getCategories, sortTours, deleteCategory, deleteTour, sortAttractions, deleteAttraction, filterLodgings, deleteLodging, deleteModel, sortModels }
+  mapStateToProps, {getCategories, sortTours, deleteCategory, deleteTour, sortAttractions, deleteAttraction, deleteModel, sortModels }
  
 )(withStyles(styles)(withRouter(Administration)));

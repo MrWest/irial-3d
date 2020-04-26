@@ -9,7 +9,7 @@ import SectionEditForm from "../../forms/sectionEditForm";
 import Nameable from "./nameable";
 import { connect } from "react-redux";
 import nameable from "./nameable";
-import {filterLodgingsUser, deleteLodging, sortAttractionsUser, deleteAttraction} from "../../../actions";
+import { sortAttractionsUser, deleteAttraction} from "../../../actions";
 import AddIcon from "@material-ui/icons/AddCircle";
 import {RoundedButtonLink} from "../../buttons";
 import { withRouter } from "react-router-dom";
@@ -22,7 +22,6 @@ componentWillMount(){
 
   // alert(this.props.sign.loginInfo)
   if(this.props.sign.loginInfo){
-    this.props.filterLodgingsUser(this.props.sign.loginInfo.id)
     this.props.sortAttractionsUser(this.props.sign.loginInfo.id)
   }
  
@@ -37,23 +36,17 @@ editAttraction = event => {
   // console.log("jajaja",event.currentTarget)
   this.props.history.push("/attractionedit/"+ event.currentTarget.id)
 }
-editLodging = event => {
-  // console.log("jajaja",event.currentTarget)
-  this.props.history.push("/lodgingedit/"+ event.currentTarget.id)
-}
 
 handleDeleteAttraction = event => {
 
   this.props.deleteAttraction(event.currentTarget.id)
  }
- handleDeleteLodging = event => {
-
-  this.props.deleteLodging(event.currentTarget.id)
- }
+ 
  handleChange = event => {
 
   this.props.history.push(event.target.value)
  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -77,7 +70,7 @@ handleDeleteAttraction = event => {
                     margin="none"
                     
                   >
-                   {this.props.lodgingsCategories.map(category =>(
+                  {/* {this.props.lodgingsCategories.map(category =>(
 
                           <MenuItem value={"/lodgingadd/" + category.id}>
                           <ListItemIcon className={classes.icon}>
@@ -87,7 +80,7 @@ handleDeleteAttraction = event => {
                               
                           </MenuItem>
                         ))}
-
+                  */}
                         {this.props.categories.map(category =>(
 
                         <MenuItem value={"/attractionadd/" + category.id}>
@@ -107,10 +100,7 @@ handleDeleteAttraction = event => {
       
         <Grid container spacing={4} >
           <Grid item xs={12} md={4}>
-          {this.props.lodgings.map(lodging => (
          
-           <Nameable nameable = {lodging}  size="large" selected = { parseInt(this.state.serviceIndex) === parseInt(lodging.id)} onClick={this.selectService} onEdit={this.editLodging}  onDelete={this.handleDeleteLodging}  id={lodging.id}></Nameable>
-            ))}
           {this.props.attractions.map(attraction => (
 
            
@@ -217,15 +207,13 @@ const mapStateToProps = state => {
   return {
     // sections: state.sections,
     categories: state.sections[1]? state.sections[1].categories : [],
-    lodgingsCategories: state.sections[2]? state.sections[2].categories: [],
     attractions: state.attractions,
-    lodgings: state.lodgings,
     language: state.language,
     sign: state.sign
 
   };
 };
 export default connect(
-  mapStateToProps, {filterLodgingsUser, deleteLodging, sortAttractionsUser, deleteAttraction}
+  mapStateToProps, { sortAttractionsUser, deleteAttraction}
  
 )(withStyles(styles)(withRouter(BusinessAdmin)));

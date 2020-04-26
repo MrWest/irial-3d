@@ -20,10 +20,6 @@ import TourEditForm from "./forms/tourEditForm";
 import TourAddForm from "./forms/tourAddForm";
 import AttractionAddForm from "./forms/attractionAddForm";
 import AttractionEditForm from "./forms/attractionEditForm";
-import LodgingsHome from "./lodgings/lodgingsHome";
-import LodgingDetails from "./lodgings/lodgingDetails"
-import LodgingAddForm from "./forms/lodgingAddForm";
-import LodgingEditForm from "./forms/lodgingEditForm";
 import AccountHome from "./account/accountHome";
 import BlogHome from "./blog/BlogHome";
 import BlogExpanded from "./blog/BlogExpanded";
@@ -63,10 +59,6 @@ class App extends Component {
             <Route path="/touradd/:id" component={TourAddForm} exact />
             <Route path="/attractionadd/:id" component={AttractionAddForm} exact />
             <Route path="/attractionedit/:id" component={AttractionEditForm} exact />
-            <Route path="/lodgings/:sort" component={LodgingsHome} exact />
-            <Route path="/lodging/:id" component={LodgingDetails} exact />
-            <Route path="/lodgingadd/:id" component={LodgingAddForm} exact />
-            <Route path="/lodgingedit/:id" component={LodgingEditForm} exact />
             <Route path="/blog" component={BlogHome}  />
             <Route path="/posts/:slug" component={BlogExpanded} exact />
             <Route path="/models/:category" component={ModelsHome} exact />

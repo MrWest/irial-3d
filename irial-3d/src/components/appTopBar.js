@@ -269,17 +269,7 @@ class AppTopBar extends Component {
                    </div>
                    
                   </MenuItem>
-                  <MenuItem
-                    component="button"
-                    onClick={() => this.handleCloseMenu("/lodgings/all")}
-                    className={classes.menuItemButton}
-                    
-                  >
-                   
-                   <div  align="center" style={{width: "100%"}}>
-                      {language.Lodgings}
-                   </div>
-                  </MenuItem>
+                 
                   <MenuItem
                     component="button"
                     // onClick={() => this.handleCloseMenu("/#aboutus")}

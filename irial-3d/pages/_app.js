@@ -20,15 +20,11 @@ import AttractionsHome from "../src/components/attractions/attractionsHome";
 import AttractionDetails from "../src/components/attractions/attractionsDetails";
 import SectionEditForm from "../src/components/forms/sectionEditForm";
 import CategoryEditForm from "../src/components/forms/categoryEditForm";
-import LodgingsHome from "../src/components/lodgings/lodgingsHome";
-import LodgingDetails from "../src/components/lodgings/lodgingDetails";
 import AttractionAddForm from "../src/components/forms/attractionAddForm";
-import LodgingAddForm from "../src/components/forms/lodgingAddForm";
 import TourAddForm from "../src/components/forms/tourAddForm";
 import CategoryAddForm from "../src/components/forms/categoryAddForm";
 import AttractionEditForm from "../src/components/forms/attractionEditForm";
 import TourEditForm from "../src/components/forms/tourEditForm";
-import LodgingEditForm from "../src/components/forms/lodgingEditForm";
 import BlogHome from "../src/components/blog/BlogHome";
 import BlogExpanded from "../src/components/blog/BlogExpanded";
 import Helmet from 'react-helmet'
@@ -62,15 +58,11 @@ class Layout extends React.Component {
         <Route path="/attraction/:id" component={AttractionDetails} exact />
         <Route path="/sectionedit/:id" component={SectionEditForm} exact />
         <Route path="/categoryedit/:id" component={CategoryEditForm} exact />
-        <Route path="/lodgings/:sort" component={LodgingsHome} exact />
-        <Route path="/lodging/:id" component={LodgingDetails} exact />
-        <Route path="/attractionadd/:id" component={AttractionAddForm} exact />        
-        <Route path="/lodgingadd/:id" component={LodgingAddForm} exact />
+        <Route path="/attractionadd/:id" component={AttractionAddForm} exact />  
         <Route path="/touradd/:id" component={TourAddForm} exact />
         <Route path="/categoryadd/:id" component={CategoryAddForm} exact />
         <Route path="/attractionedit/:id" component={AttractionEditForm} exact />
         <Route path="/touredit/:id" component={TourEditForm} exact />
-        <Route path="/lodgingedit/:id" component={LodgingEditForm} exact />
         <Route path="/blog" component={BlogHome}  />
         <Route path="/posts/:slug" component={BlogExpanded} exact />
         <Route path="/models/:category" component={ModelsHome} exact />

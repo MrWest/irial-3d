@@ -8,7 +8,7 @@ import Paper from "@material-ui/core/Paper";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { Link } from "react-router-dom";
 import { Field, reduxForm, Form, initialize} from 'redux-form';
-import { signUp,  FuckIngshit, addLodging, addAttraction, signFacebook, notifyActivity } from "../../actions";
+import { signUp,  FuckIngshit, addAttraction, signFacebook, notifyActivity } from "../../actions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Grid, Select, Checkbox, FormControlLabel, MenuItem, FormHelperText } from "@material-ui/core";
@@ -179,10 +179,7 @@ handleTextChange = async event => {
     picture: this.props.signFacebookInfo.first_name? this.props.signFacebookInfo.picture : undefined})
 
      // console.log("SinIn-user: ", user)
-
-    if(this.isIn(this.props.lodgingsCategories, data.business_category))
-     this.props.addLodging({id_category: data.business_category, name: data.business_name, id_user: user.id})
-    else
+     
      this.props.addAttraction({id_category: data.business_category, name: data.business_name, id_user: user.id})
   
 
@@ -325,7 +322,7 @@ handleTextChange = async event => {
                     // onSelectionChange={this.handleChange}
                     margin="normal"
                   >
-                     {this.props.lodgingsCategories.map(category =>(
+                    {/* {this.props.lodgingsCategories.map(category =>(
 
                         <MenuItem value={category.id}>
                             <p style={{ fontSize: 14, marginBottom: 0 }}>
@@ -333,7 +330,7 @@ handleTextChange = async event => {
                         </p>
                         </MenuItem>
                         ))}
-
+                    */}
                     {this.props.categories.map(category =>(
 
                       <MenuItem value={category.id}>
@@ -539,7 +536,7 @@ const mapStateToProps = state => {
   return {
     language: state.language  ,
     categories: state.sections[1]? state.sections[1].categories : [],
-    lodgingsCategories: state.sections[2]? state.sections[2].categories: [],
+   // lodgingsCategories: state.sections[2]? state.sections[2].categories: [],
     signFacebookInfo: state.signFacebook,
     initialValues: state.signFacebook,
    
@@ -548,7 +545,7 @@ const mapStateToProps = state => {
 };
 export default connect(
   mapStateToProps,
-  {initialize, signUp, addLodging, addAttraction, signFacebook}
+  {initialize, signUp, addAttraction, signFacebook}
 )(reduxForm({
   form: 'SignUpForm', // a unique identifier for this form 
   enableReinitialize: true,
