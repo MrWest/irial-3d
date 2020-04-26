@@ -25,6 +25,7 @@ import PostsReducer from "./postsReducer";
 import SelectedPostReducer from "./selectedPostReducer";
 import BlogCategoriesReducer from "./blogCategoriesReducer";
 import ModelsReducer from "./modelsReducer";
+import SelectedModelsReducer from "./selectedModelReducer";
 
 export default combineReducers({
   accountView: AccountViewReducer,
@@ -48,7 +49,8 @@ export default combineReducers({
   posts: PostsReducer,
   selectedPost: SelectedPostReducer,
   blogCategories: BlogCategoriesReducer,
-  models: ModelsReducer
+  models: ModelsReducer,
+  selectedModel: SelectedModelsReducer
 });
 
 //Will Change

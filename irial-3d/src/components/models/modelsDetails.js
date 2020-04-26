@@ -120,12 +120,11 @@ class ModelDetails extends Component {
                     <p><strong>{this.props.language.Languages}:</strong> {model.languages}</p>
                 </Grid>
                 <Grid item xs={12} md={6} className={classes.onMoblie}>
-                    <p><strong>{this.props.language.Duration}:</strong> {model.how_long}</p>
-                    
+                    <p><strong>{this.props.language.Duration}:</strong> {model.lumion_version}</p>
                 </Grid>
                </Grid>
               
-               {model.program.length > 0 && (
+              {/* {model.program.length > 0 && (
                 <Fragment>
                  <p style={{fontWeight: "bold", marginTop: 20, fontSize: 18}} >{this.props.language.Program}:</p>
                <ul>
@@ -138,7 +137,7 @@ class ModelDetails extends Component {
               
                
 
-                {/*<div style={{paddingTop: 20}}>
+                <div style={{paddingTop: 20}}>
                  <AttractionBookingForm model={model}></AttractionBookingForm>
                  </div>*/}
               </Grid>

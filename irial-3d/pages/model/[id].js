@@ -20,6 +20,8 @@ ModelDetailsServer.getInitialProps = async function({ reduxStore, query: { id } 
   console.log(id);
   const sections = await fetchSectionsServer(reduxStore);
   const model = await selectModelServer(id, reduxStore);
+  
+  console.log('modelsRslt', model)
   const category = await getCategoryServer(model.id_category, reduxStore);
   console.log("category: ", category);
   return {model, categories: sections[1].categories, category};

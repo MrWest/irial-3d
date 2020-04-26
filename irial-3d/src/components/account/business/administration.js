@@ -9,7 +9,7 @@ import SectionEditForm from "../../forms/sectionEditForm";
 import Nameable from "./nameable";
 import { connect } from "react-redux";
 import nameable from "./nameable";
-import {getCategories, sortTours, deleteCategory, deleteTour, filterLodgings, deleteLodging, sortAttractions, deleteAttraction} from "../../../actions";
+import {getCategories, sortTours, deleteCategory, deleteTour, filterLodgings, deleteLodging, sortAttractions, deleteAttraction, deleteModel, sortModels} from "../../../actions";
 import AddIcon from "@material-ui/icons/AddCircle";
 import {RoundedButtonLink} from "../../buttons";
 import { withRouter } from "react-router-dom";
@@ -60,6 +60,8 @@ class Administration extends Component {
 
      if(this.state.services === "lodgings")
      this.props.filterLodgings(event.currentTarget.id)
+     if(this.state.services === "models")
+     this.props.sortModels(event.currentTarget.id)
   }
 
   selectService = event => {
@@ -97,6 +99,11 @@ class Administration extends Component {
 
     this.props.deleteLodging(event.currentTarget.id)
    }
+   handleDeleteModel = event => {
+
+    this.props.deleteModel(event.currentTarget.id)
+   }
+   
   editAttraction = event => {
     // console.log("jajaja",event.currentTarget)
     this.props.history.push("/attractionedit/"+ event.currentTarget.id)
@@ -105,6 +112,11 @@ class Administration extends Component {
     // console.log("jajaja",event.currentTarget)
     this.props.history.push("/lodgingedit/"+ event.currentTarget.id)
   }
+  editModel = event => {
+    // console.log("jajaja",event.currentTarget)
+    this.props.history.push("/modeledit/"+ event.currentTarget.id)
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -187,6 +199,15 @@ class Administration extends Component {
                                                     <AddIcon color="#188218" style={{fontSize: 34, color: "#188218"}}></AddIcon>
                                 </RoundedButtonLink>
                               }
+
+                              {this.state.services === "models" &&
+                                <RoundedButtonLink  color={"#ffffff"} size={40} border={0}  to={this.state.categoryIndex != -1? "/modeladd/"+this.state.categoryIndex: "#"}>
+                                                    <AddIcon color="#188218" style={{fontSize: 34, color: "#188218"}}></AddIcon>
+                                </RoundedButtonLink>
+                              }
+
+
+
               </Grid>
           </Grid>
           <div style={{borderTop: this.props.tours.length === 0? "1px #ccc solid": 0 }}>
@@ -204,6 +225,11 @@ class Administration extends Component {
 
                 <Nameable nameable = {lodging}  size="small" selected = { parseInt(this.state.serviceIndex) === parseInt(lodging.id)} onClick={this.selectService} onEdit={this.editLodging}  onDelete={this.handleDeleteLodging}  id={lodging.id}></Nameable>
                 ))}
+                
+              {this.state.services === "models" && this.props.models.map(model => (
+
+                <Nameable nameable = {model}  size="small" selected = { parseInt(this.state.serviceIndex) === parseInt(model.id)} onClick={this.selectService} onEdit={this.editModel}  onDelete={this.handleDeleteModel}  id={model.id}></Nameable>
+              ))}
             </div>
           </Grid>
         
@@ -303,10 +329,11 @@ const mapStateToProps = state => {
     tours: state.tours,
     attractions: state.attractions,
     lodgings: state.lodgings,
+    models: state.models,
     language: state.language
   };
 };
 export default connect(
-  mapStateToProps, {getCategories, sortTours, deleteCategory, deleteTour, sortAttractions, deleteAttraction, filterLodgings, deleteLodging}
+  mapStateToProps, {getCategories, sortTours, deleteCategory, deleteTour, sortAttractions, deleteAttraction, filterLodgings, deleteLodging, deleteModel, sortModels }
  
 )(withStyles(styles)(withRouter(Administration)));

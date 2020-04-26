@@ -10,7 +10,7 @@ export const fetchSections = () => async dispatch => {
     let results;
 
     await DashBoard.get("/sections/get_sections.php"+ generatePHPParameters({lang})).then( async sectionsDb =>{
-
+      console.log('xxx: ',sectionsDb)
       var sectionsRslt = sectionsDb.data.slice()
 
       const promises = sectionsRslt.map( async section => {   

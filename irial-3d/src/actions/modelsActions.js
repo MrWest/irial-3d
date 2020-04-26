@@ -156,8 +156,7 @@ export const fetchModels = () => async dispatch => {
     uploadInfo.append("full_description", model.full_description);
     uploadInfo.append("price", model.price);
     uploadInfo.append("price_specifics", model.price_specifics);
-    uploadInfo.append("how_long", model.how_long);
-    uploadInfo.append("languages", model.languages);
+    uploadInfo.append("lumion_version", model.lumion_version);
     uploadInfo.append("currency", model.currency);
     uploadInfo.append("note", model.note);    
     uploadInfo.append("lang", lang);

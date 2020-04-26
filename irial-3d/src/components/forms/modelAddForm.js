@@ -1,19 +1,23 @@
 import React from "react";
 import {
   Grid,
+  Button,
   Select,
   RadioGroup,
+  FormControlLabel,
+  Checkbox,
   Input,
   FormControl,
   InputLabel,
   FormHelperText,
   Typography,
+  TextField,
   MenuItem
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import {FixedButton, CoolButton} from "../buttons"
-import {addAttraction, notifyActivity} from "../../actions";
+import {addModel, notifyActivity} from "../../actions";
 import CarouselTool from "../carouselTool";
 import SectionIcon from "@material-ui/icons/CardTravel";
 import AddIcon from "@material-ui/icons/AddCircle";
@@ -259,7 +263,7 @@ const styles = theme => ({
     quantity: 1
   }
 
-class AttractionAddForm extends React.Component {
+class ModelAddForm extends React.Component {
   state = {id_category: -1, currency: "CUC"
 }
 
@@ -273,11 +277,11 @@ handleChange2 = event => {
         // console.log("SHIT: ", data)
         data.id_category = this.state.id_category
         data.id_user = this.props.sign.loginInfo.id;
-        this.props.addAttraction(data);
+        this.props.addModel(data);
 
-        let message = sign.loginInfo.first_name + " " + sign.loginInfo.last_name + " has added a new attraction business to vinalestraveler called: " + data.name;
+        let message = sign.loginInfo.first_name + " " + sign.loginInfo.last_name + " has added a new model business to vinalestraveler called: " + data.name;
 
-     let subject = "New attraction";
+     let subject = "New model";
 
      let email = sign.loginInfo.email;
 
@@ -323,7 +327,7 @@ handleChange2 = event => {
                       component="h4"
                       className={classes.typographyText}
                     >
-                      {language.AddFormTittle.format(language.Attraction)}
+                      {language.AddFormTittle.format(language.Model)}
                     
                     </Typography>
                     <Grid container>
@@ -340,7 +344,7 @@ handleChange2 = event => {
                     component="p"
                     className={classes.typographyTextSmall}
                   >          
-                    {language.AddFormText.format(language.Attraction)}
+                    {language.AddFormText.format(language.Model)}
                   </Typography>
               </Grid>
             </Grid>
@@ -526,10 +530,10 @@ const mapStateToProps = state => {
   };
   export default connect(
     mapStateToProps,
-    { initialize, addAttraction}
+    { initialize, addModel}
   )(
-    reduxForm({ form: "attractionAddForm",  validate })(
-      withStyles(styles)(withRouter(AttractionAddForm))
+    reduxForm({ form: "modelAddForm",  validate })(
+      withStyles(styles)(withRouter(ModelAddForm))
     )
   );
 

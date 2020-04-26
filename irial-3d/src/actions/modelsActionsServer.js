@@ -63,7 +63,6 @@ export const fetchModelsServer = async reduxStore => {
     const modelsDb = await DashBoard.post("/models/get_model.php"+ generatePHPParameters({id, lang}))
   
     var modelsRslt = modelsDb.data
-   
         
     const modelsImagesDb = await DashBoard.get("/models/get_model_images.php"+ generatePHPParameters({idModel: modelsRslt.id}))
     modelsRslt.images = modelsImagesDb.data
