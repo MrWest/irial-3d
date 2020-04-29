@@ -124,7 +124,6 @@ class ModelsHome extends Component {
               
             </Grid>
             <Grid item xs={12}>
-               
                <DisplayModelsTool
                  models={this.props.models}
                />
@@ -247,8 +246,8 @@ ModelsHome.propTypes = {
 const mapStateTopProps = state => {
   return {
     models: state.models,
-    categories: state.sections[1]? state.sections[1].categories : [],
-    section: state.sections[1],
+    categories: state.sections[2]? state.sections[2].categories : [],
+    section: state.sections[2],
     language: state.language
   };
 };
