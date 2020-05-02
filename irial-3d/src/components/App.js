@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter, HashRouter, Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 import Header from "./header";
 import Home from "./home/home";
 import SignIn from "./sign/signIn";
@@ -83,4 +84,9 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+    return {
+     cart: state.cart
+    };
+  };
+  export default connect( mapStateToProps, {} )(App);

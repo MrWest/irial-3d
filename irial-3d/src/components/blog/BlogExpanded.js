@@ -55,7 +55,7 @@ render () {
   </main>
 );
 }
-};
+}
 
 
 const mapStateTopProps = state => {

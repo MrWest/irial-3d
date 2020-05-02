@@ -24,7 +24,7 @@ import Tab from "@material-ui/core/Tab";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import {CoolButton} from "../buttons"
-import {selectModel, updateModel, uploadModelImage, deleteModelImage, uploadModelVideo, deleteModelVideo } from "../../actions";
+import {selectModel, updateModel, uploadModelImage, deleteModelImage, uploadModelVideo, deleteModelVideo, fetchTags, toggleModelTags } from "../../actions";
 import CarouselTool from "../carouselTool";
 import SectionIcon from "@material-ui/icons/CardTravel";
 import AddIcon from "@material-ui/icons/AddCircle";
@@ -40,11 +40,18 @@ import {
   format
 } from "redux-form-validators";
 import Loader from '../global/loader';
+import { StylessButton } from '../buttons';
 import { Player } from 'video-react';
 import { Link } from "react-router-dom";
 
 //  var ImagePicker = require('react-native-image-picker');
 
+
+const Tag = ({ classes, tag, disabled, onClick }) => (
+  <StylessButton onClick={() => onClick(disabled)} className={disabled? classes.tagContainerDisabled : classes.tagContainer}>
+    {tag.name}
+  </StylessButton>
+);
 
 const BorderLinearProgress = withStyles({
   root: {
@@ -106,9 +113,12 @@ const renderError = ({ error, touched }) => {
   }
 };
 
-export const renderToggleInput = (field) => (
+export const renderToggleInput = (field) => {
+  console.log('xxx: ', field);
+  return (
   <Switch  checked={field.input.value} onChange={field.input.onChange} icons={false} color="primary" />
 );
+};
 
 const renderRadioGroup = ({ input, ...rest }) => (
   <RadioGroup
@@ -161,7 +171,27 @@ const styles = theme => ({
         paddingRight: "16px !important",
         minWidth: "100vw"
       }
-    }, 
+    },
+    tagContainer: {
+      borderRadius: 28,
+      backgroundColor: '#337ab7',
+      border: '3px solid #dedede',
+      padding: '6px 24px',
+      width: '100%',
+      color: '#ffffff',
+      textAlign: 'center',
+      cursor: 'pointer'
+    },
+    tagContainerDisabled: {
+      borderRadius: 28,
+      backgroundColor: '#dedede',
+      border: '3px solid #337ab7',
+      padding: '6px 24px',
+      width: '100%',
+      color: '#434343',
+      textAlign: 'center',
+      cursor: 'pointer'
+    },
     widthMobile: {
       [theme.breakpoints.down("sm")]: {
         width: "100% !important",
@@ -439,7 +469,7 @@ class ModelEditForm extends React.Component {
 
      
   render(){
-    const { pristine, name, theme, classes, language, handleSubmit } = this.props;
+    const { pristine, name, theme, classes, language, handleSubmit, model, tags, toggleModelTags } = this.props;
     const { busy, completed, error  } = this.state;
       
       return (
@@ -464,7 +494,7 @@ class ModelEditForm extends React.Component {
               </Grid>
               <Grid item alignItems="baseline">
 
-                        <Typography
+                    <Typography
                       variant="h4"
                       component="h4"
                       className={classes.typographyText}
@@ -498,7 +528,7 @@ class ModelEditForm extends React.Component {
 
                       <div style={{display: "table", height: 40}}>
                          <div style={{display: "table-cell", verticalAlign: "middle"}}>
-                          <Link to={"/model/" + this.props.model.id} style={{background: "#ffffff"}}>
+                          <Link to={"/model/" + model.id} style={{background: "#ffffff"}}>
                            {this.props.language.See}
                           </Link>
                           </div>                   
@@ -624,7 +654,7 @@ class ModelEditForm extends React.Component {
                         fullWidth
                         autoComplete="lumion_version"
                         component={renderTextField}
-                        label={language.Duration}
+                        label={language.LumionVersion}
                         />      
                 
                 
@@ -699,7 +729,7 @@ class ModelEditForm extends React.Component {
 
                   <div style={{width: "100%", right: 0, position: "relative", marginBottom: 0}} align="right">
 
-                  <input type="file" name="fileToUpload"  id="fileToUpload" disabled = {!this.props.model.images || this.props.model.images.length > 9}  accept="image/x-png,image/gif,image/jpeg"
+                  <input type="file" name="fileToUpload"  id="fileToUpload" disabled = {!model.images || model.images.length > 9}  accept="image/x-png,image/gif,image/jpeg"
                    onChange={this.selectImageFile.bind(this)} style={{display: "none"}}></input>
                   <label htmlFor={"fileToUpload"}>
                     <AddIcon color="#188218" style={{fontSize: 34, color: "#188218", background: "#ffffff", borderRadius: 34}}></AddIcon>
@@ -707,7 +737,7 @@ class ModelEditForm extends React.Component {
                   </label>
                                 
                   </div>
-                  {this.props.model.images&& (this.props.model.images.length === 0 ? 
+                  {model.images&& (model.images.length === 0 ? 
                   <div style={{border: "1px #3577d4 solid", height: 200, width: 200, borderRadius: 100, display: "table"}}>
 
                   <div style={{margin: "auto", display: "table-cell", textAlign: "center", verticalAlign: "middle"}}>
@@ -716,8 +746,8 @@ class ModelEditForm extends React.Component {
                   </div>
                   :
                   <CarouselTool>
-                  {this.props.model.images && this.props.model.images.map(image =>(
-                    <div align="right" style={{width: "100%", position: "relative", textAlign: "right"}}>
+                  {model.images && model.images.map(image =>(
+                    <div key={image.id} align="right" style={{width: "100%", position: "relative", textAlign: "right"}}>
                       
                       <img style={{width: "100%", borderTopLeftRadius: 4, objectFit: "cover"}} alt={image.alt} src={image.url}/>
                           <div style={{width: 40, right: 0, position: "absolute", bottom: 15}}>
@@ -742,7 +772,7 @@ class ModelEditForm extends React.Component {
 
                   <div style={{right: 0, position: "relative", marginBottom: 0, width: "100%"}} align="right">
 
-                  <input type="file" name="fileToUpload2"  id="fileToUpload2" disabled = {!this.props.model.videos  ||  this.props.model.videos.length > 2} 
+                  <input type="file" name="fileToUpload2"  id="fileToUpload2" disabled = {!model.videos  ||  model.videos.length > 2} 
                   onChange={this.selectVideoFile.bind(this)}  accept="video/mp4" style={{display: "none"}}></input>
                   <label htmlFor={"fileToUpload2"}>
                     <AddIcon color="#188218" style={{fontSize: 34, color: "#188218", background: "#ffffff", borderRadius: 34}}></AddIcon>
@@ -750,7 +780,7 @@ class ModelEditForm extends React.Component {
                   </label>
                                 
                   </div>
-                  {this.props.model.videos&& (this.props.model.videos.length === 0 ? 
+                  {model.videos&& (model.videos.length === 0 ? 
                   <div style={{border: "1px #3577d4 solid", height: 200, width: 200, borderRadius: 100, display: "table"}}>
 
                   <div style={{margin: "auto", display: "table-cell", textAlign: "center", verticalAlign: "middle"}}>
@@ -759,7 +789,7 @@ class ModelEditForm extends React.Component {
                   </div>
                   :
                   <CarouselTool>
-                  {this.props.model.videos && this.props.model.videos.map(video =>(
+                  {model.videos && model.videos.map(video =>(
                     <div align="right" style={{width: "100%", height: 245, position: "relative", textAlign: "right" }}>
                       
                       <div style={{position: "relative",  textAlign: "center",}}>
@@ -790,7 +820,18 @@ class ModelEditForm extends React.Component {
 
                     </SwipeableViews>
 
-
+                 {tags && model.tags && (
+                 <Grid container>
+                   <p className={classes.modelText} style={{ marginBottom: 16, marginTop: 124 }}><strong>{language.Tags}:</strong></p>
+                    <Grid container spacing={2}>
+                      {tags.map(tag => (
+                        <Grid key={tag.name} xs={3} style={{ marginBottom: 4 }}>
+                          <Tag classes={classes} tag={tag} disabled={!model.tags.find(t => t.id === tag.id)} onClick={activate => toggleModelTags(model, tag.id, activate)} />
+                         </Grid>
+                      ))}
+                    </Grid>
+                </Grid>
+               )}
 
                   </Grid>           
 
@@ -814,6 +855,7 @@ const mapStateToProps = state => {
      model: state.selectedModel,
      language: state.language,
      sign: state.sign,
+     tags: state.tags,
      initialValues: 
      {
         name: state.selectedModel.name,
@@ -832,7 +874,7 @@ const mapStateToProps = state => {
   export default connect(
     mapStateToProps,
     { initialize, selectModel, updateModel, uploadModelImage, 
-      deleteModelImage, uploadModelVideo, deleteModelVideo}
+      deleteModelImage, uploadModelVideo, deleteModelVideo, fetchTags, toggleModelTags}
   )(
     reduxForm({ form: "modelEditForm", enableReinitialize: true, validate })(
       withStyles(styles)(withRouter(ModelEditForm))

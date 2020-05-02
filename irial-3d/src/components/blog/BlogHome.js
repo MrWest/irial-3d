@@ -41,7 +41,7 @@ class BlogHome extends Component {
   </main>
 );
   }
-};
+}
 
 const mapStateTopProps = state => {
   return {

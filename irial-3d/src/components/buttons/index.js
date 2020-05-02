@@ -42,6 +42,50 @@ export function FontMovilButton({ className, href, children, onClick }) {
   );
 }
 
+
+export function StylessButton({
+  id,
+  className,
+  children,
+  width = 'auto',
+  height = 'auto',
+  onClick,
+  onMouseEnter,
+  onMouseLeave,
+  onLoad,
+  textAlign = 'center',
+  fontFamily = 'Roboto'
+}) {
+  return (
+    <button
+      type="button"
+      id={id}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      className={className}
+      onLoad={onLoad}
+      style={{
+        cursor: 'pointer',
+        textAlign,
+        textDecorationLine: 'none',
+        outline: 0
+      }}
+    >
+      <div
+        style={{
+          verticalAlign: 'middle',
+          fontFamily,
+          letterSpacing: 'normal',
+          textAlign
+        }}
+      >
+        {children}
+      </div>
+    </button>
+  );
+}
+
 export function StandarButton({ className, href, children, onClick }) {
   return (
     <a href={href} onClick={onClick} className={className}>

@@ -225,7 +225,14 @@ export const fetchModels = () => async dispatch => {
     modelsRslt.rate = modelsRateDb.data
 
  
- 
+    const modelOwnerInfo = await DashBoard.get("/models/get_model_owner_info.php"+ generatePHPParameters({user: modelsRslt.id_user}))
+    modelsRslt = {...modelsRslt, ownerInfo: {...modelOwnerInfo.data} };
+
+    const modelTags = await DashBoard.get("/tags/get_model_tags.php"+ generatePHPParameters({id, lang}))
+    modelsRslt = {...modelsRslt, tags: modelTags.data };
+
+    const modelTagsReleted = await DashBoard.get("/tags/get_model_tags_related_models.php"+ generatePHPParameters({id}))
+    modelsRslt = {...modelsRslt, relatedModels: modelTagsReleted.data };
   
     dispatch({
       type: SELECT_MODEL,
@@ -342,8 +349,6 @@ export const fetchModels = () => async dispatch => {
 
 
   export const addModelComment = comment => async dispatch => {
-
-       
     var headers = {
       "Content-Type": "multipart/form-data"
     };
@@ -363,7 +368,7 @@ export const fetchModels = () => async dispatch => {
    
 
     const commentDb = await DashBoard.post("/models/add_model_comment.php", uploadInfo,  {headers})
-    var commentRslt = commentDb.data
+    var commentRslt = commentDb.data.slice();
      dispatch({
       type: ADD_MODEL_COMMENT,
       payload: commentRslt//fromDB
@@ -439,6 +444,14 @@ export const fetchModels = () => async dispatch => {
        modelsRslt.rate = modelsRateDb.data
 
 
+    const modelOwnerInfo = await DashBoard.get("/models/get_model_owner_info.php"+ generatePHPParameters({user: modelsRslt.id_user}))
+    modelsRslt = {...modelsRslt, ownerInfo: {...modelOwnerInfo.data} };
+
+    const modelTags = await DashBoard.get("/tags/get_model_tags.php"+ generatePHPParameters({id: modelsRslt.id, lang}))
+    modelsRslt = {...modelsRslt, tags: modelTags.data };
+
+    const modelTagsReleted = await DashBoard.get("/tags/get_model_tags_related_models.php"+ generatePHPParameters({id: modelsRslt.id}))
+    modelsRslt = {...modelsRslt, relatedModels: modelTagsReleted.data };
     
 
      dispatch({

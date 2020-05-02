@@ -6,7 +6,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import { Grid, Select, MenuItem, InputLabel } from '@material-ui/core';
 import {setLanguageEn, setLanguageEs,
    sortTours, selectTour, sortAttractions, selectAttraction, 
-   getSection, fetchSections, getCategory, getCategories, fetchPosts, selectPost } from "../actions/index";
+   getSection, fetchSections, getCategory, getCategories, fetchPosts, selectPost, fetchTags } from "../actions/index";
 
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -58,6 +58,7 @@ class LanguageSelector extends React.Component {
     {
       this.props.fetchSections()      
       this.props.getCategories();
+      this.props.fetchTags();
       this.props.sortTours(param)
     }
     if(view === "tour" || view === "touredit")
@@ -73,6 +74,7 @@ class LanguageSelector extends React.Component {
     {
       this.props.fetchSections()      
       this.props.getCategory();
+      this.props.fetchTags();
       this.props.sortAttractions(param)
       
     }
@@ -125,6 +127,8 @@ class LanguageSelector extends React.Component {
       }
       else
       this.props.fetchSections();
+      
+      this.props.fetchTags();
     }
 
      
@@ -196,5 +200,5 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { setLanguageEn, setLanguageEs, sortTours, selectTour, sortAttractions, selectAttraction,
-    getSection ,fetchSections , getCategory, getCategories, selectPost, fetchPosts}
+    getSection ,fetchSections , getCategory, getCategories, selectPost, fetchPosts, fetchTags}
 )(withStyles(styles)(withRouter(LanguageSelector)));

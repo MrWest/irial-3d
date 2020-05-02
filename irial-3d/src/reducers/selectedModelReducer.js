@@ -1,4 +1,4 @@
-import { SELECT_MODEL, CHANGE_MODEL_PROGRAM , ADD_MODEL_COMMENT, DELETE_MODEL_COMMENT, CHANGE_MODEL_COMMENT} from "../actions/types";
+import { SELECT_MODEL, CHANGE_MODEL_PROGRAM , ADD_MODEL_COMMENT, DELETE_MODEL_COMMENT, CHANGE_MODEL_COMMENT, UPDATE_MODEL_TAGS} from "../actions/types";
 import _ from "lodash";
 
 const SelectedModelsReducer = (state = {}, action) => {
@@ -38,40 +38,12 @@ const SelectedModelsReducer = (state = {}, action) => {
      return model;
      case ADD_MODEL_COMMENT:
     
-      model  = Object.assign({}, state);
-       newComments = []
-      
-      newComments.push(action.payload)
-
-   model.comments.map(comment => {
-
-         newComments.push(comment)
-
-       
-       })
-
-     model.comments  = newComments
-     // console.log("here:", lodging.program)
-     return model;
-
+     return {... state, comments: action.payload }
      case DELETE_MODEL_COMMENT:
-    
-      model  = Object.assign({}, state);
-       newComments = []
-      
-     
+     return {... state, comments: state.comments.filter( c => c.id !== action.payload)}
 
-   model.comments.map(comment => {
-
-         if(parseInt(comment.id)!==parseInt(action.payload))
-         newComments.push(comment)
-
-       
-       })
-
-     model.comments  = newComments
-     // console.log("here:", lodging.program)
-     return model;
+     case UPDATE_MODEL_TAGS: 
+     return {... state, tags: action.payload}
 
     default:
       return state;

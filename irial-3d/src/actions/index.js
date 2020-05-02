@@ -15,4 +15,6 @@ export * from "./attractionsActionsServer";
 export * from "./postActionsServer";
 export * from "./modelsActions";
 export * from "./modelsActionsServer";
+export * from "./tagActions";
+export * from "./cartActions";
 

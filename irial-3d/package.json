@@ -5,7 +5,8 @@
     "dev": "next",
     "build": "next build",
     "start": "node server_express/server.js",
-    "lint": "eslint"
+    "lint": "eslint",
+    "lintfix-src": "eslint --fix src"
   },
   "dependencies": {
     "@emotion/core": "^10.0.20",

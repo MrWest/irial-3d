@@ -143,7 +143,13 @@ const strings = {
       Model: "Model",
       ModelsPageDescription: "Contact guides with mastery in several languages and specialized in hiking, horseback riding, climbing, diving and traditional dances.",
       ModelsPageTags: "viñales tour company, ecological tour, horseback riding, hiking, climbs, dance class, restaurant, viñales, vinales tour, viñales tour, vinales tour company",
-      ModelsPageTittle: "Lumion Models Catalog"
+      ModelsPageTittle: "Lumion Models Catalog",
+      LumionVersion: 'Lumion version',
+      Buy: "Buy",
+      AddToCart: "Add to Cart",
+      CreatorInfo: "Creator Info",
+      Tags: "Tags",
+      relatedModels: "Related Models"
      
     },
     es: {
@@ -291,7 +297,12 @@ const strings = {
       ModelsPageDescription: "Contacte con guías con dominio en varios idiomas y especializados en senderismo, monta de caballo, escalada, Buceo y bailes tradicionales",
       ModelsPageTags: "turismo, viñales, vinales tour, viñales turismo,  compañía de turismo, turismo ecológico,  reservar, paseos a caballo, caminatas, escaladas, comida local",
       ModelsPageTittle: "Catálogo de Modelos de Lumion",
-      
+      LumionVersion: 'Version Lumion',
+      Buy: "Comprar",
+      AddToCart: "Al Carrito",
+      CreatorInfo: "Acerca del Creador",
+      Tags: "Etiquetas",
+      relatedModels: "Modelos relacionados"
 
     }
    }

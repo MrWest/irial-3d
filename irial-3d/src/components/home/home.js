@@ -9,7 +9,7 @@ import AboutContact from "./aboutContact"
 import { connect } from "react-redux";
 import {Helmet} from 'react-helmet';
 import {getLanguage, isServer} from "../../apis/tools";
-import { fetchSections } from "../../actions";
+import { fetchSections, fetchTags } from "../../actions";
 
 
 class HomeOut extends Component {
@@ -17,8 +17,9 @@ class HomeOut extends Component {
   componentWillMount() {
     if(!isServer)
     {
-      const { fetchSections } = this.props;
+      const { fetchSections, fetchTags } = this.props;
       fetchSections();
+      fetchTags();
     }
     
   }
@@ -67,4 +68,4 @@ const mapStateTopProps = state => {
   };
 };
 
-export default connect(mapStateTopProps, { fetchSections })(withStyles(styles)(HomeOut));
+export default connect(mapStateTopProps, { fetchSections, fetchTags })(withStyles(styles)(HomeOut));

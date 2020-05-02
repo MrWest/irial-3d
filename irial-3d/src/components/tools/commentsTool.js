@@ -35,20 +35,22 @@ class CommentsTool extends React.Component {
   }
 
   handleOnClickAdd(){
-
-   if(this.state.newComment !== "")
-      this.props.addComment({
-        id_service: this.props.idService,
-        comment: this.state.newComment,
-        id_user: this.props.signInfo.loginInfo.id,
-        user_first_name: this.props.signInfo.loginInfo.first_name,
-        user_last_name: this.props.signInfo.loginInfo.last_name,
-        user_picture: this.props.signInfo.loginInfo.picture,
-        user_type: this.props.signInfo.loginInfo.type,
+   if(this.state.newComment){
+      const { addComment, idService, signInfo: { loginInfo: { id, first_name, last_name, picture, type }} } = this.props;
+      addComment({
+      id_service: idService,
+      comment: this.state.newComment,
+      id_user: id,
+      user_first_name: first_name,
+      user_last_name: last_name,
+      user_picture: picture,
+      user_type: type,
 
       })
 
       this.setState({newComment: "", isAdding: false})
+   }
+   
   }
 
   handleOnClickEdit(event){
@@ -279,7 +281,7 @@ const styles = theme => ({
    width: "100%"
   },
   link: {
-    color: "#3aa53a",
+    color: "#337ab7",
     fontFamily: "Roboto",
     fontWeight: "bold",
     paddingLeft: "8px !important",
