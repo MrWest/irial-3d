@@ -149,7 +149,9 @@ const strings = {
       AddToCart: "Add to Cart",
       CreatorInfo: "Creator Info",
       Tags: "Tags",
-      relatedModels: "Related Models"
+      relatedModels: "Related Models",
+      EmptyCart: 'Empty Cart',
+      ShoppingCart: 'Shopping Cart'
      
     },
     es: {
@@ -302,7 +304,9 @@ const strings = {
       AddToCart: "Al Carrito",
       CreatorInfo: "Acerca del Creador",
       Tags: "Etiquetas",
-      relatedModels: "Modelos relacionados"
+      relatedModels: "Modelos relacionados",
+      EmptyCart: 'Vaciar Carrito',
+      ShoppingCart: 'Carrito de Compras'
 
     }
    }

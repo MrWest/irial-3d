@@ -44,6 +44,18 @@ const styles = theme => ({
   emptyCart: {
     color: '#337ab7'
   },
+  shoppingCart: {
+    backgroundColor: 'rgba(0,0,0,0.2)',
+    width: 92, 
+    height: 92,
+    position: 'fixed',
+    bottom: '5vh',
+    right: '8vw',
+    borderRadius: 46,
+    '&:hover': {
+     backgroundColor: 'rgba(0,0,0,0.5)'
+    }
+  },
   cartTitle: {
     fontWeight: 'bold',
     color: '#337ab7',
@@ -73,6 +85,34 @@ const styles = theme => ({
   },
   deleteIcon: {
     color: '#A12839'
+  },
+  actionIcon: {
+    color: '#ffffff'
+  },
+  actionButton: {
+    width: '100%',
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    color: '#ffffff',
+    backgroundColor: '#337ab7',
+    textTransform: 'none',
+    '&:hover': {
+      backgroundColor: '#559cd9'
+    }
+  },
+  actionIconDisabled: {
+    color: '#5f5f5f'
+  },
+  actionButtonDisabled: {
+    width: '100%',
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    color: '#5f5f5f !important',
+    backgroundColor: '#dedede',
+    textTransform: 'none',
+    '&:hover': {
+      backgroundColor: '#559cd9'
+    }
   }
 });
 

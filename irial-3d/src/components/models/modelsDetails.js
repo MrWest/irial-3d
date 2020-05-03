@@ -7,19 +7,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import { Carousel } from 'react-responsive-carousel';
 import ImageGallery from 'react-image-gallery';
 import {
   selectModel, addModelComment, updateModelComment,
   deleteModelComment, rateModel, getCategory, addToCart
 } from '../../actions';
-
-import ResourceTabs from '../tools/resourceTabs';
 // import  ModelBookingForm  from "../forms/modelBookingForm";
 import CommentsTool from '../tools/commentsTool';
 import Loader from '../global/loader';
-import { isServer } from '../../apis/tools';
-import { CoolLink } from '../buttons';
+import { isServer, isInCart } from '../../apis/tools';
 // import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 const Tag = ({ classes, tag }) => (
@@ -97,11 +93,12 @@ class ModelDetails extends Component {
  }
 
  render() {
-   const { classes, model, category, section, language, addModelComment, updateModelComment, deleteModelComment, cart } = this.props;
+   const { classes, model, category, section, language, addModelComment, updateModelComment, deleteModelComment } = this.props;
    const { busy } = this.state;
 
-   if (model.name === undefined) { return <div />; }
+   if (!model.name)  return <div />;
 
+   const canAddToCart = isInCart(model);
    return (
      <main className={classes.container}>
        <Helmet>
@@ -142,10 +139,10 @@ class ModelDetails extends Component {
                </Grid>
                <Grid item xs={6}>
                 <Button
-                  className={classes.actionButton}
-                  endIcon={<AddShoppingCart className={classes.actionIcon}/>}
+                  className={canAddToCart ? classes.actionButtonDisabled : classes.actionButton}
+                  endIcon={<AddShoppingCart className={canAddToCart ? classes.actionIconDisabled : classes.actionIcon}/>}
                   onClick={this.handleAddItem}
-                  disabled={cart.isInCart}
+                  disabled={canAddToCart}
                 >
                   {language.AddToCart}
                 </Button>
@@ -305,6 +302,20 @@ const styles = (theme) => ({
     fontStyle: 'normal',
     color: '#ffffff',
     backgroundColor: '#337ab7',
+    textTransform: 'none',
+    '&:hover': {
+      backgroundColor: '#559cd9'
+    }
+  },
+  actionIconDisabled: {
+    color: '#5f5f5f'
+  },
+  actionButtonDisabled: {
+    width: '100%',
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    color: '#5f5f5f !important',
+    backgroundColor: '#dedede',
     textTransform: 'none',
     '&:hover': {
       backgroundColor: '#559cd9'

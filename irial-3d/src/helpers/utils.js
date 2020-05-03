@@ -1,4 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
 
 const theme = createMuiTheme({
   spacing: 4
@@ -31,4 +32,18 @@ const addThousandsSeparator = x => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g,
 
 const thousandsSeparatedAndFixed = (value, decimals = 2) => addThousandsSeparator(parseFloat(value).toFixed(decimals));
 
-export { isServer, theme, managePosts, getFeaturedmedia, contentAppJSON, contentAppForm, errorAndLog, okAndLog, thousandsSeparatedAndFixed };
+
+
+//let isInCart = item => this.items.find( itm => itm.id_item === item.id &&
+ // item.section.categories.find(cat => cat.id === item.category)); 
+
+  
+const mapStateTopProps = (state) => ({
+  cart: state.cart
+});
+
+const  isInCart = connect(mapStateTopProps, {
+})((item, props) => console.log('xxx: ', item, props));
+
+
+export { isServer, theme, managePosts, getFeaturedmedia, contentAppJSON, contentAppForm, errorAndLog, okAndLog, thousandsSeparatedAndFixed, isInCart };

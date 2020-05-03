@@ -359,6 +359,13 @@ html {
     -webkit-filter: drop-shadow( 0px 0px 12px #188218);
     filter: drop-shadow( 0px 0px 12px #188218);
   }
+
+  
+  .icon-cart-shadow {
+    -webkit-filter: drop-shadow( 0px 0px 12px #188218);
+    filter: drop-shadow( 0px 0px 12px #188218);
+  }
+
   
   
   .button-path {

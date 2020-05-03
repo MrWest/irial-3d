@@ -1,10 +1,7 @@
 import { TOGGLE_OPEN , ADD_TO_CART, REMOVE_FROM_CART, EMPY_CART } from "../actions/types";
 import _ from "lodash";
 
-const CartReducer = (state = new function() { 
-  this.open = false;
-  this.items = [];
-  this.isInCart = "jsjs"}(), action) => {
+const CartReducer = (state = { open: false, items: [] }, action) => {
   switch (action.type) {
     case TOGGLE_OPEN:
       return {...state, open: action.payload }

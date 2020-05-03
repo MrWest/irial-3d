@@ -66,6 +66,18 @@ export const generatePHPParameters = ramdomObject => {
   }
 
 
+  export const isInCart = item => {
+    
+    const store = getOrCreateStore();
+    const state = store.getState();
+    const cart = state.cart
+
+
+    return  cart.items.find( itm => itm.id_item === item.id &&
+      itm.section.categories.find(cat => cat.id === item.id_category)); 
+  }
+
+
   export const sendNotificationEmail = async (DashBoard, data) => {
 
     let sendData  = Object.assign({}, data);
