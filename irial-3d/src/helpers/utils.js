@@ -27,4 +27,8 @@ const errorAndLog = (actionName, errorStatus, data) => {
 const contentAppJSON = { 'Content-Type': 'application/json' };
 const contentAppForm = { 'Content-Type': 'application/x-www-form-urlencoded' };
 
-export { isServer, theme, managePosts, getFeaturedmedia, contentAppJSON, contentAppForm, errorAndLog, okAndLog };
+const addThousandsSeparator = x => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+const thousandsSeparatedAndFixed = (value, decimals = 2) => addThousandsSeparator(parseFloat(value).toFixed(decimals));
+
+export { isServer, theme, managePosts, getFeaturedmedia, contentAppJSON, contentAppForm, errorAndLog, okAndLog, thousandsSeparatedAndFixed };

@@ -1,11 +1,7 @@
-import { TOGGLE_OPEN , ADD_TO_CART, REMOVE_FROM_CART } from "./types";
-import DashBoard from "../apis/DashBoard";
-import {generatePHPParameters, getLanguage} from "../apis/tools";
-import { __await } from "tslib";
-
+import { TOGGLE_OPEN , ADD_TO_CART, REMOVE_FROM_CART, EMPY_CART } from "./types";
 
 //employee-orders_list
-export const openCart = open => async dispatch => {
+export const toggleCartOpen = open => async dispatch => {
 
     dispatch({
       type: TOGGLE_OPEN,
@@ -28,7 +24,7 @@ export const addToCart = item => async dispatch => {
     return item;
   };
 
-  export const RemoveFromCart = item => async dispatch => {
+  export const removeFromCart = item => async dispatch => {
       
 
       dispatch({
@@ -40,3 +36,15 @@ export const addToCart = item => async dispatch => {
     return item;
   };
 
+  
+  export const emptyCart = () => async dispatch => {
+      
+
+    dispatch({
+      type: EMPY_CART
+    });
+
+
+};
+
+  

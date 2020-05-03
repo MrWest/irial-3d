@@ -69,7 +69,10 @@ export function StylessButton({
         cursor: 'pointer',
         textAlign,
         textDecorationLine: 'none',
-        outline: 0
+        outline: 0,
+        border: 0,
+        padding: 0,
+        backgroundColor: 'transparent'
       }}
     >
       <div

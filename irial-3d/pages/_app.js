@@ -1,6 +1,7 @@
 import App from 'next/app'
 import React from 'react'
 import withReduxStore from '../lib/with-redux-store'
+import { connect } from "react-redux";
 import { Provider } from 'react-redux';
 import { Route, Switch } from "react-router-dom";
 import withReactRouter from '../lib/with-react-router';
@@ -32,6 +33,7 @@ import ModelsHome from "../src/components/models/modelsHome";
 import ModelDetails from "../src/components/models/modelsDetails";
 import ModelAddForm from "../src/components/forms/modelAddForm";
 import ModelEditForm from "../src/components/forms/modelEditForm";
+import Cart from "../src/components/global/Cart";
 
 
 const isServer = typeof window === 'undefined';
@@ -77,6 +79,7 @@ class Layout extends React.Component {
     <div className="footer-nav-ex" >
            {!children.noFooter && <FooterBar />}
     </div>
+    <Cart />
       <style jsx global>
       {`
   
@@ -464,6 +467,32 @@ class Layout extends React.Component {
         transform: translate(-50%, 0);
       }
     }
+
+    @keyframes inRight {
+      0% {
+        bottom: 0%;
+        left: 50%;
+        transform: translate(100%, 0);
+      }
+    
+      100% {
+        bottom: 0%;
+        transform: translate(0, 0);
+      }
+    }
+
+    @keyframes outRight {
+      0% {
+        bottom: 0%;
+        left: 50%;
+        transform: translate(50%, 0);
+      }
+    
+      100% {
+        bottom: 0%;
+        transform: translate(0, 0);
+      }
+    }
     
     @keyframes fadeInLeft {
       0% {
@@ -481,6 +510,19 @@ class Layout extends React.Component {
       }
     }
     
+    
+.in-right {
+  -webkit-animation-name: inRight;
+  animation-name: inRight;
+  animation-duration: 0.2s;
+}
+
+   
+.out-right {
+  -webkit-animation-name: outRight;
+  animation-name: outRight;
+  animation-duration: 0.2s;
+}
     
     .category-paper:hover .bottom-button {
       -webkit-animation-name: fadeInRight;
@@ -1953,6 +1995,8 @@ class Layout extends React.Component {
     </div>
   }
 }
+
+
 Layout = withReactRouter(Layout);
 
 class MyApp extends App {
@@ -2002,7 +2046,7 @@ class MyApp extends App {
         </Helmet>
       <Provider store={reduxStore}>
         <Layout>
-        <Component {...pageProps} />
+         <Component {...pageProps} />
         </Layout>
       </Provider>
     </>

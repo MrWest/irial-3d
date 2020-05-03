@@ -111,5 +111,6 @@ export const FETCH_TAGS = "FETCH_TAGS";
 export const TOGGLE_OPEN = "TOGGLE_OPEN";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+export const EMPY_CART = "EMPY_CART";
 
 

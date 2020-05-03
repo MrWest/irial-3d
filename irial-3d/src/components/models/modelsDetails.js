@@ -11,7 +11,7 @@ import { Carousel } from 'react-responsive-carousel';
 import ImageGallery from 'react-image-gallery';
 import {
   selectModel, addModelComment, updateModelComment,
-  deleteModelComment, rateModel, getCategory,
+  deleteModelComment, rateModel, getCategory, addToCart
 } from '../../actions';
 
 import ResourceTabs from '../tools/resourceTabs';
@@ -90,9 +90,14 @@ class ModelDetails extends Component {
    const { rateModel, model, sign } = this.props;
    rateModel({ id_model: model.id, id_user: sign.loginInfo.id, rate: value });
  }
+ 
+ handleAddItem = () => {
+  const { model, category, section, addToCart } = this.props;
+  addToCart({ id_item: model.id, name: model.name, image: model.images[0].url, price: model.price, lumion_version: model.lumion_version, section, category });
+ }
 
  render() {
-   const { classes, model, category, section, language, addModelComment, updateModelComment, deleteModelComment } = this.props;
+   const { classes, model, category, section, language, addModelComment, updateModelComment, deleteModelComment, cart } = this.props;
    const { busy } = this.state;
 
    if (model.name === undefined) { return <div />; }
@@ -125,6 +130,7 @@ class ModelDetails extends Component {
              <p className={classes.modelText}>{`${section.name}/${category.name}`}</p>
              <p className={classes.modelText}>{model.full_description}</p>
              <p className={classes.modelText}><strong>{language.LumionVersion}: </strong>{model.lumion_version}</p>
+             <p className={classes.modelPrice}><strong>{language.Price}: </strong>{`${model.price} ${model.currency}`}</p>
              <Grid container spacing={2} style={{ paddingTop: 24 }}>
                <Grid item xs={6}>
                <Button
@@ -138,6 +144,8 @@ class ModelDetails extends Component {
                 <Button
                   className={classes.actionButton}
                   endIcon={<AddShoppingCart className={classes.actionIcon}/>}
+                  onClick={this.handleAddItem}
+                  disabled={cart.isInCart}
                 >
                   {language.AddToCart}
                 </Button>
@@ -322,6 +330,15 @@ const styles = (theme) => ({
       marginBottom: 0,
     },
   },
+  modelPrice: {
+    marginBottom: 12,
+    fontFamily: 'Roboto',
+    fontSize: 18,
+    fontWeight: 'normal',
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: 0,
+    },
+  },
   orderList: {
     paddingLeft: '15px',
     paddingRight: '15px',
@@ -367,6 +384,7 @@ const mapStateTopProps = (state) => ({
   section: state.sections[2],
   language: state.language,
   sign: state.sign,
+  cart: state.cart
 });
 
 export default connect(mapStateTopProps, {
@@ -376,4 +394,5 @@ export default connect(mapStateTopProps, {
   deleteModelComment,
   rateModel,
   getCategory,
+  addToCart
 })(withStyles(styles)(ModelDetails));
