@@ -34,16 +34,26 @@ const thousandsSeparatedAndFixed = (value, decimals = 2) => addThousandsSeparato
 
 
 
-//let isInCart = item => this.items.find( itm => itm.id_item === item.id &&
- // item.section.categories.find(cat => cat.id === item.category)); 
-
-  
-const mapStateTopProps = (state) => ({
-  cart: state.cart
-});
-
-const  isInCart = connect(mapStateTopProps, {
-})((item, props) => console.log('xxx: ', item, props));
 
 
-export { isServer, theme, managePosts, getFeaturedmedia, contentAppJSON, contentAppForm, errorAndLog, okAndLog, thousandsSeparatedAndFixed, isInCart };
+const normalizeExDate = (value, prevValue) => {
+  if (value) {
+    const valueOnlyNumbers = value.replace(/[^\d]/g, '');
+    const prevValueOnlyNumbers = prevValue && prevValue.replace(/[^\d]/g, '');
+
+    if (valueOnlyNumbers !== prevValueOnlyNumbers) {
+      const len = valueOnlyNumbers.length;
+      const month = valueOnlyNumbers.slice(0, 2);
+      if (len < 2) return `${month}`;
+      if (len === 2) return `${month}/`;
+
+      const year = valueOnlyNumbers.slice(2, 4);
+      if (len <= 4) return `${month}/${year}`;
+    }
+  }
+  return prevValue;
+};
+
+
+
+export { isServer, theme, managePosts, getFeaturedmedia, contentAppJSON, contentAppForm, errorAndLog, okAndLog, thousandsSeparatedAndFixed, normalizeExDate };

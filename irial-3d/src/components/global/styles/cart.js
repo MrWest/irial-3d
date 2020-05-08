@@ -87,17 +87,19 @@ const styles = theme => ({
     color: '#A12839'
   },
   actionIcon: {
-    color: '#ffffff'
+    color: '#ffffff',
+    fontSize: 18
   },
   actionButton: {
     width: '100%',
     fontWeight: 'bold',
     fontStyle: 'normal',
+    fontFamily: 'Roboto',
     color: '#ffffff',
     backgroundColor: '#337ab7',
     textTransform: 'none',
     '&:hover': {
-      backgroundColor: '#559cd9'
+      backgroundColor: '#559cd9 !important'
     }
   },
   actionIconDisabled: {

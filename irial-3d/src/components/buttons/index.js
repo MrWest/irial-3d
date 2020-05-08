@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import LinkServer from 'next/link';
 import { HashLink } from 'react-router-hash-link';
+import { Grid } from "@material-ui/core";
 
 const isServer = typeof window === 'undefined';
 
@@ -317,6 +318,47 @@ export function CustomWidthButtonLink({
     </a>
   );
 }
+
+
+export function CustomButtonLink({
+  className,
+  to,
+  children,
+  iconLeft,
+  iconRight,
+  onClick
+}) {
+  return (
+    <Link
+      to={to}
+      onClick={onClick}
+      
+    >
+      <div
+      
+       className={className}
+       style={{
+        cursor: "pointer",
+        width: '100%',
+        fontWeight: 'bold',
+        fontStyle: 'normal',
+        color: '#ffffff',
+        borderRadius: 4,
+        backgroundColor: '#337ab7',
+        textTransform: 'none',
+        padding: '7px 24px',
+        fontSize: '0.875rem'
+      }}>
+        <Grid container justify="center" alignItems="center" >
+          <Grid item>{iconLeft}</Grid>
+          <Grid item>{children}</Grid>
+          <Grid item>{iconRight}</Grid>
+        </Grid>
+      </div>
+    </Link>
+  );
+}
+
 
 
 export function CoolButton({

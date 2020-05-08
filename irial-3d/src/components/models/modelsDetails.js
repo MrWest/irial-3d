@@ -130,12 +130,12 @@ class ModelDetails extends Component {
              <p className={classes.modelPrice}><strong>{language.Price}: </strong>{`${model.price} ${model.currency}`}</p>
              <Grid container spacing={2} style={{ paddingTop: 24 }}>
                <Grid item xs={6}>
-               <Button
-                className={classes.actionButton}
-                endIcon={<MoneySharp className={classes.actionIcon}/>}
-              >
-                {language.Buy}
-              </Button>
+                <Button
+                  className={classes.actionButton}
+                  endIcon={<MoneySharp className={classes.actionIcon}/>}
+                >
+                  {language.Buy}
+                </Button>
                </Grid>
                <Grid item xs={6}>
                 <Button

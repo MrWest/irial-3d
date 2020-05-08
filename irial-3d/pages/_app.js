@@ -34,6 +34,7 @@ import ModelDetails from "../src/components/models/modelsDetails";
 import ModelAddForm from "../src/components/forms/modelAddForm";
 import ModelEditForm from "../src/components/forms/modelEditForm";
 import Cart from "../src/components/global/Cart";
+import PaymentHome from "../src/components/payment/paymentHome";
 
 
 const isServer = typeof window === 'undefined';
@@ -71,6 +72,8 @@ class Layout extends React.Component {
         <Route path="/model/:id" component={ModelDetails} exact />
         <Route path="/modeladd/:id" component={ModelAddForm} exact />
         <Route path="/modeledit/:id" component={ModelEditForm} exact />
+        <Route path="/payment" component={PaymentHome} exact />
+        
         <Route component={Home} exact /> 
         
       </Switch>

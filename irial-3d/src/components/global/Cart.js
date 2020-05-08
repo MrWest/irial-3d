@@ -4,7 +4,7 @@ import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { toggleCartOpen, removeFromCart, emptyCart } from "../../actions";
 import { thousandsSeparatedAndFixed } from '../../helpers/utils';
-import { StylessButton } from '../buttons';
+import { StylessButton, CustomButtonLink } from '../buttons';
 import Remove from "@material-ui/icons/Delete";
 import Close from "@material-ui/icons/Close";
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
@@ -37,6 +37,12 @@ const CartItem = ({ classes, item, onRemove}) => (
 );
 
 class Cart extends Component {
+  handleOnBuy = () => {
+    const { history, toggleCartOpen } = this.props;
+    toggleCartOpen(false);
+    history.push("/payment");
+  };
+
   render() {
     const { classes, cart, toggleCartOpen, removeFromCart, emptyCart, language } = this.props;
 
@@ -104,12 +110,20 @@ class Cart extends Component {
                                 
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <Button
+                                   {/* <CustomButtonLink
                                         className={classes.actionButton}
-                                        endIcon={<MoneySharp className={classes.actionIcon}/>}
+                                        to="/payment"
+                                        iconRight={<MoneySharp className={classes.actionIcon}/>}
                                       >
                                         {language.Buy}
-                                    </Button>
+                                   </CustomButtonLink> */}
+                                     <Button
+                                        className={classes.actionButton}
+                                        endIcon={<MoneySharp className={classes.actionIcon}/>}
+                                        onClick={this.handleOnBuy}
+                                      >
+                                        {language.Buy}
+                                      </Button>
                                 </Grid>
                               </Grid>
                            </div>
