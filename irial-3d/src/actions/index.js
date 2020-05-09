@@ -17,4 +17,5 @@ export * from "./modelsActions";
 export * from "./modelsActionsServer";
 export * from "./tagActions";
 export * from "./cartActions";
+export * from "./paymentActions";
 

@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 // import OrderDisplayTool from "./orderDisplayTool";
 import { Form, reduxForm,Field, initialize } from "redux-form";
+import {loadStripe} from '@stripe/stripe-js';
 import {
   Grid,
   Button,
@@ -24,15 +25,25 @@ import { ReduxTextField, ReduxSelectField } from '../global/reduxFormFields';
 import { normalizeExDate } from '../../helpers/utils';
 import {Helmet} from 'react-helmet';
 import Loader from '../global/loader';
+import PaymentForm from './PaymentForm';
 import { isServer, getLanguage } from '../../apis/tools';
+import {Elements} from '@stripe/react-stripe-js';
 
-class PaymentHome extends Component {
-  
 
-  render() {
-    const { classes, language, cart } = this.props;
-    return (
-      <main  ref={this.myRef} className={classes.container}>
+const PaymentHome = ({ classes, language, cart }) => {
+    const [stripe, setStripe] = useState(undefined);
+
+    
+  useEffect(async () => {
+   // Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+    const stripeRslt = await loadStripe("pk_test_FHrxVh3boAE3JjQQlj1wTzWT003RxSGuMc");
+    setStripe(stripeRslt);
+
+  }, []);
+
+return (
+      <main className={classes.container}>
           <Helmet>
               <meta name="language" content={getLanguage()}/>
               <title>{language.PageTittle} | {language.ModelsPageTittle} </title>
@@ -44,42 +55,12 @@ class PaymentHome extends Component {
           <Grid container spacing={4} > 
            <Grid item xs={8}>
                <h1 className={classes.categoryTittle}>Payment Info</h1>
-               <Form >
-               <Grid container spacing={2}>
-                  <Grid item xs={12}>
-                    <Field
-                      name="ccnumber"
-                      component={ReduxTextField}
-                      classes={classes}
-                      className="card"
-                      label="Credit card number"
-                     // validate={[this.validateCCNumber]}
-                    />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Field
-                      name="exdate"
-                      component={ReduxTextField}
-                      classes={classes}
-                      className="card"
-                      label="Expiration date"
-                      normalize={normalizeExDate}
-                      //validate={[this.validateExpDate]}
-                    />
-                  </Grid>
-
-                  <Grid item xs={6}>
-                    <Field
-                      name="cvc"
-                      component={ReduxTextField}
-                      className="card"
-                      classes={classes}
-                      label="CVC"
-                      //validate={[this.validateCVC]}
-                    />
-                  </Grid>
-                </Grid>
-               </Form>
+               {stripe && (
+                    <Elements stripe={stripe}>
+                    <PaymentForm language={language} />
+                    </Elements>
+               )}
+                   
            </Grid>
            <Grid item xs={4}>
                  <p className={classes.cartTitle}>Your cart</p>
@@ -91,8 +72,7 @@ class PaymentHome extends Component {
         {/*busy && <Loader />*/}
       </main>
     );
-  }
-}
+};
 
 const styles = theme => ({
   container: {
@@ -267,4 +247,4 @@ const mapStateTopProps = state => {
   };
 };
 
-export default connect(mapStateTopProps, { })(reduxForm({ form: "paymentForm", enableReinitialize: true, validate })(withStyles(styles)(PaymentHome)));
+export default connect(mapStateTopProps, { })(withStyles(styles)(PaymentHome));

@@ -58,6 +58,7 @@ export default class MyDocument extends Document {
           <script src="/static/dist/js/wow.min.js"></script>
           <script src="/static/dist/js/mousescroll.js"></script>
           <script src="/static/dist/js/smoothscroll.js"></script>
+          <script src="https://js.stripe.com/v3/" async ></script>
         </body>
       </html>
     );

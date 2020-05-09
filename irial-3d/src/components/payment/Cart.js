@@ -10,7 +10,6 @@ import Close from "@material-ui/icons/Close";
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import RemoveShoppingCart from "@material-ui/icons/RemoveShoppingCart";
 import { AttachMoney as MoneySharp } from '@material-ui/icons';
-
 import styles from './styles/cart';
 
 const CartItem = ({ classes, item, onRemove}) => (

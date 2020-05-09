@@ -33,7 +33,7 @@ import ModelsHome from "../src/components/models/modelsHome";
 import ModelDetails from "../src/components/models/modelsDetails";
 import ModelAddForm from "../src/components/forms/modelAddForm";
 import ModelEditForm from "../src/components/forms/modelEditForm";
-import Cart from "../src/components/global/Cart";
+import Cart from "../src/components/payment/Cart";
 import PaymentHome from "../src/components/payment/paymentHome";
 
 
@@ -1991,6 +1991,32 @@ class Layout extends React.Component {
       font-size: .8em;
       padding: 5px 10px; } }
 
+          
+    .StripeElement {
+      height: 40px;
+      padding: 10px 12px;
+      width: 100%;
+      color: #32325d;
+      background-color: white;
+      border: 1px solid transparent;
+      border-radius: 4px;
+
+      box-shadow: 0 1px 3px 0 #e6ebf1;
+      -webkit-transition: box-shadow 150ms ease;
+      transition: box-shadow 150ms ease;
+    }
+
+    .StripeElement--focus {
+      box-shadow: 0 1px 3px 0 #cfd7df;
+    }
+
+    .StripeElement--invalid {
+      border-color: #fa755a;
+    }
+
+    .StripeElement--webkit-autofill {
+      background-color: #fefde5 !important;
+    }
 
 
   `}
@@ -2001,6 +2027,7 @@ class Layout extends React.Component {
 
 
 Layout = withReactRouter(Layout);
+
 
 class MyApp extends App {
   componentDidMount() {
