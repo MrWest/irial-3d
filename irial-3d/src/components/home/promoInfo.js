@@ -117,7 +117,7 @@ class PromoInfo extends React.Component {
           <Grid container  justify="center" style={{ maxWidth: "100vw"}}>
             <Grid item>
                 <CoolHashLink            
-                height={66} width={360} fill={"#ffffff"} color={"#188218"}
+                height={66} width={360} fill={"#ffffff"} color={"#337ab7"}
                 href="/#front-tour-promo"
                 data-scroll
                 // onClick={()=>{

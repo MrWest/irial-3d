@@ -127,9 +127,9 @@ const styles = theme => ({
       marginTop: 20
     },
     hrBar: {
-      background: "#188218",
-      borderColor: "#188218",
-      color: "#188218 !important",
+      background: "#337ab7",
+      borderColor: "#337ab7",
+      color: "#337ab7 !important",
       marginTop: 20,
       marginBottom: 20,
       height: 3,
@@ -137,7 +137,7 @@ const styles = theme => ({
       textAlign: "right !important"
     },
     typographyText: {
-      color: "#188218 !important",
+      color: "#337ab7 !important",
       textAlign: "right !important"
     },
     typographyTextSmall: {
@@ -331,7 +331,7 @@ class FrontContactForm extends React.Component {
             </Grid>
             
             <Grid item xs={12}  style={{ paddingTop: 10, textAlign: "right" }}>
-                    <CoolButton height={56} width={245} fill={"#188218"} color={"#ffffff"} disabled={pristine}>
+                    <CoolButton height={56} width={245} fill={"#337ab7"} color={"#ffffff"} disabled={pristine}>
                     
                     {this.state.isSending? this.props.language.Sending : this.props.language.Send}
                     </CoolButton>

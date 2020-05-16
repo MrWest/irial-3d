@@ -148,8 +148,8 @@ const styles = theme => ({
     },
     hrBar: {
       background: "#e4e400",
-      borderColor: "#188218",
-      color: "#188218 !important",
+      borderColor: "#337ab7",
+      color: "#337ab7 !important",
       marginTop: 20,
       marginBottom: 20,
       height: 3,
@@ -157,7 +157,7 @@ const styles = theme => ({
       textAlign: "left !important"
     },
     typographyText: {
-      color: "#188218 !important",
+      color: "#337ab7 !important",
       textAlign: "left !important",
       fontWeight: "bold"
     },
@@ -365,7 +365,7 @@ class AttractionBookingForm extends React.Component {
             </Grid>
 
             <Grid item xs={12} alignItems="flex-start" style={{ paddingTop: 10, textAlign: "left" }}>
-                    <CoolButton height={56} width={245} fill={"#188218"} color={"#ffffff"} disabled={pristine}>
+                    <CoolButton height={56} width={245} fill={"#337ab7"} color={"#ffffff"} disabled={pristine}>
                         {this.state.isSending? this.props.language.Sending : this.props.language.Send}
                     </CoolButton>
             </Grid>

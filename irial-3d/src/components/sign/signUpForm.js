@@ -385,7 +385,7 @@ handleTextChange = async event => {
                       variant="contained"
                       width={335}
                       height={56}
-                      fill={!this.props.signFacebookInfo.first_name?"#188218": "#4c69ba"}
+                      fill={!this.props.signFacebookInfo.first_name?"#337ab7": "#4c69ba"}
                       
                     >
                   
@@ -512,7 +512,7 @@ const styles = theme => ({
   },
     ptittle: {
       fontSize: 36,
-      color: "#188218",
+      color: "#337ab7",
       fontWeight: "bold",
       fontFamily: "Futura"
   },

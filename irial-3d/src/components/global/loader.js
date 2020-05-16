@@ -6,13 +6,13 @@ import styles from './styles/loader';
 
 
 const override = css`
-  color: #188218;
+  color: #337ab7;
 `;
 
 const Loader = ({ classes }) => {
   return (
     <div className={classes.Loading}>
-      <FadeLoader  css={override} sizeUnit="px" size={60} color="#188218" loading />
+      <FadeLoader  css={override} sizeUnit="px" size={60} color="#337ab7" loading />
     </div>
   );
 };

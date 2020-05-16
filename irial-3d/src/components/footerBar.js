@@ -24,12 +24,12 @@ class FooterBar extends React.Component {
           <Grid container spacing={2}  alignItems="center">
          
           <Grid item  xs={12} md={"auto"} >
-            <IconVTLogo  height={46} width={52} fill1={"#e4e400"} fill2={"#188218"}  />
+            <IconVTLogo  height={46} width={52} fill1={"#e4e400"} fill2={"#337ab7"}  />
           </Grid>
           <Grid item  xs={12} md={"auto"} align="center"  >
           <Grid container justify="center" alignItems="center" alignContent="center" style={{ height: '100%' }} >
             <Grid item>
-            <p style={{color: "#188218", fontFamily: "Futura", fontSize: 12, textAlign: "center", 
+            <p style={{color: "#337ab7", fontFamily: "Futura", fontSize: 12, textAlign: "center", 
             fontWeight: "bold", textShadow: "2px 2px 0 rgba(255, 255, 255, 0.75)", display: "table-cell", verticalAlign: "middle"}}>Viñales Traveler</p>
             </Grid>
             

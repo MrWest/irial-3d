@@ -141,12 +141,12 @@ class AppTopBar extends Component {
         <Grid className={classes.center} style={{textAlign: "center !important"}}>
            <div style={{width: "100%", textAlign: "center  !important", paddingBottom: 5}}>
                 <Link className={classes.logo} color="inherit" to="/" >
-                    <IconVTLogo  height={60} width={80} fill1={"#e4e400"} fill2={"#188218"} className={classes.logo} />
-                    <p style={{color: "#188218", marginBottom: 0, fontFamily: "Futura", textDecorationLine: "none !important",
+                    <IconVTLogo  height={60} width={80} fill1={"#e4e400"} fill2={"#337ab7"} className={classes.logo} />
+                    <p style={{color: "#337ab7", marginBottom: 0, fontFamily: "Futura", textDecorationLine: "none !important",
                      marginTop: -16, fontSize: 16, textAlign: "center", fontWeight: 'bolder', textShadow: "2px 2px 0 rgba(255, 255, 255, 0.75)"}}>Viñales Traveler</p>
                   </Link>
             </div>
-          <div className={classes.appbar} style={{borderTop: "1px #188218 solid", textAlign: "center"}}>
+          <div className={classes.appbar} style={{borderTop: "1px #337ab7 solid", textAlign: "center"}}>
            
          
               <Grid style={{position: "relative"}}>
@@ -481,7 +481,7 @@ const styles = theme => ({
     fontSize: 16,
     fontFamily: "Futura",
     textShadow: "2px 2px 0 rgba(255, 255, 255, 0.75)",
-    color: "#188218",
+    color: "#337ab7",
     fontWeight: "bold",
     textDecorationLine: "none !important",
     [theme.breakpoints.down("sm")]: {
@@ -505,7 +505,7 @@ const styles = theme => ({
     backgroundColor: "#c",
     fontFamily: "Futura",
     color: "#ffffff",
-    backgroundColor: "#188218",
+    backgroundColor: "#337ab7",
     fontWeight: "bold",   
     textDecorationLine: "none !important",
     [theme.breakpoints.down("sm")]: {

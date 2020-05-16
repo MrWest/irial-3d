@@ -56,7 +56,7 @@ class FrontTourPromo extends React.Component {
             <CarouselInner  >
                   {section.categories.map( (category, index) => (
                     <CarouselItem  key={index}  itemId={`${index+1}`}>
-                        <CarouselContent  alt={category.name} imageUrl={category.images[0].url} child={(<CoolLink href={"/tours/"+category.id} height={56} width={325} fill={"#ffffff"} color={"#188218"}>{category.name}</CoolLink>)}/>
+                        <CarouselContent  alt={category.name} imageUrl={category.images[0].url} child={(<CoolLink href={"/tours/"+category.id} height={56} width={325} fill={"#ffffff"} color={"#337ab7"}>{category.name}</CoolLink>)}/>
                       </CarouselItem>
                   ))}
             </CarouselInner>
@@ -87,7 +87,7 @@ class FrontTourPromo extends React.Component {
              
                   
                  
-                  <CoolLink href={"/tours/all"} height={56} width={385} fill={"#188218"} color={"#ffffff"}>
+                  <CoolLink href={"/tours/all"} height={56} width={385} fill={"#337ab7"} color={"#ffffff"}>
                   {this.props.language.GoForIt}
                   </CoolLink>
                 {/* <FixedButton>
@@ -123,7 +123,7 @@ class FrontTourPromo extends React.Component {
              
                   
                  
-                  <CoolLink href={"/tours/all"} height={56} width={340} fill={"#188218"} color={"#ffffff"}>
+                  <CoolLink href={"/tours/all"} height={56} width={340} fill={"#337ab7"} color={"#ffffff"}>
                   {this.props.language.GoForIt}
                   </CoolLink>
                 {/* <FixedButton>
@@ -147,7 +147,7 @@ class FrontTourPromo extends React.Component {
       {section.categories.map( (category, index) => (
         //  index>0 && 
         <CarouselItem  key={index} itemId={index}>
-            <CarouselContent alt={category.name} imageUrl={category.images[0].url} child={(<CoolLink href={"/tours/"+category.id} height={56} width={325} fill={"#ffffff"} color={"#188218"}>{category.name}</CoolLink>)}/>
+            <CarouselContent alt={category.name} imageUrl={category.images[0].url} child={(<CoolLink href={"/tours/"+category.id} height={56} width={325} fill={"#ffffff"} color={"#337ab7"}>{category.name}</CoolLink>)}/>
           </CarouselItem>
       ))}
 </CarouselInner>
@@ -258,7 +258,7 @@ const styles = theme => ({
     fontSize: 32,
     fontWeight: "bold",
     fontFamily: "Futura",
-    color: "#188218",
+    color: "#337ab7",
     marginBottom: 25,
   },
   pTextSmall: {

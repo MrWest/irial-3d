@@ -109,7 +109,7 @@ const styles = theme => ({
     fontFamily: "Futura",
     fontSize: 40,
     fontWeight: "bold",
-    color: "#188218",
+    color: "#337ab7",
     margin: 0
   },
   packPriceText: {

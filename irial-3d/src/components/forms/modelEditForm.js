@@ -60,7 +60,7 @@ const BorderLinearProgress = withStyles({
   },
   bar: {
     borderRadius: 20,
-    backgroundColor: '#188218',
+    backgroundColor: '#337ab7',
   },
 })(LinearProgress);
 
@@ -225,8 +225,8 @@ const styles = theme => ({
     },
     hrBar: {
       background: "#e4e400",
-      borderColor: "#188218",
-      color: "#188218 !important",
+      borderColor: "#337ab7",
+      color: "#337ab7 !important",
       marginTop: 10,
       marginBottom: 10,
       height: 3,
@@ -234,7 +234,7 @@ const styles = theme => ({
       textAlign: "left !important"
     },
     typographyText: {
-      color: "#188218 !important",
+      color: "#337ab7 !important",
       textAlign: "left !important",
       fontWeight: "bold"
     },
@@ -691,7 +691,7 @@ class ModelEditForm extends React.Component {
 
                   <Grid item xs={12} alignItems="flex-start" style={{ paddingTop: 40, textAlign: "left" }}>
            
-                        <CoolButton height={56} width={245} fill={"#188218"} color={"#ffffff"}>
+                        <CoolButton height={56} width={245} fill={"#337ab7"} color={"#ffffff"}>
                             {language.Save}
                         </CoolButton>
                 </Grid>
@@ -732,7 +732,7 @@ class ModelEditForm extends React.Component {
                   <input type="file" name="fileToUpload"  id="fileToUpload" disabled = {!model.images || model.images.length > 9}  accept="image/x-png,image/gif,image/jpeg"
                    onChange={this.selectImageFile.bind(this)} style={{display: "none"}}></input>
                   <label htmlFor={"fileToUpload"}>
-                    <AddIcon color="#188218" style={{fontSize: 34, color: "#188218", background: "#ffffff", borderRadius: 34}}></AddIcon>
+                    <AddIcon color="#337ab7" style={{fontSize: 34, color: "#337ab7", background: "#ffffff", borderRadius: 34}}></AddIcon>
                         
                   </label>
                                 
@@ -775,7 +775,7 @@ class ModelEditForm extends React.Component {
                   <input type="file" name="fileToUpload2"  id="fileToUpload2" disabled = {!model.videos  ||  model.videos.length > 2} 
                   onChange={this.selectVideoFile.bind(this)}  accept="video/mp4" style={{display: "none"}}></input>
                   <label htmlFor={"fileToUpload2"}>
-                    <AddIcon color="#188218" style={{fontSize: 34, color: "#188218", background: "#ffffff", borderRadius: 34}}></AddIcon>
+                    <AddIcon color="#337ab7" style={{fontSize: 34, color: "#337ab7", background: "#ffffff", borderRadius: 34}}></AddIcon>
                         
                   </label>
                                 

@@ -73,7 +73,7 @@ class FrontAttractions extends Component {
                                  {/* <p className="animated category-slogan" style={{textAlign: "center"}}>{category.promotion}</p> */}
                                  <div  style={{ paddingTop: 10, textAlign: "center"}} align="center">
                                           <div style={{width: 215, margin: "auto"}}>
-                                           <CoolLink  height={56} width={215} fill={"#188218"} color={"#ffffff"} href={"/attractions/"+category.id}>
+                                           <CoolLink  height={56} width={215} fill={"#337ab7"} color={"#ffffff"} href={"/attractions/"+category.id}>
                                               <p style={{fontSize: 14, color: "#ffffff"}}>{this.props.language.ViewOffers}</p>
                                            </CoolLink> 
                                            </div>
@@ -104,7 +104,7 @@ class FrontAttractions extends Component {
                                  {/* <p className="animated category-slogan" style={{textAlign: "center"}}>{category.promotion}</p> */}
                                  <div  style={{ paddingTop: 10, textAlign: "center", display: "table-cell", verticalAlign: "middle"}} align="center">
                                           <div style={{width: 260, margin: "auto"}}>
-                                           <CoolLink  height={64} width={260} fill={"#ffffff"} color={"#188218"} href={"/attractions/all"} svgClass="button-path">
+                                           <CoolLink  height={64} width={260} fill={"#ffffff"} color={"#337ab7"} href={"/attractions/all"} svgClass="button-path">
                                               <p style={{fontSize: 14}}>{this.props.language.ViewAll}</p>
                                            </CoolLink> 
                                            </div>
@@ -122,14 +122,14 @@ class FrontAttractions extends Component {
                 </section>
                 <style jsx>{`
         .icon-path {
-          -webkit-filter: drop-shadow( 0px 0px 12px #188218);
-          filter: drop-shadow( 0px 0px 12px #188218);
+          -webkit-filter: drop-shadow( 0px 0px 12px #337ab7);
+          filter: drop-shadow( 0px 0px 12px #337ab7);
         }
         
         
         .button-path {
-          -webkit-filter: drop-shadow( 1px 1px 13px #188218);
-          filter: drop-shadow( 1px 1px 13px #188218);
+          -webkit-filter: drop-shadow( 1px 1px 13px #337ab7);
+          filter: drop-shadow( 1px 1px 13px #337ab7);
         }
         
       `}</style>
@@ -175,7 +175,7 @@ FrontAttractions.propTypes = {
         marginBottom: 10,
         fontWeight: "bold",
         fontFamily: "Futura",
-        color: "#188218",//"#e4e400",
+        color: "#337ab7",//"#e4e400",
          textShadow: "1px 1px 1px #e4e400",
 
     },
@@ -221,7 +221,7 @@ FrontAttractions.propTypes = {
         fontSize: 32,
         fontWeight: "bold",
         fontFamily: "Futura",
-        color: "#188218",
+        color: "#337ab7",
         marginBottom: 20,
         textAlign: "center"
       },

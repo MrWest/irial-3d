@@ -57,7 +57,7 @@ export const TourCardLeft = ({tour, classes, language}) => {
     <div align="left" style={{ paddingTop: 40, paddingLeft: 40 }}>
       <CoolLink
         href={"/tour/"+tour.id}
-        height={56} width={225} fill={"#188218"} color={"#ffffff"}
+        height={56} width={225} fill={"#337ab7"} color={"#ffffff"}
       >
         {language.ViewOffer}
       </CoolLink>

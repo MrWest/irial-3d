@@ -122,7 +122,7 @@ export function FixedButton({ className, href, children, onClick }) {
         display: "table",
         borderRadius: 4,
         width: 282,
-        backgroundColor: "#188218",
+        backgroundColor: "#337ab7",
         color: "#ffffff",
         textDecorationLine: "none",
         paddingTop: 14,
@@ -159,7 +159,7 @@ export function FixedButtonInverse({ className, href, children, onClick, color }
         borderRadius: 4,
         width: 282,
         backgroundColor: "#ffffff",
-        color: color? color : "#188218",
+        color: color? color : "#337ab7",
         textDecorationLine: "none",
         paddingTop: 14,
         paddingBottom: 15
@@ -204,7 +204,7 @@ export function CustomWidthButton({
         border: 0,
         borderRadius: 4,
         width: width == undefined ? "auto" : width,
-        backgroundColor: "#188218",
+        backgroundColor: "#337ab7",
         color: "#ffffff",
         textDecorationLine: "none",
         paddingTop: 14,
@@ -703,14 +703,14 @@ export function CoolLink({
       </div>
       <style jsx>{`
         .icon-path {
-          -webkit-filter: drop-shadow( 0px 0px 12px #188218);
-          filter: drop-shadow( 0px 0px 12px #188218);
+          -webkit-filter: drop-shadow( 0px 0px 12px #337ab7);
+          filter: drop-shadow( 0px 0px 12px #337ab7);
         }
         
         
         .button-path {
-          -webkit-filter: drop-shadow( 1px 1px 13px #188218);
-          filter: drop-shadow( 1px 1px 13px #188218);
+          -webkit-filter: drop-shadow( 1px 1px 13px #337ab7);
+          filter: drop-shadow( 1px 1px 13px #337ab7);
         }
         
       `}</style>

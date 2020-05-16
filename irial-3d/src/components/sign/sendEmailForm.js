@@ -191,7 +191,7 @@ class SendEmailForm extends Component {
             </div>
 
             <div style={{paddingTop: 50}}>
-              <CoolButton  height={56} width={245} fill={"#188218"} color={"#ffffff"}>
+              <CoolButton  height={56} width={245} fill={"#337ab7"} color={"#ffffff"}>
                {language.Submit}
               </CoolButton>
             </div>

@@ -155,7 +155,7 @@ handleOnClickDelete(event){
         
        </p>
           <Link className={classes.link} to={serviceUrl+idService} onClick={()=> this.setState({isAdding: true})} >
-            <CommentIcon  color="#188218" style={{marginTop: -4, fontSize: 32, color: "#188218", background: "#ffffff"}}></CommentIcon>
+            <CommentIcon  color="#337ab7" style={{marginTop: -4, fontSize: 32, color: "#337ab7", background: "#ffffff"}}></CommentIcon>
           </Link>
         </div>      
         }

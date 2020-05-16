@@ -254,7 +254,7 @@ class SignInForm extends Component {
                     variant="contained"
                     width={335}
                     height={56}
-                    fill={"#188218"}
+                    fill={"#337ab7"}
                     // onClick={() => this.logIn()}
                   >
                    {this.props.language.SignIn}
@@ -350,7 +350,7 @@ const styles = theme => ({
   },
   ptittle: {
     fontSize: 36,
-    color: "#188218",
+    color: "#337ab7",
     fontWeight: "bold",
     fontFamily: "Futura"
   },

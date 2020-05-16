@@ -356,21 +356,21 @@ html {
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75)
   }
   .icon-path {
-    -webkit-filter: drop-shadow( 0px 0px 12px #188218);
-    filter: drop-shadow( 0px 0px 12px #188218);
+    -webkit-filter: drop-shadow( 0px 0px 12px #337ab7);
+    filter: drop-shadow( 0px 0px 12px #337ab7);
   }
 
   
   .icon-cart-shadow {
-    -webkit-filter: drop-shadow( 0px 0px 12px #188218);
-    filter: drop-shadow( 0px 0px 12px #188218);
+    -webkit-filter: drop-shadow( 0px 0px 12px #337ab7);
+    filter: drop-shadow( 0px 0px 12px #337ab7);
   }
 
   
   
   .button-path {
-    -webkit-filter: drop-shadow( 1px 1px 13px #188218);
-    filter: drop-shadow( 1px 1px 13px #188218);
+    -webkit-filter: drop-shadow( 1px 1px 13px #337ab7);
+    filter: drop-shadow( 1px 1px 13px #337ab7);
   }
   
   .category-paper:hover .category-tittle { 

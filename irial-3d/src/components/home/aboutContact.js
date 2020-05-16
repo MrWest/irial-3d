@@ -73,9 +73,9 @@ const styles = theme => ({
     marginTop: 20
   },
   hrBar: {
-    background: "#188218",
-    borderColor: "#188218",
-    color: "#188218 !important",
+    background: "#337ab7",
+    borderColor: "#337ab7",
+    color: "#337ab7 !important",
     marginTop: 20,
     marginBottom: 20,
     height: 3,
@@ -85,7 +85,7 @@ const styles = theme => ({
   typographyText: {
     textAlign: "left",
     margin: "20px 0px",
-    color: "#188218 !important",
+    color: "#337ab7 !important",
   },
   typographyTextSmall: {
     textAlign: "left",

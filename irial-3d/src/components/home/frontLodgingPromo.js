@@ -60,7 +60,7 @@ class FrontLodgingPromo extends React.Component {
                 
                       
                     
-                      <CoolLink height={56} width={285} fill={"#188218"} color={"#ffffff"} to={"/lodgings/all"}>
+                      <CoolLink height={56} width={285} fill={"#337ab7"} color={"#ffffff"} to={"/lodgings/all"}>
                         {this.props.language.AllLodgings}
                       </CoolLink>
                     {/* <FixedButton>
@@ -177,7 +177,7 @@ const styles = theme => ({
     fontSize: 32,
     fontWeight: "bold",
     fontFamily: "Futura",
-    color: "#188218",
+    color: "#337ab7",
     marginBottom: 25,
   },
   pTextSmall: {

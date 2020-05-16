@@ -114,7 +114,7 @@ class ResetPasswordForm extends Component {
        
 
           <div className="text-center" style={{paddingTop: 40}} align="left">
-            <CoolLink to="/signin" height={56} width={280} fill={"#188218"} color={"#ffffff"} >
+            <CoolLink to="/signin" height={56} width={280} fill={"#337ab7"} color={"#ffffff"} >
               {language.SignIn}
             </CoolLink>
           </div>
@@ -171,7 +171,7 @@ class ResetPasswordForm extends Component {
             </FormControl>
 
             <div className="text-center" style={{paddingTop: 40}} align="left">
-              <CoolButton height={56} width={230} fill={"#188218"} color={"#ffffff"} >
+              <CoolButton height={56} width={230} fill={"#337ab7"} color={"#ffffff"} >
                  {language.Reset}
               </CoolButton>
             </div>

@@ -236,7 +236,7 @@ const styles = theme => ({
     textAlign: "center",
     color: "#ffffff",
     borderRadius: "4px",
-    backgroundColor: "#188218"
+    backgroundColor: "#337ab7"
   }
 });
 
