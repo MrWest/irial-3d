@@ -20,7 +20,7 @@ class FooterBar extends React.Component {
           <Grid container justify="center" alignItems="center" alignContent="center" spacing={0}>
 
           <Grid item xs={12} md={5} >
-          <Link  color="inherit" to="/" >
+          <Link  color="inherit" href="/" >
           <Grid container spacing={2}  alignItems="center">
          
           <Grid item  xs={12} md={"auto"} >

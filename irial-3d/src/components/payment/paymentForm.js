@@ -76,7 +76,8 @@ const validations = {
   };
 
 
-export default connect(null, { payCart })(reduxForm({ form: "paymentForm", enableReinitialize: true, validate })(withRouter( function PaymentForm({ userInfo, description, amount, buttonClass, handleSubmit, history  }) {
+export default connect(null, { payCart })(reduxForm({ form: "paymentForm", enableReinitialize: true, validate })(withRouter( 
+  function PaymentForm({ userInfo, description, amount, buttonClass, handleSubmit, history, payCart }) {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -103,7 +104,7 @@ export default connect(null, { payCart })(reduxForm({ form: "paymentForm", enabl
       // This function does not exist yet; we will define it in the next step.
       console.log('xxx0: ', result.token);
       const description = `${data.name} purchase of: ${amount} usd of Lumion items`
-      this.props.payCart({...result.token, email: data.email,  amount, description  });
+      payCart({...result.token, email: data.email,  amount, description  });
       history.push('/thanks');
     }
   };
