@@ -2,38 +2,16 @@ import React, { Component } from 'react';
 import { withStyles, Grid, Button, Fab } from '@material-ui/core';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { toggleCartOpen, removeFromCart, emptyCart } from "../../actions";
+import { toggleCartOpen, emptyCart } from "../../actions";
 import { thousandsSeparatedAndFixed } from '../../helpers/utils';
 import { StylessButton, CustomButtonLink } from '../buttons';
-import Remove from "@material-ui/icons/Delete";
 import Close from "@material-ui/icons/Close";
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import RemoveShoppingCart from "@material-ui/icons/RemoveShoppingCart";
 import { AttachMoney as MoneySharp } from '@material-ui/icons';
+import CartItem from './CartItem';
 import styles from './styles/cart';
 
-const CartItem = ({ classes, item, onRemove}) => (
-  <div className={classes.cartItemContainer}>
-    <Grid container alignItems="center" spacing={2}>
-      <Grid item>
-        <div className={classes.cartItemImgContainer}>
-          <img src={item.image} className={classes.itemImg} />
-        </div>
-      </Grid>
-      <Grid item xs>
-        <p className={classes.cartItemName}>{item.name}</p>
-        <p className={classes.cartItemText}>{`${item.section.name}/${item.category.name}`}</p>
-        <p className={classes.cartItemName}>{item.lumion_version} <span className={classes.cartSmaltext}>Lumion</span></p>
-      </Grid>
-      <Grid item>
-        <p className={classes.cartItemPrice}>${thousandsSeparatedAndFixed(item.price)}</p>
-      </Grid>
-      <Grid item>
-        <StylessButton onClick={() => onRemove(item.id)}><Remove className={classes.deleteIcon} /></StylessButton>
-      </Grid>
-    </Grid>
-  </div>
-);
 
 class Cart extends Component {
   handleOnBuy = () => {
@@ -43,7 +21,7 @@ class Cart extends Component {
   };
 
   render() {
-    const { classes, cart, toggleCartOpen, removeFromCart, emptyCart, language } = this.props;
+    const { classes, cart, toggleCartOpen, emptyCart, language } = this.props;
 
     if(!cart.items.length) return <div/>
     if(!cart.open) return (
@@ -97,7 +75,7 @@ class Cart extends Component {
                           </Grid>
                           <Grid item xs={12}>
                             <div style={{ padding: '24px 0px 124px 24px' }}>
-                              {cart.items.map(item => <CartItem key={item.id} classes={classes} item={item} onRemove={removeFromCart} />)}
+                              {cart.items.map(item => <CartItem key={item.id} classes={classes} item={item}  />)}
                             </div>
                           </Grid>
                           <Grid item xs={12}>
@@ -147,4 +125,4 @@ const mapStateToProps = state => ({
   language: state.language
 });
 
-export default connect(mapStateToProps, { toggleCartOpen, removeFromCart, emptyCart })(withStyles(styles)(withRouter(Cart)));
+export default connect(mapStateToProps, { toggleCartOpen, emptyCart })(withStyles(styles)(withRouter(Cart)));

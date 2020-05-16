@@ -24,10 +24,10 @@ const CARD_ELEMENT_OPTIONS = {
 
 function CardSection() {
   return (
-    <label>
-      Card details
-      <CardElement  />
-    </label>
+      <>
+        <p style={{ marginTop: 16 }}> Card details:</p>
+        <CardElement  />
+      </>
   );
 };
 

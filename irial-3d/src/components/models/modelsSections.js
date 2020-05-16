@@ -59,7 +59,7 @@ export const ModelCardLeft = ({model, classes, language}) => {
     <div align="left" style={{ paddingTop: 40, paddingLeft: 40 }}>
       <CoolLink
         href={"/model/"+model.id}
-        height={56} width={225} fill={"#188218"} color={"#ffffff"}
+        height={56} width={225} fill={"#337ab7"} color={"#ffffff"}
       >
         {language.ViewOffer}
       </CoolLink>
@@ -166,7 +166,7 @@ export const ModelCardRight = ({model, classes, language}) =>{
         <CoolLink
               href={"/model/"+model.id}                   
             
-              height={56} width={225} fill={"#188218"} color={"#ffffff"}
+              height={56} width={225} fill={"#337ab7"} color={"#ffffff"}
             >
               {language.ViewOffer}
             </CoolLink>

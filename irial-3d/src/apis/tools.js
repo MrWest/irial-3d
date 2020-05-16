@@ -39,6 +39,11 @@ export const generatePHPParameters = ramdomObject => {
     return urlParams
   }
 
+  
+  export const headers = {
+    "Content-Type": "multipart/form-data"
+  };
+
   export const generateAppendParameters = ramdomObject => {
 
     let uploadInfo = new FormData();

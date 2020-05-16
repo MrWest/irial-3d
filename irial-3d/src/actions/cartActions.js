@@ -12,12 +12,12 @@ export const toggleCartOpen = open => async dispatch => {
   };
 
   //employee-orders_list
-export const addToCart = item => async dispatch => {
+export const addToCart = (item, openCart) => async dispatch => {
       
 
       dispatch({
         type: ADD_TO_CART,
-        payload: item
+        payload: { item, openCart }
       });
 
 

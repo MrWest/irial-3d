@@ -35,6 +35,7 @@ import ModelAddForm from "../src/components/forms/modelAddForm";
 import ModelEditForm from "../src/components/forms/modelEditForm";
 import Cart from "../src/components/payment/Cart";
 import PaymentHome from "../src/components/payment/paymentHome";
+import ThankyouPage from "../src/components/global/thanks";
 
 
 const isServer = typeof window === 'undefined';
@@ -73,6 +74,7 @@ class Layout extends React.Component {
         <Route path="/modeladd/:id" component={ModelAddForm} exact />
         <Route path="/modeledit/:id" component={ModelEditForm} exact />
         <Route path="/payment" component={PaymentHome} exact />
+        <Route path="/thanks" component={ThankyouPage} exact />
         
         <Route component={Home} exact /> 
         
@@ -572,14 +574,14 @@ class Layout extends React.Component {
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75)
     }
     .icon-path {
-      -webkit-filter: drop-shadow( 0px 0px 12px #188218);
-      filter: drop-shadow( 0px 0px 12px #188218);
+      -webkit-filter: drop-shadow( 0px 0px 12px #337ab7);
+      filter: drop-shadow( 0px 0px 12px #337ab7);
     }
     
     
     .button-path {
-      -webkit-filter: drop-shadow( 1px 1px 13px #188218);
-      filter: drop-shadow( 1px 1px 13px #188218);
+      -webkit-filter: drop-shadow( 1px 1px 13px #337ab7);
+      filter: drop-shadow( 1px 1px 13px #337ab7);
     }
     
     .category-paper:hover .category-tittle { 

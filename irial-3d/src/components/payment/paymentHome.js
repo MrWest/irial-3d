@@ -22,25 +22,31 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchModels, sortModels } from "../../actions";
 import { ReduxTextField, ReduxSelectField } from '../global/reduxFormFields';
-import { normalizeExDate } from '../../helpers/utils';
+import { thousandsSeparatedAndFixed } from '../../helpers/utils';
 import {Helmet} from 'react-helmet';
 import Loader from '../global/loader';
 import PaymentForm from './PaymentForm';
 import { isServer, getLanguage } from '../../apis/tools';
+import CartItem from './CartItem';
 import {Elements} from '@stripe/react-stripe-js';
 
 
 const PaymentHome = ({ classes, language, cart }) => {
     const [stripe, setStripe] = useState(undefined);
 
+    const init = async () => {
+        // Make sure to call `loadStripe` outside of a component’s render to avoid
+     // recreating the `Stripe` object on every render.
+         const stripeRslt = await loadStripe("pk_test_FHrxVh3boAE3JjQQlj1wTzWT003RxSGuMc");
+         setStripe(stripeRslt);
+    };
     
-  useEffect(async () => {
-   // Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
-    const stripeRslt = await loadStripe("pk_test_FHrxVh3boAE3JjQQlj1wTzWT003RxSGuMc");
-    setStripe(stripeRslt);
-
+  useEffect(() => {
+      init();
+    return () => {};
   }, []);
+
+const totalCart = cart.items.reduce((sum, i) => sum + parseFloat(i.price), 0);
 
 return (
       <main className={classes.container}>
@@ -57,13 +63,18 @@ return (
                <h1 className={classes.categoryTittle}>Payment Info</h1>
                {stripe && (
                     <Elements stripe={stripe}>
-                    <PaymentForm language={language} />
+                        <PaymentForm language={language} buttonClass={classes.submitButton} amount={totalCart * 100} />
                     </Elements>
                )}
                    
            </Grid>
            <Grid item xs={4}>
-                 <p className={classes.cartTitle}>Your cart</p>
+                 <p className={classes.cartTittle}>Your cart</p>
+                 <div style={{ padding: '24px 0px 124px 0px' }}>
+                              {cart.items.map(item => <CartItem key={item.id} classes={classes} item={item}  />)}
+                </div>
+                <p className={classes.cartItemPrice}><span className={classes.cartSmaltext} style={{ fontSize: 18 }}>Total cost:</span> ${thousandsSeparatedAndFixed(totalCart)}</p>
+                                
            </Grid>
           </Grid>
         </Grid>
@@ -127,7 +138,7 @@ const styles = theme => ({
     }
   },
   categoryTittle: {
-    marginBottom: 0,
+    marginBottom: 24,
     fontFamily: "Futura",
     fontSize: 36,
     fontWeight: "bold",
@@ -136,7 +147,20 @@ const styles = theme => ({
     lineHeight: 1,
     letterSpacing: "normal",
     color: "#337ab7",
-    display: 'inline',
+    [theme.breakpoints.down("sm")]: {
+      marginBottom: 0
+    }
+  },
+  cartTittle: {
+    marginTop: 38,
+    marginBottom: 24,
+    fontSize: 24,
+    fontWeight: "bold",
+    fontStyle: "normal",
+    fontStretch: "normal",
+    lineHeight: 1,
+    letterSpacing: "normal",
+    color: "#337ab7",
     [theme.breakpoints.down("sm")]: {
       marginBottom: 0
     }
@@ -157,21 +181,17 @@ const styles = theme => ({
     backgroundColor: "#c9f999"
   },
   submitButton: {
-    width: "282px",
-    height: "56px",
-    "& span": {
-      fontFamily: "Futura",
-      fontSize: "16px",
-      fontWeight: "bold",
-      fontStyle: "normal",
-      fontStretch: "normal",
-      lineHeight: "normal",
-      letterSpacing: "normal"
-    },
-    textAlign: "center",
-    color: "#ffffff",
-    borderRadius: "4px",
-    backgroundColor: "#188218"
+    marginTop: 24,
+    width: '100%',
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    fontFamily: 'Roboto',
+    color: '#ffffff',
+    backgroundColor: '#337ab7',
+    textTransform: 'none',
+    '&:hover': {
+      backgroundColor: '#559cd9 !important'
+    }
   }
 });
 

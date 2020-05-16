@@ -1,18 +1,90 @@
 import React from 'react';
 import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
-
+import {
+    Grid,
+    Button
+  } from "@material-ui/core";
+import { connect } from 'react-redux';
 import { payCart } from '../../actions';
-
+import { ReduxTextField, ReduxSelectField } from '../global/reduxFormFields';
+import { Form, reduxForm, Field, initialize } from "redux-form";
 import CardSection from './CardSection';
+import {
+  required,
+  email,
+  length,
+  format
+} from "redux-form-validators";
+import { withRouter } from "react-router-dom";
 
-export default function PaymentForm() {
+
+
+
+const validations = {
+    // amount: [
+    //   required({ msg: "Required" }),
+    //   numericality({
+    //     int: true,
+    //     ">=": 50,
+    //     msg: { greaterThanOrEqualTo: "You must be at least 50 swag packs" }
+    //   })
+    // ],
+    // budget: [
+    //   required({ msg: "Required" }),
+    //   numericality({
+    //     int: true
+    //   })
+    // ],
+  
+    email: [
+      required({ msg: "Required" }),
+      email()
+    //   format({
+    //     width: /^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(gmail|aol|hotmail|yahoo|outlook|icloud|inbox|mail)\.com$/i,
+    //     message: { defaultMessage: "Must use corporate email address" }
+    //   })
+    ],
+    name: [
+      required({ msg: "Required" }),
+      length({ min: 3 })
+    ],
+    // promotion: [
+    //   required({ msg: "Required" }),
+    //   length({ min: 10 })
+     
+    // ],
+    // description: [
+    //   required({ msg: "Required" }),
+    //   length({ min: 100 })]
+    //   ,
+  
+  };
+  
+  // Reusable with any other form
+  const validate = values => {
+    const errors = {};
+    for (let field in validations) {
+      let value = values[field];
+      errors[field] = validations[field]
+        .map(validateField => {
+          return validateField(value, values);
+        })
+        .find(x => x);
+    }
+   
+    return errors;
+  };
+
+
+export default connect(null, { payCart })(reduxForm({ form: "paymentForm", enableReinitialize: true, validate })(withRouter( function PaymentForm({ userInfo, description, amount, buttonClass, handleSubmit, history  }) {
   const stripe = useStripe();
   const elements = useElements();
 
-  const handleSubmit = async (event) => {
+  const rhandleSubmit = async data => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
-    event.preventDefault();
+    // event.preventDefault();
+    console.log('xxx0: ', data);
 
     if (!stripe || !elements) {
       // Stripe.js has not yet loaded.
@@ -29,17 +101,48 @@ export default function PaymentForm() {
     } else {
       // Send the token to your server.
       // This function does not exist yet; we will define it in the next step.
-      console.log('sss', result.token);
-      payCart(result.token);
+      console.log('xxx0: ', result.token);
+      const description = `${data.name} purchase of: ${amount} usd of Lumion items`
+      this.props.payCart({...result.token, email: data.email,  amount, description  });
+      history.push('/thanks');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <CardSection />
-      <button disabled={!stripe}>Confirm order</button>
-    </form>
+    <Form onSubmit={handleSubmit(rhandleSubmit)}>
+        <Grid container justify="center" spacing={4}>
+            <Grid item xs={6}>
+            <Field
+                name="name"
+                margin="small"
+                type="text"
+                fullWidth
+                autoComplete="name"
+                component={ReduxTextField}
+                label="Name"
+                />
+            </Grid>
+            <Grid item xs={6}>
+            <Field
+                name="email"
+                margin="small"
+                type="text"
+                fullWidth
+                autoComplete="name"
+                component={ReduxTextField}
+                label="Email"
+                />
+            </Grid>
+            <Grid item xs={12}>
+                <CardSection />
+            </Grid>
+            <Grid item xs={12}>
+                <Button type="submit" className={buttonClass} disabled={!stripe}>Confirm order</Button>
+            </Grid>
+        </Grid>
+      
+    </Form>
   );
-}
+})));
 
 // reduxForm({ form: "paymentForm", enableReinitialize: true, validate })(

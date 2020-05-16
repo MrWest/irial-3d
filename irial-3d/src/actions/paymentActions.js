@@ -1,10 +1,28 @@
-// import { TOGGLE_OPEN , ADD_TO_CART, REMOVE_FROM_CART, EMPY_CART } from "./types";
+import { EMPY_CART } from "./types";
 
-import StripePayments from "../apis/StripePayments";
+// import StripePayments from "../apis/StripePayments";
+import DashBoard from "../apis/DashBoard";
+import {generatePHPParameters, getLanguage, generateAppendParameters, headers } from "../apis/tools";
 
 //employee-orders_list
-export const payCart = async info => {
+export const payCart = info => async dispatch => {
 
-  const checkout = await StripePayments.post("/checkout", info);
-  console.log('xxx', checkout);
+  dispatch({
+    type: EMPY_CART
+  });
+
+  var headers = {
+    "Content-Type": "multipart/form-data"
+  };
+
+  const paymentInfo = generateAppendParameters(info);
+  console.log('xxx1: ', paymentInfo);
+  const checkout = await DashBoard.post("/payments/purchase.php", paymentInfo, {headers});
+  console.log('xxx2: ', checkout);
+  
+  dispatch({
+    type: EMPY_CART
+  });
+
+  
   };

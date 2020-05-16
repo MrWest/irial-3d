@@ -87,9 +87,9 @@ class ModelDetails extends Component {
    rateModel({ id_model: model.id, id_user: sign.loginInfo.id, rate: value });
  }
  
- handleAddItem = () => {
+ handleAddItem = openCart => {
   const { model, category, section, addToCart } = this.props;
-  addToCart({ id_item: model.id, name: model.name, image: model.images[0].url, price: model.price, lumion_version: model.lumion_version, section, category });
+  addToCart({ id_item: model.id, name: model.name, image: model.images[0].url, price: model.price, lumion_version: model.lumion_version, section, category }, openCart);
  }
 
  render() {
@@ -98,7 +98,7 @@ class ModelDetails extends Component {
 
    if (!model.name)  return <div />;
 
-   const canAddToCart = isInCart(model);
+   const cantAddToCart = isInCart(model);
    return (
      <main className={classes.container}>
        <Helmet>
@@ -130,19 +130,24 @@ class ModelDetails extends Component {
              <p className={classes.modelPrice}><strong>{language.Price}: </strong>{`${model.price} ${model.currency}`}</p>
              <Grid container spacing={2} style={{ paddingTop: 24 }}>
                <Grid item xs={6}>
-                <Button
-                  className={classes.actionButton}
-                  endIcon={<MoneySharp className={classes.actionIcon}/>}
+                <Link
+                 
+                  endIcon={<MoneySharp className={cantAddToCart ? classes.actionIconDisabled : classes.actionIcon}/>}
+                  onClick={() => { if(!cantAddToCart)this.handleAddItem(true)}}
+                  to={cantAddToCart || '/payment'}
+                  disabled={cantAddToCart}
                 >
-                  {language.Buy}
-                </Button>
+                  <Grid container justify="center" alignItems="center" className={cantAddToCart ? classes.actionButtonDisabled : classes.actionButton}>
+                    {language.Buy}
+                  </Grid>
+                </Link>
                </Grid>
                <Grid item xs={6}>
                 <Button
-                  className={canAddToCart ? classes.actionButtonDisabled : classes.actionButton}
-                  endIcon={<AddShoppingCart className={canAddToCart ? classes.actionIconDisabled : classes.actionIcon}/>}
+                  className={cantAddToCart ? classes.actionButtonDisabled : classes.actionButton}
+                  endIcon={<AddShoppingCart className={cantAddToCart ? classes.actionIconDisabled : classes.actionIcon}/>}
                   onClick={this.handleAddItem}
-                  disabled={canAddToCart}
+                  disabled={cantAddToCart}
                 >
                   {language.AddToCart}
                 </Button>
@@ -297,6 +302,8 @@ const styles = (theme) => ({
     color: '#ffffff'
   },
   actionButton: {
+    borderRadius: 4,
+    height: 36,
     width: '100%',
     fontWeight: 'bold',
     fontStyle: 'normal',
@@ -311,6 +318,8 @@ const styles = (theme) => ({
     color: '#5f5f5f'
   },
   actionButtonDisabled: {
+    borderRadius: 4,
+    height: 36,
     width: '100%',
     fontWeight: 'bold',
     fontStyle: 'normal',
@@ -318,7 +327,7 @@ const styles = (theme) => ({
     backgroundColor: '#dedede',
     textTransform: 'none',
     '&:hover': {
-      backgroundColor: '#559cd9'
+      cursor: 'default !important'
     }
   },
   modelName: {
@@ -380,7 +389,7 @@ const styles = (theme) => ({
     textAlign: 'center',
     color: '#ffffff',
     borderRadius: '4px',
-    backgroundColor: '#188218',
+    backgroundColor: '#337ab7',
   },
 });
 
