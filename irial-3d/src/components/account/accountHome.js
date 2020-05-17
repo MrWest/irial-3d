@@ -4,6 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import VerticalTabsTool from "../verticalTabsTool";
 import { Grid } from "@material-ui/core";
 import Profile from "./profile";
+import Billing from "./billing";
 import BusinessHome from "./business/businessHome";
 import { connect } from "react-redux";
 import { Form, reduxForm, initialize } from "redux-form";
@@ -205,8 +206,31 @@ class AccountHome extends Component {
          
         )
       },
+      {
+        normal: (
+        
+        
+          <div style={{textAlign: "center", width: "100%", height: 30}}>
+           <IconBilling fill="#434C5F" />
+             {/* {this.verticalText( "Business")}  */}
+          </div>
+           
+        
+        ),
+        selected: (
+          
+             <div style={{color: "#3577d4", textAlign: "center", width: "100%", height: 30}}>
+               <IconBilling fill="#3577d4" />
+              {/* {this.verticalText( "Business")}  */}
+            </div>
+            
+         
+        )
+      },
      
     ];
+
+    console.log('xxx', typeof window === 'undefined',  this.props.sign)
 
     if(!this.props.sign.isLogged || this.props.loginInfo.type === "visitor")
     return (null)
@@ -231,6 +255,7 @@ class AccountHome extends Component {
                 >
                   <Profile />
                   <BusinessHome/>
+                  <Billing company={this.props.company} />
                   {/* <Company company={this.props.company} />
                   <Billing company={this.props.company} /> */}
                 </VerticalTabsTool>
@@ -333,8 +358,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { initialize, saveProfile, saveCompany, selectAccountView }
-)(
- 
-    withStyles(styles)(AccountHome)
-  
-);
+)(withStyles(styles)(AccountHome));

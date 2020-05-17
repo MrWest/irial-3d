@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
 import {
     Grid,
@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { payCart } from '../../actions';
 import { ReduxTextField, ReduxSelectField } from '../global/reduxFormFields';
 import { Form, reduxForm, Field, initialize } from "redux-form";
-import CardSection from './CardSection';
+import CardSection from '../global/cardSection';
 import {
   required,
   email,
@@ -78,8 +78,10 @@ const validations = {
 
 export default connect(null, { payCart })(reduxForm({ form: "paymentForm", enableReinitialize: true, validate })(withRouter( 
   function PaymentForm({ userInfo, description, amount, buttonClass, handleSubmit, history, payCart }) {
-  const stripe = useStripe();
-  const elements = useElements();
+    
+  const [stripeToken, setStripeToken] = useState(undefined);
+  // const stripe = useStripe();
+  // const elements = useElements();
 
   const rhandleSubmit = async data => {
     // We don't want to let default form submission happen here,
@@ -87,26 +89,29 @@ export default connect(null, { payCart })(reduxForm({ form: "paymentForm", enabl
     // event.preventDefault();
     console.log('xxx0: ', data);
 
-    if (!stripe || !elements) {
-      // Stripe.js has not yet loaded.
-      // Make  sure to disable form submission until Stripe.js has loaded.
-      return;
-    }
+    // if (!stripe || !elements) {
+    //   // Stripe.js has not yet loaded.
+    //   // Make  sure to disable form submission until Stripe.js has loaded.
+    //   return;
+    // }
 
-    const card = elements.getElement(CardElement);
-    const result = await stripe.createToken(card);
+    // const card = elements.getElement(CardElement);
+    // const result = await stripe.createToken(card);
 
-    if (result.error) {
-      // Show error to your customer.
-      console.log(result.error.message);
-    } else {
+    // if (result.error) {
+    //   // Show error to your customer.
+    //   console.log(result.error.message);
+    // } else {
       // Send the token to your server.
       // This function does not exist yet; we will define it in the next step.
-      console.log('xxx0: ', result.token);
-      const description = `${data.name} purchase of: ${amount} usd of Lumion items`
-      payCart({...result.token, email: data.email,  amount, description  });
-      history.push('/thanks');
-    }
+      console.log('xxx0stripeToken: ', stripeToken);
+      if(stripeToken) {
+        const description = `${data.name} purchase of: ${amount} usd of Lumion items`
+        await payCart({...stripeToken, email: data.email,  amount, description  });
+        history.push('/thanks');
+
+      }
+    
   };
 
   return (
@@ -135,10 +140,10 @@ export default connect(null, { payCart })(reduxForm({ form: "paymentForm", enabl
                 />
             </Grid>
             <Grid item xs={12}>
-                <CardSection />
+                <CardSection onReady={setStripeToken} />
             </Grid>
             <Grid item xs={12}>
-                <Button type="submit" className={buttonClass} disabled={!stripe}>Confirm order</Button>
+                <Button type="submit" className={buttonClass} disabled={!stripeToken}>Confirm order</Button>
             </Grid>
         </Grid>
       

@@ -1,7 +1,8 @@
 export const loadState = () => {
   try {
     const serializedState = localStorage.getItem("state");
-    if (serializedState === null) {
+    // console.log('xxx111', typeof window === 'undefined', serializedState,'MMM', JSON.parse(serializedState))
+    if (!serializedState) {
       return undefined;
     }
     return JSON.parse(serializedState);

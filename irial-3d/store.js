@@ -9,7 +9,7 @@ let loadedInitialState = loadState();
 export function initializeStore (initialState = loadedInitialState) {
   const store =  createStore(
     reducers,
-    initialState,
+    loadedInitialState,
     composeWithDevTools(applyMiddleware(thunkMiddleware))
   );
   

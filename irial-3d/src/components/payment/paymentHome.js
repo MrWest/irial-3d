@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import OrderDisplayTool from "./orderDisplayTool";
 import { Form, reduxForm,Field, initialize } from "redux-form";
-import {loadStripe} from '@stripe/stripe-js';
 import {
   Grid,
   Button,
@@ -28,23 +27,10 @@ import Loader from '../global/loader';
 import PaymentForm from './PaymentForm';
 import { isServer, getLanguage } from '../../apis/tools';
 import CartItem from './CartItem';
-import {Elements} from '@stripe/react-stripe-js';
 
 
 const PaymentHome = ({ classes, language, cart }) => {
-    const [stripe, setStripe] = useState(undefined);
-
-    const init = async () => {
-        // Make sure to call `loadStripe` outside of a component’s render to avoid
-     // recreating the `Stripe` object on every render.
-         const stripeRslt = await loadStripe("pk_test_FHrxVh3boAE3JjQQlj1wTzWT003RxSGuMc");
-         setStripe(stripeRslt);
-    };
-    
-  useEffect(() => {
-      init();
-    return () => {};
-  }, []);
+   
 
 const totalCart = cart.items.reduce((sum, i) => sum + parseFloat(i.price), 0);
 
@@ -61,12 +47,8 @@ return (
           <Grid container spacing={4} > 
            <Grid item xs={8}>
                <h1 className={classes.categoryTittle}>Payment Info</h1>
-               {stripe && (
-                    <Elements stripe={stripe}>
-                        <PaymentForm language={language} buttonClass={classes.submitButton} amount={totalCart * 100} />
-                    </Elements>
-               )}
-                   
+              
+                <PaymentForm language={language} buttonClass={classes.submitButton} amount={totalCart * 100} />
            </Grid>
            <Grid item xs={4}>
                  <p className={classes.cartTittle}>Your cart</p>

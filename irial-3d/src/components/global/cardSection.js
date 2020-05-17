@@ -1,0 +1,92 @@
+/**
+* Use the CSS tab above to style your Element's container.
+*/
+import React, { useState, useEffect } from 'react';
+import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+
+const CARD_ELEMENT_OPTIONS = {
+  style: {
+    base: {
+      color: "#32325d",
+      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+      fontSmoothing: "antialiased",
+      fontSize: "16px",
+      "::placeholder": {
+        color: "#aab7c4",
+      },
+    },
+    invalid: {
+      color: "#fa755a",
+      iconColor: "#fa755a",
+    },
+  },
+};
+
+function CardSection({ onReady }) {
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const handleOnReady = async () => {
+    // We don't want to let default form submission happen here,
+    // which would refresh the page.
+    // event.preventDefault();
+
+    if (!stripe || !elements) {
+      // Stripe.js has not yet loaded.
+      // Make  sure to disable form submission until Stripe.js has loaded.
+      return;
+    }
+
+    const card = elements.getElement(CardElement);
+    const result = await stripe.createToken(card);
+
+    if (result.error) {
+      // Show error to your customer.
+      console.log(result.error.message);
+    } else {
+      // Send the token to your server.
+      // This function does not exist yet; we will define it in the next step.
+      console.log('xxx02: ', result.token);
+      onReady(result.token)
+    }
+  }
+
+  return (
+      <>
+        <p style={{ marginTop: 16 }}> Card details:</p>
+        <CardElement  onBlur={handleOnReady} />
+      </>
+  );
+};
+
+const CardWrapper = ({ onReady }) => {
+  const [stripe, setStripe] = useState(undefined);
+  
+  const init = async () => {
+        // Make sure to call `loadStripe` outside of a component’s render to avoid
+    // recreating the `Stripe` object on every render.
+        const stripeRslt = await loadStripe("pk_test_FHrxVh3boAE3JjQQlj1wTzWT003RxSGuMc");
+        setStripe(stripeRslt);
+    };
+
+    useEffect(() => {
+      init();
+    return () => {};
+    }, []);
+
+  return (
+    <>
+    {stripe && (
+      <Elements stripe={stripe}>
+          <CardSection  onReady={onReady} />
+      </Elements>
+       )}
+      </>
+    )
+} 
+
+
+
+export default CardWrapper;
