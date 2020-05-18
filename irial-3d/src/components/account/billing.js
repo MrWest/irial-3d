@@ -9,16 +9,20 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
-  FormHelperText
+  FormHelperText,
+  Button
 } from "@material-ui/core";
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import MuiExpansionPanel from '@material-ui/core/ExpansionPanel';
 import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import MuiExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import { Form, reduxForm, Field, initialize } from "redux-form";
 import Typography from '@material-ui/core/Typography';
-import { Field } from "redux-form";
-import wholestates from "../../apis/usStates";
 import CardSection from '../global/cardSection';
+import CommonForm from '../global/commonForm';
+import { fieldValidation, runFieldValidations } from '../../helpers/commonValidations';
+import { CustomWidthButton } from "../buttons";
 // import CustomizedExpansionPanels from '../global/expansionPanels';
 
 const ExpansionPanel = withStyles({
@@ -94,6 +98,7 @@ class Billing extends React.Component {
   };
   render() {
     const { expanded } = this.state;
+    const { pristine, classes, language } = this.props;
    
     return (
       <Grid container spacing={4}>
@@ -110,10 +115,24 @@ class Billing extends React.Component {
           <Typography>Deposit Method</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <div style={{ width: '100' }}>
-
-           <CardSection onReady={token => this.setState({ stripeToken: token })} />
-          </div>
+          <Form style={{ width: '100%', paddingBottom: 16 }}>
+           <CommonForm />
+           <Grid container alignItems="flex-end"  spacing={2}>
+             <Grid item xs={8}>
+               <CardSection onReady={token => this.setState({ stripeToken: token })} />
+             </Grid>
+             <Grid item xs={8} />
+             <Grid item xs={4}>
+                <Button
+                  className={pristine ? classes.actionButtonDisabled : classes.actionButton}
+                  type="submit"
+                  disabled={pristine}
+                >
+                  {language.Save}
+                </Button>
+             </Grid>
+           </Grid>
+          </Form>
         </ExpansionPanelDetails>
       </ExpansionPanel>
       <ExpansionPanel square expanded={expanded === 'panel2'} onChange={() => this.handlePanelChange('panel2')}>
@@ -135,4 +154,78 @@ class Billing extends React.Component {
   }
 }
 
-export default Billing;
+
+const styles = (theme) => ({
+  actionButton: {
+    borderRadius: 4,
+    height: 36,
+    width: '100%',
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    color: '#ffffff',
+    backgroundColor: '#337ab7',
+    textTransform: 'none',
+    '&:hover': {
+      backgroundColor: '#559cd9'
+    }
+  },
+  actionIconDisabled: {
+    color: '#5f5f5f'
+  },
+  actionButtonDisabled: {
+    borderRadius: 4,
+    height: 36,
+    width: '100%',
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    color: '#5f5f5f !important',
+    backgroundColor: '#dedede',
+    textTransform: 'none',
+    '&:hover': {
+      cursor: 'default !important'
+    }
+  },
+  submitButton: {
+    width: '282px',
+    height: '56px',
+    '& span': {
+      fontFamily: 'Futura',
+      fontSize: '16px',
+      fontWeight: 'bold',
+      fontStyle: 'normal',
+      fontStretch: 'normal',
+      lineHeight: 'normal',
+      letterSpacing: 'normal',
+    },
+    textAlign: 'center',
+    color: '#ffffff',
+    borderRadius: '4px',
+    backgroundColor: '#337ab7',
+  },
+});
+
+
+const mapStateTopProps = (state) => ({
+  language: state.language,
+  initialValues: {
+    shipping_country: 'US',
+    shipping_address1: 'sdjksa sdjaklsl'
+  }
+});
+
+
+const validate = values => {
+  const fieldsToValidate = [
+    'first_name',
+    'last_name',
+    'phone_number',
+    'shipping_address1',
+    'shipping_city',
+    'shipping_state',
+    'shipping_zip'
+  ];
+  return runFieldValidations(fieldsToValidate, values, fieldValidation);
+};
+
+
+export default reduxForm({ form: "depositMethodForm", enableReinitialize: true, validate })(connect(mapStateTopProps, {})(withStyles(styles)(Billing)));

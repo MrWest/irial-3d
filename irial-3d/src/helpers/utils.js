@@ -34,6 +34,20 @@ const thousandsSeparatedAndFixed = (value, decimals = 2) => addThousandsSeparato
 
 
 
+const normalizePhone = value => {
+  if (!value) {
+    return value;
+  }
+  const onlyNums = value.replace(/[^\d]/g, '');
+  if (onlyNums.length <= 3) {
+    return onlyNums;
+  }
+  if (onlyNums.length <= 7) {
+    return `${onlyNums.slice(0, 3)}-${onlyNums.slice(3)}`;
+  }
+  return `${onlyNums.slice(0, 3)}-${onlyNums.slice(3, 6)}-${onlyNums.slice(6, 10)}`;
+};
+
 
 
 const normalizeExDate = (value, prevValue) => {
@@ -55,5 +69,27 @@ const normalizeExDate = (value, prevValue) => {
 };
 
 
+const normalizePhoneInternational = value => (value ? `+${value.replace(/[^\d]/g, '')}` : value);
 
-export { isServer, theme, managePosts, getFeaturedmedia, contentAppJSON, contentAppForm, errorAndLog, okAndLog, thousandsSeparatedAndFixed, normalizeExDate };
+const normalizeUSZip = value => {
+  if (!value) {
+    return value;
+  }
+  const onlyNums = value.replace(/[^\d]/g, '');
+  if (onlyNums.length <= 5) {
+    return onlyNums;
+  }
+  if (onlyNums.length <= 9) {
+    return `${onlyNums.slice(0, 5)}-${onlyNums.slice(5)}`;
+  }
+  return `${onlyNums.slice(0, 5)}-${onlyNums.slice(5, 9)}`;
+};
+
+const zipCodeText = isInternational => (isInternational ? 'Postal Code' : 'Zip code');
+
+
+
+
+export { isServer, theme, managePosts, getFeaturedmedia, contentAppJSON, contentAppForm,
+   errorAndLog, okAndLog, thousandsSeparatedAndFixed, normalizeExDate,
+   normalizePhone, zipCodeText, normalizeUSZip, normalizePhoneInternational };

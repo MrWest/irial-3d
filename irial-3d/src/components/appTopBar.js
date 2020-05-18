@@ -152,11 +152,12 @@ class AppTopBar extends Component {
               <Grid style={{position: "relative"}}>
 
               {(this.props.signInfo.isLogged &&  this.props.signInfo.loginInfo ) &&
-              <a style={{position: "absolute", right: 0, top: -28, color: "#aaa"}} className={classes.userLoggingText}>
-              <span style={{ marginRight: this.props.signInfo.loginInfo && this.props.signInfo.loginInfo.picture? 28: 0}}>
-              {this.props.signInfo.loginInfo.first_name} {" "} <span className={classes.lastNameText}>{this.props.signInfo.loginInfo.last_name}</span></span></a>}
-              {this.props.signInfo.loginInfo && this.props.signInfo.loginInfo.picture&&  <a style={{position: "absolute", right: 0, top: -36, color: "#aaa"}}><img style={{height: 24, width: 24, borderRadius: 12}}
+              <div style={{position: "absolute", right: 0, top: -38}} ><a className={classes.userLoggingText}>
+              <span style={{ marginRight: this.props.signInfo.loginInfo && this.props.signInfo.loginInfo.picture? 20: 0}}>
+              {this.props.signInfo.loginInfo.first_name} {" "} <span className={classes.lastNameText}>{this.props.signInfo.loginInfo.last_name}</span></span></a>
+              {this.props.signInfo.loginInfo && this.props.signInfo.loginInfo.picture&&  <a style={{ color: "#aaa"}}><img style={{height: 24, width: 24, borderRadius: 12, marginBottom: -2 }}
                src={this.props.signInfo.loginInfo.picture === "/images/public/user.png" ? "../static/images/public/user.png" : this.props.signInfo.loginInfo.picture} /></a>}
+               </div>}
                  <LanguageSelector style = {{position: "absolute", right: 0, top: -8}}></LanguageSelector>
                 <Link id="linkTour"  className={isHovered !== "linkTour"? classes.appBarButton : classes.appBarButtonHovered}  to="/tours/all" onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
                   {language.Tours}

@@ -55,7 +55,7 @@ function CardSection({ onReady }) {
 
   return (
       <>
-        <p style={{ marginTop: 16 }}> Card details:</p>
+        <p style={{ marginLeft: 4, marginTop: 8, marginBottom: 4, color: '#6d6d6d' }}> Card details:</p>
         <CardElement  onBlur={handleOnReady} />
       </>
   );
