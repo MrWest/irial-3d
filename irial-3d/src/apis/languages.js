@@ -153,7 +153,8 @@ const strings = {
       EmptyCart: 'Empty Cart',
       ShoppingCart: 'Shopping Cart',
       Checking: "Checking...",
-      CardDetails: "Card Details"
+      CardDetails: "Card Details",
+      Create: "Create"
      
     },
     es: {
@@ -310,7 +311,8 @@ const strings = {
       EmptyCart: 'Vaciar Carrito',
       ShoppingCart: 'Carrito de Compras',
       Checking: "Comprobando...",
-      CardDetails: "Informacion de la Tarjeta"
+      CardDetails: "Informacion de la Tarjeta",
+      Create: 'Crear'
 
     }
    }

@@ -61,7 +61,7 @@ const fieldValidation = (field, values) => {
     case 'ccname':
     case 'cvc':
     case 'how_do_you_plan_to_use_swag_packs':
-    case 'shipping_address1':
+    case 'address1':
     case 'name_on_account':
     case 'routing_number':
     case 'account_number':
@@ -71,8 +71,8 @@ const fieldValidation = (field, values) => {
     case 'first_name':
     case 'last_name':
     case 'name':
-    case 'shipping_city':
-    case 'shipping_country':
+    case 'city':
+    case 'country':
       return [
         required({ msg: 'Required' }),
         length({ max: 100 }),
@@ -137,19 +137,19 @@ const fieldValidation = (field, values) => {
       return [required({ msg: 'Please, provide a valid name for the account' })];
 
     case 'phone_number':
-      return phoneValidation(values.shipping_country);
+      return phoneValidation(values.country);
 
     case 'rnumber':
       return [required({ msg: 'Please, provide a valid account routing number' })];
 
-    case 'shipping_state':
-      return stateValidation(values.shipping_country);
+    case 'state':
+      return stateValidation(values.country);
 
     case 'shipping_international_state':
-      return values.shipping_country !== 'US' ? [required({ msg: 'Required' })] : [];
+      return values.country !== 'US' ? [required({ msg: 'Required' })] : [];
 
-    case 'shipping_zip':
-      return zipValidation(values.shipping_country);
+    case 'zip':
+      return zipValidation(values.country);
 
     case 'size':
       return [length({ max: 3 })];
@@ -201,11 +201,11 @@ const normalizer = (field, input, values) => {
       break;
     case 'billing_city':
     case 'billing_state':
-    case 'shipping_address1':
+    case 'address1':
       output[field] = [required({ msg: 'Required' })];
       break;
-    case 'shipping_city':
-    case 'shipping_state':
+    case 'city':
+    case 'state':
       output[field] = [
         required({ msg: 'Required' }),
         format({
@@ -217,8 +217,8 @@ const normalizer = (field, input, values) => {
     case 'billing_zip':
       output[field] = zipValidation(values.billing_country);
       break;
-    case 'shipping_zip':
-      output[field] = zipValidation(values.shipping_country);
+    case 'zip':
+      output[field] = zipValidation(values.country);
       break;
     default:
       break;
@@ -237,11 +237,11 @@ const createValidations = (values, exclude = []) => {
     'billing_address1',
     'billing_city',
     'billing_state',
-    'shipping_address1',
-    'shipping_city',
-    'shipping_state',
+    'address1',
+    'city',
+    'state',
     'billing_zip',
-    'shipping_zip'
+    'zip'
   ];
   exclude.forEach(field => delete fields[fields.indexOf(field)]);
   let output = {};

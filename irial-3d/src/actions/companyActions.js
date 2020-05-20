@@ -34,7 +34,7 @@ export const loadCompany = cId => async dispatch => {
       sendCompany.append("shipping_address1", company.shipping_address1);
       sendCompany.append("shipping_address2", company.shipping_address2);     
       sendCompany.append("shipping_city", company.shipping_city);
-      sendCompany.append("shipping_state", company.shipping_state);
+      sendCompany.append("state", company.state);
       sendCompany.append("shipping_zip", company.shipping_zip);
      
       if(company.logo !== null)

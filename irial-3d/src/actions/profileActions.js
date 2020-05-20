@@ -46,5 +46,7 @@ export const updateBillingInfo = info => async dispatch => {
     type: UPDATE_BILLING_INFO,
     payload: user
   });
+
+  return user;
 };
   

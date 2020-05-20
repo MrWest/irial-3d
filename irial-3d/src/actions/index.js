@@ -19,4 +19,5 @@ export * from "./tagActions";
 export * from "./cartActions";
 export * from "./paymentActions";
 export * from "./userActions";
+export * from "./stripeActions";
 

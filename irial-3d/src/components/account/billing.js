@@ -12,7 +12,7 @@ import { Form, reduxForm, initialize } from "redux-form";
 import Typography from '@material-ui/core/Typography';
 import CardSection from '../global/cardSection';
 import CommonForm from '../global/commonForm';
-import { updateBillingInfo } from  '../../actions';
+import { updateBillingInfo, createConnectedAccount } from  '../../actions';
 import { fieldValidation, runFieldValidations } from '../../helpers/commonValidations';
 // import { CustomWidthButton } from "../buttons";
 // import CustomizedExpansionPanels from '../global/expansionPanels';
@@ -74,10 +74,13 @@ class Billing extends React.Component {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     // event.preventDefault();
-    const { updateBillingInfo, profileId } = this.props;
+    const { updateBillingInfo, profileId, stripeExternalAccountId } = this.props;
     const { stripeToken } = this.state;
-    console.log('xxx0: ', data, stripeToken);
-    updateBillingInfo({...data, id: profileId });
+    console.log('xxx0: ', data, stripeToken, stripeExternalAccountId);
+    const updatedUser = await updateBillingInfo({...data, id: profileId });
+
+    createConnectedAccount();
+
 
     // if (!stripe || !elements) {
     //   // Stripe.js has not yet loaded.
@@ -106,7 +109,7 @@ class Billing extends React.Component {
 
   render() {
     const { expanded, stripeToken } = this.state;
-    const { pristine, submitting, invalid, classes, language, handleSubmit } = this.props;
+    const { pristine, submitting, invalid, classes, language, handleSubmit, stripeExternalAccountId } = this.props;
    
     return (
       <Grid container spacing={4}>
@@ -132,11 +135,11 @@ class Billing extends React.Component {
              <Grid item xs={8} />
              <Grid item xs={4}>
                 <Button
-                  className={(invalid || submitting || pristine || !stripeToken) ? classes.actionButtonDisabled : classes.actionButton}
+                  className={(invalid || submitting || pristine || (!stripeToken && !stripeExternalAccountId)) ? classes.actionButtonDisabled : classes.actionButton}
                   type="submit"
-                  disabled={invalid || submitting || pristine || !stripeToken}
+                  disabled={invalid || submitting || pristine || (!stripeToken && !stripeExternalAccountId)}
                 >
-                  {language.Save}
+                  {stripeExternalAccountId? language.Save : language.Create}
                 </Button>
              </Grid>
            </Grid>
@@ -216,17 +219,18 @@ const styles = (theme) => ({
 const mapStateTopProps = (state) => ({
   language: state.language,
   profileId: state.profile.id,
+  stripeExternalAccountId: state.profile.stripe_external_account_id,
   initialValues: {
     first_name: state.profile.billing_first_name || state.profile.first_name,
     last_name: state.profile.billing_last_name || state.profile.last_name,
     phone_number: state.profile.billing_phone_number || state.profile.phone_number,
     email: state.profile.billing_email || state.profile.email,
-    shipping_country: state.profile.billing_country || 'US',
-    shipping_address1: state.profile.billing_address1,
-    shipping_address2: state.profile.billing_address2,
-    shipping_state: state.profile.billing_state,
-    shipping_city: state.profile.billing_city,
-    shipping_zip: state.profile.billing_zip
+    country: state.profile.billing_country || 'US',
+    address1: state.profile.billing_address1,
+    address2: state.profile.billing_address2,
+    state: state.profile.billing_state,
+    city: state.profile.billing_city,
+    zip: state.profile.billing_zip
   }
 });
 
@@ -237,10 +241,10 @@ const validate = values => {
     'last_name',
     'email',
     'phone_number',
-    'shipping_address1',
-    'shipping_city',
-    'shipping_state',
-    'shipping_zip'
+    'address1',
+    'city',
+    'state',
+    'zip'
   ];
   return runFieldValidations(fieldsToValidate, values, fieldValidation);
 };

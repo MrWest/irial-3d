@@ -65,7 +65,7 @@ const InfoForm = () => {
       </Grid>
       <Grid item xs={6}>
         <Field
-          name="shipping_country"
+          name="country"
           label="Country"
           component={ReduxSelectField}
           defaultValue="US"
@@ -82,7 +82,7 @@ const InfoForm = () => {
       <Grid item xs={6}>
         {isInternational ? (
           <Field
-            name="shipping_state"
+            name="state"
             fullWidth
             placeholder="State / Province / Region"
             component={ReduxTextField}
@@ -91,7 +91,7 @@ const InfoForm = () => {
             margin="small"
           />
         ) : (
-          <Field name="shipping_state" fullWidth label="State" component={ReduxSelectField} >
+          <Field name="state" fullWidth label="State" component={ReduxSelectField} >
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
@@ -105,7 +105,7 @@ const InfoForm = () => {
       </Grid>
       <Grid item xs={6}>
         <Field
-          name="shipping_city"
+          name="city"
           fullWidth
           placeholder="City"
           label="City"
@@ -117,7 +117,7 @@ const InfoForm = () => {
       </Grid>
       <Grid item xs={6}>
         <Field
-          name="shipping_zip"
+          name="zip"
           fullWidth
           placeholder={zipCodeText(isInternational)}
           label={zipCodeText(isInternational)}
@@ -130,25 +130,25 @@ const InfoForm = () => {
       </Grid>
       <Grid item xs={8}>
         <Field
-          name="shipping_address1"
+          name="address1"
           fullWidth
           placeholder="Address"
           label="Address"
           component={ReduxTextField}
           type="text"
-          autoComplete="shipping_address1"
+          autoComplete="address1"
           margin="small"
         />
       </Grid>
       <Grid item xs={4}>
         <Field
-          name="shipping_address2"
+          name="address2"
           fullWidth
           placeholder="Floor, suite, unit (optional)"
           label="Floor, suite, unit (optional)"
           component={ReduxTextField}
           type="text"
-          autoComplete="shipping_address2"
+          autoComplete="address2"
           margin="small"
         />
       </Grid>
