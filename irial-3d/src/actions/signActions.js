@@ -122,20 +122,6 @@ export const setRedirectUrl = redirectUrl => async dispatch => {
   });
 };
 
-export const saveProfile = profile => async dispatch => {
- 
-  var headers = {
-    "Content-Type": "multipart/form-data"
-  };
-
-  const profileAPI = await DashBoard.post("/users/update_user.php",  generateAppendParameters(profile),  {headers});
-
-  profileAPI.data.password = undefined;
-  dispatch({
-    type: "SAVE_PROFILE",
-    payload: profileAPI.data
-  });
-};
 
 export const prepareRecoveryEmail = data => async dispatch => {
 

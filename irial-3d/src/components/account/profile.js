@@ -243,6 +243,20 @@ class Profile extends React.Component {
             label="First name"
           />
         </Grid>
+
+          <Grid item xs={12} md={6} style={{ paddingTop: 0 }}>
+            <Field
+              name="email"
+              margin="small"
+              fullWidth
+              autoComplete="email"
+              type="email"
+              component={renderTextField}
+              label="Account email address"
+              myerror={this.state.myerror}
+              onChange={this.handleTextChange.bind(this)}
+            />
+          </Grid>
         <Grid item xs={12} md={6} style={{ paddingTop: 0 }}>
           <Field
             name="phone_number"
@@ -253,20 +267,6 @@ class Profile extends React.Component {
             component={renderTextField}
             label="Phone number"
             normalize={this.normalizePhone}
-          />
-        </Grid>
-
-        <Grid item xs={12} md={6} style={{ paddingTop: 0 }}>
-          <Field
-            name="email"
-            margin="small"
-            fullWidth
-            autoComplete="email"
-            type="email"
-            component={renderTextField}
-            label="Account email address"
-            myerror={this.state.myerror}
-            onChange={this.handleTextChange.bind(this)}
           />
         </Grid>
         <Grid item xs={12}>
@@ -429,7 +429,7 @@ const mapStateToProps = state => {
   
   return {
     sign: state.sign,
-    initialValues: state.sign.loginInfo
+    initialValues: state.profile
     // {
     //   first_name: state.sign.loginInfo.first_name,
     //   last_name: state.sign.loginInfo.last_name,

@@ -11,9 +11,58 @@ import countries from '../../apis/countries';
 const InfoForm = () => {
   
   const [isInternational, setIsInternational] = useState(undefined);
-  const handleCountryChanged = country => setIsInternational(country !== 'US');
+  const handleCountryChanged = ({target: {value }}) => setIsInternational( value !== 'US');
   return (
     <Grid container spacing={2}>
+    <Grid item xs={6}>
+      <Field
+        name="first_name"
+        fullWidth
+        placeholder="First name"
+        label="First name"
+        component={ReduxTextField}
+        type="text"
+        autoComplete="first_name"
+        margin="small"
+      />
+    </Grid>
+    <Grid item xs={6}>
+      <Field
+        name="last_name"
+        fullWidth
+        placeholder="Last name"
+        label="Last name"
+        component={ReduxTextField}
+        type="text"
+        autoComplete="last_name"
+        margin="small"
+      />
+    </Grid>
+      <Grid item xs={6}>
+        <Field
+          name="email"
+          fullWidth
+          placeholder="Email address"
+          label="Email address"
+          component={ReduxTextField}
+          type="email"
+          autoComplete="email"
+          margin="small"
+        />
+      </Grid>
+      <Grid item xs={6}>
+        <Field
+          name="phone_number"
+          fullWidth
+          placeholder="Phone number"
+          label="Phone number"
+          component={ReduxTextField}
+          normalize={isInternational ? normalizePhoneInternational : normalizePhone}
+          type="text"
+          autoComplete="phone_number"
+          margin="small"
+        />
+      </Grid>
       <Grid item xs={6}>
         <Field
           name="shipping_country"
@@ -48,7 +97,7 @@ const InfoForm = () => {
             </MenuItem>
             {usaStates.map(st => (
               <MenuItem key={st.abbreviation} value={st.abbreviation}>
-                <p style={{ fontSize: 14, marginBottom: 0 }}>{st.name}</p>
+                {st.name}
               </MenuItem>
             ))}
           </Field>
@@ -59,6 +108,7 @@ const InfoForm = () => {
           name="shipping_city"
           fullWidth
           placeholder="City"
+          label="City"
           component={ReduxTextField}
           type="text"
           autoComplete="city"
@@ -70,33 +120,11 @@ const InfoForm = () => {
           name="shipping_zip"
           fullWidth
           placeholder={zipCodeText(isInternational)}
+          label={zipCodeText(isInternational)}
           component={ReduxTextField}
           normalize={isInternational ? undefined : normalizeUSZip}
           type="text"
           autoComplete="zip"
-          margin="small"
-        />
-      </Grid>
-      <Grid item xs={6}>
-        <Field
-          name="email"
-          fullWidth
-          placeholder="Email address"
-          component={ReduxTextField}
-          type="email"
-          autoComplete="email"
-          margin="small"
-        />
-      </Grid>
-      <Grid item xs={6}>
-        <Field
-          name="phone_number"
-          fullWidth
-          placeholder="Phone number"
-          component={ReduxTextField}
-          normalize={isInternational ? normalizePhoneInternational : normalizePhone}
-          type="text"
-          autoComplete="phone_number"
           margin="small"
         />
       </Grid>
@@ -105,6 +133,7 @@ const InfoForm = () => {
           name="shipping_address1"
           fullWidth
           placeholder="Address"
+          label="Address"
           component={ReduxTextField}
           type="text"
           autoComplete="shipping_address1"
@@ -116,31 +145,10 @@ const InfoForm = () => {
           name="shipping_address2"
           fullWidth
           placeholder="Floor, suite, unit (optional)"
+          label="Floor, suite, unit (optional)"
           component={ReduxTextField}
           type="text"
           autoComplete="shipping_address2"
-          margin="small"
-        />
-      </Grid>
-      <Grid item xs={6}>
-        <Field
-          name="first_name"
-          fullWidth
-          placeholder="First name"
-          component={ReduxTextField}
-          type="text"
-          autoComplete="first_name"
-          margin="small"
-        />
-      </Grid>
-      <Grid item xs={6}>
-        <Field
-          name="last_name"
-          fullWidth
-          placeholder="Last name"
-          component={ReduxTextField}
-          type="text"
-          autoComplete="last_name"
           margin="small"
         />
       </Grid>

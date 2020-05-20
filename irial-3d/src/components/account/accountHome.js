@@ -7,8 +7,7 @@ import Profile from "./profile";
 import Billing from "./billing";
 import BusinessHome from "./business/businessHome";
 import { connect } from "react-redux";
-import { Form, reduxForm, initialize } from "redux-form";
-import { saveProfile, saveCompany, selectAccountView } from "../../actions";
+import { loadProfile, selectAccountView } from "../../actions";
 import {Helmet} from 'react-helmet';
 import {
   required,
@@ -105,43 +104,10 @@ function IconBilling({ fill }) {
 
 class AccountHome extends Component {
 
-  realhandleSubmit(data) {
-    if (this.props.accountView === 0) {
-      const profile2Save = {
-        id: this.props.profile.id,
-        first_name: data.first_name,
-        last_name: data.last_name,
-        phone_number: data.phone_number,
-        email: data.email
-      };
-
-      this.props.saveProfile(profile2Save);
-    }
-
-    if (this.props.accountView > 0) {
-      const company2Save = {
-        id: this.props.company.id,
-        name: data.name,
-        phone: data.phone,
-        shipping_address1: data.shipping_address1,
-        shipping_address2: data.shipping_address2,
-        shipping_city: data.shipping_city,
-        shipping_zip: data.shipping_zip,
-        shipping_state: data.shipping_state,
-        billing_address1: data.billing_address1,
-        billing_address2: data.billing_address2,
-        billing_city: data.billing_city,
-        billing_zip: data.billing_zip,
-        billing_state: data.billing_state,
-        logo: typeof data.logo === typeof File ? data.logo : null,
-        secondary_logo:
-          typeof data.secondary_logo === typeof File
-            ? data.secondary_logo
-            : null
-      };
-
-      this.props.saveCompany(company2Save);
-    }
+  componentDidMount() {
+    const { loadProfile, loginInfo } = this.props;
+    if(loginInfo.id)
+    loadProfile(loginInfo.id);
   }
 
   verticalText(text){
@@ -229,8 +195,6 @@ class AccountHome extends Component {
       },
      
     ];
-
-    console.log('xxx', typeof window === 'undefined',  this.props.sign)
 
     if(!this.props.sign.isLogged || this.props.loginInfo.type === "visitor")
     return (null)
@@ -344,18 +308,11 @@ const mapStateToProps = state => {
   return {
     accountView: state.accountView,
     profile: state.profile,
-    company: state.company,
     sign: state.sign,
-    loginInfo: state.sign.loginInfo,
-    initialValues: {
-      first_name: state.sign.loginInfo.first_name,
-      last_name: state.sign.loginInfo.last_name,
-      email: state.sign.loginInfo.email,
-     
-    }
+    loginInfo: state.sign.loginInfo
   };
 };
 export default connect(
   mapStateToProps,
-  { initialize, saveProfile, saveCompany, selectAccountView }
+  { loadProfile,  selectAccountView }
 )(withStyles(styles)(AccountHome));

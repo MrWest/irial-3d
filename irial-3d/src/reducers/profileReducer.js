@@ -1,13 +1,13 @@
 
-import { LOAD_PROFILE, SAVE_PROFILE} from "../actions/types";
+import { LOAD_PROFILE, SAVE_PROFILE, UPDATE_BILLING_INFO } from "../actions/types";
 
 
 const profileReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD_PROFILE:
-      return action.payload;
     case SAVE_PROFILE:
-      return action.payload;
+    case UPDATE_BILLING_INFO:
+      return {...state, ...action.payload};
     
     default:
       return state;

@@ -1,15 +1,6 @@
 import React from "react";
 import {
   Grid,
-  Radio,
-  Select,
-  FormControlLabel,
-  Checkbox,
-  Input,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  FormHelperText,
   Button
 } from "@material-ui/core";
 import { connect } from 'react-redux';
@@ -17,12 +8,13 @@ import { withStyles } from '@material-ui/core/styles';
 import MuiExpansionPanel from '@material-ui/core/ExpansionPanel';
 import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import MuiExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import { Form, reduxForm, Field, initialize } from "redux-form";
+import { Form, reduxForm, initialize } from "redux-form";
 import Typography from '@material-ui/core/Typography';
 import CardSection from '../global/cardSection';
 import CommonForm from '../global/commonForm';
+import { updateBillingInfo } from  '../../actions';
 import { fieldValidation, runFieldValidations } from '../../helpers/commonValidations';
-import { CustomWidthButton } from "../buttons";
+// import { CustomWidthButton } from "../buttons";
 // import CustomizedExpansionPanels from '../global/expansionPanels';
 
 const ExpansionPanel = withStyles({
@@ -69,10 +61,6 @@ const ExpansionPanelDetails = withStyles((theme) => ({
 
 class Billing extends React.Component {
   state = {
-    checkedB: true,
-    method: "credit card",
-    accType: "",
-    modalOpen: false,
     expanded : 'panel1',
     stripeToken: undefined
   };
@@ -81,24 +69,44 @@ class Billing extends React.Component {
     this.setState({ expanded: panel });
   };
 
-  handleChangeMethod = event => {
-    this.setState({ method: event.target.value });
+  
+  rhandleSubmit = async data => {
+    // We don't want to let default form submission happen here,
+    // which would refresh the page.
+    // event.preventDefault();
+    const { updateBillingInfo, profileId } = this.props;
+    const { stripeToken } = this.state;
+    console.log('xxx0: ', data, stripeToken);
+    updateBillingInfo({...data, id: profileId });
+
+    // if (!stripe || !elements) {
+    //   // Stripe.js has not yet loaded.
+    //   // Make  sure to disable form submission until Stripe.js has loaded.
+    //   return;
+    // }
+
+    // const card = elements.getElement(CardElement);
+    // const result = await stripe.createToken(card);
+
+    // if (result.error) {
+    //   // Show error to your customer.
+    //   console.log(result.error.message);
+    // } else {
+      // Send the token to your server.
+      // This function does not exist yet; we will define it in the next step.
+      // console.log('xxx0stripeToken: ', stripeToken);
+      // if(stripeToken) {
+      //   const description = `${data.name} purchase of: ${amount} usd of Lumion items`
+      //   await payCart({...stripeToken, email: data.email,  amount, description  });
+      //   history.push('/thanks');
+
+      // }
+    
   };
-  handleChangeAccount = event => {
-    this.setState({ accType: event.target.value });
-  };
-  handleCloseModalPrivacy = () => {
-    this.setState({ modalOpen: false });
-  };
-  handleOpenModalPrivacy = () => {
-    this.setState({ modalOpen: true });
-  };
-  handleChangeCheck = name => event => {
-    this.setState({ [name]: event.target.checked });
-  };
+
   render() {
-    const { expanded } = this.state;
-    const { pristine, classes, language } = this.props;
+    const { expanded, stripeToken } = this.state;
+    const { pristine, submitting, invalid, classes, language, handleSubmit } = this.props;
    
     return (
       <Grid container spacing={4}>
@@ -115,7 +123,7 @@ class Billing extends React.Component {
           <Typography>Deposit Method</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Form style={{ width: '100%', paddingBottom: 16 }}>
+          <Form style={{ width: '100%', paddingBottom: 16 }} onSubmit={handleSubmit(this.rhandleSubmit)}>
            <CommonForm />
            <Grid container alignItems="flex-end"  spacing={2}>
              <Grid item xs={8}>
@@ -124,9 +132,9 @@ class Billing extends React.Component {
              <Grid item xs={8} />
              <Grid item xs={4}>
                 <Button
-                  className={pristine ? classes.actionButtonDisabled : classes.actionButton}
+                  className={(invalid || submitting || pristine || !stripeToken) ? classes.actionButtonDisabled : classes.actionButton}
                   type="submit"
-                  disabled={pristine}
+                  disabled={invalid || submitting || pristine || !stripeToken}
                 >
                   {language.Save}
                 </Button>
@@ -207,9 +215,18 @@ const styles = (theme) => ({
 
 const mapStateTopProps = (state) => ({
   language: state.language,
+  profileId: state.profile.id,
   initialValues: {
-    shipping_country: 'US',
-    shipping_address1: 'sdjksa sdjaklsl'
+    first_name: state.profile.billing_first_name || state.profile.first_name,
+    last_name: state.profile.billing_last_name || state.profile.last_name,
+    phone_number: state.profile.billing_phone_number || state.profile.phone_number,
+    email: state.profile.billing_email || state.profile.email,
+    shipping_country: state.profile.billing_country || 'US',
+    shipping_address1: state.profile.billing_address1,
+    shipping_address2: state.profile.billing_address2,
+    shipping_state: state.profile.billing_state,
+    shipping_city: state.profile.billing_city,
+    shipping_zip: state.profile.billing_zip
   }
 });
 
@@ -218,6 +235,7 @@ const validate = values => {
   const fieldsToValidate = [
     'first_name',
     'last_name',
+    'email',
     'phone_number',
     'shipping_address1',
     'shipping_city',
@@ -228,4 +246,4 @@ const validate = values => {
 };
 
 
-export default reduxForm({ form: "depositMethodForm", enableReinitialize: true, validate })(connect(mapStateTopProps, {})(withStyles(styles)(Billing)));
+export default connect(mapStateTopProps, { initialize, updateBillingInfo })(reduxForm({ form: "DepositMethodForm", enableReinitialize: true, validate })(withStyles(styles)(Billing)));

@@ -38,6 +38,7 @@ export const SET_NOTIFICATION_READED = "SET_NOTIFICATION_READED";
 //profile
 export const LOAD_PROFILE = "LOAD_PROFILE";
 export const SAVE_PROFILE = "SAVE_PROFILE";
+export const UPDATE_BILLING_INFO = "UPDATE_BILLING_INFO";
 
 //company
 export const LOAD_COMPANY = "LOAD_COMPANY";
@@ -112,5 +113,6 @@ export const TOGGLE_OPEN = "TOGGLE_OPEN";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const EMPY_CART = "EMPY_CART";
+
 
 

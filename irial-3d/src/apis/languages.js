@@ -151,7 +151,9 @@ const strings = {
       Tags: "Tags",
       relatedModels: "Related Models",
       EmptyCart: 'Empty Cart',
-      ShoppingCart: 'Shopping Cart'
+      ShoppingCart: 'Shopping Cart',
+      Checking: "Checking...",
+      CardDetails: "Card Details"
      
     },
     es: {
@@ -306,7 +308,9 @@ const strings = {
       Tags: "Etiquetas",
       relatedModels: "Modelos relacionados",
       EmptyCart: 'Vaciar Carrito',
-      ShoppingCart: 'Carrito de Compras'
+      ShoppingCart: 'Carrito de Compras',
+      Checking: "Comprobando...",
+      CardDetails: "Informacion de la Tarjeta"
 
     }
    }
