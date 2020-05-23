@@ -12,8 +12,9 @@ import { Form, reduxForm, initialize } from "redux-form";
 import Typography from '@material-ui/core/Typography';
 import CardSection from '../global/cardSection';
 import CommonForm from '../global/commonForm';
-import { updateBillingInfo, createConnectedAccount } from  '../../actions';
+import { updateBillingInfo, createConnectedAccount, createExternalBankAccount, updateStripeAccountInfo, tosAcceptanceStripe } from  '../../actions';
 import { fieldValidation, runFieldValidations } from '../../helpers/commonValidations';
+import { isServer } from '../../apis/tools';
 // import { CustomWidthButton } from "../buttons";
 // import CustomizedExpansionPanels from '../global/expansionPanels';
 
@@ -65,6 +66,12 @@ class Billing extends React.Component {
     stripeToken: undefined
   };
 
+
+  componentDidMount() {
+    const { stripeExternalAccountId } = this.props;
+    if(!isServer && stripeExternalAccountId)
+    this.setState({ stripeToken: stripeExternalAccountId });
+  }
   handlePanelChange = (panel) => {
     this.setState({ expanded: panel });
   };
@@ -79,31 +86,20 @@ class Billing extends React.Component {
     console.log('xxx0: ', data, stripeToken, stripeExternalAccountId);
     const updatedUser = await updateBillingInfo({...data, id: profileId });
 
-    createConnectedAccount();
+    if(stripeExternalAccountId) {
+    //  const createdAccount = await createConnectedAccount({...data, id: profileId });
+    //  console.log('xxx1: ', createdAccount);
+     
+    //  await updateStripeAccountInfo({ id: profileId, stripe_account_id: createdAccount.id, stripe_account_type: createdAccount.type });
 
+    
+    //  const acceptance = await tosAcceptanceStripe({ id: 'acct_1GkuOEG9wbUmr7k7' });
+    //  console.log('xxx13: ', acceptance);
+     const createdBankAccount = await createExternalBankAccount({id: 'acct_1GkuOEG9wbUmr7k7', nounce: stripeToken.id });
+     await updateStripeAccountInfo({ id: profileId, stripe_external_account_id: createdBankAccount.id });
+     console.log('xxx1: ', createdBankAccount);
+    }
 
-    // if (!stripe || !elements) {
-    //   // Stripe.js has not yet loaded.
-    //   // Make  sure to disable form submission until Stripe.js has loaded.
-    //   return;
-    // }
-
-    // const card = elements.getElement(CardElement);
-    // const result = await stripe.createToken(card);
-
-    // if (result.error) {
-    //   // Show error to your customer.
-    //   console.log(result.error.message);
-    // } else {
-      // Send the token to your server.
-      // This function does not exist yet; we will define it in the next step.
-      // console.log('xxx0stripeToken: ', stripeToken);
-      // if(stripeToken) {
-      //   const description = `${data.name} purchase of: ${amount} usd of Lumion items`
-      //   await payCart({...stripeToken, email: data.email,  amount, description  });
-      //   history.push('/thanks');
-
-      // }
     
   };
 
@@ -135,9 +131,9 @@ class Billing extends React.Component {
              <Grid item xs={8} />
              <Grid item xs={4}>
                 <Button
-                  className={(invalid || submitting || pristine || (!stripeToken && !stripeExternalAccountId)) ? classes.actionButtonDisabled : classes.actionButton}
+                  className={(invalid || submitting || !stripeToken ) ? classes.actionButtonDisabled : classes.actionButton}
                   type="submit"
-                  disabled={invalid || submitting || pristine || (!stripeToken && !stripeExternalAccountId)}
+                  disabled={invalid || submitting || !stripeToken }
                 >
                   {stripeExternalAccountId? language.Save : language.Create}
                 </Button>

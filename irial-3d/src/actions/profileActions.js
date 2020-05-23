@@ -1,6 +1,6 @@
 import {LOAD_PROFILE, SAVE_PROFILE, UPDATE_BILLING_INFO} from "./types";
 import DashBoard from "../apis/DashBoard";
-import {generateAppendParameters, generatePHPParameters} from "../apis/tools";
+import {generateAppendParameters, generatePHPParameters, headers} from "../apis/tools";
 
 
 export const loadProfile = id => async dispatch => {
@@ -17,10 +17,6 @@ export const loadProfile = id => async dispatch => {
 
  
   export const saveProfile = profile => async dispatch => {
-  
-    var headers = {
-      "Content-Type": "multipart/form-data"
-    };
 
     const profileAPI = await DashBoard.post("/users/update_user.php",  generateAppendParameters(profile),  {headers});
 
@@ -33,10 +29,6 @@ export const loadProfile = id => async dispatch => {
 
   
 export const updateBillingInfo = info => async dispatch => {
- 
-  var headers = {
-    "Content-Type": "multipart/form-data"
-  };
 
   const userAPI = await DashBoard.post("/users/update_user_stripe_account_info.php",  generateAppendParameters(info),  {headers});
 
@@ -46,6 +38,21 @@ export const updateBillingInfo = info => async dispatch => {
     type: UPDATE_BILLING_INFO,
     payload: user
   });
+
+  return user;
+};
+  
+
+export const updateStripeAccountInfo = async info => {
+
+  const userAPI = await DashBoard.post("/users/update_user_bank_account.php",  generateAppendParameters(info),  {headers});
+
+  const user = userAPI.data;
+
+  // dispatch({
+  //   type: UPDATE_BILLING_INFO,
+  //   payload: user
+  // });
 
   return user;
 };

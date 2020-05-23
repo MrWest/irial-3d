@@ -48,7 +48,7 @@ return (
            <Grid item xs={8}>
                <h1 className={classes.categoryTittle}>Payment Info</h1>
               
-                <PaymentForm language={language} buttonClass={classes.submitButton} amount={totalCart * 100} />
+                <PaymentForm language={language} buttonClass={classes.submitButton} amount={totalCart * 100} destination={cart.items.length > 0 ? cart.items[0].destination : undefined} />
            </Grid>
            <Grid item xs={4}>
                  <p className={classes.cartTittle}>Your cart</p>

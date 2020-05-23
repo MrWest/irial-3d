@@ -89,7 +89,8 @@ class ModelDetails extends Component {
  
  handleAddItem = openCart => {
   const { model, category, section, addToCart } = this.props;
-  addToCart({ id_item: model.id, name: model.name, image: model.images[0].url, price: model.price, lumion_version: model.lumion_version, section, category }, openCart);
+  addToCart({ id_item: model.id, name: model.name, image: model.images[0].url, price: model.price,
+     lumion_version: model.lumion_version, section, category, destination: model.ownerInfo.stripe_account_id }, openCart);
  }
 
  render() {

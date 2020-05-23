@@ -49,7 +49,7 @@ let CardSection = ({ onReady, language }) => {
   
       const card = elements.getElement(CardElement);
       setChecking(true);
-      const result = await stripe.createToken(card);
+      const result = await stripe.createToken(card, { currency: 'usd' });
       setChecking(false);
       if (result.error) {
         // Show error to your customer.

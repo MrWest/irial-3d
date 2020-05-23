@@ -11,5 +11,30 @@ export const createConnectedAccount = async info => {
   const checkout = await DashBoard.post("/stripe/create_connected_account.php", paymentInfo, {headers});
   console.log('xxx2: ', checkout);
   
-  
+  return checkout.data;
   };
+
+  export const createExternalBankAccount = async info => {
+    const paymentInfo = generateAppendParameters(info);
+    console.log('xxx1: ', paymentInfo);
+    const checkout = await DashBoard.post("/stripe/create_external_account.php", paymentInfo, {headers});
+    console.log('xxx2: ', checkout);
+    
+    
+  return checkout.data;
+
+    };
+
+    
+  export const tosAcceptanceStripe = async info => {
+    const paymentInfo = generateAppendParameters(info);
+    console.log('xxx1: ', paymentInfo);
+    const checkout = await DashBoard.post("/stripe/stripe_agreement_acceptance.php", paymentInfo, {headers});
+    console.log('xxx2: ', checkout);
+    
+    
+  return checkout.data;
+
+    };
+
+  
