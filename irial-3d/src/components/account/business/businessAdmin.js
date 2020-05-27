@@ -18,14 +18,6 @@ class BusinessAdmin extends Component {
   state = { serviceIndex: -1
 };
 
-componentWillMount(){
-
-  // alert(this.props.sign.loginInfo)
-  if(this.props.sign.loginInfo){
-    this.props.sortAttractionsUser(this.props.sign.loginInfo.id)
-  }
- 
-}
 
 selectService = event => {
 
@@ -101,11 +93,11 @@ handleDeleteAttraction = event => {
         <Grid container spacing={4} >
           <Grid item xs={12} md={4}>
          
-          {this.props.attractions.map(attraction => (
+          {/* {this.props.attractions.map(attraction => (
 
            
             <Nameable nameable = {attraction}  size="large" selected = { parseInt(this.state.serviceIndex) === parseInt(attraction.id)} onClick={this.selectService} onEdit={this.editAttraction}  onDelete={this.handleDeleteAttraction}  id={attraction.id}></Nameable>
-          ))}
+          ))} */}
 
           
        

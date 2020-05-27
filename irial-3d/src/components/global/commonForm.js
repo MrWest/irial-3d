@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import { Grid, MenuItem } from '@material-ui/core';
 import { Field } from 'redux-form';
 import { connect } from 'react-redux';
-import { normalizePhone, zipCodeText, normalizeUSZip, normalizePhoneInternational } from '../../helpers/utils';
+import { normalizePhone, zipCodeText, normalizeUSZip, normalizePhoneInternational, normalizeDate } from '../../helpers/utils';
 import { ReduxTextField, ReduxSelectField } from '../global/reduxFormFields';
 import usaStates from '../../apis/usStates';
 import countries from '../../apis/countries';
 
 
-const InfoForm = () => {
+const InfoForm = ({ international }) => {
   
-  const [isInternational, setIsInternational] = useState(undefined);
+  const [isInternational, setIsInternational] = useState(international);
   const handleCountryChanged = ({target: {value }}) => setIsInternational( value !== 'US');
   return (
     <Grid container spacing={2}>
-    <Grid item xs={6}>
+    <Grid item xs={4}>
       <Field
         name="first_name"
         fullWidth
@@ -26,7 +26,7 @@ const InfoForm = () => {
         margin="small"
       />
     </Grid>
-    <Grid item xs={6}>
+    <Grid item xs={4}>
       <Field
         name="last_name"
         fullWidth
@@ -38,7 +38,7 @@ const InfoForm = () => {
         margin="small"
       />
     </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={4}>
         <Field
           name="email"
           fullWidth
@@ -47,19 +47,6 @@ const InfoForm = () => {
           component={ReduxTextField}
           type="email"
           autoComplete="email"
-          margin="small"
-        />
-      </Grid>
-      <Grid item xs={6}>
-        <Field
-          name="phone_number"
-          fullWidth
-          placeholder="Phone number"
-          label="Phone number"
-          component={ReduxTextField}
-          normalize={isInternational ? normalizePhoneInternational : normalizePhone}
-          type="text"
-          autoComplete="phone_number"
           margin="small"
         />
       </Grid>
@@ -149,6 +136,60 @@ const InfoForm = () => {
           component={ReduxTextField}
           type="text"
           autoComplete="address2"
+          margin="small"
+        />
+      </Grid>
+      <Grid item xs={4}>
+        <Field
+          name="phone_number"
+          fullWidth
+          placeholder="Phone number"
+          label="Phone number"
+          component={ReduxTextField}
+          normalize={isInternational ? normalizePhoneInternational : normalizePhone}
+          type="text"
+          autoComplete="phone_number"
+          margin="small"
+        />
+      </Grid>
+      <Grid item xs={4}>
+        <Field
+          name="billing_birth_day"
+          fullWidth
+          placeholder="YYYY/MM/DD"
+          label="Birth day"
+          component={ReduxTextField}
+          normalize={normalizeDate}
+          type="email"
+          autoComplete="billing_birth_day"
+          margin="small"
+        />
+      </Grid>
+      <Grid item xs={4}>
+        <Field
+          name="billing_pid_number"
+          fullWidth
+          placeholder={`${isInternational ? "Personal Id number" : "Last 4 digits"}`}
+          label={`${isInternational ? "Personal Id number" : "Last 4 digits of your SSN"}`}
+          component={ReduxTextField}
+          normalize={value => value.replace(/[^\d]/g, '')}
+          // validate={value => !isInternational && value && value.length === 4 ? undefined : isInternational ? undefined : ma}
+          type="text"
+          autoComplete="billing_pid_number"
+          margin="small"
+        />
+      </Grid>
+      
+      <Grid item xs={12}>
+        <Field
+          name="billing_professional_profile_url"
+          fullWidth
+          placeholder="Professional profile url"
+          label="Professional profile url (LinkedIn profile url, or personal web site, or blog)"
+          component={ReduxTextField}
+          type="text"
+          autoComplete="billing_professional_profile_url"
+          validate={value => /^[\x00-\x7F]+$/.test(value)? undefined : 'Url contains invalid characters'}
           margin="small"
         />
       </Grid>

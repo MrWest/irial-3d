@@ -24,6 +24,14 @@ const zipValidation = country =>
       ]
     : [required({ msg: 'Required' })];
 
+const numberIdValidation = country =>
+    ['US', 'USA'].includes(country)
+      ? [
+          required({ msg: 'Required' }),
+          length({ max: 4 })
+        ]
+      : [required({ msg: 'Required' })];
+
 const runFieldValidations = (fieldsToValidate, values, validations) => {
   const errors = {};
   if (fieldsToValidate) {
@@ -65,6 +73,7 @@ const fieldValidation = (field, values) => {
     case 'name_on_account':
     case 'routing_number':
     case 'account_number':
+    case 'billing_birth_day':
       return [required({ msg: 'Required' }), length({ max: 100 })];
 
     case 'billing_city':
@@ -87,6 +96,9 @@ const fieldValidation = (field, values) => {
 
     case 'billing_zip':
       return zipValidation(values.billing_country);
+    
+    case 'billing_pid_number':
+      return numberIdValidation(values.country)
 
     case 'budget':
       return [
@@ -153,6 +165,12 @@ const fieldValidation = (field, values) => {
 
     case 'size':
       return [length({ max: 3 })];
+    case 'billing_professional_profile_url':
+      return [required(),  format({
+        with: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/i,
+        message: { defaultMessage: 'Must be a valid url' }
+      })];
+
 
     default:
       return undefined;

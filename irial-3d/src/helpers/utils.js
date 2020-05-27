@@ -50,6 +50,27 @@ const normalizePhone = value => {
 
 
 
+
+const normalizeDate = value => {
+  if (!value) {
+    return value;
+  }
+
+  if(value === '0000-00-00') return '';
+  
+  const onlyNums = value.replace(/[^\d]/g, '');
+  if (onlyNums.length <= 4) {
+    return onlyNums;
+  }
+  if (onlyNums.length <= 6) {
+    return `${onlyNums.slice(0, 4)}/${onlyNums.slice(4)}`;
+  }
+  return `${onlyNums.slice(0, 4)}/${onlyNums.slice(4, 6)}/${onlyNums.slice(6, 8)}`;
+};
+
+
+
+
 const normalizeExDate = (value, prevValue) => {
   if (value) {
     const valueOnlyNumbers = value.replace(/[^\d]/g, '');
@@ -92,4 +113,4 @@ const zipCodeText = isInternational => (isInternational ? 'Postal Code' : 'Zip c
 
 export { isServer, theme, managePosts, getFeaturedmedia, contentAppJSON, contentAppForm,
    errorAndLog, okAndLog, thousandsSeparatedAndFixed, normalizeExDate,
-   normalizePhone, zipCodeText, normalizeUSZip, normalizePhoneInternational };
+   normalizePhone, zipCodeText, normalizeUSZip, normalizePhoneInternational, normalizeDate };

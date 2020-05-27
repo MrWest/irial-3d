@@ -1,7 +1,8 @@
 import React from "react";
 import {
   Grid,
-  Button
+  Button,
+  Link
 } from "@material-ui/core";
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
@@ -12,7 +13,7 @@ import { Form, reduxForm, initialize } from "redux-form";
 import Typography from '@material-ui/core/Typography';
 import CardSection from '../global/cardSection';
 import CommonForm from '../global/commonForm';
-import { updateBillingInfo, createConnectedAccount, createExternalBankAccount, updateStripeAccountInfo, tosAcceptanceStripe } from  '../../actions';
+import { updateBillingInfo, createConnectedAccount, createExternalBankAccount, updateStripeAccountInfo, tosAcceptanceStripe, deleteStripeAccount } from  '../../actions';
 import { fieldValidation, runFieldValidations } from '../../helpers/commonValidations';
 import { isServer } from '../../apis/tools';
 // import { CustomWidthButton } from "../buttons";
@@ -81,23 +82,34 @@ class Billing extends React.Component {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     // event.preventDefault();
-    const { updateBillingInfo, profileId, stripeExternalAccountId } = this.props;
+    const { updateBillingInfo, profile, stripeAccountId } = this.props;
     const { stripeToken } = this.state;
-    console.log('xxx0: ', data, stripeToken, stripeExternalAccountId);
-    const updatedUser = await updateBillingInfo({...data, id: profileId });
+    console.log('xxx0: ', data, stripeToken, stripeAccountId);
+    const updatedUser = await updateBillingInfo({...data, id: profile.id });
 
-    if(stripeExternalAccountId) {
-    //  const createdAccount = await createConnectedAccount({...data, id: profileId });
-    //  console.log('xxx1: ', createdAccount);
-     
-    //  await updateStripeAccountInfo({ id: profileId, stripe_account_id: createdAccount.id, stripe_account_type: createdAccount.type });
+    if(!stripeAccountId && stripeToken ) {
+      const createdAccount = await createConnectedAccount({...data, id: profile.id, external_account: stripeToken.id });
+     console.log('xxx1: ', createdAccount);
 
+     if(createdAccount.id) {
+
+       await updateStripeAccountInfo({ id: profile.id, stripe_account_id: createdAccount.id, stripe_account_type: createdAccount.type });
     
-    //  const acceptance = await tosAcceptanceStripe({ id: 'acct_1GkuOEG9wbUmr7k7' });
-    //  console.log('xxx13: ', acceptance);
-     const createdBankAccount = await createExternalBankAccount({id: 'acct_1GkuOEG9wbUmr7k7', nounce: stripeToken.id });
-     await updateStripeAccountInfo({ id: profileId, stripe_external_account_id: createdBankAccount.id });
-     console.log('xxx1: ', createdBankAccount);
+    //   //  const acceptance = await tosAcceptanceStripe({ id: 'acct_1GkuOEG9wbUmr7k7' });
+    //   //  console.log('xxx13: ', acceptance);
+    //    const createdBankAccount = await createExternalBankAccount({id: createdAccount.id, nounce: stripeToken.id });
+    //    console.log('xxx1: ', createdBankAccount);
+       
+    //    await updateStripeAccountInfo({ id: profile.id, stripe_external_account_id: createdBankAccount.id });
+     }
+     
+    
+
+    }
+    else {
+      console.log('xxx1: ', { id: profile.id, stripeId: stripeAccountId });
+      const deletedAccount = await deleteStripeAccount({ id: profile.id, stripeId: stripeAccountId });
+      console.log('xxx1: ', deletedAccount);
     }
 
     
@@ -105,7 +117,7 @@ class Billing extends React.Component {
 
   render() {
     const { expanded, stripeToken } = this.state;
-    const { pristine, submitting, invalid, classes, language, handleSubmit, stripeExternalAccountId } = this.props;
+    const { pristine, submitting, invalid, classes, language, handleSubmit, stripeAccountId, country, profile } = this.props;
    
     return (
       <Grid container spacing={4}>
@@ -123,19 +135,37 @@ class Billing extends React.Component {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Form style={{ width: '100%', paddingBottom: 16 }} onSubmit={handleSubmit(this.rhandleSubmit)}>
-           <CommonForm />
+           <CommonForm international={country && country !== 'US'}/>
            <Grid container alignItems="flex-end"  spacing={2}>
              <Grid item xs={8}>
                <CardSection onReady={token => this.setState({ stripeToken: token })} />
              </Grid>
-             <Grid item xs={8} />
+             <Grid item xs={4} />
+             <Grid item xs={4} >
+               <Link
+                  type="submit"
+                  href={`https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_HFjRgc6vCvDCBR6x5ghJisC6mOLPx4tp&scope=read_write&state=${profile.id}
+                  &stripe_user[business_type]=individual&business_profile[mcc]=5815&stripe_user[business_name]=${profile.first_name}-${profile.last_name}&business_profile[name]=${profile.first_name}-${profile.last_name}
+                  &stripe_user[url]=${profile.billing_professional_profile_url}&stripe_user[email]=${profile.email}&stripe_user[first_name]=${profile.first_name}
+                  &stripe_user[last_name]=${profile.last_name}`}
+                >
+                  <img
+                    src="/static/images/public/blue-on-dark.png"
+                    srcSet="/static/images/public/blue-on-dark.png 1x, /static/images/public/blue-on-dark@2x.png 2x,
+                      /static/images/public/blue-on-dark@3x.png 3x"
+                    alt="Connect Stripe"
+                    className={classes.imageWASwagUp}
+                  />
+                </Link>
+             </Grid>
+             <Grid item xs={4} />
              <Grid item xs={4}>
                 <Button
                   className={(invalid || submitting || !stripeToken ) ? classes.actionButtonDisabled : classes.actionButton}
                   type="submit"
                   disabled={invalid || submitting || !stripeToken }
                 >
-                  {stripeExternalAccountId? language.Save : language.Create}
+                  {stripeAccountId? language.Save : language.Create}
                 </Button>
              </Grid>
            </Grid>
@@ -209,13 +239,20 @@ const styles = (theme) => ({
     borderRadius: '4px',
     backgroundColor: '#337ab7',
   },
+  imageWASwagUp: {
+    width: '100%',
+    maxWidth: '100%',
+    maxHeight: 36,
+    objectFit: 'contain'
+  },
 });
 
 
 const mapStateTopProps = (state) => ({
   language: state.language,
-  profileId: state.profile.id,
-  stripeExternalAccountId: state.profile.stripe_external_account_id,
+  profile: state.profile,
+  stripeAccountId: state.profile.stripe_account_id,
+  country: state.profile.billing_country,
   initialValues: {
     first_name: state.profile.billing_first_name || state.profile.first_name,
     last_name: state.profile.billing_last_name || state.profile.last_name,
@@ -226,7 +263,10 @@ const mapStateTopProps = (state) => ({
     address2: state.profile.billing_address2,
     state: state.profile.billing_state,
     city: state.profile.billing_city,
-    zip: state.profile.billing_zip
+    zip: state.profile.billing_zip,
+    billing_birth_day: state.profile.billing_birth_day !== '0000-00-00' ? state.profile.billing_birth_day : undefined,
+    billing_pid_number: state.profile.billing_pid_number,
+    billing_professional_profile_url: state.profile.billing_professional_profile_url
   }
 });
 
@@ -240,7 +280,10 @@ const validate = values => {
     'address1',
     'city',
     'state',
-    'zip'
+    'zip',
+    'billing_pid_number',
+    'billing_birth_day',
+    'billing_professional_profile_url'
   ];
   return runFieldValidations(fieldsToValidate, values, fieldValidation);
 };
