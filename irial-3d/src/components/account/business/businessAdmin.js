@@ -44,7 +44,7 @@ handleDeleteAttraction = event => {
     return (
       <main  style={{paddingBottom: 40}}>
           <Grid container spacing={4}>
-              <Grid item alignItems="baseline" style={{paddingRight: 0}} >
+              <Grid item style={{paddingRight: 0}} >
                <div style={{display: "table", height: "100%"}}>
                 <div style={{display: "table-cell", verticalAlign: "middle", paddingLeft: 0}}>
                 <p >{this.props.language.MyBusinesses}:</p>
@@ -74,14 +74,12 @@ handleDeleteAttraction = event => {
                         ))}
                   */}
                         {this.props.categories.map(category =>(
-
-                        <MenuItem value={"/attractionadd/" + category.id}>
-                        <ListItemIcon className={classes.icon}>
-                          <AddIcon color="#ffffff" style={{fontSize: 34, color: "#188218", opacity: 0.3}}></AddIcon>    
-                        </ListItemIcon>
-                        <ListItemText classes={{ primary: classes.primary }}  inset primary={category.name} />
-                            
-                        </MenuItem>
+                          <MenuItem key={category.id} value={"/attractionadd/" + category.id}>
+                            <ListItemIcon className={classes.icon}>
+                              <AddIcon color="#ffffff" style={{fontSize: 34, color: "#188218", opacity: 0.3}}></AddIcon>    
+                            </ListItemIcon>
+                            <ListItemText classes={{ primary: classes.primary }}  inset primary={category.name} />
+                          </MenuItem>
                         ))}
                    
                    

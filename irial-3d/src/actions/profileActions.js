@@ -59,10 +59,27 @@ export const updateStripeAccountInfo = async info => {
 
 
 
-  
-export const updateBillingInfoServer = (reduxStore, info) => async dispatch => {
+export const updateStripeAccountInfoServer = async info => {
 
-  const userAPI = await DashBoard.post("/users/update_user_stripe_account_info.php",  generateAppendParameters(info),  {headers});
+  const userAPI = await DashBoard.post("/users/update_user_bank_account.php",  generatePHPParameters(info),  {headers});
+
+  const user = userAPI.data;
+
+  // dispatch({
+  //   type: UPDATE_BILLING_INFO,
+  //   payload: user
+  // });
+
+  return user;
+};
+
+
+
+
+  
+export const updateBillingInfoServer = async (reduxStore, info) => {
+
+  const userAPI = await DashBoard.post("/users/update_user_stripe_account_info.php",  generatePHPParameters(info),  {headers});
 
   const user = userAPI.data;
 

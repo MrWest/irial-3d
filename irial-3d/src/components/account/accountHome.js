@@ -126,7 +126,7 @@ class AccountHome extends Component {
     )
   }
   render() {
-    const { classes, valid } = this.props;
+    const { classes, valid, stripe_account_status } = this.props;
 
     const labels = [
       {
@@ -205,7 +205,7 @@ class AccountHome extends Component {
               <title>Viñales Traveler | Account</title>
               <meta name="description" content="This is what you want to show as the page content in the Google SERP Listing" />
            </Helmet>
-       <section className={parseInt(this.props.accountView) === 1 && this.props.loginInfo.type === "business"?classes.cover: null} alignItems="top">
+       <section className={parseInt(this.props.accountView) === 1 && this.props.loginInfo.type === "business"?classes.cover: null} >
    
       <Grid container justify="center" spacing={0}>
        <Grid item className={classes.center}>
@@ -219,7 +219,7 @@ class AccountHome extends Component {
                 >
                   <Profile />
                   <BusinessHome/>
-                  <Billing company={this.props.company} />
+                  <Billing company={this.props.company} stripe_account_status={stripe_account_status} />
                   {/* <Company company={this.props.company} />
                   <Billing company={this.props.company} /> */}
                 </VerticalTabsTool>

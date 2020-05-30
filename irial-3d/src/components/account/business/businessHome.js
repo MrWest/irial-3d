@@ -41,7 +41,7 @@ const styles = theme => ({
     [theme.breakpoints.up("sm")]: {
       backgroundImage: "url(../images/sign/artwork.svg)",
       backgroundRepeat: "no-repeat",
-      backgroundSize: "cover",
+      // backgroundSize: "cover",
       backgroundPosition: "right",
       backgroundSize: "contain",
       width: "100%",

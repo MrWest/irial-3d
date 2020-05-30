@@ -41,13 +41,25 @@ export const createConnectedAccount = async info => {
   export const deleteStripeAccount = async info => {
     const paymentInfo = generateAppendParameters(info);
     console.log('xxx1: ', paymentInfo);
-    const checkout = await DashBoard.post("/stripe/dalete_connected_account.php", paymentInfo, {headers});
+    const checkout = await DashBoard.post("/stripe/delete_connected_account.php", paymentInfo, {headers});
     console.log('xxx2: ', checkout);
     
     
   return checkout.data;
 
     };
+
+      
+  export const getAllStripeConnectedAccounts = async () => {
+    const checkout = await DashBoard.get("/stripe/stripe_get_all_connected_accounts.php");
+    console.log('xxx2: ', checkout);
+    
+    
+  return checkout.data;
+
+    };
+
+    
 
     
   export const getStripeToken = async info => {
@@ -71,6 +83,18 @@ export const createConnectedAccount = async info => {
       return checkout.data;
   
       };
+
+
+      export const getStripeAccountLoginLink = async info => {
+        const paymentInfo = generatePHPParameters(info);
+        console.log('getStripeAccountLoginLink: ', paymentInfo);
+        const checkout = await DashBoard.get(`/stripe/stripe_get_login_token.php${paymentInfo}`);
+        console.log('getStripeAccountLoginLink: ', checkout.data);
+        
+        
+        return checkout.data;
+    
+        };
   
 
   

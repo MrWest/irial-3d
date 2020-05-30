@@ -13,9 +13,11 @@ import { Form, reduxForm, initialize } from "redux-form";
 import Typography from '@material-ui/core/Typography';
 import CardSection from '../global/cardSection';
 import CommonForm from '../global/commonForm';
-import { updateBillingInfo, createConnectedAccount, createExternalBankAccount, updateStripeAccountInfo, tosAcceptanceStripe, deleteStripeAccount } from  '../../actions';
+import { updateBillingInfo, createConnectedAccount, createExternalBankAccount, updateStripeAccountInfo,
+   tosAcceptanceStripe, deleteStripeAccount, getAllStripeConnectedAccounts, getStripeAccountLoginLink } from  '../../actions';
 import { fieldValidation, runFieldValidations } from '../../helpers/commonValidations';
 import { isServer } from '../../apis/tools';
+import {loadStripe} from '@stripe/stripe-js';
 // import { CustomWidthButton } from "../buttons";
 // import CustomizedExpansionPanels from '../global/expansionPanels';
 
@@ -64,14 +66,21 @@ const ExpansionPanelDetails = withStyles((theme) => ({
 class Billing extends React.Component {
   state = {
     expanded : 'panel1',
-    stripeToken: undefined
+    stripeToken: undefined,
+    loginLink: undefined
   };
 
 
-  componentDidMount() {
-    const { stripeExternalAccountId } = this.props;
-    if(!isServer && stripeExternalAccountId)
-    this.setState({ stripeToken: stripeExternalAccountId });
+  async componentDidMount() {
+    const { stripeAccountId, profile } = this.props;
+    if(!isServer && stripeAccountId) {
+    
+      const linkInfo = await getStripeAccountLoginLink({id: stripeAccountId, pid: profile.id, scaid: stripeAccountId });
+      console.log(linkInfo);
+      this.setState({ loginLink: linkInfo.url });
+
+    }
+    // this.setState({ stripeToken: stripeExternalAccountId });
   }
   handlePanelChange = (panel) => {
     this.setState({ expanded: panel });
@@ -82,6 +91,7 @@ class Billing extends React.Component {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     // event.preventDefault();
+    // if(false) {
     const { updateBillingInfo, profile, stripeAccountId } = this.props;
     const { stripeToken } = this.state;
     console.log('xxx0: ', data, stripeToken, stripeAccountId);
@@ -106,18 +116,19 @@ class Billing extends React.Component {
     
 
     }
-    else {
-      console.log('xxx1: ', { id: profile.id, stripeId: stripeAccountId });
-      const deletedAccount = await deleteStripeAccount({ id: profile.id, stripeId: stripeAccountId });
-      console.log('xxx1: ', deletedAccount);
-    }
+  // }
+  // else {
+  //     console.log('xxx1: ', { id: 44, stripeId: 'acct_1GhGr7C6FIK1fqnv' });
+  //     const deletedAccount = await getAllStripeConnectedAccounts();
+  //     console.log('xxx1: ', deletedAccount);
+  // }
 
     
   };
 
   render() {
-    const { expanded, stripeToken } = this.state;
-    const { pristine, submitting, invalid, classes, language, handleSubmit, stripeAccountId, country, profile } = this.props;
+    const { expanded, stripeToken, loginLink } = this.state;
+    const { pristine, submitting, invalid, classes, language, handleSubmit, stripeAccountId, country, profile, stripe_account_status } = this.props;
    
     return (
       <Grid container spacing={4}>
@@ -147,7 +158,8 @@ class Billing extends React.Component {
                   href={`https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_HFjRgc6vCvDCBR6x5ghJisC6mOLPx4tp&scope=read_write&state=${profile.id}
                   &stripe_user[business_type]=individual&business_profile[mcc]=5815&stripe_user[business_name]=${profile.first_name}-${profile.last_name}&business_profile[name]=${profile.first_name}-${profile.last_name}
                   &stripe_user[url]=${profile.billing_professional_profile_url}&stripe_user[email]=${profile.email}&stripe_user[first_name]=${profile.first_name}
-                  &stripe_user[last_name]=${profile.last_name}`}
+                  &stripe_user[last_name]=${profile.last_name}&business_profile[product_description]: Lumion models and projects
+                  &business_profile[industry]: digital_products__other_digital_goods`}
                 >
                   <img
                     src="/static/images/public/blue-on-dark.png"
@@ -158,15 +170,37 @@ class Billing extends React.Component {
                   />
                 </Link>
              </Grid>
-             <Grid item xs={4} />
+             <Grid item xs={4} >
+               {stripe_account_status}
+                {/* <Button
+                  className={classes.actionButton}
+                  type="button"
+                  style={{ background: '#daaaaa' }}
+                  onClick={this.rhandleSubmit}
+                >
+                   {language.Delete}
+                </Button> */}
+             </Grid>
              <Grid item xs={4}>
-                <Button
+             <Link
+                  type="submit"
+                  href={loginLink}
+                >
+                  <img
+                    src="/static/images/public/blue-on-dark.png"
+                    srcSet="/static/images/public/blue-on-dark.png 1x, /static/images/public/blue-on-dark@2x.png 2x,
+                      /static/images/public/blue-on-dark@3x.png 3x"
+                    alt="Connect Stripe"
+                    className={classes.imageWASwagUp}
+                  />
+                </Link>
+                {/* <Button
                   className={(invalid || submitting || !stripeToken ) ? classes.actionButtonDisabled : classes.actionButton}
                   type="submit"
                   disabled={invalid || submitting || !stripeToken }
                 >
                   {stripeAccountId? language.Save : language.Create}
-                </Button>
+                </Button> */}
              </Grid>
            </Grid>
           </Form>
