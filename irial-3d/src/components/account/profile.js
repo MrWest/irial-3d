@@ -6,14 +6,17 @@ import {
   Input,
   FormControl,
   InputLabel,
-  FormHelperText
+  FormHelperText,
+  TextField,
+  Button
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import { Form, reduxForm, initialize, Field } from "redux-form";
-import { CustomWidthButton } from "../buttons";
+import { Form, reduxForm, initialize, Field, reset } from "redux-form";
+import { CustomWidthButton, StylessButton } from "../buttons";
+import { encryptor, isServer } from "../../apis/tools";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import {FuckIngshit, saveProfile} from "../../actions";
+import {FuckIngshit, saveProfile, getStripeAccountLoginLink} from "../../actions";
 import {
   required,
   email,
@@ -119,34 +122,25 @@ const renderError = ({ error, touched }) => {
   }
 };
 
-const renderRadioGroup = ({ input, ...rest }) => (
-  <RadioGroup
-    {...input}
-    {...rest}
-    valueSelected={input.value}
-    onChange={(event, value) => input.onChange(value)}
-  />
-);
-
-const renderSelectField = ({
-  input,
-  label,
-  meta: { touched, error },
-  children,
-  ...custom
-}) => (
-  <Select
-    floatingLabelText={label}
-    errorText={touched && error}
-    {...input}
-    onChange={(event, index, value) => input.onChange(event)}
-    children={children}
-    {...custom}
-  />
-);
 
 class Profile extends React.Component {
   state = {myerror: undefined};
+
+ async componentDidMount() {
+   const { initialValues: {  id, stripe_account_id }} = this.props;
+    if(!isServer && stripe_account_id) {
+
+      console.log('stripeAccountId', stripe_account_id)
+      var stripeAccountIdEncrypted = encryptor.encrypt(stripe_account_id);
+      console.log('stripeAccountIdEncrypted', stripeAccountIdEncrypted)
+      const linkInfo = await getStripeAccountLoginLink({id: stripe_account_id, pid: id, scaid: stripeAccountIdEncrypted });
+      console.log(linkInfo);
+      this.setState({ loginLink: linkInfo.url });
+
+      
+    }
+  }
+
   normalizePhone = value => {
     if (!value) {
       return value;
@@ -198,15 +192,59 @@ class Profile extends React.Component {
   }
 
   render() {
-    const {classes} = this.props;
+    const {classes, reset, initialValues, invalid, submitting } = this.props;
+    const { loginLink } = this.state;
+    console.log(invalid, submitting);
     return (
     
       <Form onSubmit={this.props.handleSubmit(this.realhandleSubmit.bind(this))} className={classes.form}>
       <Grid container spacing={4}>
         <Grid item xs={12}>
-          <p style={{ fontSize: 32, fontWeight: "bold", marginBottom: 20 }}>
-            Profile
-          </p>
+          <Grid container alignItems="center">
+            <Grid item xs>
+              <p style={{ fontSize: 32, fontWeight: "bold", marginBottom: 0 }}>
+                Profile <span  style={{ fontSize: 32, fontWeight: "normal", color: '#9d9d9d' }} >|</span> <span style={{ fontSize: 18, fontWeight: "normal", color: '#9d9d9d' }} >{initialValues.email}</span>
+              </p>
+            </Grid>
+            <Grid item>
+              {initialValues.stripe_account_id ? (
+                <Link
+                  type="submit"
+                  href={loginLink}
+                  >
+                  <Grid container spacing={0} alignItems="flex-start"
+                  className={classes.stripeloginButon}>
+                    <Grid item xs> 
+                      <span style={{ color: '#666EE8', fontFamily: 'Futura', fontSize: 14, marginRight: 8 }}>
+                        Login into
+                      </span>
+                    </Grid>
+                    <Grid item>
+                        <svg width="53" height="22" viewBox="0 0 53 22" xmlns="http://www.w3.org/2000/svg"><title>Stripe</title><path d="M52.95 12.687h-7.157c.164 1.715 1.42 2.264 2.844 2.264 1.452 0 2.622-.325 3.591-.845v2.948c-.993.632-2.305.983-4.052.983-3.56 0-6.056-2.232-6.056-6.644 0-3.726 2.116-6.685 5.594-6.685C51.187 4.708 53 7.622 53 11.37c0 .354-.033 1.12-.05 1.318zm-5.259-4.996c-.914 0-1.93.647-1.93 2.295h3.78c0-1.646-.952-2.295-1.85-2.295zM36.358 18.037c-1.279 0-2.061-.54-2.586-.925l-.008 4.11-3.656.778V4.951h3.332l.077.905c.536-.47 1.43-1.148 2.863-1.148 2.568 0 4.986 2.315 4.986 6.574 0 4.649-2.392 6.755-5.008 6.755zm-.851-10.088c-.84 0-1.365.307-1.746.725l.021 5.436c.355.385.867.695 1.725.695 1.352 0 2.258-1.473 2.258-3.443 0-1.914-.92-3.413-2.258-3.413zm-10.44-2.998h3.67v12.825h-3.67V4.95zm0-4.17L28.737 0v2.983l-3.67.781V.781zm-3.832 8.3v8.695h-3.653V4.95h3.273l.117 1.082c.89-1.574 2.727-1.256 3.214-1.08v3.362c-.465-.15-2.032-.38-2.95.767zm-7.592 4.195c0 2.157 2.307 1.485 2.775 1.298v2.978c-.487.268-1.37.485-2.566.485-2.17 0-3.797-1.6-3.797-3.765l.016-11.706 3.569-.76.003 3.145h2.777v3.12h-2.777v5.205zm-4.357.624c0 2.634-2.05 4.137-5.09 4.137a9.94 9.94 0 0 1-3.955-.83v-3.494c1.227.668 2.747 1.169 3.958 1.169.815 0 1.359-.219 1.359-.895C5.558 12.241 0 12.898 0 8.848c0-2.59 2.02-4.14 4.986-4.14 1.211 0 2.422.186 3.633.67v3.445c-1.112-.6-2.524-.942-3.636-.942-.766 0-1.285.222-1.285.793 0 1.647 5.588.864 5.588 5.226z" fill="#666EE8" fill-rule="evenodd"/></svg>
+                     </Grid>
+                  </Grid>
+                 </Link>
+              ) : (
+                <Link
+                  type="submit"
+                  href={`https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_HFjRgc6vCvDCBR6x5ghJisC6mOLPx4tp&scope=read_write&state=${initialValues.id}
+                  &stripe_user[business_type]=individual&business_profile[mcc]=5815&stripe_user[business_name]=${initialValues.first_name}-${initialValues.last_name}&business_profile[name]=${initialValues.first_name}-${initialValues.last_name}
+                  &stripe_user[email]=${initialValues.email}&stripe_user[first_name]=${initialValues.first_name}
+                  &stripe_user[last_name]=${initialValues.last_name}&business_profile[product_description]: Lumion models and projects
+                  &business_profile[industry]: digital_products__other_digital_goods`}
+                >
+                  <img
+                    src="/static/images/public/blue-on-dark.png"
+                    srcSet="/static/images/public/blue-on-dark.png 1x, /static/images/public/blue-on-dark@2x.png 2x,
+                      /static/images/public/blue-on-dark@3x.png 3x"
+                    alt="Connect Stripe"
+                    className={classes.imageWASwagUp}
+                  />
+                </Link>
+              )}
+            </Grid>
+          </Grid>
+            
           <hr style={{ height: 1, backgroundColor: "#999999" }} />
         </Grid>
         <Grid item xs={12}>
@@ -220,7 +258,7 @@ class Profile extends React.Component {
             Basic information
           </p>
         </Grid>
-        <Grid item xs={12} md={6} style={{ paddingTop: 0 }}>
+        <Grid item xs={12} md={4} style={{ paddingTop: 0 }}>
           <Field
             name="first_name"
             margin="small"
@@ -232,7 +270,7 @@ class Profile extends React.Component {
           />
         </Grid>
 
-        <Grid item xs={12} md={6} style={{ paddingTop: 0 }}>
+        <Grid item xs={12} md={4} style={{ paddingTop: 0 }}>
           <Field
             name="last_name"
             margin="small"
@@ -240,24 +278,12 @@ class Profile extends React.Component {
             fullWidth
             autoComplete="last_name"
             component={renderTextField}
-            label="First name"
+            label="Last name"
           />
         </Grid>
 
-          <Grid item xs={12} md={6} style={{ paddingTop: 0 }}>
-            <Field
-              name="email"
-              margin="small"
-              fullWidth
-              autoComplete="email"
-              type="email"
-              component={renderTextField}
-              label="Account email address"
-              myerror={this.state.myerror}
-              onChange={this.handleTextChange.bind(this)}
-            />
-          </Grid>
-        <Grid item xs={12} md={6} style={{ paddingTop: 0 }}>
+         
+        <Grid item xs={12} md={4} style={{ paddingTop: 0 }}>
           <Field
             name="phone_number"
             margin="small"
@@ -275,13 +301,13 @@ class Profile extends React.Component {
               fontSize: 14,
               fontWeight: "bold",
               textTransform: "uppercase",
-              marginTop: 24
+              marginTop: 16
             }}
           >
             Change password
           </p>
         </Grid>
-        <Grid item xs={12} md={6} style={{ paddingTop: 0 }}>
+        <Grid item xs={12} md={4} style={{ paddingTop: 0 }}>
           <Field
             name="password"
             type="password"
@@ -294,7 +320,7 @@ class Profile extends React.Component {
           />
         </Grid>
 
-        <Grid item xs={12} md={6} style={{ paddingTop: 0 }}>
+        <Grid item xs={12} md={4} style={{ paddingTop: 0 }}>
           <Field
             name="cpassword"
             type="password"
@@ -306,51 +332,29 @@ class Profile extends React.Component {
             htmlFor="password"
           />
         </Grid>
-        <Grid item xs={12}>
-                <Grid container style={{ paddingLeft: 0, paddingRight: 0, paddingBottom: 40 }}>
-                  <Grid item xs={12} md={3} />
-
-                  <Grid item xs={12} md={9}>
-                    <Grid container spacing={4}>
-                      <Grid item xs={12} md={3} />
-                      <Grid item xs={6} md={3}>
-                        <Link
-                          to="/"
-                          style={{
-                            textDecorationLine: "none !important",
-                            fontSize: 16,
-                            padding: 56,
-                            paddingTop: 18,
-                             paddingBottom: 14,
-                            fontWeight: "bold",
-                            width: "100%",
-                            display: "block",
-                            cursor: "pointer",
-                            color: "#3577d4 !important",
-                            textAlign: "right"
-                          }}
-                         
-                        >
-                          Cancel
-                        </Link>
-                      </Grid>
-                      <Grid item xs={6}>
-                        <CustomWidthButton
-                          disabled={false}
-                          width="100%"
-                          onClick={() => {
-                            this.setState({ modalAprove: true });
-                          }}
-                        >
-                          Save 
-                        </CustomWidthButton>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Grid>
-          
-      </Grid>
+        <Grid item xs={12} md={4} />
+        <Grid item xs={12} md={8} />
+        <Grid item xs={6} md={2}>
+                <Button
+                    disabled={invalid || submitting }
+                    onClick={() => reset()}
+                    type="button"
+                    className={classes.cancelButton}
+                  >
+                    Cancel 
+                </Button>
+          </Grid>
+          <Grid item xs={6} md={2}>
+               <Button
+                    disabled={invalid || submitting }
+                    type="submit"
+                    className={(invalid || submitting) ? classes.actionButtonDisabled : classes.actionButton}
+                  >
+                    Save 
+                </Button>
+            </Grid>
+                      
+         </Grid>
       </Form>
     );
   }
@@ -367,6 +371,15 @@ const styles = theme => ({
      paddingBottom: 130,     
     alignItems: "center",
     justifyContent: "center",
+  },
+  stripeloginButon: {
+    padding: '8px 16px',
+    backgroundColor: '#eaeaea',
+    borderRadius: 4,
+    height: 36,
+    '&:hover': {
+      backgroundColor: '#efefef'
+    }
   },
   cover: {
     verticalAlign: "top",
@@ -399,7 +412,35 @@ const styles = theme => ({
       minWidth: "1180px"
     }
   },
- 
+  actionButton: {
+    borderRadius: 4,
+    height: 36,
+    width: '100%',
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    color: '#ffffff',
+    backgroundColor: '#337ab7',
+    textTransform: 'none',
+    '&:hover': {
+      backgroundColor: '#559cd9'
+    }
+  },
+  actionIconDisabled: {
+    color: '#5f5f5f'
+  },
+  actionButtonDisabled: {
+    borderRadius: 4,
+    height: 36,
+    width: '100%',
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    color: '#5f5f5f !important',
+    backgroundColor: '#dedede',
+    textTransform: 'none',
+    '&:hover': {
+      cursor: 'default !important'
+    }
+  },
   inner: {
     paddingTop: 40
   },
@@ -412,16 +453,18 @@ const styles = theme => ({
     width: "100%"
   },
   cancelButton: {
-    textDecorationLine: "none !important",
-    fontSize: 16,
-    paddingTop: 18,
-     paddingBottom: 14,
-    fontWeight: "bold",
-    width: "100%",
-    display: "block",
-    cursor: "pointer",
-    color: "#3577d4 !important",
-    textAlign: "right"
+    borderRadius: 4,
+    height: 36,
+    width: '100%',
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    color: '#337ab7',
+    backgroundColor: 'transparent',
+    textTransform: 'none',
+    '&:hover': {
+      color: '#559cd9',
+      backgroundColor: 'transparent'
+    }
   }
 });
 
@@ -443,7 +486,7 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { initialize, saveProfile}
+  { initialize, reset, saveProfile}
 )(
   reduxForm({ form: "ProfileForm", enableReinitialize: true, validate })(
     withStyles(styles)(Profile)

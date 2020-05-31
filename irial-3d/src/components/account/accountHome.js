@@ -172,27 +172,27 @@ class AccountHome extends Component {
          
         )
       },
-      {
-        normal: (
+      // {
+      //   normal: (
         
         
-          <div style={{textAlign: "center", width: "100%", height: 30}}>
-           <IconBilling fill="#434C5F" />
-             {/* {this.verticalText( "Business")}  */}
-          </div>
+      //     <div style={{textAlign: "center", width: "100%", height: 30}}>
+      //      <IconBilling fill="#434C5F" />
+      //        {/* {this.verticalText( "Business")}  */}
+      //     </div>
            
         
-        ),
-        selected: (
+      //   ),
+      //   selected: (
           
-             <div style={{color: "#3577d4", textAlign: "center", width: "100%", height: 30}}>
-               <IconBilling fill="#3577d4" />
-              {/* {this.verticalText( "Business")}  */}
-            </div>
+      //        <div style={{color: "#3577d4", textAlign: "center", width: "100%", height: 30}}>
+      //          <IconBilling fill="#3577d4" />
+      //         {/* {this.verticalText( "Business")}  */}
+      //       </div>
             
          
-        )
-      },
+      //   )
+      // },
      
     ];
 
@@ -219,7 +219,7 @@ class AccountHome extends Component {
                 >
                   <Profile />
                   <BusinessHome/>
-                  <Billing company={this.props.company} stripe_account_status={stripe_account_status} />
+                  {/* <Billing company={this.props.company} stripe_account_status={stripe_account_status} /> */}
                   {/* <Company company={this.props.company} />
                   <Billing company={this.props.company} /> */}
                 </VerticalTabsTool>

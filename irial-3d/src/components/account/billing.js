@@ -17,9 +17,15 @@ import { updateBillingInfo, createConnectedAccount, createExternalBankAccount, u
    tosAcceptanceStripe, deleteStripeAccount, getAllStripeConnectedAccounts, getStripeAccountLoginLink } from  '../../actions';
 import { fieldValidation, runFieldValidations } from '../../helpers/commonValidations';
 import { isServer } from '../../apis/tools';
-import {loadStripe} from '@stripe/stripe-js';
 // import { CustomWidthButton } from "../buttons";
 // import CustomizedExpansionPanels from '../global/expansionPanels';
+// Specify a string key:
+// Don't do this though, your keys should most likely be stored in env variables
+// and accessed via process.env.MY_SECRET_KEY
+var key = 'WILDWEST_COMPANY__KILLER-PRODUCTION_INC.__IRIAL-3D';
+ 
+// Create an encryptor:
+var encryptor = require('simple-encryptor')(key);
 
 const ExpansionPanel = withStyles({
   root: {
@@ -74,11 +80,15 @@ class Billing extends React.Component {
   async componentDidMount() {
     const { stripeAccountId, profile } = this.props;
     if(!isServer && stripeAccountId) {
-    
-      const linkInfo = await getStripeAccountLoginLink({id: stripeAccountId, pid: profile.id, scaid: stripeAccountId });
+
+      console.log('stripeAccountId', stripeAccountId)
+      var stripeAccountIdEncrypted = encryptor.encrypt(stripeAccountId);
+      console.log('stripeAccountIdEncrypted', stripeAccountIdEncrypted)
+      const linkInfo = await getStripeAccountLoginLink({id: stripeAccountId, pid: profile.id, scaid: stripeAccountIdEncrypted });
       console.log(linkInfo);
       this.setState({ loginLink: linkInfo.url });
 
+      
     }
     // this.setState({ stripeToken: stripeExternalAccountId });
   }
@@ -145,8 +155,8 @@ class Billing extends React.Component {
           <Typography>Deposit Method</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Form style={{ width: '100%', paddingBottom: 16 }} onSubmit={handleSubmit(this.rhandleSubmit)}>
-           <CommonForm international={country && country !== 'US'}/>
+          {/* <Form style={{ width: '100%', paddingBottom: 16 }} onSubmit={handleSubmit(this.rhandleSubmit)}> */}
+           {/* <CommonForm international={country && country !== 'US'}/> */}
            <Grid container alignItems="flex-end"  spacing={2}>
              <Grid item xs={8}>
                <CardSection onReady={token => this.setState({ stripeToken: token })} />
@@ -203,7 +213,7 @@ class Billing extends React.Component {
                 </Button> */}
              </Grid>
            </Grid>
-          </Form>
+          {/* </Form> */}
         </ExpansionPanelDetails>
       </ExpansionPanel>
       <ExpansionPanel square expanded={expanded === 'panel2'} onChange={() => this.handlePanelChange('panel2')}>

@@ -88,7 +88,7 @@ const CardWrapper = ({ onReady }) => {
   
   const init = async () => {
         // Make sure to call `loadStripe` outside of a component’s render to avoid
-    // recreating the `Stripe` object on every render.
+        // recreating the `Stripe` object on every render.
         const stripeRslt = await loadStripe("pk_test_FHrxVh3boAE3JjQQlj1wTzWT003RxSGuMc");
         setStripe(stripeRslt);
     };

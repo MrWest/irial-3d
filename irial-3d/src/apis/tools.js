@@ -148,6 +148,13 @@ export const generatePHPParameters = ramdomObject => {
     return `https://graph.facebook.com/${id}/picture?type=small`;
   }
 
+
+  
+const key = 'WILDWEST_COMPANY__KILLER-PRODUCTION_INC.__IRIAL-3D';
+ 
+// Create an encryptor:
+export const encryptor = require('simple-encryptor')(key);
+
    // First, checks if it isn't implemented yet.
 
   
