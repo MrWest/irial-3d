@@ -78,13 +78,15 @@ class Billing extends React.Component {
 
 
   async componentDidMount() {
-    const { stripeAccountId, profile } = this.props;
-    if(!isServer && stripeAccountId) {
+    const { profile } = this.props;
+    if(!isServer && profile.stripe_account_id) {
 
-      console.log('stripeAccountId', stripeAccountId)
-      var stripeAccountIdEncrypted = encryptor.encrypt(stripeAccountId);
-      console.log('stripeAccountIdEncrypted', stripeAccountIdEncrypted)
-      const linkInfo = await getStripeAccountLoginLink({id: stripeAccountId, pid: profile.id, scaid: stripeAccountIdEncrypted });
+      console.log('stripeAccountId', profile.stripe_account_id)
+      // var stripeAccountIdEncrypted = encryptor.encrypt(profile.stripe_account_id);
+      // console.log('stripeAccountIdEncrypted', encryptor.hmac(profile.stripe_account_id))
+      var stripeAccountIdsummary = profile.stripe_account_id.replace('acct_', '');
+      console.log('stripeAccountIdsummary', stripeAccountIdsummary);
+      const linkInfo = await getStripeAccountLoginLink({id: profile.stripe_account_id, pid: profile.id, scaid: stripeAccountIdsummary });
       console.log(linkInfo);
       this.setState({ loginLink: linkInfo.url });
 

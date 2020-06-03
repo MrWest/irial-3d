@@ -107,7 +107,7 @@ class AccountHome extends Component {
   componentDidMount() {
     const { loadProfile, loginInfo } = this.props;
     if(loginInfo.id)
-    loadProfile(loginInfo.id);
+      loadProfile(loginInfo.id);
   }
 
   verticalText(text){
@@ -217,7 +217,7 @@ class AccountHome extends Component {
                   index={parseInt(this.props.accountView)}
                   onChange={index => this.props.selectAccountView(index)}
                 >
-                  <Profile />
+                  <Profile stripe_account_status={stripe_account_status}/>
                   <BusinessHome/>
                   {/* <Billing company={this.props.company} stripe_account_status={stripe_account_status} /> */}
                   {/* <Company company={this.props.company} />
@@ -307,7 +307,6 @@ const styles = theme => ({
 const mapStateToProps = state => {
   return {
     accountView: state.accountView,
-    profile: state.profile,
     sign: state.sign,
     loginInfo: state.sign.loginInfo
   };

@@ -114,3 +114,7 @@ const zipCodeText = isInternational => (isInternational ? 'Postal Code' : 'Zip c
 export { isServer, theme, managePosts, getFeaturedmedia, contentAppJSON, contentAppForm,
    errorAndLog, okAndLog, thousandsSeparatedAndFixed, normalizeExDate,
    normalizePhone, zipCodeText, normalizeUSZip, normalizePhoneInternational, normalizeDate };
+
+export function reverseString(str) {
+  return str.split("").reverse().join("");
+};

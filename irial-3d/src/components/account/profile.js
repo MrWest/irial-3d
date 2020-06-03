@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Form, reduxForm, initialize, Field, reset } from "redux-form";
-import { CustomWidthButton, StylessButton } from "../buttons";
+import { reverseString } from "../../helpers/utils";
 import { encryptor, isServer } from "../../apis/tools";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -122,18 +122,22 @@ const renderError = ({ error, touched }) => {
   }
 };
 
+ 
+
 
 class Profile extends React.Component {
-  state = {myerror: undefined};
+  state = { myerror: undefined, loginLink: undefined };
 
  async componentDidMount() {
-   const { initialValues: {  id, stripe_account_id }} = this.props;
+   const { profile: {  id, stripe_account_id }} = this.props;
     if(!isServer && stripe_account_id) {
-
-      console.log('stripeAccountId', stripe_account_id)
-      var stripeAccountIdEncrypted = encryptor.encrypt(stripe_account_id);
-      console.log('stripeAccountIdEncrypted', stripeAccountIdEncrypted)
-      const linkInfo = await getStripeAccountLoginLink({id: stripe_account_id, pid: id, scaid: stripeAccountIdEncrypted });
+      // console.log('stripeAccountId', stripe_account_id)
+      // var stripeAccountIdEncrypted = encryptor.encrypt(stripe_account_id);
+      // console.log('stripeAccountIdEncrypted', stripeAccountIdEncrypted)
+      
+      var stripeAccountIdsummary = stripe_account_id.replace('acct_', '');
+      console.log('stripeAccountIdsummary', reverseString(stripeAccountIdsummary));
+      const linkInfo = await getStripeAccountLoginLink({id: stripe_account_id, pid: id, scaid: reverseString(stripeAccountIdsummary) });
       console.log(linkInfo);
       this.setState({ loginLink: linkInfo.url });
 
@@ -191,29 +195,40 @@ class Profile extends React.Component {
    
   }
 
+
+  stripeStatusMessage() {
+    const { profile } = this.props;
+    return profile.stripe_account_id ? 'There are some errors or missing information on your stripe account. Please correct them using the stripe link, in order to set things up for collect payments.' : 
+    'In order to receive payments you should enter your billing info using the stripe onboarding link on the right.'
+
+  }
+
   render() {
-    const {classes, reset, initialValues, invalid, submitting } = this.props;
+    const {classes, reset, profile, invalid, submitting, pristine, stripe_account_status } = this.props;
     const { loginLink } = this.state;
-    console.log(invalid, submitting);
+    // console.log(invalid, submitting, pristine, loginLink);
     return (
     
       <Form onSubmit={this.props.handleSubmit(this.realhandleSubmit.bind(this))} className={classes.form}>
       <Grid container spacing={4}>
         <Grid item xs={12}>
           <Grid container alignItems="center">
-            <Grid item xs>
+            <Grid item >
               <p style={{ fontSize: 32, fontWeight: "bold", marginBottom: 0 }}>
-                Profile <span  style={{ fontSize: 32, fontWeight: "normal", color: '#9d9d9d' }} >|</span> <span style={{ fontSize: 18, fontWeight: "normal", color: '#9d9d9d' }} >{initialValues.email}</span>
+                Profile <span  style={{ fontSize: 32, fontWeight: "normal", color: '#9d9d9d' }} >|</span> <span style={{ fontSize: 18, fontWeight: "normal", color: '#9d9d9d' }} >{profile.email}</span>
               </p>
             </Grid>
+            <Grid item xs style={{ padding: '0px 32px' }}>
+              {profile.stripe_account_status !== 'verified' && 
+              (<span style={{ fontSize: 14, fontWeight: "normal", color: '#fd7d7d' }} >
+                {this.stripeStatusMessage()}
+                </span>)}
+            </Grid>
             <Grid item>
-              {initialValues.stripe_account_id ? (
-                <Link
-                  type="submit"
-                  href={loginLink}
-                  >
+              {profile.stripe_account_id ? (
+                <a href={loginLink} >
                   <Grid container spacing={0} alignItems="flex-start"
-                  className={classes.stripeloginButon}>
+                    className={classes.stripeloginButon}>
                     <Grid item xs> 
                       <span style={{ color: '#666EE8', fontFamily: 'Futura', fontSize: 14, marginRight: 8 }}>
                         Login into
@@ -223,14 +238,14 @@ class Profile extends React.Component {
                         <svg width="53" height="22" viewBox="0 0 53 22" xmlns="http://www.w3.org/2000/svg"><title>Stripe</title><path d="M52.95 12.687h-7.157c.164 1.715 1.42 2.264 2.844 2.264 1.452 0 2.622-.325 3.591-.845v2.948c-.993.632-2.305.983-4.052.983-3.56 0-6.056-2.232-6.056-6.644 0-3.726 2.116-6.685 5.594-6.685C51.187 4.708 53 7.622 53 11.37c0 .354-.033 1.12-.05 1.318zm-5.259-4.996c-.914 0-1.93.647-1.93 2.295h3.78c0-1.646-.952-2.295-1.85-2.295zM36.358 18.037c-1.279 0-2.061-.54-2.586-.925l-.008 4.11-3.656.778V4.951h3.332l.077.905c.536-.47 1.43-1.148 2.863-1.148 2.568 0 4.986 2.315 4.986 6.574 0 4.649-2.392 6.755-5.008 6.755zm-.851-10.088c-.84 0-1.365.307-1.746.725l.021 5.436c.355.385.867.695 1.725.695 1.352 0 2.258-1.473 2.258-3.443 0-1.914-.92-3.413-2.258-3.413zm-10.44-2.998h3.67v12.825h-3.67V4.95zm0-4.17L28.737 0v2.983l-3.67.781V.781zm-3.832 8.3v8.695h-3.653V4.95h3.273l.117 1.082c.89-1.574 2.727-1.256 3.214-1.08v3.362c-.465-.15-2.032-.38-2.95.767zm-7.592 4.195c0 2.157 2.307 1.485 2.775 1.298v2.978c-.487.268-1.37.485-2.566.485-2.17 0-3.797-1.6-3.797-3.765l.016-11.706 3.569-.76.003 3.145h2.777v3.12h-2.777v5.205zm-4.357.624c0 2.634-2.05 4.137-5.09 4.137a9.94 9.94 0 0 1-3.955-.83v-3.494c1.227.668 2.747 1.169 3.958 1.169.815 0 1.359-.219 1.359-.895C5.558 12.241 0 12.898 0 8.848c0-2.59 2.02-4.14 4.986-4.14 1.211 0 2.422.186 3.633.67v3.445c-1.112-.6-2.524-.942-3.636-.942-.766 0-1.285.222-1.285.793 0 1.647 5.588.864 5.588 5.226z" fill="#666EE8" fill-rule="evenodd"/></svg>
                      </Grid>
                   </Grid>
-                 </Link>
+                 </a>
               ) : (
-                <Link
+                <a
                   type="submit"
-                  href={`https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_HFjRgc6vCvDCBR6x5ghJisC6mOLPx4tp&scope=read_write&state=${initialValues.id}
-                  &stripe_user[business_type]=individual&business_profile[mcc]=5815&stripe_user[business_name]=${initialValues.first_name}-${initialValues.last_name}&business_profile[name]=${initialValues.first_name}-${initialValues.last_name}
-                  &stripe_user[email]=${initialValues.email}&stripe_user[first_name]=${initialValues.first_name}
-                  &stripe_user[last_name]=${initialValues.last_name}&business_profile[product_description]: Lumion models and projects
+                  href={`https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_HFjRgc6vCvDCBR6x5ghJisC6mOLPx4tp&scope=read_write&state=${profile.id}
+                  &stripe_user[business_type]=individual&business_profile[mcc]=5815&stripe_user[business_name]=${profile.first_name}-${profile.last_name}&business_profile[name]=${profile.first_name}-${profile.last_name}
+                  &stripe_user[email]=${profile.email}&stripe_user[first_name]=${profile.first_name}
+                  &stripe_user[last_name]=${profile.last_name}&business_profile[product_description]: Lumion models and projects
                   &business_profile[industry]: digital_products__other_digital_goods`}
                 >
                   <img
@@ -240,7 +255,7 @@ class Profile extends React.Component {
                     alt="Connect Stripe"
                     className={classes.imageWASwagUp}
                   />
-                </Link>
+                </a>
               )}
             </Grid>
           </Grid>
@@ -346,9 +361,9 @@ class Profile extends React.Component {
           </Grid>
           <Grid item xs={6} md={2}>
                <Button
-                    disabled={invalid || submitting }
+                    disabled={invalid || submitting || pristine }
                     type="submit"
-                    className={(invalid || submitting) ? classes.actionButtonDisabled : classes.actionButton}
+                    className={(invalid || submitting || pristine) ? classes.actionButtonDisabled : classes.actionButton}
                   >
                     Save 
                 </Button>
@@ -376,6 +391,7 @@ const styles = theme => ({
     padding: '8px 16px',
     backgroundColor: '#eaeaea',
     borderRadius: 4,
+    cursor: 'pointer',
     height: 36,
     '&:hover': {
       backgroundColor: '#efefef'
@@ -472,7 +488,8 @@ const mapStateToProps = state => {
   
   return {
     sign: state.sign,
-    initialValues: state.profile
+    initialValues: state.profile,
+    profile: state.profile
     // {
     //   first_name: state.sign.loginInfo.first_name,
     //   last_name: state.sign.loginInfo.last_name,

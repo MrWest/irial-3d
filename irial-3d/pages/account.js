@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import AccountHome from '../src/components/account/accountHome';
-import { getStripeToken, getStripeAccount, updateBillingInfoServer, updateStripeAccountInfoServer } from '../src/actions';
-import { encryptor } from '../src/apis/tools';
+import { getStripeToken, getStripeAccount, updateStripeAccountInfoServer } from '../src/actions';
+import { reverseString } from '../src/helpers/utils';
 
 class Account extends Component {
   render() {
-    const { status } = this.props;  
+    const { profileStipeInfo } = this.props;  
     
-    return <AccountHome stripe_account_status={status} />;
+    return <AccountHome stripe_account_status={profileStipeInfo ? profileStipeInfo.stripe_account_status : 'error'} />;
   }
 }
 
@@ -17,9 +17,12 @@ const handleAccount = async ( stripe_user_id, state, reduxStore ) => {
     const account = await getStripeAccount({ stripe_user_id });
     console.log(account);
     requirements = account.requirements;
-    const profileStipeInfo = await updateStripeAccountInfoServer({ id: state, stripe_account_id: account.id, stripe_account_type: account.type, stripe_account_status: requirements && requirements.disabled_reason ? 'error' : 'verified' });
-    console.log(profileStipeInfo);
-    return { profileStipeInfo }
+    if(account.id) {
+      const profileStipeInfo = await updateStripeAccountInfoServer({ id: state, stripe_account_id: account.id, stripe_account_type: account.type, stripe_account_status: requirements && requirements.disabled_reason ? 'error' : 'verified' });
+      console.log('profileStipeInfo', profileStipeInfo);
+      return { profileStipeInfo }
+    }
+    return {  }
     // if(account.requirements && !account.requirements.disabled_reason) {
     //   const { individual } = account;
     //   const { address } = individual;
@@ -69,7 +72,7 @@ const handleAccount = async ( stripe_user_id, state, reduxStore ) => {
     // return { id: state, stripe_user_id };
 }
 
-Account.getInitialProps = async function({ reduxStore, query: { code, state, scaid } }) {
+Account.getInitialProps = async function({ reduxStore, query: { code, state, scaid, pid } }) {
   console.log(code, state);
  
   if(code && state )
@@ -77,15 +80,16 @@ Account.getInitialProps = async function({ reduxStore, query: { code, state, sca
     const token = await getStripeToken({ code });
     const stripe_user_id = token.stripe_user_id;
     console.log(stripe_user_id);
-    return handleAccount(stripe_user_id, state, reduxStore);
+    return stripe_user_id ? handleAccount(stripe_user_id, state, reduxStore) : {};
   }
     
-  if(scaid){
+  if(pid && scaid){
     
-    console.log('decryptedss', scaid);
-    var decrypted = encryptor.decrypt(scaid);
+    // console.log('decryptedss', scaid);
+    // var decrypted = encryptor.decrypt(scaid);
+    var decrypted = `acct_${reverseString(scaid)}`;
     console.log('decrypted', decrypted);
-    return handleAccount(decrypted, state, reduxStore);
+    return decrypted ? handleAccount(decrypted, pid, reduxStore) : {};
   }
   
   return { code, state, scaid };
