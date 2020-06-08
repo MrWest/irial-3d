@@ -41,6 +41,7 @@
     "react-encrypt": "^1.0.1",
     "react-facebook": "^8.0.4",
     "react-facebook-login": "^4.1.1",
+    "react-file-download": "^0.3.5",
     "react-helmet": "^5.2.1",
     "react-image-gallery": "^1.0.7",
     "react-localization": "^1.0.15",

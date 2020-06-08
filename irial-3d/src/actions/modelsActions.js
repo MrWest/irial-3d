@@ -165,7 +165,7 @@ export const fetchModels = () => async dispatch => {
     let statusInfo = new FormData();
     statusInfo.append("id", model.id);
     statusInfo.append("lang", lang);
-    if(model.status){
+    if(model.published){
      
       statusInfo.append("status", "1");
       await DashBoard.post("/models/update_model_status.php", statusInfo,  {headers})
@@ -273,6 +273,33 @@ export const fetchModels = () => async dispatch => {
       uploadInfo.append("file", info.file);
 
       const modelAPI = await DashBoard.post("/models/upload_model_image.php", uploadInfo,  {headers, onUploadProgress: info.onProgress});
+
+      // getCategory(info.idCategory)
+    }
+
+
+
+    
+  };
+
+  
+  export const uploadModelFile = info => async dispatch => {
+  
+    var headers = {
+      "Content-Type": "multipart/form-data"
+    };
+
+  
+    let uploadInfo = new FormData();
+    uploadInfo.append("modelId", info.modelId);
+    uploadInfo.append("fileName", info.fileName);
+    uploadInfo.append("modelName", info.modelName);
+
+    if(info.file !== null){
+
+      uploadInfo.append("file", info.file);
+
+      const modelAPI = await DashBoard.post("/models/upload_model_file.php", uploadInfo,  {headers, onUploadProgress: info.onProgress});
 
       // getCategory(info.idCategory)
     }

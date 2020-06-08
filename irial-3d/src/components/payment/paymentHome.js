@@ -26,11 +26,19 @@ import {Helmet} from 'react-helmet';
 import Loader from '../global/loader';
 import PaymentForm from './PaymentForm';
 import { isServer, getLanguage } from '../../apis/tools';
+import { downloadFile } from '../../actions';
 import CartItem from './CartItem';
+
 
 
 const PaymentHome = ({ classes, language, cart }) => {
    
+const onPay = async () => {
+
+  cart.items.forEach(async item => {
+    await downloadFile({ name: item.name, file: item.file});
+  });
+};
 
 const totalCart = cart.items.reduce((sum, i) => sum + parseFloat(i.price), 0);
 
@@ -48,7 +56,9 @@ return (
            <Grid item xs={8}>
                <h1 className={classes.categoryTittle}>Payment Info</h1>
               
-                <PaymentForm language={language} buttonClass={classes.submitButton} amount={totalCart * 100} destination={cart.items.length > 0 ? cart.items[0].destination : undefined} />
+                <PaymentForm language={language} buttonClass={classes.submitButton} amount={totalCart * 100}
+                 destination={cart.items.length > 0 ? cart.items[0].destination : undefined}
+                 onPay={onPay} />
            </Grid>
            <Grid item xs={4}>
                  <p className={classes.cartTittle}>Your cart</p>

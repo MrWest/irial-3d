@@ -400,7 +400,7 @@ export function CoolButton({
               
               </metadata>
               <g transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)"
-              fill={fill? fill : "#ffffff"} stroke="none">
+              fill={disabled ? 'gray' : fill? fill : "#ffffff"} stroke="none">
               <path d="M695 1200 l-30 -8 32 -1 c61 -2 46 -21 -17 -21 -41 0 -66 -5 -76 -15
               -9 -8 -26 -15 -40 -15 -13 0 -24 -4 -24 -8 0 -10 64 -38 107 -47 70 -14 40
               -25 -65 -23 -89 2 -114 -1 -135 -15 -15 -10 -27 -21 -27 -26 0 -10 95 -51 119

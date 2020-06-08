@@ -16,7 +16,8 @@ import {
   TableCell,
   TableBody,
   Switch,
-  LinearProgress
+  LinearProgress,
+  Button
 } from "@material-ui/core";
 import SwipeableViews from "react-swipeable-views";
 import Tabs from "@material-ui/core/Tabs";
@@ -24,10 +25,12 @@ import Tab from "@material-ui/core/Tab";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import {CoolButton} from "../buttons"
-import {selectModel, updateModel, uploadModelImage, deleteModelImage, uploadModelVideo, deleteModelVideo, fetchTags, toggleModelTags } from "../../actions";
+import {selectModel, updateModel, uploadModelImage, deleteModelImage, uploadModelVideo,
+   deleteModelVideo, fetchTags, toggleModelTags, uploadModelFile } from "../../actions";
 import CarouselTool from "../carouselTool";
 import SectionIcon from "@material-ui/icons/CardTravel";
 import AddIcon from "@material-ui/icons/AddCircle";
+import CloudUploadOutlined from "@material-ui/icons/CloudUploadOutlined";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import DeleteIcon from "@material-ui/icons/Delete";
 import {RoundedButtonLink} from "../buttons";
@@ -48,9 +51,9 @@ import { Link } from "react-router-dom";
 
 
 const Tag = ({ classes, tag, disabled, onClick }) => (
-  <StylessButton onClick={() => onClick(disabled)} className={disabled? classes.tagContainerDisabled : classes.tagContainer}>
+  <Button onClick={() => onClick(disabled)} className={disabled? classes.tagContainerDisabled : classes.tagContainer}>
     {tag.name}
-  </StylessButton>
+  </Button>
 );
 
 const BorderLinearProgress = withStyles({
@@ -180,7 +183,11 @@ const styles = theme => ({
       width: '100%',
       color: '#ffffff',
       textAlign: 'center',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      '&:hover': {
+        color: '#666666'
+
+      }
     },
     tagContainerDisabled: {
       borderRadius: 28,
@@ -193,6 +200,7 @@ const styles = theme => ({
       cursor: 'pointer'
     },
     widthMobile: {
+      paddingLeft: 24,
       [theme.breakpoints.down("sm")]: {
         width: "100% !important",
         textAlign: "right !important"      
@@ -447,6 +455,34 @@ class ModelEditForm extends React.Component {
     
       }
 
+      uploadModel = event =>{
+        const { language } = this.props;
+        let files = event.target.files
+        let reader = new FileReader()
+        try {
+        reader.readAsDataURL(files[0])
+        this.setState({error: '', completed: 0});
+        reader.onload = e => {
+
+          // console.log("xXx", files[0])
+          if(files[0] && files[0].size < 4200000 ){
+          this.setState({imageData: e.target.result})
+          this.props.uploadModelFile({modelId: this.props.model.id, file:  e.target.result,
+             fileName: files[0].name, modelName: this.props.model.name, onProgress: this.onUploadProgress}).then(res=> {
+
+              this.props.selectModel(this.props.match.params.id).then(()=> this.setState({completed: 0}));
+             })
+        }
+        else
+        this.setState({error: language.MAX_FILE_SIZE.format('4 Mb')})
+      }
+      }
+      catch (error) {
+        this.setState({error: language.UPLOAD_FAILED})
+      }
+    
+      }
+
       handleDeleteImage = event => {
 
         this.props.deleteModelImage(event.currentTarget.id).then(res=> {
@@ -469,9 +505,9 @@ class ModelEditForm extends React.Component {
 
      
   render(){
-    const { pristine, name, theme, classes, language, handleSubmit, model, tags, toggleModelTags } = this.props;
+    const { pristine, theme, classes, language, handleSubmit, model, tags, toggleModelTags, initialValues: { name } } = this.props;
     const { busy, completed, error  } = this.state;
-      
+      const isDisabled = !model.url || !model.server_path;
       return (
         <main className={classes.container}>
         <Grid container justify="center" spacing={0}>
@@ -492,7 +528,7 @@ class ModelEditForm extends React.Component {
               </div>
                   
               </Grid>
-              <Grid item alignItems="baseline">
+              <Grid item xs alignItems="baseline">
 
                     <Typography
                       variant="h4"
@@ -522,33 +558,23 @@ class ModelEditForm extends React.Component {
                   </Typography>
               </Grid>
               <Grid item className={classes.widthMobile}>
-                 <Grid container spacing={4}>
-                 
-                 <Grid item xs={6}>
+                <div style={{ textAlign: 'center', marginBottom: 16 }}>
+                    <Link to={"/model/" + model.id} style={{background: "#ffffff"}}>
+                      {this.props.language.See}
+                    </Link>
+                                      
+                 </div>
 
-                      <div style={{display: "table", height: 40}}>
-                         <div style={{display: "table-cell", verticalAlign: "middle"}}>
-                          <Link to={"/model/" + model.id} style={{background: "#ffffff"}}>
-                           {this.props.language.See}
-                          </Link>
-                          </div>                   
-                         </div>
-                          
-                 </Grid>
-
-                   {this.props.sign.isLogged && this.props.sign.loginInfo &&
-                     (this.props.sign.loginInfo.type === "admin") &&
-                       <Grid item  xs={6} >
-
-                         <p style={{fontSize: 12, textAlign: "right", color: "#777", paddingRight: -16}} className={classes.rightOnMobile}>{language.Status}</p>
-                         <Field
-                                name="status"
-                                id="status"
-                                component={renderToggleInput}
-                                   />
-                      </Grid>}
-                 
-                 </Grid>
+                    {this.props.sign.isLogged && this.props.sign.loginInfo &&
+                      (this.props.sign.loginInfo.type === "admin") &&
+                        <div>
+                          <p style={{fontSize: 12, textAlign: "center", color: "#777"}} className={classes.rightOnMobile}>{language.Status}</p>
+                          <Field
+                            name="status"
+                            component={renderToggleInput}
+                              />
+                        </div>}
+                  
                       
               </Grid>
             
@@ -556,19 +582,30 @@ class ModelEditForm extends React.Component {
           
            
             <Grid item xs={12} alignItems="flex-start" style={{ paddingTop: 0 }}>
-            <Grid container spacing={4}>
+            <Grid container spacing={4} style={{ paddingTop: 42 }}>
+           
             <Grid item xs={12} md={6} alignItems="flex-start" style={{ paddingTop: 10 }}>
-                <Field
+                <TextField
                 name="name"
                 margin="small"
                 type="text"
                 fullWidth
-                autoComplete="name"
-                component={renderTextField}
+                readOnly
+                value={name}
                 label={language.Name}
                 />
             </Grid>
-
+            <Grid item xs={12} md={6}>
+              <div style={{width: "100%", position: "relative", textAlign: 'center' }}>
+                <input type="file" name="currentFile"  id="currentFile" accept="application/pdf"
+                 onChange={this.uploadModel.bind(this)} style={{display: "none"}}></input>
+                  <label htmlFor={"currentFile"}>
+                    <CloudUploadOutlined color="#337ab7" 
+                      style={{fontSize: 64, color: "#337ab7", background: "#ffffff", cursor: 'pointer' }}></CloudUploadOutlined>
+                  </label>
+                              
+              </div>
+            </Grid>
            
             <Grid item xs={12} alignItems="flex-start" style={{ paddingTop: 10 }}>
                  <Field
@@ -691,7 +728,7 @@ class ModelEditForm extends React.Component {
 
                   <Grid item xs={12} alignItems="flex-start" style={{ paddingTop: 40, textAlign: "left" }}>
            
-                        <CoolButton height={56} width={245} fill={"#337ab7"} color={"#ffffff"}>
+                        <CoolButton height={56} width={245} fill={"#337ab7"} color={"#ffffff"} disabled={isDisabled}>
                             {language.Save}
                         </CoolButton>
                 </Grid>
@@ -790,7 +827,7 @@ class ModelEditForm extends React.Component {
                   :
                   <CarouselTool>
                   {model.videos && model.videos.map(video =>(
-                    <div align="right" style={{width: "100%", height: 245, position: "relative", textAlign: "right" }}>
+                    <div key={video.id} align="right" style={{width: "100%", height: 245, position: "relative", textAlign: "right" }}>
                       
                       <div style={{position: "relative",  textAlign: "center",}}>
                       
@@ -866,7 +903,7 @@ const mapStateToProps = state => {
         price_specifics: state.selectedModel.price_specifics,
         currency: "CUC",//state.selectedLodging.currency,
         note: state.selectedModel.note,
-        status: parseInt(state.selectedTour.status)>0
+        status: parseInt(state.selectedModel.status)>0
      }
   
     };
@@ -874,7 +911,7 @@ const mapStateToProps = state => {
   export default connect(
     mapStateToProps,
     { initialize, selectModel, updateModel, uploadModelImage, 
-      deleteModelImage, uploadModelVideo, deleteModelVideo, fetchTags, toggleModelTags}
+      deleteModelImage, uploadModelVideo, deleteModelVideo, fetchTags, toggleModelTags, uploadModelFile}
   )(
     reduxForm({ form: "modelEditForm", enableReinitialize: true, validate })(
       withStyles(styles)(withRouter(ModelEditForm))

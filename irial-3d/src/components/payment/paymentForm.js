@@ -77,7 +77,7 @@ const validations = {
 
 
 export default connect(null, { payCart })(reduxForm({ form: "paymentForm", enableReinitialize: true, validate })(withRouter( 
-  function PaymentForm({ destination, amount, buttonClass, handleSubmit, history, payCart }) {
+  function PaymentForm({ destination, amount, buttonClass, handleSubmit, history, payCart, onPay }) {
     
   const [stripeToken, setStripeToken] = useState(undefined);
   // const stripe = useStripe();
@@ -108,6 +108,7 @@ export default connect(null, { payCart })(reduxForm({ form: "paymentForm", enabl
       if(stripeToken) {
         const description = `${data.name} purchase of: ${amount} usd of Lumion items`
         await payCart({...stripeToken, email: data.email,  amount, destination, description  });
+        await onPay();
         history.push('/thanks');
 
       }
