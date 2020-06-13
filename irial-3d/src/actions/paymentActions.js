@@ -38,7 +38,7 @@ export const doTransfers = async info => {
 
   const paymentInfo = generateAppendParameters(info);
   console.log('doTransfers: ', paymentInfo);
-  const checkout = await DashBoard.post("/payments/transfers.php", paymentInfo, {headers});
+  const checkout = await DashBoard.post("/payments/auto_purchases.php", paymentInfo, {headers});
   console.log('doTransfers: ', checkout);
   
    //fileDownload(checkout.data, `${info.name}.pdf`);
