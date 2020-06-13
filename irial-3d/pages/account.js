@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import AccountHome from '../src/components/account/accountHome';
-import { getStripeToken, getStripeAccount, updateStripeAccountInfoServer } from '../src/actions';
+import { getStripeToken, getStripeAccount, updateStripeAccountInfoServer, getStripeAccountLoginLink } from '../src/actions';
 import { reverseString } from '../src/helpers/utils';
 
 class Account extends Component {
   render() {
     const { profileStipeInfo } = this.props;  
     
-    return <AccountHome stripe_account_status={profileStipeInfo ? profileStipeInfo.stripe_account_status : 'error'} />;
+    return <AccountHome profileStipeInfo={profileStipeInfo} stripe_account_status={profileStipeInfo ? profileStipeInfo.stripe_account_status : 'error'} />;
   }
 }
 
@@ -20,56 +20,21 @@ const handleAccount = async ( stripe_user_id, state, reduxStore ) => {
     if(account.id) {
       const profileStipeInfo = await updateStripeAccountInfoServer({ id: state, stripe_account_id: account.id, stripe_account_type: account.type, stripe_account_status: requirements && requirements.disabled_reason ? 'error' : 'verified' });
       console.log('profileStipeInfo', profileStipeInfo);
+
+      if(profileStipeInfo.stripe_account_id) {
+        var stripeAccountIdsummary = profileStipeInfo.stripe_account_id.replace('acct_', '');
+        console.log('stripeAccountIdsummary', reverseString(stripeAccountIdsummary));
+        const linkInfo = await getStripeAccountLoginLink({id: profileStipeInfo.stripe_account_id, pid: profileStipeInfo.id, scaid: reverseString(stripeAccountIdsummary) });
+        console.log(linkInfo);
+        return { profileStipeInfo: {...profileStipeInfo, linkUrl: linkInfo.url} }
+      }
+
+     
+
       return { profileStipeInfo }
     }
     return {  }
-    // if(account.requirements && !account.requirements.disabled_reason) {
-    //   const { individual } = account;
-    //   const { address } = individual;
-    //   const data = {
-    //     first_name: individual.first_name,
-    //     last_name: individual.last_name,
-    //     email: individual.email,
-    //     phone_number: individual.phone,
-    //     billing_birth_day: `${individual.dob.year}/${individual.dob.month}/${individual.dob.day}`,
-    //     country: address.country,
-    //     state: address.state,
-    //     city: address.city,
-    //     address1: address.line1,
-    //     address2: address.line2,
-    //     zip: address.postal_code,
-    //     status: individual.status
-    //   };
-  
-    //   const updatedUser = await updateBillingInfoServer(reduxStore, {...data, id: state });
-    //   const finallyAccount = await updateStripeAccountInfoServer({ id: state, stripe_account_id: account.id, stripe_account_type: account.type });
-    //   console.log(updatedUser, finallyAccount);
-    //   return { ...data, stripe_account_id: account.id, stripe_account_type: account.type }
-    // }
-    // else if(account.id) {
-      
-    //   const data = {
-    //     first_name: "",
-    //     last_name: "",
-    //     email: account.email,
-    //     phone_number: account.business_profile.support_phone,
-    //     billing_birth_day: '0000-00-00',
-    //     country: account.country,
-    //     state: "",
-    //     city: "",
-    //     address1: "",
-    //     address2: "",
-    //     zip: "",
-    //     status: account.requirements.disabled_reason
-    //   };
-  
-     // const updatedUser = await updateBillingInfoServer(reduxStore, {...data, id: state });
-      // const finallyAccount = await updateStripeAccountInfoServer({ id: state, stripe_account_id: account.id, stripe_account_type: account.type });
-     // console.log(updatedUser, finallyAccount);
-      // return { profileStipeInfo }
-    // }
-
-    // return { id: state, stripe_user_id };
+   
 }
 
 Account.getInitialProps = async function({ reduxStore, query: { code, state, scaid, pid } }) {

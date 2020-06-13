@@ -126,7 +126,7 @@ class AccountHome extends Component {
     )
   }
   render() {
-    const { classes, valid, stripe_account_status } = this.props;
+    const { classes, valid, stripe_account_status, profileStipeInfo } = this.props;
 
     const labels = [
       {
@@ -217,7 +217,7 @@ class AccountHome extends Component {
                   index={parseInt(this.props.accountView)}
                   onChange={index => this.props.selectAccountView(index)}
                 >
-                  <Profile stripe_account_status={stripe_account_status}/>
+                  <Profile profileStipeInfo={profileStipeInfo} stripe_account_status={stripe_account_status}/>
                   <BusinessHome/>
                   {/* <Billing company={this.props.company} stripe_account_status={stripe_account_status} /> */}
                   {/* <Company company={this.props.company} />

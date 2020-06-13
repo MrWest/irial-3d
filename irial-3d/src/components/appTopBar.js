@@ -162,9 +162,6 @@ class AppTopBar extends Component {
                 <Link id="linkTour"  className={isHovered !== "linkTour"? classes.appBarButton : classes.appBarButtonHovered}  to="/tours/all" onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
                   {language.Tours}
                 </Link>
-                <Link   id="linkAttraction" className={isHovered !== "linkAttraction" ? classes.appBarButton : classes.appBarButtonHovered}  to="/attractions/all" onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
-                {language.Attractions}
-                </Link>
                 <Link   id="linkModels" className={isHovered !== "linkModels"? classes.appBarButton : classes.appBarButtonHovered} to="/models/all" onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
                 {language.Models}
                 </Link>
@@ -258,24 +255,11 @@ class AppTopBar extends Component {
                       {language.Tours}
                    </div>
                   </MenuItem>
-                  <MenuItem
-                    component="button"
-                    onClick={() => this.handleCloseMenu("/attractions/all")}
-                    className={classes.menuItemButton}
-                    
-                  >
-                   
-                   <div  align="center" style={{width: "100%"}}>
-                      {language.Attractions}
-                   </div>
-                   
-                  </MenuItem>
                  
                   <MenuItem
                     component="button"
                     // onClick={() => this.handleCloseMenu("/#aboutus")}
                     className={classes.menuItemButton}
-                    
                   >
 
                      <div  align="center" style={{width: "100%"}}>

@@ -128,20 +128,20 @@ const renderError = ({ error, touched }) => {
 class Profile extends React.Component {
   state = { myerror: undefined, loginLink: undefined };
 
+  generateStripeLink = async (stripe_account_id, id) => {
+
+    var stripeAccountIdsummary = stripe_account_id.replace('acct_', '');
+    console.log('stripeAccountIdsummary', reverseString(stripeAccountIdsummary));
+    const linkInfo = await getStripeAccountLoginLink({id: stripe_account_id, pid: id, scaid: reverseString(stripeAccountIdsummary) });
+    console.log(linkInfo);
+    this.setState({ loginLink: linkInfo.url });
+
+  }
+
  async componentDidMount() {
    const { profile: {  id, stripe_account_id }} = this.props;
     if(!isServer && stripe_account_id) {
-      // console.log('stripeAccountId', stripe_account_id)
-      // var stripeAccountIdEncrypted = encryptor.encrypt(stripe_account_id);
-      // console.log('stripeAccountIdEncrypted', stripeAccountIdEncrypted)
-      
-      var stripeAccountIdsummary = stripe_account_id.replace('acct_', '');
-      console.log('stripeAccountIdsummary', reverseString(stripeAccountIdsummary));
-      const linkInfo = await getStripeAccountLoginLink({id: stripe_account_id, pid: id, scaid: reverseString(stripeAccountIdsummary) });
-      console.log(linkInfo);
-      this.setState({ loginLink: linkInfo.url });
-
-      
+     this.generateStripeLink(stripe_account_id, id);
     }
   }
 
@@ -204,7 +204,7 @@ class Profile extends React.Component {
   }
 
   render() {
-    const {classes, reset, profile, invalid, submitting, pristine, stripe_account_status } = this.props;
+    const {classes, reset, profile, invalid, submitting, pristine, profileStipeInfo } = this.props;
     const { loginLink } = this.state;
     // console.log(invalid, submitting, pristine, loginLink);
     return (
@@ -226,7 +226,7 @@ class Profile extends React.Component {
             </Grid>
             <Grid item>
               {profile.stripe_account_id ? (
-                <a href={loginLink} >
+                <a href={profileStipeInfo && profileStipeInfo.linkUrl ? profileStipeInfo.linkUrl : loginLink} >
                   <Grid container spacing={0} alignItems="flex-start"
                     className={classes.stripeloginButon}>
                     <Grid item xs> 
@@ -243,7 +243,7 @@ class Profile extends React.Component {
                 <a
                   type="submit"
                   href={`https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_HFjRgc6vCvDCBR6x5ghJisC6mOLPx4tp&scope=read_write&state=${profile.id}
-                  &stripe_user[business_type]=individual&business_profile[mcc]=5815&stripe_user[business_name]=${profile.first_name}-${profile.last_name}&business_profile[name]=${profile.first_name}-${profile.last_name}
+                  &stripe_user[business_type]=individual&suggested_capabilities[]=card_payments&business_profile[mcc]=5815&stripe_user[business_name]=${profile.first_name}-${profile.last_name}&business_profile[name]=${profile.first_name}-${profile.last_name}
                   &stripe_user[email]=${profile.email}&stripe_user[first_name]=${profile.first_name}
                   &stripe_user[last_name]=${profile.last_name}&business_profile[product_description]: Lumion models and projects
                   &business_profile[industry]: digital_products__other_digital_goods`}

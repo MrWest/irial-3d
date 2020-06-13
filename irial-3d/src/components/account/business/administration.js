@@ -159,7 +159,7 @@ class Administration extends Component {
           <div style={{borderTop: this.props.tours.length === 0? "1px #ccc solid": 0 }}>
           {this.props.categories.map(category => (
 
-            <Nameable nameable = {category}  size="medium" selected = { parseInt(this.state.categoryIndex) === parseInt(category.id)} onEdit={this.editCategory}  onClick={this.selectCategory} onDelete={this.handleDeleteCategory} id={category.id}></Nameable>
+             <Nameable nameable = {category}  size="medium" selected = { parseInt(this.state.categoryIndex) === parseInt(category.id)} onEdit={this.editCategory}  onClick={this.selectCategory} onDelete={this.handleDeleteCategory} id={category.id}></Nameable>
             ))} 
             </div>
           </Grid>

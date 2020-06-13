@@ -54,6 +54,48 @@ export const fetchModels = () => async dispatch => {
 
   };
 
+  export const sortModelsByCategoryUser = info => async dispatch => {
+
+    const lang = getLanguage();
+
+   
+    let results = undefined;
+    
+    let completeUrl = generatePHPParameters({...info, lang});
+    // if(category === "all")
+    // modelsDb = await DashBoard.get("/models/get_models.php"+ generatePHPParameters({lang}))
+    //  else
+     await DashBoard.get("/models/get_models_category_user.php"+ completeUrl).then( async modelsDb => {
+
+      var modelsRslt = modelsDb.data.slice()
+      
+     const promises = modelsRslt.map( async model => {   
+         
+       const modelImagesDb = await DashBoard.get("/models/get_model_images.php"+ generatePHPParameters({idModel: model.id}))
+       model.images = modelImagesDb.data
+
+       const modelsRateDb = await DashBoard.get("/models/get_model_rate.php"+ generatePHPParameters({idModel: model.id}))
+       model.rate = modelsRateDb.data
+
+       return model
+       
+     })
+
+      results = await Promise.all(promises)
+
+     })
+
+     
+
+     dispatch({
+      type: FETCH_MODELS,
+      payload: results//fromDB
+    });
+
+
+  };
+
+
 
   export const sortModelsUser = user => async dispatch => {
 

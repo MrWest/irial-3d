@@ -6,6 +6,7 @@ import SwipeableViews from "react-swipeable-views";
 import Tabs from "@material-ui/core/Tabs";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
+import SectionIcon from "@material-ui/icons/Dashboard";
 import Tab from "@material-ui/core/Tab";
 import SectionEditForm from "../../forms/sectionEditForm";
 import {RoundedButtonLink} from "../../buttons";
@@ -20,7 +21,7 @@ class Nameable extends Component {
   }
 
   render() {
-    const { classes, nameable, selected, id, onClick, size, onEdit, editOnly, onDelete } = this.props;
+    const { classes, nameable, selected, id, onClick, size, onEdit, editOnly, onDelete, notEditable } = this.props;
   
     var innerPadding = "15px 10px"
 
@@ -41,7 +42,8 @@ class Nameable extends Component {
                     <div style={{display: "table-cell", verticalAlign: "middle", textAlign: "center", width: "100%"}}>
                           <div style={{textAlign: "center", width: 20, margin: "auto"}}>
                           <RoundedButtonLink id={id} color={"#cccccc"} size={20} border={0}  onClick={onEdit}>
-                                                    <EditIcon color="primary"></EditIcon>
+                                                   {notEditable? (<SectionIcon color="primary"></SectionIcon>):
+                                                   (<EditIcon color="primary"></EditIcon>)} 
                                 </RoundedButtonLink>
                           </div>
                          
@@ -60,7 +62,7 @@ class Nameable extends Component {
             </Grid>
             
             <Grid item xs={2} align="right">
-                 {!editOnly&&<div style={{ height: 50 , display: "table", width: "100%"}}>
+                 {(!editOnly || !notEditable) &&<div style={{ height: 50 , display: "table", width: "100%"}}>
                     <div style={{display: "table-cell", verticalAlign: "middle", width: 20}}>
                         <RoundedButtonLink id={id} item color={"#cccccc"} size={20} border={0} onClick={onDelete}  >
                                             <DeleteIcon color="disabled" className="delete-icon"></DeleteIcon>

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import Administration from "./administration"
-import BusinessAdmin from "./businessAdmin"
+import BusinessAdmin from "./userAdministration"
 
 import { connect } from "react-redux";
 
@@ -12,13 +12,13 @@ class BusinessHome extends Component {
   state = {};
   render() {
    
-    const { classes } = this.props;
+    const { classes, loginInfo } = this.props;
     return (
       <main >
         
 
-        {this.props.loginInfo.type === "admin" && <Administration/>}
-        {this.props.loginInfo.type === "business" && <BusinessAdmin/>}
+        {loginInfo.type === "admin" && <Administration/>}
+        {loginInfo.type === "business" && <BusinessAdmin/>}
          
       
       </main>

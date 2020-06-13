@@ -26,7 +26,7 @@ class HomeOut extends Component {
   render() {
     const { classes, sections, language } = this.props;
 
-    if(sections === undefined || sections.length < 3)
+    if(sections === undefined || sections.length < 1)
      return <div/>
      
     return (
@@ -40,8 +40,8 @@ class HomeOut extends Component {
             </Helmet>
           <PromoField />
           <FrontTourPromo  section={sections[0]} reverse={true}/>
-          <FrontAttractions section={sections[1]}/>
-          <FrontLodgingPromo  section={sections[2]} reverse={false}/>
+          {/* <FrontAttractions section={sections[1]}/>
+          <FrontLodgingPromo  section={sections[2]} reverse={false}/> */}
           <AboutContact></AboutContact>
         </div>
     );
