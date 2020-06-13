@@ -34,6 +34,7 @@ const styles = theme => ({
   cartItemContainer: {
     padding: '8px 12px',
     borderBottom: '1px solid #dedede',
+    color: '#434c5f',
     '&:hover': {
       background: '#dedee3'
     }

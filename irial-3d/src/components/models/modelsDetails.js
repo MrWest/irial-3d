@@ -90,7 +90,7 @@ class ModelDetails extends Component {
  handleAddItem = openCart => {
   const { model, category, section, addToCart } = this.props;
   addToCart({ id_item: model.id, name: model.name, image: model.images[0].url, price: model.price,
-     lumion_version: model.lumion_version, section, category, destination: model.ownerInfo.stripe_account_id, file: model.server_path }, openCart);
+     lumion_version: model.lumion_version, section, category, destination: model.ownerInfo.stripe_account_id, file: model.server_path, type: 'model' }, openCart);
  }
 
  render() {
@@ -134,7 +134,7 @@ class ModelDetails extends Component {
                 <Link
                  
                   endIcon={<MoneySharp className={cantAddToCart ? classes.actionIconDisabled : classes.actionIcon}/>}
-                  onClick={() => { if(!cantAddToCart)this.handleAddItem(true)}}
+                  onClick={() => { if(!cantAddToCart)this.handleAddItem(false)}}
                   to={cantAddToCart || '/payment'}
                   disabled={cantAddToCart}
                 >

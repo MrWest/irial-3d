@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles, Grid } from '@material-ui/core';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { removeFromCart, emptyCart } from "../../actions";
 import { thousandsSeparatedAndFixed } from '../../helpers/utils';
@@ -9,7 +9,8 @@ import Remove from "@material-ui/icons/Delete";
 import styles from './styles/cart';
 
 const CartItem = ({ classes, item, removeFromCart}) => (
-  <div className={classes.cartItemContainer}>
+  <Link to={`${item.type}/${item.id_item}`} >
+    <div className={classes.cartItemContainer}>
     <Grid container alignItems="center" spacing={2}>
       <Grid item>
         <div className={classes.cartItemImgContainer}>
@@ -28,7 +29,8 @@ const CartItem = ({ classes, item, removeFromCart}) => (
         <StylessButton onClick={() => removeFromCart(item.id)}><Remove className={classes.deleteIcon} /></StylessButton>
       </Grid>
     </Grid>
-  </div>
+    </div>
+  </Link>
 );
 // const mapStateToProps = state => ({
 //   cart: state.cart,

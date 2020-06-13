@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "http://localhost:8080/ibackend/ajax"
+  baseURL: "http://192.168.1.107:8080/ibackend/ajax"
 });

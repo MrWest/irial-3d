@@ -107,8 +107,8 @@ export default connect(null, { payCart })(reduxForm({ form: "paymentForm", enabl
       console.log('xxx0stripeToken: ', stripeToken);
       if(stripeToken) {
         const description = `${data.name} purchase of: ${amount} usd of Lumion items`
-        await payCart({...stripeToken, email: data.email,  amount, destination, description  });
-        await onPay();
+        const charge = await payCart({...stripeToken, email: data.email,  amount, destination, description  });
+        await onPay(charge);
         history.push('/thanks');
 
       }

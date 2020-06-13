@@ -26,21 +26,47 @@ import {Helmet} from 'react-helmet';
 import Loader from '../global/loader';
 import PaymentForm from './PaymentForm';
 import { isServer, getLanguage } from '../../apis/tools';
-import { downloadFile } from '../../actions';
+import { downloadFile, doTransfers } from '../../actions';
 import CartItem from './CartItem';
 
 
 
-const PaymentHome = ({ classes, language, cart }) => {
-   
-const onPay = async () => {
+const PaymentHome = ({ classes, language, cart: { items } }) => {
 
-  cart.items.forEach(async item => {
-    await downloadFile({ name: item.name, file: item.file});
+const totalCart = items.reduce((sum, i) => sum + parseFloat(i.price), 0);
+
+const getTransfers = () => {
+  let group = items.reduce((r, a) => {
+    console.log("a", a);
+    console.log('r', r);
+    r[a.destination] = [...r[a.destination] || [], a];
+    return r;
+   }, {});
+   console.log("group", group);
+
+   const transfers = [];
+   for (var property in group) {
+    transfers.push({ destination: property, amount: group[property].reduce((sum, i) => sum + parseFloat(i.price), 0),
+     description: `Selling ${group[property].length} items: ${group[property].reduce((sum, i) => sum === "" ? sum + i.name : sum + ", " + i.name, "")} `})
+   }
+
+   console.log("transfers", transfers);
+
+   return JSON.stringify(transfers);
+}
+
+getTransfers();
+   
+const onPay = async charge => {
+
+  const transfers = getTransfers();
+
+  doTransfers({ transfers, transfer_group: charge.transfer_group });
+
+  items.forEach(async item => {
+    await downloadFile({ name: item.name, file: item.file });
   });
 };
-
-const totalCart = cart.items.reduce((sum, i) => sum + parseFloat(i.price), 0);
 
 return (
       <main className={classes.container}>
@@ -57,13 +83,13 @@ return (
                <h1 className={classes.categoryTittle}>Payment Info</h1>
               
                 <PaymentForm language={language} buttonClass={classes.submitButton} amount={totalCart * 100}
-                 destination={cart.items.length > 0 ? cart.items[0].destination : undefined}
+                 destination={items.length > 0 ? items[0].destination : undefined}
                  onPay={onPay} />
            </Grid>
            <Grid item xs={4}>
                  <p className={classes.cartTittle}>Your cart</p>
                  <div style={{ padding: '24px 0px 124px 0px' }}>
-                              {cart.items.map(item => <CartItem key={item.id} classes={classes} item={item}  />)}
+                    {items.map(item => <CartItem key={item.id} classes={classes} item={item}  />)}
                 </div>
                 <p className={classes.cartItemPrice}><span className={classes.cartSmaltext} style={{ fontSize: 18 }}>Total cost:</span> ${thousandsSeparatedAndFixed(totalCart)}</p>
                                 
