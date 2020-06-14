@@ -26,6 +26,8 @@ import ModelsReducer from "./modelsReducer";
 import SelectedModelReducer from "./selectedModelReducer";
 import ProjectsReducer from "./projectsReducer";
 import SelectedProjectReducer from "./selectedProjectReducer";
+import TexturesReducer from "./texturesReducer";
+import SelectedTextureReducer from "./selectedTextureReducer";
 import TagsReducer from "./tagsReducer";
 import CartReducer from "./cartReducer";
 
@@ -54,6 +56,8 @@ export default combineReducers({
   selectedModel: SelectedModelReducer,
   projects: ProjectsReducer,
   selectedProject: SelectedProjectReducer,
+  textures: TexturesReducer,
+  selectedTexture: SelectedTextureReducer,
   tags: TagsReducer,
   cart: CartReducer
 });
