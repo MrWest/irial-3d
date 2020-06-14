@@ -154,7 +154,13 @@ const strings = {
       ShoppingCart: 'Shopping Cart',
       Checking: "Checking...",
       CardDetails: "Card Details",
-      Create: "Create"
+      Create: "Create",
+      Projects: "Projects",
+      Project: "Project",
+      Textures: "Textures",
+      Texture: "Texture",
+      Scenes: "Scenes",
+      Scene: "Scene"
      
     },
     es: {
@@ -312,7 +318,13 @@ const strings = {
       ShoppingCart: 'Carrito de Compras',
       Checking: "Comprobando...",
       CardDetails: "Informacion de la Tarjeta",
-      Create: 'Crear'
+      Create: 'Crear',
+      Projects: "Proyectos",
+      Project: "Proyectos",
+      Textures: "Texturas",
+      Texture: "Textura",
+      Scenes: "Escenas",
+      Scene: "Escena"
 
     }
    }

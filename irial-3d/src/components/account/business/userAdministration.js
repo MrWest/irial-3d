@@ -9,7 +9,9 @@ import SectionEditForm from "../../forms/sectionEditForm";
 import Nameable from "./nameable";
 import { connect } from "react-redux";
 import nameable from "./nameable";
-import {getCategories, sortTours, deleteCategory, deleteTour, sortAttractions, deleteAttraction, deleteModel, sortModelsByCategoryUser} from "../../../actions";
+import {getCategories, sortTours, deleteCategory, deleteTour,
+   deleteAttraction, deleteModel, deleteProject, deleteTexture, deleteScene,
+   sortModelsByCategoryUser, sortProjectsByCategoryUser, sortTexturesByCategoryUser, sortScenesByCategoryUser} from "../../../actions";
 import AddIcon from "@material-ui/icons/AddCircle";
 import {RoundedButtonLink} from "../../buttons";
 import { withRouter } from "react-router-dom";
@@ -46,17 +48,22 @@ class UserAdministration extends Component {
   }
 
   selectCategory = event => {
-    const { profile } = this.props;
+    const { profile, sortModelsByCategoryUser,
+    sortProjectsByCategoryUser, sortTexturesByCategoryUser, sortScenesByCategoryUser } = this.props;
     this.setState({categoryIndex: event.currentTarget.id})
 
     if(this.state.services === "tours")
     this.props.sortTours(event.currentTarget.id)
-    if(this.state.services === "attractions")
-     this.props.sortAttractions(event.currentTarget.id)
-
+    
      
      if(this.state.services === "models")
-     this.props.sortModelsByCategoryUser({category: event.currentTarget.id, user: profile.id});
+      sortModelsByCategoryUser({category: event.currentTarget.id, user: profile.id});
+     if(this.state.services === "projects")
+      sortProjectsByCategoryUser({category: event.currentTarget.id, user: profile.id});
+     if(this.state.services === "textures")
+      sortTexturesByCategoryUser({category: event.currentTarget.id, user: profile.id});
+     if(this.state.services === "scenes")
+      sortScenesByCategoryUser({category: event.currentTarget.id, user: profile.id});
   }
 
   selectService = event => {
@@ -65,13 +72,28 @@ class UserAdministration extends Component {
   }
   
    handleDeleteModel = event => {
+    const { deleteModel } = this.props;
+    deleteModel(event.currentTarget.id)
+   }
 
-    this.props.deleteModel(event.currentTarget.id)
+   handleDeleteProject = event => {
+    const { deleteProject } = this.props;
+    deleteProject(event.currentTarget.id)
+   }
+
+   handleDeleteTexture = event => {
+    const { deleteTexture } = this.props;
+    deleteTexture(event.currentTarget.id)
+   }
+
+   handleDeleteScene = event => {
+    const { deleteScene } = this.props;
+    deleteScene(event.currentTarget.id)
    }
    
-  editModel = event => {
-    // console.log("jajaja",event.currentTarget)
-    this.props.history.push("/modeledit/"+ event.currentTarget.id)
+  editItem = ({currentTarget: { id }},  path) => {
+    const { history } = this.props;
+    history.push(`/${path}/${id}`);
   }
 
   render() {
@@ -144,16 +166,20 @@ class UserAdministration extends Component {
           <div>
           
               {services === "models" && models.map(model => (
-                <Nameable key={model.id} nameable = {model}  size="small" selected = { parseInt(serviceIndex) === parseInt(model.id)} onClick={this.selectService} onEdit={this.editModel}  onDelete={this.handleDeleteModel}  id={model.id}></Nameable>
+                <Nameable key={model.id} nameable = {model}  size="small" selected = { parseInt(serviceIndex) === parseInt(model.id)}
+                 onClick={this.selectService} onEdit={event => this.editItem(event, 'modeledit')}  onDelete={this.handleDeleteModel}  id={model.id}></Nameable>
               ))}
               {services === "projects" && projects.map(project => (
-                <Nameable key={project.id} nameable = {project}  size="small" selected = { parseInt(serviceIndex) === parseInt(project.id)} onClick={this.selectService} onEdit={this.editModel}  onDelete={this.handleDeleteModel}  id={project.id}></Nameable>
+                <Nameable key={project.id} nameable = {project}  size="small" selected = { parseInt(serviceIndex) === parseInt(project.id)}
+                 onClick={this.selectService} onEdit={event => this.editItem(event, 'projectedit')}  onDelete={this.handleDeleteProject}  id={project.id}></Nameable>
               ))}
               {services === "textures" && textures.map(texture => (
-                <Nameable key={texture.id} nameable = {texture}  size="small" selected = { parseInt(serviceIndex) === parseInt(texture.id)} onClick={this.selectService} onEdit={this.editModel}  onDelete={this.handleDeleteModel}  id={texture.id}></Nameable>
+                <Nameable key={texture.id} nameable = {texture}  size="small" selected = { parseInt(serviceIndex) === parseInt(texture.id)}
+                 onClick={this.selectService} onEdit={event => this.editItem(event, 'textureedit')}  onDelete={this.handleDeleteTexture}  id={texture.id}></Nameable>
               ))}
               {services === "scenes" && scenes.map(scene => (
-                <Nameable key={scene.id} nameable = {scene}  size="small" selected = { parseInt(serviceIndex) === parseInt(scene.id)} onClick={this.selectService} onEdit={this.editModel}  onDelete={this.handleDeleteModel}  id={scene.id}></Nameable>
+                <Nameable key={scene.id} nameable = {scene}  size="small" selected = { parseInt(serviceIndex) === parseInt(scene.id)}
+                 onClick={this.selectService} onEdit={event => this.editItem(event, 'scenesedit')}  onDelete={this.handleDeleteScene}  id={scene.id}></Nameable>
               ))}
             </div>
           </Grid>
@@ -261,6 +287,7 @@ const mapStateToProps = state => {
   };
 };
 export default connect(
-  mapStateToProps, {getCategories, sortTours, deleteCategory, deleteTour, sortAttractions, deleteAttraction, deleteModel, sortModelsByCategoryUser }
+  mapStateToProps, {getCategories, sortTours, deleteCategory, deleteTour, deleteModel, deleteProject, deleteTexture, deleteScene,
+    sortModelsByCategoryUser, sortProjectsByCategoryUser, sortTexturesByCategoryUser, sortScenesByCategoryUser }
  
 )(withStyles(styles)(withRouter(UserAdministration)));

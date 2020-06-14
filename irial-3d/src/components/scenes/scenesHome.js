@@ -246,8 +246,8 @@ ScenesHome.propTypes = {
 const mapStateTopProps = state => {
   return {
     scenes: state.scenes,
-    categories: state.sections[1]? state.sections[1].categories : [],
-    section: state.sections[1],
+    categories: state.sections[4]? state.sections[4].categories : [],
+    section: state.sections[4],
     language: state.language
   };
 };

@@ -246,8 +246,8 @@ ProjectsHome.propTypes = {
 const mapStateTopProps = state => {
   return {
     projects: state.projects,
-    categories: state.sections[1]? state.sections[1].categories : [],
-    section: state.sections[1],
+    categories: state.sections[2]? state.sections[2].categories : [],
+    section: state.sections[2],
     language: state.language
   };
 };

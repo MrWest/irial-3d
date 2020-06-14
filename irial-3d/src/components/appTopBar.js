@@ -163,7 +163,16 @@ class AppTopBar extends Component {
                   {language.Tours}
                 </Link>
                 <Link   id="linkModels" className={isHovered !== "linkModels"? classes.appBarButton : classes.appBarButtonHovered} to="/models/all" onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
-                {language.Models}
+                  {language.Models}
+                </Link>
+                <Link   id="linkProjects" className={isHovered !== "linkProjects"? classes.appBarButton : classes.appBarButtonHovered} to="/projects/all" onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
+                  {language.Projects}
+                </Link>
+                <Link   id="linkTextures" className={isHovered !== "linkTextures"? classes.appBarButton : classes.appBarButtonHovered} to="/textures/all" onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
+                  {language.Textures}
+                </Link>
+                <Link   id="linkScenes" className={isHovered !== "linkScenes"? classes.appBarButton : classes.appBarButtonHovered} to="/scenes/all" onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
+                  {language.Scenes}
                 </Link>
                 <HashLink smooth   id="linkAbout" className={isHovered !=="linkAbout"? classes.appBarButton : classes.appBarButtonHovered} to="/#aboutus" onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
                 {language.About}

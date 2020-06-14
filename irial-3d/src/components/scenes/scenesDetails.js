@@ -400,9 +400,9 @@ SceneDetails.propTypes = {
 
 const mapStateTopProps = (state) => ({
   scene: state.selectedScene,
-  categories: state.sections[1] ? state.sections[1].categories : [],
+  categories: state.sections[4] ? state.sections[4].categories : [],
   category: state.selectedCategory,
-  section: state.sections[1],
+  section: state.sections[4],
   language: state.language,
   sign: state.sign,
   cart: state.cart

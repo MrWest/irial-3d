@@ -24,14 +24,27 @@ import CategoryAddForm from "../src/components/forms/categoryAddForm";
 import TourEditForm from "../src/components/forms/tourEditForm";
 import BlogHome from "../src/components/blog/BlogHome";
 import BlogExpanded from "../src/components/blog/BlogExpanded";
-import Helmet from 'react-helmet'
+import Helmet from 'react-helmet';
 import ModelsHome from "../src/components/models/modelsHome";
 import ModelDetails from "../src/components/models/modelsDetails";
 import ModelAddForm from "../src/components/forms/modelAddForm";
 import ModelEditForm from "../src/components/forms/modelEditForm";
+import ProjectsHome from "../src/components/projects/projectsHome";
+import ProjectDetails from "../src/components/projects/projectsDetails";
+import ProjectAddForm from "../src/components/forms/projectAddForm";
+import ProjectEditForm from "../src/components/forms/projectEditForm";
+import TexturesHome from "../src/components/textures/texturesHome";
+import TextureDetails from "../src/components/textures/texturesDetails";
+import TextureAddForm from "../src/components/forms/textureAddForm";
+import TextureEditForm from "../src/components/forms/textureEditForm";
+import ScenesHome from "../src/components/scenes/scenesHome";
+import SceneDetails from "../src/components/scenes/scenesDetails";
+import SceneAddForm from "../src/components/forms/sceneAddForm";
+import SceneEditForm from "../src/components/forms/sceneEditForm";
 import Cart from "../src/components/payment/Cart";
 import PaymentHome from "../src/components/payment/paymentHome";
 import ThankyouPage from "../src/components/global/thanks";
+import texturesDetails from '../src/components/textures/texturesDetails';
 
 
 const isServer = typeof window === 'undefined';
@@ -65,6 +78,18 @@ class Layout extends React.Component {
         <Route path="/model/:id" component={ModelDetails} exact />
         <Route path="/modeladd/:id" component={ModelAddForm} exact />
         <Route path="/modeledit/:id" component={ModelEditForm} exact />
+        <Route path="/projects/:category" component={ProjectsHome} exact />
+        <Route path="/project/:id" component={ProjectDetails} exact />
+        <Route path="/projectadd/:id" component={ProjectAddForm} exact />
+        <Route path="/projectedit/:id" component={ProjectEditForm} exact />
+        <Route path="/textures/:category" component={TexturesHome} exact />
+        <Route path="/texture/:id" component={TextureDetails} exact />
+        <Route path="/textureadd/:id" component={TextureAddForm} exact />
+        <Route path="/textureedit/:id" component={TextureEditForm} exact />
+        <Route path="/scenes/:category" component={ScenesHome} exact />
+        <Route path="/scene/:id" component={SceneDetails} exact />
+        <Route path="/sceneadd/:id" component={SceneAddForm} exact />
+        <Route path="/sceneedit/:id" component={SceneEditForm} exact />
         <Route path="/payment" component={PaymentHome} exact />
         <Route path="/thanks" component={ThankyouPage} exact />
         

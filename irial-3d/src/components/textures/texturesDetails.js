@@ -400,9 +400,9 @@ TextureDetails.propTypes = {
 
 const mapStateTopProps = (state) => ({
   texture: state.selectedTexture,
-  categories: state.sections[1] ? state.sections[1].categories : [],
+  categories: state.sections[3] ? state.sections[3].categories : [],
   category: state.selectedCategory,
-  section: state.sections[1],
+  section: state.sections[3],
   language: state.language,
   sign: state.sign,
   cart: state.cart

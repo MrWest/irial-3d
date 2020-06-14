@@ -246,8 +246,8 @@ TexturesHome.propTypes = {
 const mapStateTopProps = state => {
   return {
     textures: state.textures,
-    categories: state.sections[1]? state.sections[1].categories : [],
-    section: state.sections[1],
+    categories: state.sections[3]? state.sections[3].categories : [],
+    section: state.sections[3],
     language: state.language
   };
 };

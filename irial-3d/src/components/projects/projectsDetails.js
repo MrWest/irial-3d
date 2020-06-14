@@ -400,9 +400,9 @@ ProjectDetails.propTypes = {
 
 const mapStateTopProps = (state) => ({
   project: state.selectedProject,
-  categories: state.sections[1] ? state.sections[1].categories : [],
+  categories: state.sections[2] ? state.sections[2].categories : [],
   category: state.selectedCategory,
-  section: state.sections[1],
+  section: state.sections[2],
   language: state.language,
   sign: state.sign,
   cart: state.cart
