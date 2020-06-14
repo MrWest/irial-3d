@@ -28,6 +28,8 @@ import ProjectsReducer from "./projectsReducer";
 import SelectedProjectReducer from "./selectedProjectReducer";
 import TexturesReducer from "./texturesReducer";
 import SelectedTextureReducer from "./selectedTextureReducer";
+import ScenesReducer from "./scenesReducer";
+import SelectedSceneReducer from "./selectedSceneReducer";
 import TagsReducer from "./tagsReducer";
 import CartReducer from "./cartReducer";
 
@@ -58,6 +60,8 @@ export default combineReducers({
   selectedProject: SelectedProjectReducer,
   textures: TexturesReducer,
   selectedTexture: SelectedTextureReducer,
+  scenes: ScenesReducer,
+  selectedScene: SelectedSceneReducer,
   tags: TagsReducer,
   cart: CartReducer
 });

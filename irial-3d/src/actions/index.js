@@ -20,4 +20,7 @@ export * from "./cartActions";
 export * from "./paymentActions";
 export * from "./userActions";
 export * from "./stripeActions";
+export * from "./projectsActions";
+export * from "./texturesActions";
+export * from "./scenesActions";
 
