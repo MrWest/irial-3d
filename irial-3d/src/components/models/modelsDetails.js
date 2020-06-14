@@ -400,9 +400,9 @@ ModelDetails.propTypes = {
 
 const mapStateTopProps = (state) => ({
   model: state.selectedModel,
-  categories: state.sections[2] ? state.sections[2].categories : [],
+  categories: state.sections[1] ? state.sections[1].categories : [],
   category: state.selectedCategory,
-  section: state.sections[2],
+  section: state.sections[1],
   language: state.language,
   sign: state.sign,
   cart: state.cart

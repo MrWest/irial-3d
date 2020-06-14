@@ -23,8 +23,6 @@ const validate =  values => {
     'first_name',
     'last_name',
     'email',
-    'business_name',
-    'business_category',
     'password',
     'retype_password'
   ]
@@ -172,19 +170,18 @@ handleTextChange = async event => {
 
     if(!this.state.myerror){
 
-      let user = undefined
+    let user = undefined;
 
     user = await this.props.signUp({first_name: data.first_name, last_name: data.last_name, email: data.email,
-      login_type: this.props.signFacebookInfo.first_name? "facebook" : "site",  password: data.password,
+    login_type: this.props.signFacebookInfo.first_name? "facebook" : "site",  password: data.password,
     picture: this.props.signFacebookInfo.first_name? this.props.signFacebookInfo.picture : undefined})
 
      // console.log("SinIn-user: ", user)
      
-     this.props.addAttraction({id_category: data.business_category, name: data.business_name, id_user: user.id})
+     //this.props.addAttraction({id_category: data.business_category, name: data.business_name, id_user: user.id})
   
 
-     let message = data.first_name + " " + data.last_name + " has signed up to vinalestraveler for a " +
-     data.business_category + "business called: " + data.business_name;
+     let message = data.first_name + " " + data.last_name + " has signed up to irial 3d";
 
      let subject = "New user registration";
 
@@ -298,53 +295,7 @@ handleTextChange = async event => {
               {/* {this.state.myerror} */}
             </Grid>     
             
-              <Grid item xs={12} md={6}  style={{paddingTop: 5, paddingBottom: 0}}>
-                  <Field
-                    name="business_name"
-                    required fullWidth
-                    autoComplete="business_name" autoFocus
-                    htmlFor="text"
-                    component={renderTextField}
-                    label={this.props.language.BusinessName}
-                    
-                    />
-               
-              </Grid>
-              <Grid item xs={12} md={6} style={{paddingTop: 5, paddingBottom: 0}}>
-                 
-               
-                <Field
-                    fullWidth
-                    name="business_category"
-                    component={renderSelectField}
-                    label={this.props.language.Category}
-                    value={this.state.type}
-                    // onSelectionChange={this.handleChange}
-                    margin="normal"
-                  >
-                    {/* {this.props.lodgingsCategories.map(category =>(
-
-                        <MenuItem value={category.id}>
-                            <p style={{ fontSize: 14, marginBottom: 0 }}>
-                          <strong>{category.name}</strong>
-                        </p>
-                        </MenuItem>
-                        ))}
-                    */}
-                    {this.props.categories.map(category =>(
-
-                      <MenuItem value={category.id}>
-                           <p style={{ fontSize: 14, marginBottom: 0 }}>
-                         <strong>{category.name}</strong>
-                       </p>
-                      </MenuItem>
-                    ))}
-
-                   
-                                       
-                  </Field>
-              </Grid>
-              <Grid item xs={12} md={6}  style={{paddingTop: 5}}>
+            <Grid item xs={12} md={6}  style={{paddingTop: 5}}>
               {!this.props.signFacebookInfo.first_name &&
                  <Field
                   name="password"
@@ -371,10 +322,6 @@ handleTextChange = async event => {
               }
               </Grid>
             </Grid>
-                
-
-            
-          
 
             <div align="left"  style={{paddingTop: 40}}>
             <Grid container spacing={0}>
@@ -535,7 +482,7 @@ SignUpForm.propTypes = {
 const mapStateToProps = state => {
   return {
     language: state.language  ,
-    categories: state.sections[1]? state.sections[1].categories : [],
+   // categories: state.sections[1]? state.sections[1].categories : [],
    // lodgingsCategories: state.sections[2]? state.sections[2].categories: [],
     signFacebookInfo: state.signFacebook,
     initialValues: state.signFacebook,

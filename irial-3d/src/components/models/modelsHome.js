@@ -246,8 +246,8 @@ ModelsHome.propTypes = {
 const mapStateTopProps = state => {
   return {
     models: state.models,
-    categories: state.sections[2]? state.sections[2].categories : [],
-    section: state.sections[2],
+    categories: state.sections[1]? state.sections[1].categories : [],
+    section: state.sections[1],
     language: state.language
   };
 };
