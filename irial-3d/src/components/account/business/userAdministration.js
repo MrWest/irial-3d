@@ -29,23 +29,19 @@ class UserAdministration extends Component {
 
   getServices(id)
   {
-    var services = "none"
-    this.props.sections.map(section =>{
-      if(parseInt(section.id) === parseInt(id))
-      {
-        services = section.type
-      }
-    })
+    const { sections } = this.props;
+    const section = sections.find(section =>
+      parseInt(section.id, 10) === parseInt(id, 10));
 
-    return services
+    return section ? section.type : 'none';
   }
   selectSection = event => {
 
-    // console.log("fuck:",event)
+    const { getCategories } = this.props;
     this.setState({sectionIndex: event.currentTarget.id, categoryIndex: -1, 
     services: this.getServices(event.currentTarget.id)})
 
-    this.props.getCategories(event.currentTarget.id)
+    getCategories(event.currentTarget.id)
 
   }
 
@@ -79,7 +75,7 @@ class UserAdministration extends Component {
   }
 
   render() {
-    const { classes, language, sections, categories, tours, models } = this.props;
+    const { classes, language, sections, categories, tours, models, projects, textures, scenes } = this.props;
     const { services, sectionIndex, categoryIndex, serviceIndex  } = this.state;
     return (
       <main>
@@ -149,6 +145,15 @@ class UserAdministration extends Component {
           
               {services === "models" && models.map(model => (
                 <Nameable key={model.id} nameable = {model}  size="small" selected = { parseInt(serviceIndex) === parseInt(model.id)} onClick={this.selectService} onEdit={this.editModel}  onDelete={this.handleDeleteModel}  id={model.id}></Nameable>
+              ))}
+              {services === "projects" && projects.map(project => (
+                <Nameable key={project.id} nameable = {project}  size="small" selected = { parseInt(serviceIndex) === parseInt(project.id)} onClick={this.selectService} onEdit={this.editModel}  onDelete={this.handleDeleteModel}  id={project.id}></Nameable>
+              ))}
+              {services === "textures" && textures.map(texture => (
+                <Nameable key={texture.id} nameable = {texture}  size="small" selected = { parseInt(serviceIndex) === parseInt(texture.id)} onClick={this.selectService} onEdit={this.editModel}  onDelete={this.handleDeleteModel}  id={texture.id}></Nameable>
+              ))}
+              {services === "scenes" && scenes.map(scene => (
+                <Nameable key={scene.id} nameable = {scene}  size="small" selected = { parseInt(serviceIndex) === parseInt(scene.id)} onClick={this.selectService} onEdit={this.editModel}  onDelete={this.handleDeleteModel}  id={scene.id}></Nameable>
               ))}
             </div>
           </Grid>
@@ -247,8 +252,10 @@ const mapStateToProps = state => {
     sections: state.sections,
     categories: state.categories,
     tours: state.tours,
-    attractions: state.attractions,
     models: state.models,
+    projects: state.projects,
+    textures: state.textures,
+    scenes: state.scenes,
     language: state.language,
     profile: state.profile
   };

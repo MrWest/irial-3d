@@ -16,7 +16,8 @@ import {
   TableCell,
   TableBody,
   Switch,
-  LinearProgress
+  LinearProgress,
+  Button
 } from "@material-ui/core";
 import SwipeableViews from "react-swipeable-views";
 import Tabs from "@material-ui/core/Tabs";
@@ -24,11 +25,12 @@ import Tab from "@material-ui/core/Tab";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import {CoolButton} from "../buttons"
-import {selectAttraction, updateAttraction, uploadAttractionImage, deleteAttractionImage, uploadAttractionVideo, deleteAttractionVideo, 
-  updateAttractionProgram, addAttractionProgram, deleteAttractionProgram, changeAttractionProgram} from "../../actions";
+import {selectModel, updateModel, uploadModelImage, deleteModelImage, uploadModelVideo,
+   deleteModelVideo, fetchTags, toggleModelTags, uploadModelFile } from "../../actions";
 import CarouselTool from "../carouselTool";
 import SectionIcon from "@material-ui/icons/CardTravel";
 import AddIcon from "@material-ui/icons/AddCircle";
+import CloudUploadOutlined from "@material-ui/icons/CloudUploadOutlined";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import DeleteIcon from "@material-ui/icons/Delete";
 import {RoundedButtonLink} from "../buttons";
@@ -41,11 +43,18 @@ import {
   format
 } from "redux-form-validators";
 import Loader from '../global/loader';
+import { StylessButton } from '../buttons';
 import { Player } from 'video-react';
 import { Link } from "react-router-dom";
 
 //  var ImagePicker = require('react-native-image-picker');
 
+
+const Tag = ({ classes, tag, disabled, onClick }) => (
+  <Button onClick={() => onClick(disabled)} className={disabled? classes.tagContainerDisabled : classes.tagContainer}>
+    {tag.name}
+  </Button>
+);
 
 const BorderLinearProgress = withStyles({
   root: {
@@ -107,9 +116,12 @@ const renderError = ({ error, touched }) => {
   }
 };
 
-export const renderToggleInput = (field) => (
+export const renderToggleInput = (field) => {
+  console.log('xxx: ', field);
+  return (
   <Switch  checked={field.input.value} onChange={field.input.onChange} icons={false} color="primary" />
 );
+};
 
 const renderRadioGroup = ({ input, ...rest }) => (
   <RadioGroup
@@ -162,8 +174,33 @@ const styles = theme => ({
         paddingRight: "16px !important",
         minWidth: "100vw"
       }
-    }, 
+    },
+    tagContainer: {
+      borderRadius: 28,
+      backgroundColor: '#337ab7',
+      border: '3px solid #dedede',
+      padding: '6px 24px',
+      width: '100%',
+      color: '#ffffff',
+      textAlign: 'center',
+      cursor: 'pointer',
+      '&:hover': {
+        color: '#666666'
+
+      }
+    },
+    tagContainerDisabled: {
+      borderRadius: 28,
+      backgroundColor: '#dedede',
+      border: '3px solid #337ab7',
+      padding: '6px 24px',
+      width: '100%',
+      color: '#434343',
+      textAlign: 'center',
+      cursor: 'pointer'
+    },
     widthMobile: {
+      paddingLeft: 24,
       [theme.breakpoints.down("sm")]: {
         width: "100% !important",
         textAlign: "right !important"      
@@ -325,7 +362,7 @@ const styles = theme => ({
     quantity: 1
   }
 
-class AttractionEditForm extends React.Component {
+class ModelEditForm extends React.Component {
   state = {
     selectedImage: undefined,
     imageData: undefined,
@@ -342,15 +379,15 @@ class AttractionEditForm extends React.Component {
     realhandleSubmit = data => {
 
        
-        data.id = this.props.attraction.id
-        this.props.updateAttraction(data);
+        data.id = this.props.model.id
+        this.props.updateModel(data);
         this.props.history.push("/account")
       }
 
       componentWillMount()
       {
         const {id} = this.props.match.params
-        this.props.selectAttraction(id).then(() => {
+        this.props.selectModel(id).then(() => {
           this.setState({ busy: false });
         });
       }
@@ -374,10 +411,10 @@ class AttractionEditForm extends React.Component {
           // console.log("xXx", files[0])
           if(files[0] && files[0].size < 4200000 ){
           this.setState({imageData: e.target.result})
-          this.props.uploadAttractionImage({attractionId: this.props.attraction.id, file:  e.target.result,
-             fileName: files[0].name, attractionName: this.props.attraction.name, onProgress: this.onUploadProgress}).then(res=> {
+          this.props.uploadModelImage({modelId: this.props.model.id, file:  e.target.result,
+             fileName: files[0].name, modelName: this.props.model.name, onProgress: this.onUploadProgress}).then(res=> {
 
-              this.props.selectAttraction(this.props.match.params.id).then(()=> this.setState({completed: 0}));
+              this.props.selectModel(this.props.match.params.id).then(()=> this.setState({completed: 0}));
              })
         }
         else
@@ -402,10 +439,10 @@ class AttractionEditForm extends React.Component {
           // console.log("xXx", files[0])
           if(files[0] && files[0].size < 6300000 ){
           this.setState({imageData: e.target.result})
-          this.props.uploadAttractionVideo({attractionId: this.props.attraction.id, file:  e.target.result,
-             fileName: files[0].name, attractionName: this.props.attraction.name, onProgress: this.onUploadProgress}).then(res=> {
+          this.props.uploadModelVideo({modelId: this.props.model.id, file:  e.target.result,
+             fileName: files[0].name, modelName: this.props.model.name, onProgress: this.onUploadProgress}).then(res=> {
 
-              this.props.selectAttraction(this.props.match.params.id).then(()=> this.setState({completed: 0}));
+              this.props.selectModel(this.props.match.params.id).then(()=> this.setState({completed: 0}));
              });
         }
         else
@@ -418,19 +455,47 @@ class AttractionEditForm extends React.Component {
     
       }
 
+      uploadModel = event =>{
+        const { language } = this.props;
+        let files = event.target.files
+        let reader = new FileReader()
+        try {
+        reader.readAsDataURL(files[0])
+        this.setState({error: '', completed: 0});
+        reader.onload = e => {
+
+          // console.log("xXx", files[0])
+          if(files[0] && files[0].size < 4200000 ){
+          this.setState({imageData: e.target.result})
+          this.props.uploadModelFile({modelId: this.props.model.id, file:  e.target.result,
+             fileName: files[0].name, modelName: this.props.model.name, onProgress: this.onUploadProgress}).then(res=> {
+
+              this.props.selectModel(this.props.match.params.id).then(()=> this.setState({completed: 0}));
+             })
+        }
+        else
+        this.setState({error: language.MAX_FILE_SIZE.format('4 Mb')})
+      }
+      }
+      catch (error) {
+        this.setState({error: language.UPLOAD_FAILED})
+      }
+    
+      }
+
       handleDeleteImage = event => {
 
-        this.props.deleteAttractionImage(event.currentTarget.id).then(res=> {
+        this.props.deleteModelImage(event.currentTarget.id).then(res=> {
 
-          this.props.selectAttraction(this.props.match.params.id)
+          this.props.selectModel(this.props.match.params.id)
          })
       }
 
       handleDeleteVideo = event => {
 
-        this.props.deleteAttractionVideo(event.currentTarget.id).then(res=> {
+        this.props.deleteModelVideo(event.currentTarget.id).then(res=> {
 
-          this.props.selectAttraction(this.props.match.params.id)
+          this.props.selectModel(this.props.match.params.id)
          })
       }
 
@@ -438,34 +503,11 @@ class AttractionEditForm extends React.Component {
         this.setState({selectedIndex: value})
       };
 
-      handleProgramChange= event => {
-
-        this.props.updateAttractionProgram({id: event.target.id, content: event.target.value, idAttraction: this.props.match.params.id})
-        // this.props.selectAttraction(this.props.match.params.id)
-      }
-
-      addNewProgram= event => {
-
-        this.props.addAttractionProgram({id_attraction: this.props.match.params.id, content: "New activity",
-         position: this.props.attraction.program.length+1})
-        this.props.selectAttraction(this.props.match.params.id)
-      }
-
-      handleDeleteAttractionProgram = event => {
-
-        this.props.deleteAttractionProgram(event.currentTarget.id)
-        this.props.selectAttraction(this.props.match.params.id)
-      }
-      
-      handleTextChange(event){
-
-        this.props.changeAttractionProgram({id: event.target.id, content: event.target.value})
-       }
-
+     
   render(){
-    const { pristine, name, theme, classes, language, handleSubmit } = this.props;
+    const { pristine, theme, classes, language, handleSubmit, model, tags, toggleModelTags, initialValues: { name } } = this.props;
     const { busy, completed, error  } = this.state;
-      
+      const isDisabled = !model.url || !model.server_path;
       return (
         <main className={classes.container}>
         <Grid container justify="center" spacing={0}>
@@ -486,14 +528,14 @@ class AttractionEditForm extends React.Component {
               </div>
                   
               </Grid>
-              <Grid item alignItems="baseline">
+              <Grid item xs alignItems="baseline">
 
-                        <Typography
+                    <Typography
                       variant="h4"
                       component="h4"
                       className={classes.typographyText}
                     >
-                       {language.EditFormTittle.format(language.Attraction)}
+                       {language.EditFormTittle.format(language.Model)}
                     
                     </Typography>
                     
@@ -511,38 +553,28 @@ class AttractionEditForm extends React.Component {
                     component="p"
                     className={classes.typographyTextSmall}
                   >      
-                  {language.EditFormText.format(language.Attraction)}    
+                  {language.EditFormText.format(language.Model)}    
                    
                   </Typography>
               </Grid>
               <Grid item className={classes.widthMobile}>
-                 <Grid container spacing={4}>
-                 
-                 <Grid item xs={6}>
+                <div style={{ textAlign: 'center', marginBottom: 16 }}>
+                    <Link to={"/model/" + model.id} style={{background: "#ffffff"}}>
+                      {this.props.language.See}
+                    </Link>
+                                      
+                 </div>
 
-                      <div style={{display: "table", height: 40}}>
-                         <div style={{display: "table-cell", verticalAlign: "middle"}}>
-                          <Link to={"/attraction/" + this.props.attraction.id} style={{background: "#ffffff"}}>
-                           {this.props.language.See}
-                          </Link>
-                          </div>                   
-                         </div>
-                          
-                 </Grid>
-
-                   {this.props.sign.isLogged && this.props.sign.loginInfo &&
-                     (this.props.sign.loginInfo.type === "admin") &&
-                       <Grid item  xs={6} >
-
-                         <p style={{fontSize: 12, textAlign: "right", color: "#777", paddingRight: -16}} className={classes.rightOnMobile}>{language.Status}</p>
-                         <Field
-                                name="status"
-                                id="status"
-                                component={renderToggleInput}
-                                   />
-                      </Grid>}
-                 
-                 </Grid>
+                    {this.props.sign.isLogged && this.props.sign.loginInfo &&
+                      (this.props.sign.loginInfo.type === "admin") &&
+                        <div>
+                          <p style={{fontSize: 12, textAlign: "center", color: "#777"}} className={classes.rightOnMobile}>{language.Status}</p>
+                          <Field
+                            name="status"
+                            component={renderToggleInput}
+                              />
+                        </div>}
+                  
                       
               </Grid>
             
@@ -550,19 +582,30 @@ class AttractionEditForm extends React.Component {
           
            
             <Grid item xs={12} alignItems="flex-start" style={{ paddingTop: 0 }}>
-            <Grid container spacing={4}>
+            <Grid container spacing={4} style={{ paddingTop: 42 }}>
+           
             <Grid item xs={12} md={6} alignItems="flex-start" style={{ paddingTop: 10 }}>
-                <Field
+                <TextField
                 name="name"
                 margin="small"
                 type="text"
                 fullWidth
-                autoComplete="name"
-                component={renderTextField}
+                readOnly
+                value={name}
                 label={language.Name}
                 />
             </Grid>
-
+            <Grid item xs={12} md={6}>
+              <div style={{width: "100%", position: "relative", textAlign: 'center' }}>
+                <input type="file" name="currentFile"  id="currentFile" accept="application/pdf"
+                 onChange={this.uploadModel.bind(this)} style={{display: "none"}}></input>
+                  <label htmlFor={"currentFile"}>
+                    <CloudUploadOutlined color="#337ab7" 
+                      style={{fontSize: 64, color: "#337ab7", background: "#ffffff", cursor: 'pointer' }}></CloudUploadOutlined>
+                  </label>
+                              
+              </div>
+            </Grid>
            
             <Grid item xs={12} alignItems="flex-start" style={{ paddingTop: 10 }}>
                  <Field
@@ -642,13 +685,13 @@ class AttractionEditForm extends React.Component {
                   </Grid>
                   <Grid item xs={4} md={3}  style={{ paddingTop: 10, fontSize: 8 }} >
                       <Field
-                        name="how_long"
+                        name="lumion_version"
                         margin="small"
                         type="text"
                         fullWidth
-                        autoComplete="how_long"
+                        autoComplete="lumion_version"
                         component={renderTextField}
-                        label={language.Duration}
+                        label={language.LumionVersion}
                         />      
                 
                 
@@ -685,7 +728,7 @@ class AttractionEditForm extends React.Component {
 
                   <Grid item xs={12} alignItems="flex-start" style={{ paddingTop: 40, textAlign: "left" }}>
            
-                        <CoolButton height={56} width={245} fill={"#337ab7"} color={"#ffffff"}>
+                        <CoolButton height={56} width={245} fill={"#337ab7"} color={"#ffffff"} disabled={isDisabled}>
                             {language.Save}
                         </CoolButton>
                 </Grid>
@@ -710,7 +753,6 @@ class AttractionEditForm extends React.Component {
                       
                                     <Tab label={language.Images} className={classes.tabItem} />
                                     <Tab label={language.Videos} className={classes.tabItem} />
-                                    <Tab label={language.Program} className={classes.tabItem} />
                                 
                       
                     </Tabs>
@@ -724,7 +766,7 @@ class AttractionEditForm extends React.Component {
 
                   <div style={{width: "100%", right: 0, position: "relative", marginBottom: 0}} align="right">
 
-                  <input type="file" name="fileToUpload"  id="fileToUpload" disabled = {!this.props.attraction.images || this.props.attraction.images.length > 9}  accept="image/x-png,image/gif,image/jpeg"
+                  <input type="file" name="fileToUpload"  id="fileToUpload" disabled = {!model.images || model.images.length > 9}  accept="image/x-png,image/gif,image/jpeg"
                    onChange={this.selectImageFile.bind(this)} style={{display: "none"}}></input>
                   <label htmlFor={"fileToUpload"}>
                     <AddIcon color="#337ab7" style={{fontSize: 34, color: "#337ab7", background: "#ffffff", borderRadius: 34}}></AddIcon>
@@ -732,7 +774,7 @@ class AttractionEditForm extends React.Component {
                   </label>
                                 
                   </div>
-                  {this.props.attraction.images&& (this.props.attraction.images.length === 0 ? 
+                  {model.images&& (model.images.length === 0 ? 
                   <div style={{border: "1px #3577d4 solid", height: 200, width: 200, borderRadius: 100, display: "table"}}>
 
                   <div style={{margin: "auto", display: "table-cell", textAlign: "center", verticalAlign: "middle"}}>
@@ -741,8 +783,8 @@ class AttractionEditForm extends React.Component {
                   </div>
                   :
                   <CarouselTool>
-                  {this.props.attraction.images && this.props.attraction.images.map(image =>(
-                    <div align="right" style={{width: "100%", position: "relative", textAlign: "right"}}>
+                  {model.images && model.images.map(image =>(
+                    <div key={image.id} align="right" style={{width: "100%", position: "relative", textAlign: "right"}}>
                       
                       <img style={{width: "100%", borderTopLeftRadius: 4, objectFit: "cover"}} alt={image.alt} src={image.url}/>
                           <div style={{width: 40, right: 0, position: "absolute", bottom: 15}}>
@@ -767,7 +809,7 @@ class AttractionEditForm extends React.Component {
 
                   <div style={{right: 0, position: "relative", marginBottom: 0, width: "100%"}} align="right">
 
-                  <input type="file" name="fileToUpload2"  id="fileToUpload2" disabled = {!this.props.attraction.videos  ||  this.props.attraction.videos.length > 2} 
+                  <input type="file" name="fileToUpload2"  id="fileToUpload2" disabled = {!model.videos  ||  model.videos.length > 2} 
                   onChange={this.selectVideoFile.bind(this)}  accept="video/mp4" style={{display: "none"}}></input>
                   <label htmlFor={"fileToUpload2"}>
                     <AddIcon color="#337ab7" style={{fontSize: 34, color: "#337ab7", background: "#ffffff", borderRadius: 34}}></AddIcon>
@@ -775,7 +817,7 @@ class AttractionEditForm extends React.Component {
                   </label>
                                 
                   </div>
-                  {this.props.attraction.videos&& (this.props.attraction.videos.length === 0 ? 
+                  {model.videos&& (model.videos.length === 0 ? 
                   <div style={{border: "1px #3577d4 solid", height: 200, width: 200, borderRadius: 100, display: "table"}}>
 
                   <div style={{margin: "auto", display: "table-cell", textAlign: "center", verticalAlign: "middle"}}>
@@ -784,8 +826,8 @@ class AttractionEditForm extends React.Component {
                   </div>
                   :
                   <CarouselTool>
-                  {this.props.attraction.videos && this.props.attraction.videos.map(video =>(
-                    <div align="right" style={{width: "100%", height: 245, position: "relative", textAlign: "right" }}>
+                  {model.videos && model.videos.map(video =>(
+                    <div key={video.id} align="right" style={{width: "100%", height: 245, position: "relative", textAlign: "right" }}>
                       
                       <div style={{position: "relative",  textAlign: "center",}}>
                       
@@ -813,62 +855,20 @@ class AttractionEditForm extends React.Component {
                       </div> : <p style={{ color: '#b00020'}}>{error}</p>} 
                   </div>
 
-                  <div>
-                 
-                 <Table>
-                 <TableHead>
-                   <TableRow>
-                     <TableCell className={classes.positionCell}>
-                       #
-                     </TableCell>
-                      <TableCell style={{width: "100%"}}>
-                       {language.Content}
-                     </TableCell>
-                     <TableCell className={classes.addCell}>
-                              <RoundedButtonLink  color={"#ffffff"} size={40} border={0}  onClick={this.addNewProgram.bind(this)}>
-                                                    <AddIcon color="#337ab7" style={{fontSize: 34, color: "#337ab7"}}></AddIcon>
-                                </RoundedButtonLink>
-                     </TableCell>
-                   </TableRow>
-                   </TableHead>
-                   <TableBody>
-                     {this.props.attraction.program && this.props.attraction.program.map(prog =>(
-
-                        <TableRow>
-                        <TableCell  className={classes.positionCell}>
-                          {prog.position}
-                        </TableCell>
-                        <TableCell className={classes.contentCell} >
-                        
-                        <TextField
-                          id={prog.id}
-                          className={classes.textField}
-                          fullWidth
-                          margin="none"
-                          variant="outlined"
-                          value={prog.content}
-                          onChange={this.handleTextChange.bind(this)}
-                          multiline
-                          onBlur={this.handleProgramChange.bind(this)}
-                          rows={3}
-                        />
-                           
-                        </TableCell>
-                        <TableCell className={classes.addCell}>
-                        <RoundedButtonLink id={prog.id}  size={40} border={0} onClick={this.handleDeleteAttractionProgram.bind(this)} >
-                                                        <DeleteIcon color="disabled" className="delete-icon" style={{fontSize: 34, background: "#ffffff", borderRadius: 34}}></DeleteIcon>
-                         </RoundedButtonLink>
-                         </TableCell>
-                        </TableRow>
-                     ))}
-                    
-                    </TableBody>
-                 </Table>
-
-                  </div>
                     </SwipeableViews>
 
-
+                 {tags && model.tags && (
+                 <Grid container>
+                   <p className={classes.modelText} style={{ marginBottom: 16, marginTop: 124 }}><strong>{language.Tags}:</strong></p>
+                    <Grid container spacing={2}>
+                      {tags.map(tag => (
+                        <Grid key={tag.name} xs={3} style={{ marginBottom: 4 }}>
+                          <Tag classes={classes} tag={tag} disabled={!model.tags.find(t => t.id === tag.id)} onClick={activate => toggleModelTags(model, tag.id, activate)} />
+                         </Grid>
+                      ))}
+                    </Grid>
+                </Grid>
+               )}
 
                   </Grid>           
 
@@ -889,33 +889,32 @@ class AttractionEditForm extends React.Component {
 
 const mapStateToProps = state => {
     return {
-     attraction: state.selectedAttraction,
+     model: state.selectedModel,
      language: state.language,
      sign: state.sign,
+     tags: state.tags,
      initialValues: 
      {
-        name: state.selectedAttraction.name,
-        general_description: state.selectedAttraction.general_description,
-        full_description: state.selectedAttraction.full_description,
-        price: state.selectedAttraction.price,
-        how_long: state.selectedAttraction.how_long,
-        price_specifics: state.selectedAttraction.price_specifics,
-        languages: state.selectedAttraction.languages,
+        name: state.selectedModel.name,
+        general_description: state.selectedModel.general_description,
+        full_description: state.selectedModel.full_description,
+        price: state.selectedModel.price,
+        lumion_version: state.selectedModel.lumion_version,
+        price_specifics: state.selectedModel.price_specifics,
         currency: "CUC",//state.selectedLodging.currency,
-        note: state.selectedAttraction.note,
-        status: parseInt(state.selectedTour.status)>0
+        note: state.selectedModel.note,
+        status: parseInt(state.selectedModel.status)>0
      }
   
     };
   };
   export default connect(
     mapStateToProps,
-    { initialize, selectAttraction, updateAttraction, uploadAttractionImage, 
-      deleteAttractionImage, updateAttractionProgram, addAttractionProgram,
-       deleteAttractionProgram, changeAttractionProgram, uploadAttractionVideo, deleteAttractionVideo}
+    { initialize, selectModel, updateModel, uploadModelImage, 
+      deleteModelImage, uploadModelVideo, deleteModelVideo, fetchTags, toggleModelTags, uploadModelFile}
   )(
-    reduxForm({ form: "attractionEditForm", enableReinitialize: true, validate })(
-      withStyles(styles)(withRouter(AttractionEditForm))
+    reduxForm({ form: "modelEditForm", enableReinitialize: true, validate })(
+      withStyles(styles)(withRouter(ModelEditForm))
     )
   );
 
