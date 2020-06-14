@@ -23,7 +23,9 @@ import PostsReducer from "./postsReducer";
 import SelectedPostReducer from "./selectedPostReducer";
 import BlogCategoriesReducer from "./blogCategoriesReducer";
 import ModelsReducer from "./modelsReducer";
-import SelectedModelsReducer from "./selectedModelReducer";
+import SelectedModelReducer from "./selectedModelReducer";
+import ProjectsReducer from "./projectsReducer";
+import SelectedProjectReducer from "./selectedProjectReducer";
 import TagsReducer from "./tagsReducer";
 import CartReducer from "./cartReducer";
 
@@ -49,7 +51,9 @@ export default combineReducers({
   selectedPost: SelectedPostReducer,
   blogCategories: BlogCategoriesReducer,
   models: ModelsReducer,
-  selectedModel: SelectedModelsReducer,
+  selectedModel: SelectedModelReducer,
+  projects: ProjectsReducer,
+  selectedProject: SelectedProjectReducer,
   tags: TagsReducer,
   cart: CartReducer
 });
