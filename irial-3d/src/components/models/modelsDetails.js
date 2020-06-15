@@ -189,7 +189,7 @@ class ModelDetails extends Component {
                )}
                 {model.relatedModels && (
                  <Grid container>
-                   <p className={classes.modelText} style={{ marginBottom: 16, marginTop: 24 }}><strong>{language.relatedModels}:</strong></p>
+                   <p className={classes.modelText} style={{ marginBottom: 16, marginTop: 24 }}><strong>{language.RelatedModels}:</strong></p>
                     <Grid container spacing={2}>
                       {model.relatedModels.map(rmodel => (
                         <Grid key={rmodel.id} item xs={6}>

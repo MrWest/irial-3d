@@ -189,7 +189,7 @@ class ProjectDetails extends Component {
                )}
                 {project.relatedProjects && (
                  <Grid container>
-                   <p className={classes.projectText} style={{ marginBottom: 16, marginTop: 24 }}><strong>{language.relatedProjects}:</strong></p>
+                   <p className={classes.projectText} style={{ marginBottom: 16, marginTop: 24 }}><strong>{language.RelatedProjects}:</strong></p>
                     <Grid container spacing={2}>
                       {project.relatedProjects.map(rproject => (
                         <Grid key={rproject.id} item xs={6}>

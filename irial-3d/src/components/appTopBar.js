@@ -159,9 +159,6 @@ class AppTopBar extends Component {
                src={this.props.signInfo.loginInfo.picture === "/images/public/user.png" ? "../static/images/public/user.png" : this.props.signInfo.loginInfo.picture} /></a>}
                </div>}
                  <LanguageSelector style = {{position: "absolute", right: 0, top: -8}}></LanguageSelector>
-                <Link id="linkTour"  className={isHovered !== "linkTour"? classes.appBarButton : classes.appBarButtonHovered}  to="/tours/all" onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
-                  {language.Tours}
-                </Link>
                 <Link   id="linkModels" className={isHovered !== "linkModels"? classes.appBarButton : classes.appBarButtonHovered} to="/models/all" onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
                   {language.Models}
                 </Link>

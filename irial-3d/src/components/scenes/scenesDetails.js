@@ -189,7 +189,7 @@ class SceneDetails extends Component {
                )}
                 {scene.relatedScenes && (
                  <Grid container>
-                   <p className={classes.sceneText} style={{ marginBottom: 16, marginTop: 24 }}><strong>{language.relatedScenes}:</strong></p>
+                   <p className={classes.sceneText} style={{ marginBottom: 16, marginTop: 24 }}><strong>{language.RelatedScenes}:</strong></p>
                     <Grid container spacing={2}>
                       {scene.relatedScenes.map(rscene => (
                         <Grid key={rscene.id} item xs={6}>

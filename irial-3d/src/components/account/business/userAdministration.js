@@ -158,6 +158,24 @@ class UserAdministration extends Component {
                       </RoundedButtonLink>
                     }
 
+                    {services === "projects" &&
+                      <RoundedButtonLink  color={"#ffffff"} size={40} border={0}  to={categoryIndex !== -1? `/projectadd/${categoryIndex}` : "#"}>
+                                          <AddIcon color="#188218" style={{fontSize: 34, color: "#188218"}}></AddIcon>
+                      </RoundedButtonLink>
+                    }
+
+                    {services === "textures" &&
+                      <RoundedButtonLink  color={"#ffffff"} size={40} border={0}  to={categoryIndex !== -1? `/textureadd/${categoryIndex}` : "#"}>
+                                          <AddIcon color="#188218" style={{fontSize: 34, color: "#188218"}}></AddIcon>
+                      </RoundedButtonLink>
+                    }
+
+                    {services === "scenes" &&
+                      <RoundedButtonLink  color={"#ffffff"} size={40} border={0}  to={categoryIndex !== -1? `/sceneadd/${categoryIndex}` : "#"}>
+                                          <AddIcon color="#188218" style={{fontSize: 34, color: "#188218"}}></AddIcon>
+                      </RoundedButtonLink>
+                    }
+
 
 
                 </Grid>

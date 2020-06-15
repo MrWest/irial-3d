@@ -23,4 +23,5 @@ export * from "./stripeActions";
 export * from "./projectsActions";
 export * from "./texturesActions";
 export * from "./scenesActions";
+export * from "./projectsActionsServer";
 

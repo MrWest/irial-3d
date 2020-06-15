@@ -189,7 +189,7 @@ class TextureDetails extends Component {
                )}
                 {texture.relatedTextures && (
                  <Grid container>
-                   <p className={classes.textureText} style={{ marginBottom: 16, marginTop: 24 }}><strong>{language.relatedTextures}:</strong></p>
+                   <p className={classes.textureText} style={{ marginBottom: 16, marginTop: 24 }}><strong>{language.RelatedTextures}:</strong></p>
                     <Grid container spacing={2}>
                       {texture.relatedTextures.map(rtexture => (
                         <Grid key={rtexture.id} item xs={6}>

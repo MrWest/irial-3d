@@ -27,6 +27,18 @@ import ModelsHome from "./models/modelsHome";
 import ModelsDetails from "./models/modelsDetails"
 import ModelAddForm from "./forms/modelAddForm";
 import ModelEditForm from "./forms/modelEditForm";
+import ProjectsHome from "./projects/projectsHome";
+import ProjectDetails from "./projects/projectsDetails";
+import ProjectAddForm from "./forms/projectAddForm";
+import ProjectEditForm from "./forms/projectEditForm";
+import TexturesHome from "./textures/texturesHome";
+import TextureDetails from "./textures/texturesDetails";
+import TextureAddForm from "./forms/textureAddForm";
+import TextureEditForm from "./forms/textureEditForm";
+import ScenesHome from "./scenes/scenesHome";
+import SceneDetails from "./scenes/scenesDetails";
+import SceneAddForm from "./forms/sceneAddForm";
+import SceneEditForm from "./forms/sceneEditForm";
 
 // import "../styles/App.css";
 // import "../styles/video-react.css"; // import css
@@ -65,6 +77,18 @@ class App extends Component {
             <Route path="/models/:id" component={ModelsDetails} exact />
             <Route path="/modeladd/:id" component={ModelAddForm} exact />
             <Route path="/modeledit/:id" component={ModelEditForm} exact />
+            <Route path="/projects/:category" component={ProjectsHome} exact />
+            <Route path="/project/:id" component={ProjectDetails} exact />
+            <Route path="/projectadd/:id" component={ProjectAddForm} exact />
+            <Route path="/projectedit/:id" component={ProjectEditForm} exact />
+            <Route path="/textures/:category" component={TexturesHome} exact />
+            <Route path="/texture/:id" component={TextureDetails} exact />
+            <Route path="/textureadd/:id" component={TextureAddForm} exact />
+            <Route path="/textureedit/:id" component={TextureEditForm} exact />
+            <Route path="/scenes/:category" component={ScenesHome} exact />
+            <Route path="/scene/:id" component={SceneDetails} exact />
+            <Route path="/sceneadd/:id" component={SceneAddForm} exact />
+            <Route path="/sceneedit/:id" component={SceneEditForm} exact />
 
 
 

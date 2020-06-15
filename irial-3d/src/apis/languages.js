@@ -149,7 +149,7 @@ const strings = {
       AddToCart: "Add to Cart",
       CreatorInfo: "Creator Info",
       Tags: "Tags",
-      relatedModels: "Related Models",
+      RelatedModels: "Related Models",
       EmptyCart: 'Empty Cart',
       ShoppingCart: 'Shopping Cart',
       Checking: "Checking...",
@@ -160,7 +160,10 @@ const strings = {
       Textures: "Textures",
       Texture: "Texture",
       Scenes: "Scenes",
-      Scene: "Scene"
+      Scene: "Scene",
+      ProjectsPageTittle: "Lumion Projects Catalog",
+      ProjectsPageDescription: "Contact guides with mastery in several languages and specialized in hiking, horseback riding, climbing, diving and traditional dances.",
+     
      
     },
     es: {
@@ -324,7 +327,10 @@ const strings = {
       Textures: "Texturas",
       Texture: "Textura",
       Scenes: "Escenas",
-      Scene: "Escena"
+      Scene: "Escena",
+      ProjectsPageTittle: "Catálogo de Proyectos de Lumion",
+      ProjectsPageDescription: "Contact guides with mastery in several languages and specialized in hiking, horseback riding, climbing, diving and traditional dances.",
+     
 
     }
    }
