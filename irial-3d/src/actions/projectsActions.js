@@ -208,7 +208,7 @@ export const fetchProjects = () => async dispatch => {
     let statusInfo = new FormData();
     statusInfo.append("id", project.id);
     statusInfo.append("lang", lang);
-    if(project.published){
+    if(project.status){
      
       statusInfo.append("status", "1");
       await DashBoard.post("/projects/update_project_status.php", statusInfo,  {headers})

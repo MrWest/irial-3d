@@ -17,8 +17,8 @@ class BusinessHome extends Component {
       <main >
         
 
-        {loginInfo.type === "admin" && <Administration/>}
-        {loginInfo.type === "business" && <BusinessAdmin/>}
+        {/* {loginInfo.type === "admin" && <Administration/>} */}
+        <BusinessAdmin isAdmin={loginInfo.type === "admin"} />
          
       
       </main>

@@ -207,7 +207,7 @@ export const fetchTextures = () => async dispatch => {
     let statusInfo = new FormData();
     statusInfo.append("id", texture.id);
     statusInfo.append("lang", lang);
-    if(texture.published){
+    if(texture.status){
      
       statusInfo.append("status", "1");
       await DashBoard.post("/textures/update_texture_status.php", statusInfo,  {headers})

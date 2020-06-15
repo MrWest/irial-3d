@@ -117,7 +117,6 @@ const renderError = ({ error, touched }) => {
 };
 
 export const renderToggleInput = (field) => {
-  console.log('xxx: ', field);
   return (
   <Switch  checked={field.input.value} onChange={field.input.onChange} icons={false} color="primary" />
 );
@@ -378,10 +377,10 @@ class ProjectEditForm extends React.Component {
   };
     realhandleSubmit = data => {
 
-       
-        data.id = this.props.project.id
-        this.props.updateProject(data);
-        this.props.history.push("/account")
+        const { updateProject, history, project } = this.props;
+        data.id = project.id;
+        updateProject(data);
+        history.push("/account")
       }
 
       componentWillMount()

@@ -207,7 +207,7 @@ export const fetchScenes = () => async dispatch => {
     let statusInfo = new FormData();
     statusInfo.append("id", scene.id);
     statusInfo.append("lang", lang);
-    if(scene.published){
+    if(scene.status){
      
       statusInfo.append("status", "1");
       await DashBoard.post("/scenes/update_scene_status.php", statusInfo,  {headers})

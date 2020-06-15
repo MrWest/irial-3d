@@ -207,7 +207,7 @@ export const fetchModels = () => async dispatch => {
     let statusInfo = new FormData();
     statusInfo.append("id", model.id);
     statusInfo.append("lang", lang);
-    if(model.published){
+    if(model.status){
      
       statusInfo.append("status", "1");
       await DashBoard.post("/models/update_model_status.php", statusInfo,  {headers})

@@ -107,7 +107,7 @@ class TexturesHome extends Component {
                     </MenuItem>
                     {this.props.categories.map((category, index) => (
                       
-                      <MenuItem value={category.id}>
+                      <MenuItem key={category.id} value={category.id}>
                        <p style={{ fontSize: 14, marginBottom: 0,  color: '#0f2440' }}>
                          <strong>{category.name}</strong>
                        </p>

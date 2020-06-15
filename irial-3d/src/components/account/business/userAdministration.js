@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import nameable from "./nameable";
 import {getCategories, sortTours, deleteCategory, deleteTour,
    deleteAttraction, deleteModel, deleteProject, deleteTexture, deleteScene,
+   sortModels, sortProjects, sortTextures, sortScenes,
    sortModelsByCategoryUser, sortProjectsByCategoryUser, sortTexturesByCategoryUser, sortScenesByCategoryUser} from "../../../actions";
 import AddIcon from "@material-ui/icons/AddCircle";
 import {RoundedButtonLink} from "../../buttons";
@@ -49,14 +50,24 @@ class UserAdministration extends Component {
 
   selectCategory = event => {
     const { profile, sortModelsByCategoryUser,
-    sortProjectsByCategoryUser, sortTexturesByCategoryUser, sortScenesByCategoryUser } = this.props;
+      sortModels, sortProjects, sortTextures, sortScenes,
+    sortProjectsByCategoryUser, sortTexturesByCategoryUser, sortScenesByCategoryUser, isAdmin } = this.props;
     this.setState({categoryIndex: event.currentTarget.id})
 
-    if(this.state.services === "tours")
-    this.props.sortTours(event.currentTarget.id)
+   
     
-     
-     if(this.state.services === "models")
+     if(isAdmin) {
+      if(this.state.services === "models")
+      sortModels(event.currentTarget.id);
+     if(this.state.services === "projects")
+       sortProjects(event.currentTarget.id);
+     if(this.state.services === "textures")
+      sortTextures(event.currentTarget.id);
+     if(this.state.services === "scenes")
+      sortScenes(event.currentTarget.id);
+     }
+     else {
+      if(this.state.services === "models")
       sortModelsByCategoryUser({category: event.currentTarget.id, user: profile.id});
      if(this.state.services === "projects")
       sortProjectsByCategoryUser({category: event.currentTarget.id, user: profile.id});
@@ -64,6 +75,8 @@ class UserAdministration extends Component {
       sortTexturesByCategoryUser({category: event.currentTarget.id, user: profile.id});
      if(this.state.services === "scenes")
       sortScenesByCategoryUser({category: event.currentTarget.id, user: profile.id});
+     }
+     
   }
 
   selectService = event => {
@@ -96,8 +109,17 @@ class UserAdministration extends Component {
     history.push(`/${path}/${id}`);
   }
 
+  editCategory = event => {
+    const { history } = this.props;
+    history.push("/categoryedit/"+ event.currentTarget.id)
+  }
+  editSection = event => {
+    const { history } = this.props;
+    history.push("/sectionedit/"+ event.currentTarget.id)
+  }
+
   render() {
-    const { classes, language, sections, categories, tours, models, projects, textures, scenes } = this.props;
+    const { classes, language, sections, categories, tours, models, projects, textures, scenes, isAdmin } = this.props;
     const { services, sectionIndex, categoryIndex, serviceIndex  } = this.state;
     return (
       <main>
@@ -115,25 +137,39 @@ class UserAdministration extends Component {
                 <Nameable key={section.id} nameable = {section} size="large" 
                 selected = { parseInt(sectionIndex) === parseInt(section.id)}
                 onClick={this.selectSection} id={section.id}
-                notEditable></Nameable>
+                onEdit={this.editSection}
+                notEditable={!isAdmin}></Nameable>
                 ))}
           </div>
           </Grid>
 
           <Grid item  xs={12} md={4}>
 
-               <div style={{display: "table", height: 40 }}>
-                <div style={{display: "table-cell", verticalAlign: "middle", paddingLeft: 10}}>
-                <p>{language.Categories}</p>
+              <Grid container alignItems="center">
+                <Grid item xs>
+                <div style={{display: "table", height: 40 }}>
+                  <div style={{display: "table-cell", verticalAlign: "middle", paddingLeft: 10}}>
+                  <p>{language.Categories}</p>
+                  </div>
                 </div>
-               </div>
+                </Grid>
+                <Grid item>
+                  {(isAdmin && this.state.sectionIndex !== -1) && (
+                  <RoundedButtonLink  color={"#ffffff"} size={40} border={0} to={`/categoryadd/${this.state.sectionIndex}`} >
+                    <AddIcon color="#188218" style={{fontSize: 34, color: "#188218"}}></AddIcon>
+                  </RoundedButtonLink>
+                  )}
+                  
+                </Grid>
+              </Grid>
+               
                <div>
                 {categories.map(category => (
-
                     <Nameable key={category.id} nameable = {category}  size="medium" 
                       selected = { parseInt(categoryIndex) === parseInt(category.id)}
                       onClick={this.selectCategory} id={category.id}
-                      notEditable
+                      onEdit={this.editCategory}
+                      notEditable={!isAdmin}
                     ></Nameable>
                     ))} 
             </div>
@@ -306,6 +342,7 @@ const mapStateToProps = state => {
 };
 export default connect(
   mapStateToProps, {getCategories, sortTours, deleteCategory, deleteTour, deleteModel, deleteProject, deleteTexture, deleteScene,
+    sortModels, sortProjects, sortTextures, sortScenes,
     sortModelsByCategoryUser, sortProjectsByCategoryUser, sortTexturesByCategoryUser, sortScenesByCategoryUser }
  
 )(withStyles(styles)(withRouter(UserAdministration)));

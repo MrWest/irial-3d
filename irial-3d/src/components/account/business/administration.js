@@ -151,15 +151,14 @@ class Administration extends Component {
               
               </Grid>
               <Grid item xs={4} align="right" style={{paddingRight: 15, visibility: this.state.sectionIndex != -1? "inherit": "hidden"}}>
-                                   <RoundedButtonLink  color={"#ffffff"} size={40} border={0} to={this.state.sectionIndex != -1? "/categoryadd/"+this.state.sectionIndex: "#"} >
-                                                    <AddIcon color="#188218" style={{fontSize: 34, color: "#188218"}}></AddIcon>
+                                <RoundedButtonLink  color={"#ffffff"} size={40} border={0} to={this.state.sectionIndex != -1? "/categoryadd/"+this.state.sectionIndex: "#"} >
+                                   <AddIcon color="#188218" style={{fontSize: 34, color: "#188218"}}></AddIcon>
                                 </RoundedButtonLink>
               </Grid>
           </Grid>
           <div style={{borderTop: this.props.tours.length === 0? "1px #ccc solid": 0 }}>
           {this.props.categories.map(category => (
-
-             <Nameable nameable = {category}  size="medium" selected = { parseInt(this.state.categoryIndex) === parseInt(category.id)} onEdit={this.editCategory}  onClick={this.selectCategory} onDelete={this.handleDeleteCategory} id={category.id}></Nameable>
+             <Nameable key={category.id} nameable={category}  size="medium" selected = { parseInt(this.state.categoryIndex) === parseInt(category.id)} onEdit={this.editCategory}  onClick={this.selectCategory} onDelete={this.handleDeleteCategory} id={category.id}></Nameable>
             ))} 
             </div>
           </Grid>

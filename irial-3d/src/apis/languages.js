@@ -163,7 +163,12 @@ const strings = {
       Scene: "Scene",
       ProjectsPageTittle: "Lumion Projects Catalog",
       ProjectsPageDescription: "Contact guides with mastery in several languages and specialized in hiking, horseback riding, climbing, diving and traditional dances.",
-     
+      TexturesPageTittle: 'Lumion Textures Catalog',
+      TexturesPageDescription: '',
+      TexturesPageTags: '',
+      ScenesPageTittle: 'Lumion Scene Configurations Catalog',
+      ScenesPageDescription: '',
+      ScenesPageTags: ''
      
     },
     es: {
@@ -330,7 +335,12 @@ const strings = {
       Scene: "Escena",
       ProjectsPageTittle: "Catálogo de Proyectos de Lumion",
       ProjectsPageDescription: "Contact guides with mastery in several languages and specialized in hiking, horseback riding, climbing, diving and traditional dances.",
-     
+      TexturesPageTittle: 'Catálogo de Texturas de Lumion',
+      TexturesPageDescription: '',
+      TexturesPageTags: '',
+      ScenesPageTittle: 'Catálogo de Configuración de Escenas de Lumion',
+      ScenesPageDescription: '',
+      ScenesPageTags: ''
 
     }
    }

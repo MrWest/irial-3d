@@ -117,7 +117,6 @@ const renderError = ({ error, touched }) => {
 };
 
 export const renderToggleInput = (field) => {
-  console.log('xxx: ', field);
   return (
   <Switch  checked={field.input.value} onChange={field.input.onChange} icons={false} color="primary" />
 );
