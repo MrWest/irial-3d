@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { selectProjectServer, fetchSectionsServer, getCategoryServer } from "../../src/actions";
-import ProjectDetails from "../../src/components/projects/projectsDetails";
+import ProjectEditForm from "../../src/components/forms/projectEditForm";
 
 
-class ProjectDetailsServer extends Component {
+class ProjectEditFormServer extends Component {
   render() {
     const { categories, project, category } = this.props;  
     
@@ -11,12 +11,12 @@ class ProjectDetailsServer extends Component {
      return <div/>
 
     return (
-      <ProjectDetails project={project} category={category} categories={categories}/>
+      <ProjectEditForm project={project} category={category} categories={categories}/>
     );
   }
 }
 
-ProjectDetailsServer.getInitialProps = async function({ reduxStore, query: { id } }) {
+ProjectEditFormServer.getInitialProps = async function({ reduxStore, query: { id } }) {
   console.log(id);
   const sections = await fetchSectionsServer(reduxStore);
   const project = await selectProjectServer(id, reduxStore);
@@ -28,4 +28,4 @@ ProjectDetailsServer.getInitialProps = async function({ reduxStore, query: { id 
 };
 
 
-export default ProjectDetailsServer;
+export default ProjectEditFormServer;

@@ -840,7 +840,7 @@ class ProjectEditForm extends React.Component {
                         
                           <div style={{width: 40, right: 0, position: "absolute", bottom: 0}}>
                                     <RoundedButtonLink id={video.id}  size={40} border={0} onClick={this.handleDeleteVideo.bind(this)} >
-                                                        <DeleteIcon color="disabled" className="delete-icon" style={{fontSize: 34, background: "#ffffff", borderRadius: 34}}></DeleteIcon>
+                                          <DeleteIcon color="disabled" className="delete-icon" style={{fontSize: 34, background: "#ffffff", borderRadius: 34}}></DeleteIcon>
                                     </RoundedButtonLink>
                           </div>
                     </div>
