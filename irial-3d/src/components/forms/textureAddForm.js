@@ -273,21 +273,25 @@ handleChange2 = event => {
 
     realhandleSubmit = data => {
 
-      const { sign } = this.props;
+      const { sign, addTexture, history } = this.props;
         // console.log("SHIT: ", data)
         data.id_category = this.state.id_category
-        data.id_user = this.props.sign.loginInfo.id;
-        this.props.addTexture(data);
+        data.id_user = sign.loginInfo.id;
+        addTexture(data).then(texture => {
+          if(texture.id) {
+            
+            let message = sign.loginInfo.first_name + " " + sign.loginInfo.last_name + " has added a new texture business to vinalestraveler called: " + data.name;
 
-        let message = sign.loginInfo.first_name + " " + sign.loginInfo.last_name + " has added a new texture business to vinalestraveler called: " + data.name;
+            let subject = "New texture";
+      
+            let email = sign.loginInfo.email;
+      
+            notifyActivity({ message, subject, email});
+   
+            history.push(`/textureedit/${texture.id}`)
+          }
+        });
 
-     let subject = "New texture";
-
-     let email = sign.loginInfo.email;
-
-     notifyActivity({ message, subject, email});
-
-        this.props.history.push("/account")
       }
 
       

@@ -17,7 +17,7 @@ import {
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import {FixedButton, CoolButton} from "../buttons"
-import {addModel, notifyActivity} from "../../actions";
+import {addScene, notifyActivity} from "../../actions";
 import CarouselTool from "../carouselTool";
 import SectionIcon from "@material-ui/icons/CardTravel";
 import AddIcon from "@material-ui/icons/AddCircle";
@@ -263,7 +263,7 @@ const styles = theme => ({
     quantity: 1
   }
 
-class ModelAddForm extends React.Component {
+class SceneAddForm extends React.Component {
   state = {id_category: -1, currency: "CUC"
 }
 
@@ -271,23 +271,27 @@ handleChange2 = event => {
   this.setState({ currency: event.target.value });
 };
 
-    realhandleSubmit = data => {
+    realhandleSubmit = async data => {
 
-      const { sign } = this.props;
+      const { sign, addScene, history } = this.props;
         // console.log("SHIT: ", data)
         data.id_category = this.state.id_category
-        data.id_user = this.props.sign.loginInfo.id;
-        this.props.addModel(data);
+        data.id_user = sign.loginInfo.id;
+        addScene(data).then(scene => {
+          if(scene.id) {
+            let message = sign.loginInfo.first_name + " " + sign.loginInfo.last_name + " has added a new scene business to vinalestraveler called: " + data.name;
 
-        let message = sign.loginInfo.first_name + " " + sign.loginInfo.last_name + " has added a new model business to vinalestraveler called: " + data.name;
+            let subject = "New scene";
+       
+            let email = sign.loginInfo.email;
+       
+            notifyActivity({ message, subject, email});
+       
+            history.push(`/sceneedit/${scene.id}`)
+          }
+        });
 
-     let subject = "New model";
-
-     let email = sign.loginInfo.email;
-
-     notifyActivity({ message, subject, email});
-
-        this.props.history.push("/account")
+        
       }
 
       
@@ -327,7 +331,7 @@ handleChange2 = event => {
                       component="h4"
                       className={classes.typographyText}
                     >
-                      {language.AddFormTittle.format(language.Model)}
+                      {language.AddFormTittle.format(language.Scene)}
                     
                     </Typography>
                     <Grid container>
@@ -344,7 +348,7 @@ handleChange2 = event => {
                     component="p"
                     className={classes.typographyTextSmall}
                   >          
-                    {language.AddFormText.format(language.Model)}
+                    {language.AddFormText.format(language.Scene)}
                   </Typography>
               </Grid>
             </Grid>
@@ -530,10 +534,10 @@ const mapStateToProps = state => {
   };
   export default connect(
     mapStateToProps,
-    { initialize, addModel}
+    { initialize, addScene}
   )(
-    reduxForm({ form: "modelAddForm",  validate })(
-      withStyles(styles)(withRouter(ModelAddForm))
+    reduxForm({ form: "sceneAddForm",  validate })(
+      withStyles(styles)(withRouter(SceneAddForm))
     )
   );
 

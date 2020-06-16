@@ -271,23 +271,29 @@ handleChange2 = event => {
   this.setState({ currency: event.target.value });
 };
 
-    realhandleSubmit = data => {
+    realhandleSubmit = async data => {
 
-      const { sign } = this.props;
+      const { sign, addModel, history } = this.props;
         // console.log("SHIT: ", data)
         data.id_category = this.state.id_category
-        data.id_user = this.props.sign.loginInfo.id;
-        this.props.addModel(data);
+        data.id_user = sign.loginInfo.id;
+        addModel(data).then(model => {
+          if(model.id) {
+            let message = sign.loginInfo.first_name + " " + sign.loginInfo.last_name + " has added a new model business to vinalestraveler called: " + data.name;
+  
+            let subject = "New model";
+    
+            let email = sign.loginInfo.email;
+    
+            notifyActivity({ message, subject, email});
+    
+            history.push(`/modeledit/${model.id}`)
+          }
+        });
 
-        let message = sign.loginInfo.first_name + " " + sign.loginInfo.last_name + " has added a new model business to vinalestraveler called: " + data.name;
+        
 
-     let subject = "New model";
-
-     let email = sign.loginInfo.email;
-
-     notifyActivity({ message, subject, email});
-
-        this.props.history.push("/account")
+        
       }
 
       
