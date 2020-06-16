@@ -4,6 +4,33 @@ import classNames from "classnames";
 import { CoolLink, ImageLink } from "../buttons";
 import StarRatingComponent from 'react-star-rating-component';
 
+export const ModelItem = ({model, classes, language}) => {
+  return (
+    
+    <div>
+       <div>
+        <p
+          variant="p"
+          component="p"
+          className={classes.itemNameText}
+        >
+          {model.name}
+        </p>
+      </div>
+      <Grid container style={{ backgroundImage:  model.images.length > 0 ? `url(${model.images[0].url})` : undefined }}></Grid>
+      <div>
+      <p
+        variant="p"
+        component="p"
+        className={classes.itemNameText}
+      >
+        {model.name}
+      </p>
+      </div>
+    </div>
+  );
+};
+
 
 export const ModelCardLeft = ({model, classes, language}) => {
   return (

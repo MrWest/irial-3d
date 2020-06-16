@@ -3,6 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
 import _ from "lodash";
+import ItemCard from '../itemCard/itemCard';
 import { ModelCardLeft, ModelImageLeft, ModelCardRight, ModelImageRight} from './modelsSections';
 
 class DisplayModelsTool extends Component {
@@ -15,40 +16,14 @@ class DisplayModelsTool extends Component {
     const { classes , models, language} = this.props;
     return (
       <main className={classes.container}>
+        <Grid container alignItems="stretch" >
         {models.filter( a => parseInt(a.status) > 0).map((model, index) => (
-          <section key={index} 
-            className={
-              index % 2 === 1 ? classes.grayBackground : classes.whiteBackground
-            }
-          >
-          
-           <div className={classes.center}>
-                <Grid container spacing={0}>
-                  {index % 2 === 0 ? (
-                     <Fragment>
-                        <ModelCardLeft classes={classes} model={model} language={language}/>
-                        <ModelImageLeft classes={classes} model={model}/>
-                   </Fragment>
-                  ) : (
-                     <Fragment>
-                        <Grid container spacing={0} className={classes.noMobile}>
-                          <ModelImageRight classes={classes} model={model}/>
-                          <ModelCardRight classes={classes} model={model} language={language}/>
-                        </Grid>
-                        <Grid container spacing={0} className={classes.onMobile}>
-                          <ModelCardRight classes={classes} model={model} language={language}/>
-                          <ModelImageRight classes={classes} model={model}/>
-                        </Grid>
-                    </Fragment>
-
-                  )}
-
-                </Grid>
-              </div>
-         
-         
-          </section>
-        ))}
+          <Grid key={model.id} item xs={12} sm={6} md={4} className={classes.itemContainer}>
+            <ItemCard  item={model} type='model' />
+          </Grid>
+          ))}
+        </Grid>
+        
       </main>
     );
   }
@@ -91,10 +66,30 @@ const styles = theme => ({
       display: 'inherit',
     }
   },
+  itemContainer: {
+    marginBottom: 32
+  },
   packNameText: {
     fontFamily: "Futura",
     fontSize: 40,
     fontWeight: "bold",
+    color: "#337ab7",
+    margin: 0
+  },
+  itemContent: {
+    backgroundImage: "url(../static/images/home/about-contact.jpg)",
+    backgroundRepeat: "no-repeat",
+    height: 320,
+    display: 'inherit',
+    // backgroundSize: "cover",
+    backgroundPosition: "right",
+    backgroundSize: "contain",
+  },
+  itemNameText: {
+    fontFamily: "Futura",
+    fontSize: 28,
+    fontWeight: "bold",
+    textAlign: 'center',
     color: "#337ab7",
     margin: 0
   },
