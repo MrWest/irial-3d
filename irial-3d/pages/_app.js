@@ -74,7 +74,7 @@ class Layout extends React.Component {
         <Route path="/touredit/:id" component={TourEditForm} exact />
         <Route path="/blog" component={BlogHome}  />
         <Route path="/posts/:slug" component={BlogExpanded} exact />
-        <Route path="/models/:category" component={ModelsHome} exact />
+        <Route path="/models/:query" component={ModelsHome} exact />
         <Route path="/model/:id" component={ModelDetails} exact />
         <Route path="/modeladd/:id" component={ModelAddForm} exact />
         <Route path="/modeledit/:id" component={ModelEditForm} exact />
@@ -204,7 +204,18 @@ class Layout extends React.Component {
     }
     
 
-         
+    .item-options {
+      position: absolute;
+      top: 0;
+      background: rgba(0,0,0,0.3);
+      width: 100%;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      display: none;
+      padding-right: 20px;
+      padding-top: 12px;
+      padding-bottom: 8px;
+    }
   
          p {
           margin: 0px;

@@ -12,7 +12,10 @@ const styles = theme => ({
     '&&:hover': {
       backgroundColor: '#ffffff',
       // borderBottomRightRadius: 100,
-      boxShadow: '0 32px 85px 0 rgba(27, 28, 31, 0.05)'
+      boxShadow: '0 32px 85px 0 rgba(27, 28, 31, 0.05)',
+      '& .item-options': {
+        display: 'inherit'
+      }
     },
     [theme.breakpoints.down('sm')]: {
       minHeight: 320
@@ -61,7 +64,7 @@ const styles = theme => ({
     opacity: 1,
     fontFamily: 'Gilroy-Regular',
     fontSize: 16,
-    lineHeight: 1.75,
+    lineHeight: 1.4,
     color: '#434d5c'
   },
   ItemCategory: {
@@ -88,10 +91,15 @@ const styles = theme => ({
   },
   ItemTitle: {
     fontFamily: 'Gilroy-SemiBold',
-    fontSize: 23,
+    fontSize: 24,
     fontWeight: 600,
+    marginTop: 16,
+    marginBottom: 8,
     lineHeight: 1.5,
-    color: '#0f2440'
+    color: '#0f2440',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
   },
   ItemDescription: {
     opacity: 0.56,

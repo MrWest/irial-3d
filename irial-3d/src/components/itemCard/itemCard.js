@@ -2,23 +2,49 @@ import React from 'react';
 import { withStyles, Grid, Card, CardContent } from '@material-ui/core';
 import Link from 'next/link';
 import CategoryLabel from './CategoryLabel';
+import { RoundedButtonLink } from '../buttons';
+import { AttachMoney as MoneySharp, AddShoppingCart } from '@material-ui/icons';
 import StarRatingComponent from 'react-star-rating-component';
+import { isInCart } from '../../apis/tools';
 import styles from './styles/itemCard';
 
 const descriptionLeverage = description =>
   description && description.length > 120 ? `${description.substring(0, 120)}...` : description;
 
-const ItemCard = ({ classes, item, category, type }) => (
+const ItemCard = ({ classes, item, category, type, addToCart, addToCartText, buyItem }) => (
   <Link href={`/${type}/${item.id}`}>
     <Card className={classes.Card}>
-      <img
-        className={classes.Media}
-        src={item.images && item.images.length > 0 ? item.images[0].url : undefined}
-        title={item.name}
-        alt={item.name}
-      />
+      <div style={{ position: 'relative' }}>
+        <img
+          className={classes.Media}
+          src={item.images && item.images.length > 0 ? item.images[0].url : undefined}
+          title={item.name}
+          alt={item.name}
+        />
+        {!isInCart(item) && (
+          <div className='item-options'>
+            <Grid container justify="flex-end" spacing={2}>
+              <Grid item>
+                <div title={buyItem}>
+                  <RoundedButtonLink  color={"#ffffff"} size={24} border={0} to={`/payment`} onClick={() => addToCart(item,false)} >
+                    <MoneySharp color="#ffffff" style={{fontSize: 24, color: "#ffffff"}}></MoneySharp>
+                  </RoundedButtonLink>
+                </div>
+              </Grid>
+              <Grid item>
+                <div title={addToCartText}>
+                  <RoundedButtonLink  color={"#ffffff"} size={24} border={0} onClick={() => addToCart(item,true)} >
+                      <AddShoppingCart color="#ffffff" style={{fontSize: 24, color: "#ffffff"}}></AddShoppingCart>
+                  </RoundedButtonLink>
+                </div>
+              </Grid>
+            </Grid>
+          </div>
+        )}
+      </div>
+     
       {/* <CardContent> */}
-      <div style={{ padding: '20px 18px' }}>
+      <div style={{ padding: '12px 18px' }}>
         <Grid container alignContent="center">
           <Grid item xs={6}>
             <Grid container justify="flex-start">
@@ -42,8 +68,16 @@ const ItemCard = ({ classes, item, category, type }) => (
             </Grid>
           </Grid>
         </Grid>
-        <h3 className={classes.ItemTitle}>{item.name}</h3>
-        <p className={classes.ItemSummary}>{descriptionLeverage(item.description)}</p>
+        <Grid container>
+          <Grid item xs>
+            <h4 className={classes.ItemTitle} title={item.name}>{item.name}</h4>
+          </Grid>
+          <Grid item>
+            <p className={classes.ItemTitle}>${item.price}</p>
+          </Grid>
+        </Grid>
+        
+        <p className={classes.ItemSummary}>{descriptionLeverage(item.general_description)}</p>
       </div>
       {/* </CardContent> */}
     </Card>

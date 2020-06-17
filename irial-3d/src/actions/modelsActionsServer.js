@@ -14,14 +14,14 @@ export const fetchModelsServer = async reduxStore => {
     return modelsRslt;
   };
 
-  export const sortModelsServer = async (category, reduxStore) => {
+  export const sortModelsServer = async (category, sort='all', offset=0, reduxStore) => {
 
     const lang = getLanguage(reduxStore);
 
    
     let results = undefined;
     
-    let completeUrl = category === "all"?  generatePHPParameters({lang}) : generatePHPParameters({category, lang});
+    let completeUrl = category === "all"?  generatePHPParameters({lang, sort}) : generatePHPParameters({category, sort, offset, lang});
     // if(category === "all")
     // modelsDb = await DashBoard.get("/models/get_models.php"+ generatePHPParameters({lang}))
     //  else
@@ -37,6 +37,9 @@ export const fetchModelsServer = async reduxStore => {
        const modelsRateDb = await DashBoard.get("/models/get_model_rate.php"+ generatePHPParameters({idModel: model.id}))
        model.rate = modelsRateDb.data
 
+       const modelOwnerInfo = await DashBoard.get("/models/get_model_owner_info.php"+ generatePHPParameters({user: model.id_user}))
+       model = {...model, ownerInfo: {...modelOwnerInfo.data} };
+
        return model
        
      })
@@ -44,7 +47,6 @@ export const fetchModelsServer = async reduxStore => {
       results = await Promise.all(promises)
 
      })
-
      
 
      reduxStore.dispatch({

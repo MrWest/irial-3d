@@ -73,7 +73,7 @@ class App extends Component {
             <Route path="/attractionedit/:id" component={AttractionEditForm} exact />
             <Route path="/blog" component={BlogHome}  />
             <Route path="/posts/:slug" component={BlogExpanded} exact />
-            <Route path="/models/:category" component={ModelsHome} exact />
+            <Route path="/models/:query" component={ModelsHome} exact />
             <Route path="/models/:id" component={ModelsDetails} exact />
             <Route path="/modeladd/:id" component={ModelAddForm} exact />
             <Route path="/modeledit/:id" component={ModelEditForm} exact />

@@ -5,7 +5,7 @@ import ModelsHome from "../../src/components/models/modelsHome";
 class ModelsHomeServer extends Component {
 
   render() {
-    const { models, section, category } = this.props;    
+    const { models, section, query } = this.props;    
     if(!section)
      return <div />;
     return (
@@ -14,12 +14,13 @@ class ModelsHomeServer extends Component {
   }
 }
 
-ModelsHomeServer.getInitialProps = async function({ reduxStore, query: { category } }) {
-  console.log(category);
+ModelsHomeServer.getInitialProps = async function({ reduxStore, query: { query } }) {
+  console.log(query);
+  const settings = query.split('-');
   const sections = await fetchSectionsServer(reduxStore);
-  const models = await sortModelsServer(category, reduxStore);
+  const models = await sortModelsServer(settings[0] || 'all', settings[1] || 'all', 0, reduxStore);
   console.log(models.length);
-  return {models, section: sections[1], category};
+  return {models, section: sections[1], query};
 };
 
 
