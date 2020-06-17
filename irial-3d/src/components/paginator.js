@@ -60,7 +60,7 @@ class Paginator extends Component {
           display: source && source.length === 0 ? 'none' : 'block'
         }}
       >
-        <Grid container spacing={0}>
+        <Grid container spacing={0} alignItems="center">
           <Grid item xs={3}>
             <button
               type="button"
@@ -77,21 +77,12 @@ class Paginator extends Component {
             </button>
           </Grid>
           <Grid item xs={6}>
-            <Grid container spacing={0} style={{ fontSize: 14 }}>
+            <Grid container spacing={0}  alignItems="center">
               <Grid item>
                 <input type="text" className={classes.TextField} value={currentPage} onChange={this.handleTextChange} />
               </Grid>
-              <Grid item style={{ display: 'table', height: 43 }}>
-                <div
-                  style={{
-                    display: 'table-cell',
-                    verticalAlign: 'middle',
-                    paddingLeft: 18,
-                    textAlign: 'center'
-                  }}
-                >
+              <Grid item xs style={{ textAlign: 'center' }}>
                   of {this.pages(total, items)}
-                </div>
               </Grid>
             </Grid>
           </Grid>

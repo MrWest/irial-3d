@@ -7,6 +7,7 @@ import { AttachMoney as MoneySharp, AddShoppingCart } from '@material-ui/icons';
 import StarRatingComponent from 'react-star-rating-component';
 import { isInCart } from '../../apis/tools';
 import styles from './styles/itemCard';
+import { thousandsSeparatedAndFixed } from '../../helpers/utils';
 
 const descriptionLeverage = description =>
   description && description.length > 120 ? `${description.substring(0, 120)}...` : description;
@@ -44,16 +45,16 @@ const ItemCard = ({ classes, item, category, type, addToCart, addToCartText, buy
       </div>
      
       {/* <CardContent> */}
-      <div style={{ padding: '12px 18px' }}>
+      <div style={{ padding: '12px 18px', paddingBottom: 24 }}>
         <Grid container alignContent="center">
-          <Grid item xs={6}>
+          <Grid item xs>
             <Grid container justify="flex-start">
               <Grid item>
                 <CategoryLabel category={item.category_name} variant="small" />
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={6} align="right">
+          <Grid item xs>
             <Grid container justify="flex-end" alignItems="center" style={{ height: '100%' }}>
               <Grid item>
               <StarRatingComponent 
@@ -70,10 +71,10 @@ const ItemCard = ({ classes, item, category, type, addToCart, addToCartText, buy
         </Grid>
         <Grid container>
           <Grid item xs>
-            <h4 className={classes.ItemTitle} title={item.name}>{item.name}</h4>
+        <h4 className={classes.ItemTitle} title={item.name}>{item.name}{' '}<span style={{ fontSize: 12}}>{item.lumion_version}</span></h4>
           </Grid>
           <Grid item>
-            <p className={classes.ItemTitle}>${item.price}</p>
+            <p className={classes.ItemTitle} style={{ opacity: 0.8 }}>${thousandsSeparatedAndFixed(item.price)}</p>
           </Grid>
         </Grid>
         

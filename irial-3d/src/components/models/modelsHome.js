@@ -16,6 +16,7 @@ import { fetchModels, sortModels, addToCart } from "../../actions";
 import {Helmet} from 'react-helmet';
 import Loader from '../global/loader';
 import DisplayModelsTool from "./displayModelsTool";
+import Paginator from '../paginator';
 import {getLanguage} from "../../apis/tools";
 import { isServer } from '../../apis/tools';
 
@@ -24,30 +25,41 @@ class ModelsHome extends Component {
     sort: "all",
     filter: 'all',
     category: {},
-    busy: true
+    busy: false
   };
-  
-  componentWillMount() {
+
+  loadView = async force => {
     if(!isServer) {
       const { sortModels, match: { params: { query }} } = this.props;
+      const { filter, sort } = this.state;
       const settings = query.split('-');
-      this.setState({filter: settings[0] || 'all', sort: settings[1] || 'all' });
-      sortModels(settings[0] || 'all', settings[1] || 'all').then(() => {
-        this.setState({ busy: false });
-      });
-     
+      const queryFilter =  settings[0] || 'all';
+      const querySort = settings[1] || 'all';
+      if(filter !== queryFilter || sort !== querySort || force) {
+        this.setState({filter: queryFilter, sort: querySort });
+        this.setState({ busy: true });
+        sortModels(queryFilter, querySort).then(response => {
+          this.setState({ busy: false, total: response });
+        });
+      }
+    
     }
+  }
+  
+  componentDidMount() {
+   this.loadView(true);
     // this.myRef = React.createRef()   // Create a ref object 
   }
 
-  componentDidMount() {
-    // this.myRef.current.scrollTo(0, 0);
+  componentDidUpdate() {
+    this.loadView();
   }
+
 
   handleAddItem = (item, openCart) => {
     const { categories, section, addToCart } = this.props;
     addToCart({ id_item: item.id, name: item.name, image: item.images[0].url, price: item.price,
-       lumion_version: item.lumion_version, section, category: categories.find(c => c.id === item.id_category), destination: item.ownerInfo.stripe_account_id, file: item.server_path, type: 'item' }, openCart);
+       lumion_version: item.lumion_version, section, category: categories.find(c => c.id === item.id_category), destination: item.ownerInfo.stripe_account_id, file: item.server_path, type: 'model' }, openCart);
    }
 
   handleChange = event => {
@@ -72,16 +84,28 @@ class ModelsHome extends Component {
   handleSortChange = event => {
     if(this.state.sort !==  event.target.value)
     {
+      const { history } = this.props;
       history.push(`/models/${this.state.filter}-${event.target.value}`);
      
     }
     
   };
 
+  paginate = async offset => {
+    const { sortModels } = this.props;
+    const { filter, sort } = this.state;
+    this.setState({ busy: true });
+    await sortModels(filter, sort, offset ).then(response => {
+      this.setState({ busy: false, total: response });
+      return response;
+    });
+  
+  };
+
 
   render() {
     const { classes, section, language, models, categories } = this.props;    
-    const { busy } = this.state;
+    const { busy, filter, total, sort } = this.state;
     if(!section)
        return <div/>; 
     return (
@@ -95,22 +119,21 @@ class ModelsHome extends Component {
       <Grid container justify="center" spacing={0}>
         <Grid item className={classes.center}>
           <Grid container spacing={4} alignItems="center" > 
-            <Grid item xs className={classes.mobilePadding}>
+            <Grid item xs >
 
-            <p style={{fontSize: 16, lineHeight: 1.3, color: '#0f2440 !important', fontFamily: 'Roboto !important'}}>
-                <h1 variant="p" align="left" className={classes.categoryTittle} style={{ display: 'inline'}}>
-                {this.state.sort === "all"? section.name+ " " : this.state.category.name+ " "}  
-                </h1>
-               {this.state.sort === "all"? section.description : this.state.category.promotion}
-            </p>
+              <p style={{fontSize: 16, lineHeight: 1.3, color: '#0f2440 !important', fontFamily: 'Roboto !important'}}>
+                  <h1 variant="p" align="left" className={classes.categoryTittle} style={{ display: 'inline'}}>
+                  {filter === "all"? section.name+ " " : categories.find(c => parseInt(c.id) === parseInt(filter, 10)).name+ " "}  
+                  </h1>
+                {filter === "all"? section.description : this.state.category.promotion}
+              </p>
                 
               </Grid>
               <Grid item >
-                 <Grid item align="right">
                    <FormControl variant="outlined" className={classes.seletcTool}>
                    <InputLabel htmlFor="idsimple">{language.Filter}</InputLabel>
                     <Select
-                      value={this.state.sort}
+                      value={filter}
                       onChange={this.handleChange}
                       margin="none"
                       
@@ -130,11 +153,12 @@ class ModelsHome extends Component {
                     </Select>
                 </FormControl>
                 </Grid> 
+                         
                 <Grid item >
                    <FormControl variant="outlined" className={classes.seletcTool}>
                    <InputLabel htmlFor="idsimple">{this.props.language.SortBy}</InputLabel>
                   <Select
-                    value={this.state.sort}
+                    value={sort}
                     onChange={this.handleSortChange}
                     margin="none"
                     
@@ -173,8 +197,7 @@ class ModelsHome extends Component {
                     ))} */}
                   </Select>
                 </FormControl>
-                </Grid>              
-              </Grid>
+                </Grid>    
               
               
             </Grid>
@@ -186,7 +209,9 @@ class ModelsHome extends Component {
             
            </Grid>
           </Grid>
-          
+          <Grid container justify="center" style={{ paddingTop: 20 }}>
+              <Paginator previous={this.paginate} next={this.paginate} items={12} total={total} source={models} />
+           </Grid>
         </Grid>
         {busy && <Loader />}
       </main>

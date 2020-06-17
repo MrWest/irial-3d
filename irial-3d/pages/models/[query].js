@@ -9,7 +9,7 @@ class ModelsHomeServer extends Component {
     if(!section)
      return <div />;
     return (
-      <ModelsHome models={models} section={section} />
+      <ModelsHome  />
     );
   }
 }

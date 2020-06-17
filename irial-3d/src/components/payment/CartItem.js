@@ -9,7 +9,7 @@ import Remove from "@material-ui/icons/Delete";
 import styles from './styles/cart';
 
 const CartItem = ({ classes, item, removeFromCart}) => (
-  <Link to={`${item.type}/${item.id_item}`} >
+  <Link to={`/${item.type}/${item.id_item}`} >
     <div className={classes.cartItemContainer}>
     <Grid container alignItems="center" spacing={2}>
       <Grid item>

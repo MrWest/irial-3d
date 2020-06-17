@@ -45,7 +45,7 @@ const styles = theme => ({
     borderRadius: 32,
     backgroundColor: '#3577d4',
     color: '#FFFFFF',
-    fontFamily: 'Gilroy-Bold',
+    fontFamily: 'Roboto',
     fontSize: 16,
     // fontWeight: 600,
     lineHeight: 1.8,
@@ -62,7 +62,7 @@ const styles = theme => ({
   },
   ItemSummary: {
     opacity: 1,
-    fontFamily: 'Gilroy-Regular',
+    fontFamily: 'Roboto',
     fontSize: 16,
     lineHeight: 1.4,
     color: '#434d5c'
@@ -71,7 +71,7 @@ const styles = theme => ({
     height: 38,
     borderRadius: 6,
     backgroundColor: '#f4e9fb',
-    fontFamily: 'Gilroy-Medium',
+    fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: 600,
     lineHeight: 2.29,
@@ -82,7 +82,7 @@ const styles = theme => ({
   },
   TimeReading: {
     opacity: 1,
-    fontFamily: 'Gilroy-Medium',
+    fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: 500,
     lineHeight: 1.43,
@@ -90,7 +90,7 @@ const styles = theme => ({
     color: '#8d9299'
   },
   ItemTitle: {
-    fontFamily: 'Gilroy-SemiBold',
+    fontFamily: 'Roboto',
     fontSize: 24,
     fontWeight: 600,
     marginTop: 16,
@@ -103,14 +103,14 @@ const styles = theme => ({
   },
   ItemDescription: {
     opacity: 0.56,
-    fontFamily: 'Gilroy-Regular',
+    fontFamily: 'Roboto',
     fontSize: 16,
     lineHeight: 1.88,
     color: '#0f2440'
   },
   SubscribeInput: {
     maxWidth: 494,
-    fontFamily: 'Gilroy-Medium',
+    fontFamily: 'Roboto',
     fontSize: 24,
     fontWeight: 600,
     lineHeight: 1.33,
@@ -118,11 +118,11 @@ const styles = theme => ({
     backgroundColor: 'transparent',
     '& input': {
       fontSize: 20,
-      fontFamily: 'Gilroy-Light',
+      fontFamily: 'Roboto',
       backgroundColor: 'transparent',
       '&::placeholder': {
         color: '#8d9299',
-        fontFamily: 'Gilroy-Regular',
+        fontFamily: 'Roboto',
         fontSize: 16,
         opacity: 1
       }
