@@ -5,8 +5,9 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { Grid, Select, MenuItem, InputLabel } from '@material-ui/core';
 import {setLanguageEn, setLanguageEs,
-   sortTours, selectTour, sortAttractions, selectAttraction, 
-   getSection, fetchSections, getCategory, getCategories, fetchPosts, selectPost, fetchTags } from "../actions/index";
+   sortTours, selectTour, sortModels, selectModel, sortProjects, selectProject,
+   getSection, fetchSections, getCategory, getCategories, fetchPosts, selectPost, fetchTags,
+    sortTextures, selectTexture, sortScenes, selectScene } from "../actions/index";
 
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -51,58 +52,94 @@ class LanguageSelector extends React.Component {
     // console.log("LANG",this.props.language)
   }
 
-  dataRequest(view, param, lang){
+  dataRequest(view, query, lang){
+
+    const { history, getSection, getCategory, fetchSections, fetchTags,
+       sortModels, selectModel, sortProjects, selectProject, sortTextures, selectTexture, sortScenes, selectScene } = this.props;
+    fetchSections();
+    fetchTags();
+
+    const settings = query.split('-');
+    const queryFilter =  settings[0] || 'all';
+    const querySort = settings[1] || 'all';
+
+    switch(view) {
+      case 'models':
+        sortModels(queryFilter, querySort);
+        break;
+      case 'model':
+        selectModel(queryFilter);
+        break;
+      case 'projects':
+        sortProjects(queryFilter, querySort);
+        break;
+      case 'project':
+        selectProject(queryFilter);
+        break;
+      case 'textures':
+        sortTextures(queryFilter, querySort);
+        break;
+      case 'texture':
+        selectTexture(queryFilter);
+        break;
+      case 'scenes':
+        sortScenes(queryFilter, querySort);
+        break;
+      case 'scene':
+        selectScene(queryFilter);
+        break;
+      default:
+        break;
+    }
+
+
 
     
-    if(view === "tours")
-    {
-      this.props.fetchSections()      
-      this.props.getCategories();
-      this.props.fetchTags();
-      this.props.sortTours(param)
-    }
-    if(view === "tour" || view === "touredit")
-    {
-      this.props.selectTour(param).then(resp => {
-        this.props.getCategory(resp.id_category);
-      })
-    }
+    // if(view === "tours")
+    // {
+    //   this.props.fetchSections()      
+    //   this.props.getCategories();
+    //   this.props.fetchTags();
+    //   this.props.sortTours(param)
+    // }
+    // if(view === "tour" || view === "touredit")
+    // {
+    //   this.props.selectTour(param).then(resp => {
+    //     this.props.getCategory(resp.id_category);
+    //   })
+    // }
     
 
 
-    if(view === "attractions")
-    {
-      this.props.fetchSections()      
-      this.props.getCategory();
-      this.props.fetchTags();
-      this.props.sortAttractions(param)
+    // if(view === "attractions")
+    // {
+    //   this.props.fetchSections()      
+    //   this.props.getCategory();
+    //   this.props.fetchTags();
+    //   this.props.sortModels(param)
       
-    }
-    if(view === "attraction" || view === "attractionedit")
-    {
-      this.props.selectAttraction(param).then(resp => {
-        this.props.getCategory(resp.id_category);
-      })
-    }
+    // }
+    // if(view === "attraction" || view === "attractionedit")
+    // {
+    //   this.props.selectModel(param).then(resp => {
+    //     this.props.getCategory(resp.id_category);
+    //   })
+    // }
 
   
 
     if(view === "sectionedit" )
-    {
-      this.props.getSection(param)
-    }
+      getSection(query);
     
     if(view === "categoryedit" )
-    {
-      this.props.getCategory(param)
-    }
+      getCategory(query);
     
    
     if(view === "posts")
     {
 
       // this.props.selectPost(param);
-      this.props.history.push(`/${view}/${slugWorkout(param, lang)}`);
+      history.push(`/${view}/${slugWorkout(param, lang)}`);
     }
   }
 
@@ -162,25 +199,7 @@ class LanguageSelector extends React.Component {
                     }}><span style={{fontSize: 14}}>{this.props.language.spanish}</span></MenuItem>
           </Select>
         </FormControl>
-
-        {/* <FormControl component="fieldset"  className={classes.formControl}>
-          <FormLabel component="legend">{this.state.value}</FormLabel>
-          <RadioGroup
-            aria-label="Language"
-            name="gender1"
-            row
-            className={classes.group}
-            value={this.state.value}
-            onChange={this.handleChange}
-          >
-          
-              <FormControlLabel value="en"control={<Radio  classes={{ root: classes.group}} />} label="En" />
-          
-              <FormControlLabel value="es" classes={{ root: classes.formControl}} control={<Radio classes={{ root: classes.group}} />} label="Es" />
-           
-            
-          </RadioGroup>
-        </FormControl> */}
+      
       </div>
     );
   }
@@ -199,6 +218,7 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { setLanguageEn, setLanguageEs, sortTours, selectTour, sortAttractions, selectAttraction,
+  { setLanguageEn, setLanguageEs, sortTours, selectTour, sortModels, selectModel, sortProjects, selectProject,
+     sortTextures, selectTexture, sortScenes, selectScene,
     getSection ,fetchSections , getCategory, getCategories, selectPost, fetchPosts, fetchTags}
 )(withStyles(styles)(withRouter(LanguageSelector)));

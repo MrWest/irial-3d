@@ -14,14 +14,14 @@ export const fetchScenesServer = async reduxStore => {
     return scenesRslt;
   };
 
-  export const sortScenesServer = async (category, reduxStore) => {
+  export const sortScenesServer = async (category, sort='all', offset=0, reduxStore) => {
 
     const lang = getLanguage(reduxStore);
 
    
     let results = undefined;
     
-    let completeUrl = category === "all"?  generatePHPParameters({lang}) : generatePHPParameters({category, lang});
+    let completeUrl = generatePHPParameters({category, sort, offset, lang});
     // if(category === "all")
     // scenesDb = await DashBoard.get("/scenes/get_scenes.php"+ generatePHPParameters({lang}))
     //  else
@@ -35,7 +35,11 @@ export const fetchScenesServer = async reduxStore => {
        scene.images = sceneImagesDb.data
 
        const scenesRateDb = await DashBoard.get("/scenes/get_scene_rate.php"+ generatePHPParameters({idScene: scene.id}))
-       scene.rate = scenesRateDb.data
+       scene.rate = scenesRateDb.data;
+
+       
+       const sceneOwnerInfo = await DashBoard.get("/scenes/get_scene_owner_info.php"+ generatePHPParameters({user: scene.id_user}))
+       scene = {...scene, ownerInfo: {...sceneOwnerInfo.data} };
 
        return scene
        

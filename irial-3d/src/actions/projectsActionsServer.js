@@ -14,14 +14,14 @@ export const fetchProjectsServer = async reduxStore => {
     return projectsRslt;
   };
 
-  export const sortProjectsServer = async (category, reduxStore) => {
+  export const sortProjectsServer = async (category = 'all', sort='all', offset=0, reduxStore) => {
 
     const lang = getLanguage(reduxStore);
 
    
     let results = undefined;
     
-    let completeUrl = category === "all"?  generatePHPParameters({lang}) : generatePHPParameters({category, lang});
+    let completeUrl = generatePHPParameters({category, sort, offset, lang});
     // if(category === "all")
     // projectsDb = await DashBoard.get("/projects/get_projects.php"+ generatePHPParameters({lang}))
     //  else

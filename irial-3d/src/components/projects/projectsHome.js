@@ -12,61 +12,100 @@ import {
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchProjects, sortProjects } from "../../actions";
+import { fetchProjects, sortProjects, addToCart } from "../../actions";
 import {Helmet} from 'react-helmet';
 import Loader from '../global/loader';
 import DisplayProjectsTool from "./displayProjectsTool";
+import Paginator from '../paginator';
 import {getLanguage} from "../../apis/tools";
 import { isServer } from '../../apis/tools';
 
 class ProjectsHome extends Component {
   state = {
     sort: "all",
+    filter: 'all',
     category: {},
-    busy: true
+    busy: false
   };
-  
-  componentWillMount() {
+
+  loadView = async force => {
     if(!isServer) {
-      const { category } = this.props.match.params;
-      this.setState({sort: category})
-      this.props.sortProjects(category).then(() => {
-        this.setState({ busy: false });
-      });
-      this.props.categories.map(c =>{
-          if(parseInt(c.id) === parseInt(category))
-            this.setState({category: c})
-      })
-    }
+      const { sortProjects, match: { params: { query }} } = this.props;
+      const { filter, sort } = this.state;
+      const settings = query.split('-');
+      const queryFilter =  settings[0] || 'all';
+      const querySort = settings[1] || 'all';
+      if(filter !== queryFilter || sort !== querySort || force) {
+        this.setState({filter: queryFilter, sort: querySort });
+        this.setState({ busy: true });
+        sortProjects(queryFilter, querySort).then(response => {
+          this.setState({ busy: false, total: response });
+        });
+      }
     
+    }
+  }
+  
+  componentDidMount() {
+   this.loadView(true);
     // this.myRef = React.createRef()   // Create a ref object 
   }
 
-  componentDidMount() {
-    // this.myRef.current.scrollTo(0, 0);
+  componentDidUpdate() {
+    this.loadView();
   }
 
+
+  handleAddItem = (item, openCart) => {
+    const { categories, section, addToCart } = this.props;
+    addToCart({ id_item: item.id, name: item.name, image: item.images[0].url, price: item.price,
+       lumion_version: item.lumion_version, section, category: categories.find(c => c.id === item.id_category), destination: item.ownerInfo.stripe_account_id, file: item.server_path, type: 'project' }, openCart);
+   }
+
   handleChange = event => {
-    if(this.state.sort !==  event.target.value)
+    if(this.state.filter !==  event.target.value)
     {
-        this.setState({ sort: event.target.value, busy: true });
-        this.props.sortProjects(event.target.value).then(() => {
-          this.setState({ busy: false });
-        });
+      const { history } = this.props;
+      //   this.setState({ sort: event.target.value, busy: true });
+      //   this.props.sortProjects(event.target.value).then(() => {
+      //     this.setState({ busy: false });
+      //   });
 
-        this.props.categories.map(c =>{
-          if(c.id === event.target.value)
-            this.setState({category: c})
+      //   this.props.categories.map(c =>{
+      //     if(c.id === event.target.value)
+      //       this.setState({category: c})
 
-      });
-      this.props.history.push("/projects/"+event.target.value);
+      // });
+      history.push(`/projects/${event.target.value}-${this.state.sort}`);
     }
     
   };
 
+  handleSortChange = event => {
+    if(this.state.sort !==  event.target.value)
+    {
+      const { history } = this.props;
+      history.push(`/projects/${this.state.filter}-${event.target.value}`);
+     
+    }
+    
+  };
+
+  paginate = async offset => {
+    const { sortProjects } = this.props;
+    const { filter, sort } = this.state;
+    this.setState({ busy: true });
+    await sortProjects(filter, sort, offset ).then(response => {
+      this.setState({ busy: false, total: response });
+      return response;
+    });
+  
+  };
+
+
   render() {
-    const { classes, section, language } = this.props;    
-    const { busy } = this.state;
+    const { classes, section, language, projects, categories } = this.props;    
+    const { busy, filter, total, sort } = this.state;
     if(!section)
        return <div/>; 
     return (
@@ -79,58 +118,100 @@ class ProjectsHome extends Component {
             </Helmet>
       <Grid container justify="center" spacing={0}>
         <Grid item className={classes.center}>
-          <Grid container spacing={4} > 
-            <Grid item  xs={12} md={8} className={classes.mobilePadding}>
+          <Grid container spacing={4} alignItems="center" > 
+            <Grid item xs >
 
-            <p style={{fontSize: 16, lineHeight: 1.3, color: '#0f2440 !important', fontFamily: 'Roboto !important'}}>
-                <h1 variant="p" align="left" className={classes.categoryTittle} style={{ display: 'inline'}}>
-                {this.state.sort === "all"? this.props.section.name+ " " : this.state.category.name+ " "}  
-                </h1>
-               {this.state.sort === "all"? this.props.section.description : this.state.category.promotion}
-            </p>
+              <p style={{fontSize: 16, lineHeight: 1.3, color: '#0f2440 !important', fontFamily: 'Roboto !important'}}>
+                  <h1 variant="p" align="left" className={classes.categoryTittle} style={{ display: 'inline'}}>
+                  {filter === "all"? section.name+ " " : categories.find(c => parseInt(c.id) === parseInt(filter, 10)).name+ " "}  
+                  </h1>
+                {filter === "all"? section.description : this.state.category.promotion}
+              </p>
                 
               </Grid>
-              <Grid item xs={12} md={4}>
-                 <Grid item align="right">
+              <Grid item >
                    <FormControl variant="outlined" className={classes.seletcTool}>
                    <InputLabel htmlFor="idsimple">{language.Filter}</InputLabel>
+                    <Select
+                      value={filter}
+                      onChange={this.handleChange}
+                      margin="none"
+                      
+                    >
+                      <MenuItem value={"all"}>
+                        <p style={{ fontSize: 14, marginBottom: 0,  color: '#0f2440' }}>
+                          <em>{language.ViewAll}</em>
+                        </p>
+                      </MenuItem>
+                      {categories.map((category, index) => (
+                        <MenuItem value={category.id}>
+                        <p style={{ fontSize: 14, marginBottom: 0,  color: '#0f2440' }}>
+                          <strong>{category.name}</strong>
+                        </p>
+                      </MenuItem>
+                      ))}
+                    </Select>
+                </FormControl>
+                </Grid> 
+                         
+                <Grid item >
+                   <FormControl variant="outlined" className={classes.seletcTool}>
+                   <InputLabel htmlFor="idsimple">{this.props.language.SortBy}</InputLabel>
                   <Select
-                    value={this.state.sort}
-                    onChange={this.handleChange}
+                    value={sort}
+                    onChange={this.handleSortChange}
                     margin="none"
                     
                   >
                     <MenuItem value={"all"}>
-                      <p style={{ fontSize: 14, marginBottom: 0,  color: '#0f2440' }}>
-                        <em>{this.props.language.ViewAll}</em>
-                      </p>
+                           <em style={{ color: '#0f2440'}}>{this.props.language.None}</em>
                     </MenuItem>
-                    {this.props.categories.map((category, index) => (
+                    <MenuItem value={"sort_price"}>
+                           <span style={{ color: '#0f2440'}}>{`${this.props.language.Price} - ${this.props.language.Ascending}`}</span>
+                    </MenuItem>
+                    <MenuItem value={"sort_price_desc"}>
+                           <span style={{ color: '#0f2440'}}>{`${this.props.language.Price} - ${this.props.language.Descending}`}</span>
+                    </MenuItem>
+                    <MenuItem value={"sort_lumion"}>
+                           <span style={{ color: '#0f2440'}}>{`${this.props.language.LumionVersion} - ${this.props.language.Ascending}`}</span>
+                    </MenuItem>
+                    <MenuItem value={"sort_capacity_desc"}>
+                           <span style={{ color: '#0f2440'}}>{`${this.props.language.LumionVersion} - ${this.props.language.Descending}`}</span>
+                    </MenuItem>
+                    <MenuItem value={"sort_rating"}>
+                           <span style={{ color: '#0f2440'}}>{`${this.props.language.Rating} - ${this.props.language.Ascending}`}</span>
+                    </MenuItem>
+                    <MenuItem value={"sort_rating_desc"}>
+                           <span style={{ color: '#0f2440'}}>{`${this.props.language.Rating} - ${this.props.language.Descending}`}</span>
+                    </MenuItem>
+                    {/* {this.props.categories.map((category, index) => (
                       
-                      <MenuItem value={category.id}>
-                       <p style={{ fontSize: 14, marginBottom: 0,  color: '#0f2440' }}>
+                       <MenuItem value={category.id}>
+                       <p style={{ fontSize: 14, marginBottom: 0 }}>
                          <strong>{category.name}</strong>
                        </p>
                      </MenuItem>
                       
                          
                         
-                    ))}
+                    ))} */}
                   </Select>
                 </FormControl>
-                </Grid>               
-              </Grid>
+                </Grid>    
               
               
             </Grid>
             <Grid item xs={12}>
                <DisplayProjectsTool
-                 projects={this.props.projects}
+                 projects={projects}
+                 addToCart={this.handleAddItem}
                />
             
            </Grid>
           </Grid>
-          
+          <Grid container justify="center" style={{ paddingTop: 20 }}>
+              <Paginator previous={this.paginate} next={this.paginate} items={12} total={total} source={projects} />
+           </Grid>
         </Grid>
         {busy && <Loader />}
       </main>
@@ -252,4 +333,4 @@ const mapStateTopProps = state => {
   };
 };
 
-export default connect(mapStateTopProps, {fetchProjects, sortProjects })(withStyles(styles)(ProjectsHome));
+export default connect(mapStateTopProps, {fetchProjects, sortProjects, addToCart })(withStyles(styles)(ProjectsHome));

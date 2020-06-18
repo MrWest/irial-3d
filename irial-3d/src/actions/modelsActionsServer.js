@@ -21,7 +21,7 @@ export const fetchModelsServer = async reduxStore => {
    
     let results = undefined;
     
-    let completeUrl = category === "all"?  generatePHPParameters({lang, sort}) : generatePHPParameters({category, sort, offset, lang});
+    let completeUrl = generatePHPParameters({category, sort, offset, lang});
     // if(category === "all")
     // modelsDb = await DashBoard.get("/models/get_models.php"+ generatePHPParameters({lang}))
     //  else

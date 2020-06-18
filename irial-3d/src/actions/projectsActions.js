@@ -14,14 +14,14 @@ export const fetchProjects = () => async dispatch => {
     });
   };
 
-  export const sortProjects = category => async dispatch => {
+  export const sortProjects = (category = 'all', sort='all', offset=0) => async dispatch => {
 
     const lang = getLanguage();
 
    
     let results = undefined;
     
-    let completeUrl = category === "all"?  generatePHPParameters({lang}) : generatePHPParameters({category, lang});
+    let completeUrl = generatePHPParameters({category, sort, offset, lang});
     // if(category === "all")
     // projectsDb = await DashBoard.get("/projects/get_projects.php"+ generatePHPParameters({lang}))
     //  else
@@ -35,7 +35,10 @@ export const fetchProjects = () => async dispatch => {
        project.images = projectImagesDb.data
 
        const projectsRateDb = await DashBoard.get("/projects/get_project_rate.php"+ generatePHPParameters({idProject: project.id}))
-       project.rate = projectsRateDb.data
+       project.rate = projectsRateDb.data;
+
+       const projectOwnerInfo = await DashBoard.get("/projects/get_project_owner_info.php"+ generatePHPParameters({user: project.id_user}))
+       project = {...project, ownerInfo: {...projectOwnerInfo.data} };
 
        return project
        
@@ -52,6 +55,8 @@ export const fetchProjects = () => async dispatch => {
       payload: results//fromDB
     });
 
+    const queryAPI = await DashBoard.post("/projects/get_projects_count.php"+ generatePHPParameters({lang}));
+    return parseInt(queryAPI.data.count);
 
   };
 

@@ -69,12 +69,12 @@ const ItemCard = ({ classes, item, category, type, addToCart, addToCartText, buy
             </Grid>
           </Grid>
         </Grid>
-        <Grid container>
-          <Grid item xs>
-        <h4 className={classes.ItemTitle} title={item.name}>{item.name}{' '}<span style={{ fontSize: 12}}>{item.lumion_version}</span></h4>
+        <Grid container alignItems="flex-end" >
+          <Grid item xs style={{ maxWidth: '80%'}}>
+            <h4 className={classes.ItemTitle} title={item.name}>{item.name}{' '}<span style={{ fontSize: 12}}>{item.lumion_version}</span></h4>
           </Grid>
           <Grid item>
-            <p className={classes.ItemTitle} style={{ opacity: 0.8 }}>${thousandsSeparatedAndFixed(item.price)}</p>
+            <p className={classes.ItemPrice} >${thousandsSeparatedAndFixed(item.price)}</p>
           </Grid>
         </Grid>
         

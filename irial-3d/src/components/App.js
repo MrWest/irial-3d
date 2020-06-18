@@ -77,15 +77,15 @@ class App extends Component {
             <Route path="/models/:id" component={ModelsDetails} exact />
             <Route path="/modeladd/:id" component={ModelAddForm} exact />
             <Route path="/modeledit/:id" component={ModelEditForm} exact />
-            <Route path="/projects/:category" component={ProjectsHome} exact />
+            <Route path="/projects/:query" component={ProjectsHome} exact />
             <Route path="/project/:id" component={ProjectDetails} exact />
             <Route path="/projectadd/:id" component={ProjectAddForm} exact />
             <Route path="/projectedit/:id" component={ProjectEditForm} exact />
-            <Route path="/textures/:category" component={TexturesHome} exact />
+            <Route path="/textures/:query" component={TexturesHome} exact />
             <Route path="/texture/:id" component={TextureDetails} exact />
             <Route path="/textureadd/:id" component={TextureAddForm} exact />
             <Route path="/textureedit/:id" component={TextureEditForm} exact />
-            <Route path="/scenes/:category" component={ScenesHome} exact />
+            <Route path="/scenes/:query" component={ScenesHome} exact />
             <Route path="/scene/:id" component={SceneDetails} exact />
             <Route path="/sceneadd/:id" component={SceneAddForm} exact />
             <Route path="/sceneedit/:id" component={SceneEditForm} exact />

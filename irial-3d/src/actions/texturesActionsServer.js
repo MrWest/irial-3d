@@ -14,14 +14,14 @@ export const fetchTexturesServer = async reduxStore => {
     return texturesRslt;
   };
 
-  export const sortTexturesServer = async (category, reduxStore) => {
+  export const sortTexturesServer = async (category, sort='all', offset=0, reduxStore) => {
 
     const lang = getLanguage(reduxStore);
 
    
     let results = undefined;
     
-    let completeUrl = category === "all"?  generatePHPParameters({lang}) : generatePHPParameters({category, lang});
+    let completeUrl = generatePHPParameters({category, sort, offset, lang});
     // if(category === "all")
     // texturesDb = await DashBoard.get("/textures/get_textures.php"+ generatePHPParameters({lang}))
     //  else
@@ -35,7 +35,10 @@ export const fetchTexturesServer = async reduxStore => {
        texture.images = textureImagesDb.data
 
        const texturesRateDb = await DashBoard.get("/textures/get_texture_rate.php"+ generatePHPParameters({idTexture: texture.id}))
-       texture.rate = texturesRateDb.data
+       texture.rate = texturesRateDb.data;
+
+       const textureOwnerInfo = await DashBoard.get("/textures/get_texture_owner_info.php"+ generatePHPParameters({user: texture.id_user}))
+       texture = {...texture, ownerInfo: {...textureOwnerInfo.data} };
 
        return texture
        

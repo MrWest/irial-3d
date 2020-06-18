@@ -3,7 +3,8 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
 import _ from "lodash";
-import { TextureCardLeft, TextureImageLeft, TextureCardRight, TextureImageRight} from './texturesSections';
+import ItemCard from '../itemCard/itemCard';
+// import { TextureCardLeft, TextureImageLeft, TextureCardRight, TextureImageRight} from './texturesSections';
 
 class DisplayTexturesTool extends Component {
  
@@ -12,43 +13,17 @@ class DisplayTexturesTool extends Component {
   };
 
   render() {
-    const { classes , textures, language} = this.props;
+    const { classes , textures, language, addToCart} = this.props;
     return (
       <main className={classes.container}>
-        {textures.filter( a => parseInt(a.status) > 0).map((texture, index) => (
-          <section key={index} 
-            className={
-              index % 2 === 1 ? classes.grayBackground : classes.whiteBackground
-            }
-          >
-          
-           <div className={classes.center}>
-                <Grid container spacing={0}>
-                  {index % 2 === 0 ? (
-                     <Fragment>
-                        <TextureCardLeft classes={classes} texture={texture} language={language}/>
-                        <TextureImageLeft classes={classes} texture={texture}/>
-                   </Fragment>
-                  ) : (
-                     <Fragment>
-                        <Grid container spacing={0} className={classes.noMobile}>
-                          <TextureImageRight classes={classes} texture={texture}/>
-                          <TextureCardRight classes={classes} texture={texture} language={language}/>
-                        </Grid>
-                        <Grid container spacing={0} className={classes.onMobile}>
-                          <TextureCardRight classes={classes} texture={texture} language={language}/>
-                          <TextureImageRight classes={classes} texture={texture}/>
-                        </Grid>
-                    </Fragment>
-
-                  )}
-
-                </Grid>
-              </div>
-         
-         
-          </section>
-        ))}
+        <Grid container alignItems="stretch" >
+        {textures.filter( a => parseInt(a.status) > 0).map(texture => (
+          <Grid key={texture.id} item xs={12} sm={6} md={4} className={classes.itemContainer}>
+            <ItemCard  item={texture} type='texture' addToCart={addToCart} addToCartText={language.AddToCart} buyItem={language.Buy} />
+          </Grid>
+          ))}
+        </Grid>
+        
       </main>
     );
   }
@@ -91,10 +66,30 @@ const styles = theme => ({
       display: 'inherit',
     }
   },
+  itemContainer: {
+    marginBottom: 32
+  },
   packNameText: {
     fontFamily: "Futura",
     fontSize: 40,
     fontWeight: "bold",
+    color: "#337ab7",
+    margin: 0
+  },
+  itemContent: {
+    backgroundImage: "url(../static/images/home/about-contact.jpg)",
+    backgroundRepeat: "no-repeat",
+    height: 320,
+    display: 'inherit',
+    // backgroundSize: "cover",
+    backgroundPosition: "right",
+    backgroundSize: "contain",
+  },
+  itemNameText: {
+    fontFamily: "Futura",
+    fontSize: 28,
+    fontWeight: "bold",
+    textAlign: 'center',
     color: "#337ab7",
     margin: 0
   },

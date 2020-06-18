@@ -99,6 +99,20 @@ const styles = theme => ({
     color: '#0f2440',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    maxWidth: '90%'
+  },
+  ItemPrice: {
+    fontFamily: 'Roboto',
+    fontSize: 20,
+    fontWeight: 600,
+    marginTop: 16,
+    marginBottom: 8,
+    lineHeight: 1.5,
+    color: '#0f2440',
+    opacity: 0.85,
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
     textOverflow: 'ellipsis'
   },
   ItemDescription: {

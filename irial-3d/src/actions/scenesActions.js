@@ -13,14 +13,14 @@ export const fetchScenes = () => async dispatch => {
     });
   };
 
-  export const sortScenes = category => async dispatch => {
+  export const sortScenes = (category = 'all', sort='all', offset=0) => async dispatch => {
 
     const lang = getLanguage();
 
    
     let results = undefined;
     
-    let completeUrl = category === "all"?  generatePHPParameters({lang}) : generatePHPParameters({category, lang});
+    let completeUrl = generatePHPParameters({category, sort, offset, lang});
     // if(category === "all")
     // scenesDb = await DashBoard.get("/scenes/get_scenes.php"+ generatePHPParameters({lang}))
     //  else
@@ -34,9 +34,12 @@ export const fetchScenes = () => async dispatch => {
        scene.images = sceneImagesDb.data
 
        const scenesRateDb = await DashBoard.get("/scenes/get_scene_rate.php"+ generatePHPParameters({idScene: scene.id}))
-       scene.rate = scenesRateDb.data
+       scene.rate = scenesRateDb.data;
 
-       return scene
+       const sceneOwnerInfo = await DashBoard.get("/scenes/get_scene_owner_info.php"+ generatePHPParameters({user: scene.id_user}))
+       scene = {...scene, ownerInfo: {...sceneOwnerInfo.data} };
+
+       return scene;
        
      })
 
@@ -51,6 +54,8 @@ export const fetchScenes = () => async dispatch => {
       payload: results//fromDB
     });
 
+    const queryAPI = await DashBoard.post("/scenes/get_scenes_count.php"+ generatePHPParameters({lang}));
+    return parseInt(queryAPI.data.count);
 
   };
 

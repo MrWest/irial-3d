@@ -3,7 +3,8 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
 import _ from "lodash";
-import { SceneCardLeft, SceneImageLeft, SceneCardRight, SceneImageRight} from './scenesSections';
+import ItemCard from '../itemCard/itemCard';
+// import { SceneCardLeft, SceneImageLeft, SceneCardRight, SceneImageRight} from './scenesSections';
 
 class DisplayScenesTool extends Component {
  
@@ -12,43 +13,17 @@ class DisplayScenesTool extends Component {
   };
 
   render() {
-    const { classes , scenes, language} = this.props;
+    const { classes , scenes, language, addToCart} = this.props;
     return (
       <main className={classes.container}>
-        {scenes.filter( a => parseInt(a.status) > 0).map((scene, index) => (
-          <section key={index} 
-            className={
-              index % 2 === 1 ? classes.grayBackground : classes.whiteBackground
-            }
-          >
-          
-           <div className={classes.center}>
-                <Grid container spacing={0}>
-                  {index % 2 === 0 ? (
-                     <Fragment>
-                        <SceneCardLeft classes={classes} scene={scene} language={language}/>
-                        <SceneImageLeft classes={classes} scene={scene}/>
-                   </Fragment>
-                  ) : (
-                     <Fragment>
-                        <Grid container spacing={0} className={classes.noMobile}>
-                          <SceneImageRight classes={classes} scene={scene}/>
-                          <SceneCardRight classes={classes} scene={scene} language={language}/>
-                        </Grid>
-                        <Grid container spacing={0} className={classes.onMobile}>
-                          <SceneCardRight classes={classes} scene={scene} language={language}/>
-                          <SceneImageRight classes={classes} scene={scene}/>
-                        </Grid>
-                    </Fragment>
-
-                  )}
-
-                </Grid>
-              </div>
-         
-         
-          </section>
-        ))}
+        <Grid container alignItems="stretch" >
+        {scenes.filter( a => parseInt(a.status) > 0).map(scene => (
+          <Grid key={scene.id} item xs={12} sm={6} md={4} className={classes.itemContainer}>
+            <ItemCard  item={scene} type='scene' addToCart={addToCart} addToCartText={language.AddToCart} buyItem={language.Buy} />
+          </Grid>
+          ))}
+        </Grid>
+        
       </main>
     );
   }
@@ -91,10 +66,30 @@ const styles = theme => ({
       display: 'inherit',
     }
   },
+  itemContainer: {
+    marginBottom: 32
+  },
   packNameText: {
     fontFamily: "Futura",
     fontSize: 40,
     fontWeight: "bold",
+    color: "#337ab7",
+    margin: 0
+  },
+  itemContent: {
+    backgroundImage: "url(../static/images/home/about-contact.jpg)",
+    backgroundRepeat: "no-repeat",
+    height: 320,
+    display: 'inherit',
+    // backgroundSize: "cover",
+    backgroundPosition: "right",
+    backgroundSize: "contain",
+  },
+  itemNameText: {
+    fontFamily: "Futura",
+    fontSize: 28,
+    fontWeight: "bold",
+    textAlign: 'center',
     color: "#337ab7",
     margin: 0
   },

@@ -14,12 +14,13 @@ class ScenesHomeServer extends Component {
   }
 }
 
-ScenesHomeServer.getInitialProps = async function({ reduxStore, query: { category } }) {
-  console.log(category);
+ScenesHomeServer.getInitialProps = async function({ reduxStore, query: { query } }) {
+  console.log(query);
+  const settings = query.split('-');
   const sections = await fetchSectionsServer(reduxStore);
-  const scenes = await sortScenesServer(category, reduxStore);
+  const scenes = await sortScenesServer(settings[0] || 'all', settings[1] || 'all', 0, reduxStore);
   console.log(scenes.length);
-  return {scenes, section: sections[1], category};
+  return {scenes, section: sections[4], query};
 };
 
 

@@ -5,21 +5,22 @@ import ProjectsHome from "../../src/components/projects/projectsHome";
 class ProjectsHomeServer extends Component {
 
   render() {
-    const { projects, section, category } = this.props;    
+    const { projects, section, query } = this.props;    
     if(!section)
      return <div />;
     return (
-      <ProjectsHome models={projects} section={section} />
+      <ProjectsHome  />
     );
   }
 }
 
-ProjectsHomeServer.getInitialProps = async function({ reduxStore, query: { category } }) {
-  console.log(category);
+ProjectsHomeServer.getInitialProps = async function({ reduxStore, query: { query } }) {
+  console.log(query);
+  const settings = query.split('-');
   const sections = await fetchSectionsServer(reduxStore);
-  const projects = await sortProjectsServer(category, reduxStore);
+  const projects = await sortProjectsServer(settings[0] || 'all', settings[1] || 'all', 0, reduxStore);
   console.log(projects.length);
-  return { projects, section: sections[2], category };
+  return { projects, section: sections[2], query };
 };
 
 

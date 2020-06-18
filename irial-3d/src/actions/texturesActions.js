@@ -13,14 +13,14 @@ export const fetchTextures = () => async dispatch => {
     });
   };
 
-  export const sortTextures = category => async dispatch => {
+  export const sortTextures = (category = 'all', sort='all', offset=0) => async dispatch => {
 
     const lang = getLanguage();
 
    
     let results = undefined;
     
-    let completeUrl = category === "all"?  generatePHPParameters({lang}) : generatePHPParameters({category, lang});
+    let completeUrl = generatePHPParameters({category, sort, offset, lang});
     // if(category === "all")
     // texturesDb = await DashBoard.get("/textures/get_textures.php"+ generatePHPParameters({lang}))
     //  else
@@ -34,7 +34,11 @@ export const fetchTextures = () => async dispatch => {
        texture.images = textureImagesDb.data
 
        const texturesRateDb = await DashBoard.get("/textures/get_texture_rate.php"+ generatePHPParameters({idTexture: texture.id}))
-       texture.rate = texturesRateDb.data
+       texture.rate = texturesRateDb.data;
+
+       
+       const textureOwnerInfo = await DashBoard.get("/textures/get_texture_owner_info.php"+ generatePHPParameters({user: texture.id_user}))
+       texture = {...texture, ownerInfo: {...textureOwnerInfo.data} };
 
        return texture
        
@@ -50,7 +54,9 @@ export const fetchTextures = () => async dispatch => {
       type: FETCH_TEXTURES,
       payload: results//fromDB
     });
-
+    
+    const queryAPI = await DashBoard.post("/textures/get_textures_count.php"+ generatePHPParameters({lang}));
+    return parseInt(queryAPI.data.count);
 
   };
 
