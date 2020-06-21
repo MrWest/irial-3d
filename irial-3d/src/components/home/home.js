@@ -9,7 +9,7 @@ import AboutContact from "./aboutContact"
 import { connect } from "react-redux";
 import {Helmet} from 'react-helmet';
 import {getLanguage, isServer} from "../../apis/tools";
-import { fetchSections, fetchTags } from "../../actions";
+import { fetchSections, fetchTags, sortModels } from "../../actions";
 
 
 class HomeOut extends Component {
@@ -17,17 +17,18 @@ class HomeOut extends Component {
   componentWillMount() {
     if(!isServer)
     {
-      const { fetchSections, fetchTags } = this.props;
+      const { fetchSections, fetchTags, sortModels } = this.props;
       fetchSections();
       fetchTags();
+      sortModels();
     }
     
   }
   render() {
-    const { classes, sections, language } = this.props;
+    const { classes, sections, language, models } = this.props;
 
-    if(sections === undefined || sections.length < 1)
-     return <div/>
+    // if(sections === undefined || sections.length < 1)
+    //  return <div/>
      
     return (
 
@@ -38,8 +39,8 @@ class HomeOut extends Component {
               <meta name="description" content={language.HomePageDescription} />
               <meta name="keywords" content={language.HomePageTags} /> 
             </Helmet>
-          <PromoField />
-          <FrontTourPromo  section={sections[0]} reverse={true}/>
+          <PromoField models={models} />
+          {/* <FrontTourPromo  section={sections[0]} reverse={true}/> */}
           {/* <FrontAttractions section={sections[1]}/>
           <FrontLodgingPromo  section={sections[2]} reverse={false}/> */}
           <AboutContact></AboutContact>
@@ -64,8 +65,9 @@ HomeOut.propTypes = {
 const mapStateTopProps = state => {
   return {
     sections: state.sections,
+    models: state.models,
     language: state.language
   };
 };
 
-export default connect(mapStateTopProps, { fetchSections, fetchTags })(withStyles(styles)(HomeOut));
+export default connect(mapStateTopProps, { fetchSections, fetchTags, sortModels })(withStyles(styles)(HomeOut));

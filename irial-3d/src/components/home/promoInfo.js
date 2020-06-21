@@ -7,15 +7,81 @@ import { CoolHashLink} from "../buttons"
 import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
 
+class PromoInfo extends React.Component {
+  state = {};
+
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <div className={classes.root}>
+        <h1 className={classes.title}>Irial 3D</h1>
+        <h2 className={classes.content}>Lumion Networkig <br/> <span className={classes.subContent}>3D Models, Learning &amp; Jobs</span></h2>
+        
+          {/* <h1 className={classes.pText}>{this.props.language.welcome}</h1>
+          <p variant="p" component="p" className={classes.pTextSmallFirst}>
+          {this.props.language.fistp}
+          </p>
+          <p variant="p" component="p" className={classes.pTextSmall}>
+          {this.props.language.secondp} <br/>
+          {this.props.language.thirdp}
+          </p>
+          <Grid container  justify="center" style={{ maxWidth: "100vw"}}>
+            <Grid item>
+                <CoolHashLink            
+                height={66} width={360} fill={"#ffffff"} color={"#337ab7"}
+                href="/#front-tour-promo"
+                data-scroll
+                // onClick={()=>{
+                  
+                //    this.props.language.setLanguage('en');
+                // }}
+              >
+                {this.props.language.button}
+              </CoolHashLink>
+            </Grid>
+          
+          </Grid> */}
+         
+        </div>
+     
+    );
+  }
+}
+
+PromoInfo.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
 const styles = theme => ({
   root: {
     paddingTop: 0,
     background: "transparent",
     paddingLeft: "0px !important",
     paddingRight: "0px !important",
-    width: "100%",
-    textAlign: "center !important",
+    width: "100%"
     
+  },
+  title: {
+    fontFamily: 'Futura',
+    fontSize: 124,
+    marginBottom:0,
+    color: '#ffffff',
+    textShadow: "1px 1px 0 rgba(0, 0, 0, 0.75)",
+    textTransform: 'uppercase'
+  },
+  content: {
+    fontFamily: 'MONOSPACE',
+    fontSize: 56,
+    marginTop: 0,
+    color: '#ffdf00',
+    textShadow: "1px 1px 0 rgba(0, 0, 0, 0.75)",
+  },
+  subContent: {
+    fontFamily: 'MONOSPACE',
+    fontSize: 38,
+    color: '#ffdf00',
+    textShadow: "1px 1px 0 rgba(0, 0, 0, 0.75)",
   },
   orderButton: {   
     background: "#ffffff",   
@@ -96,50 +162,6 @@ const styles = theme => ({
     }
   }
 });
-
-class PromoInfo extends React.Component {
-  state = {};
-
-  render() {
-    const { classes } = this.props;
-
-    return (
-      <div className={classes.root}>
-        
-          <h1 className={classes.pText}>{this.props.language.welcome}</h1>
-          <p variant="p" component="p" className={classes.pTextSmallFirst}>
-          {this.props.language.fistp}
-          </p>
-          <p variant="p" component="p" className={classes.pTextSmall}>
-          {this.props.language.secondp} <br/>
-          {this.props.language.thirdp}
-          </p>
-          <Grid container  justify="center" style={{ maxWidth: "100vw"}}>
-            <Grid item>
-                <CoolHashLink            
-                height={66} width={360} fill={"#ffffff"} color={"#337ab7"}
-                href="/#front-tour-promo"
-                data-scroll
-                // onClick={()=>{
-                  
-                //    this.props.language.setLanguage('en');
-                // }}
-              >
-                {this.props.language.button}
-              </CoolHashLink>
-            </Grid>
-          
-          </Grid>
-         
-        </div>
-     
-    );
-  }
-}
-
-PromoInfo.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 
 const mapStateToProps = state => {
   

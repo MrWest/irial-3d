@@ -1,13 +1,14 @@
 import React from 'react'
 import Home from "../src/components/home/home"
 import { connect } from 'react-redux'
-import { fetchSectionsServer } from "../src/actions";
+import { fetchSectionsServer, sortModelsServer } from "../src/actions";
 
 class Index extends React.Component {
   static async getInitialProps ({ reduxStore, req }) {
   
     const sections = await fetchSectionsServer(reduxStore);
-    return {sections};
+    const models = await sortModelsServer('all', 'all', 0, reduxStore);
+    return {sections, models};
   }
 
   componentDidMount () {
@@ -17,8 +18,8 @@ class Index extends React.Component {
   }
 
   render () {
-    const {sections}= this.props;
-    return ( <Home server sections={sections} />)
+    const {sections, models}= this.props;
+    return ( <Home server sections={sections} models={models} />)
   }
 }
 

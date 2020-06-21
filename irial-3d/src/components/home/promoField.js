@@ -1,21 +1,30 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import PromoImg from "./promoImg";
-import PromoCarousel from "./promoCarousel";
+import PromoItems from "./promoItems";
+import PromoInfo from "./promoInfo";
 import { Grid } from "@material-ui/core";
 
 class PromoField extends Component {
   state = {};
   render() {
-    const { classes } = this.props;
+    const { classes, models } = this.props;
+    console.log(models);
     return (
-      <div className={classes.promoField}>
+      <Grid container justify="center" className={classes.promoField}>
         <Grid container className={classes.center} spacing={0}>
         {/* <Grid item sm={12} md={3} ></Grid> */}
-          <Grid item sm={12} md={12}>
-            <PromoCarousel />
+        <Grid container>
+          <Grid item md={8} xs={12}>
+            <PromoInfo />
           </Grid>
+        </Grid>
+        <Grid container>
+          <Grid item xs={12}>
+            <PromoItems models={models}/>
+          </Grid>
+        </Grid>
+         
           {/* <Grid item sm={12} md={3} ></Grid> */}
           {/* <Grid item sm={12} md={4} >
            <div   className={classes.table}>
@@ -24,7 +33,7 @@ class PromoField extends Component {
             </div>
           </Grid> */}
         </Grid>
-      </div>
+      </Grid>
     );
   }
 }
@@ -35,16 +44,14 @@ const styles = theme => ({
     height: "100%"
   },
   promoField: {
-     
-    backgroundImage: "url(../static/images/home/vinales_traveler.jpg)",
+    backgroundImage: "url(../static/images/home/irial-3d-font-city-blue.jpg)",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "top-left",    
     width: "100%",
     display: "flex",    
     minHeight: "90vh",
-    alignItems: "center",
-    justifyContent: "center",
+    paddingTop: 52,
     objectFit: "cover",
     color: "#ffffff", 
     [theme.breakpoints.down("sm")]: {
