@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import { ArrowDownward } from "@material-ui/icons";
-import { sortModels } from "../../actions";
+import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
+import ScrollMenu from 'react-horizontal-scrolling-menu';
 import { Grid } from "@material-ui/core";
 
 class PromoItems extends Component {
@@ -12,30 +12,78 @@ class PromoItems extends Component {
     const { classes, models } = this.props;
     if(!models) return <div />;
     return (
-      <Grid container justify="center" >
-        <div className={classes.center}>
+      <Grid container >
+        <Grid item>
+         <div  className={classes.itemsPanel} style={{ background: 'rgba(0,0,0,0.8)' }}>
+           <Grid container alignItems="center">
+             <Grid item>
+             <div className={classes.downloadViewContainer} style={{ height: 'auto', background: 'transparent' }}>
+              <Grid container justify="center" alignItems="center" style={{ height: '100%', width: '100%' }}>
+              <Grid item>
+                <ArrowUpward style={{ fontSize: 24, fontWeight: 'bolder' }} />
+                </Grid>
+              </Grid>
+             </div>
+             </Grid>
+             <Grid item>
+             <Grid container justify="center" alignItems="center" style={{ height: '100%', width: '100%' }}>
+              <Grid item>
+                <h3 className={classes.newProducts} >New Products</h3>
+                </Grid>
+              </Grid>
+             </Grid>
+           </Grid>
+         </div>
+         </Grid>
+         <Grid item xs={12}>
+        <div  className={classes.itemsPanel}>
           <Grid container alignItems='center'>
-            <Grid item>
-             {/* <ArrowDownward fontSize={56} /> */}
+            <Grid item >
+            <div className={classes.downloadViewContainer}>
+            <Grid container justify="center" alignItems="center" style={{ height: '100%', width: '100%' }}>
+             <Grid item>
+               <p className={classes.appDonwload}>App <br/> Download </p>
+               <ArrowDownward style={{ fontSize: 56 }} />
+              </Grid>
+             </Grid>
+             </div>
             </Grid>
-            {models.map(item => (
+            <Grid item xs style={{ maxWidth: 792, overflow: 'hidden' }}>
+              <Grid container style={{ width: 99999 }}>
+              {models.map(item => (
                <Grid key={item.id} item>
                  <div className={classes.itemViewContainer}>
-                   <Grid container alignItems="center" style={{ height: '100%' }}>
+                   <Grid container justify="center" alignItems="center" style={{ height: '100%', width: '100%' }}>
                      <Grid item>
-                       <div className={classes.itemView}>
+                        <div className={classes.itemView}>
                         <img src={item.images[0].url} className={classes.itemImg} alt={item.name}/>
                        </div>
+                     
                      </Grid>
                    </Grid>
                  </div>
                </Grid>
-            ))
-
-            }
+            ))}
+             {models.map(item => (
+               <Grid key={item.id} item>
+                 <div className={classes.itemViewContainer}>
+                   <Grid container justify="center" alignItems="center" style={{ height: '100%', width: '100%' }}>
+                     <Grid item>
+                        <div className={classes.itemView}>
+                        <img src={item.images[0].url} className={classes.itemImg} alt={item.name}/>
+                       </div>
+                     
+                     </Grid>
+                   </Grid>
+                 </div>
+               </Grid>
+            ))}
+              </Grid>
+            </Grid>
           </Grid>
         
         </div>
+        </Grid>
       </Grid>
     );
   }
@@ -80,16 +128,43 @@ const styles = theme => ({
       minWidth: "1100px"
     }
   },
+  downloadButton: {
+    background: 'green',
+    cursor: 'pointer'
+  },
+  appDonwload: {
+    fontFamily: 'Roboto',
+    fontSize: 14,
+    textAlign: 'center'
+  },
+  newProducts: {
+    fontFamily: 'MONOSPACE',
+    fontSize: 20,
+    margin: '8px 0px',
+    marginLeft: 22,
+    marginRight: 22
+  },
+  itemsPanel: {
+    width: 'auto',
+    background: 'rgba(0,0,0,0.5)'
+  },
   itemViewContainer: {
-    height: 200,
-    width: 200
+    height: 156,
+    width: 198
+  },
+  downloadViewContainer: {
+    height: 156,
+    width: 92,
+    background: 'green',
+    cursor: 'pointer'
   },
   itemView: {
-    height: 142,
-    width: 142,
+    height: 104,
+    width: 156,
+    cursor: 'pointer',
     '&&:hover': {
-      height: 184,
-      width: 184,
+      height: 132,
+      width: 198,
     }
   },
   itemImg: {

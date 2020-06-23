@@ -168,7 +168,8 @@ const strings = {
       TexturesPageTags: '',
       ScenesPageTittle: 'Lumion Scene Configurations Catalog',
       ScenesPageDescription: '',
-      ScenesPageTags: ''
+      ScenesPageTags: '',
+      Search: 'Search'
      
     },
     es: {
@@ -340,7 +341,8 @@ const strings = {
       TexturesPageTags: '',
       ScenesPageTittle: 'Catálogo de Configuración de Escenas de Lumion',
       ScenesPageDescription: '',
-      ScenesPageTags: ''
+      ScenesPageTags: '',
+      Search: 'Buscar'
 
     }
    }

@@ -65,7 +65,7 @@ const styles = theme => ({
   title: {
     fontFamily: 'Futura',
     fontSize: 124,
-    marginBottom:0,
+    margin:0,
     color: '#ffffff',
     textShadow: "1px 1px 0 rgba(0, 0, 0, 0.75)",
     textTransform: 'uppercase'
@@ -73,7 +73,7 @@ const styles = theme => ({
   content: {
     fontFamily: 'MONOSPACE',
     fontSize: 56,
-    marginTop: 0,
+    margin: 0,
     color: '#ffdf00',
     textShadow: "1px 1px 0 rgba(0, 0, 0, 0.75)",
   },

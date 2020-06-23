@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import PromoField from "./promoField";
 import FrontTourPromo from "./frontTourPromo";
-import FrontAttractions from "./frontAttractions"
+import FrontModels from "./frontModels"
 import FrontLodgingPromo from "./frontLodgingPromo"
 import AboutContact from "./aboutContact"
 import { connect } from "react-redux";
@@ -40,9 +40,7 @@ class HomeOut extends Component {
               <meta name="keywords" content={language.HomePageTags} /> 
             </Helmet>
           <PromoField models={models} />
-          {/* <FrontTourPromo  section={sections[0]} reverse={true}/> */}
-          {/* <FrontAttractions section={sections[1]}/>
-          <FrontLodgingPromo  section={sections[2]} reverse={false}/> */}
+          <FrontModels section={sections[1]}/>
           <AboutContact></AboutContact>
         </div>
     );

@@ -62,10 +62,16 @@ class AppTopBar extends Component {
     const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
 
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    if (height) {
+    if (height && !isServer &&  this.props) {
       const scrolled = winScroll / height;
+      const { location } = this.props;
       this.setState({
-        transparency: scrolled === 0
+        transparency: scrolled === 0 && location.pathname === '/'
+      });
+    }
+    else if(!isServer &&  this.props) {
+      this.setState({
+        transparency: location.pathname === '/'
       });
     }
   };
@@ -73,6 +79,12 @@ class AppTopBar extends Component {
   componentDidMount() {
     
     this.listenToScroll();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { location } = this.props;
+    if(prevProps.location.pathname !== location.pathname)
+     this.listenToScroll();
   }
 
   setWrapperRef(node) {
@@ -115,15 +127,7 @@ class AppTopBar extends Component {
     document.removeEventListener("click", this.resetDropdown3);
   }
 
-  handleOpenModalBag = event => {
-    this.setState({ anchorEl: event.currentTarget });
-    this.setState({ modalOpen: !this.state.modalOpen });
-    document.addEventListener("click", this.resetDropdown2);
-  };
-
-  handleCloseModalBag = event => {
-    this.setState({ modalOpen: false });
-  };
+  
   handleToggleMenu = event => {
     this.setState({ anchorEl: event.currentTarget });
     this.setState(state => ({ menu: !state.menu }));
@@ -178,6 +182,7 @@ class AppTopBar extends Component {
         <Grid container justify="center" className={transparency? classes.topBar : classes.topBarWhite}>
           <Grid container alignItems="center" className={classes.center}>
             <Grid item>
+              <Link to="/">
               <Grid container alignItems="center" spacing={1}>
                 <Grid item>
                   <IrialLogo classes={classes} />
@@ -186,32 +191,33 @@ class AppTopBar extends Component {
                   <p className={transparency? classes.logoText : classes.logoTextBlue }>Irial 3D</p>
                 </Grid>
               </Grid>
+              </Link>
             </Grid>
             <Grid item xs />
               <Grid item>
-                search
+                <input className={classes.inputSearch} placeholder={language.Search}></input>
               </Grid>
           </Grid>
         </Grid>
         <Grid container justify="center" className={classes.bottomBar}>
           <Grid container className={classes.center}>
-           <Grid container alignItems="center" style={{ height: '100%' }}>
+           <Grid container alignItems="stretch" style={{ height: '100%' }}>
              <Grid item xs>
-                <Grid container alignItems="center">
+                <Grid container alignItems="stretch" style={{ height: '100%' }}>
                   {links.map(link => (
                     <Grid key={link.name} item>
                     {link.hash? (
                       <HashLink smooth    to={link.to} >
-                        <span className={classes.appBarButton}>
+                        <div className={classes.appBarButton}>
                           {link.name}
-                        </span>
+                        </div>
                       </HashLink>
                     ):
                     (
                       <Link to={link.to} >
-                        <span className={classes.appBarButton}>
+                        <div className={classes.appBarButton}>
                          {link.name}
-                        </span>
+                        </div>
                     </Link>
                     )}
                     </Grid>
@@ -219,7 +225,7 @@ class AppTopBar extends Component {
                   </Grid>
                 </Grid>
                 <Grid item>
-                  <p className={classes.appBarButton}>language</p>
+                  <LanguageSelector />
                 </Grid>
            </Grid>
           </Grid>
@@ -295,12 +301,15 @@ const styles = theme => ({
     }
   },
   topBar: {
+    height: 28
   },
   topBarWhite: {
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
+    height: 28
   },
   bottomBar: {
-    backgroundColor: '#000000'
+    backgroundColor: '#000000',
+    height: 28
   },
   grow: {
     width: "100%",
@@ -380,7 +389,8 @@ const styles = theme => ({
     width: 158
   },
   appBarButton: {
-    padding: "2px 12px",
+    padding: "4px 12px",
+    paddingBottom: 5,
     fontSize: 16,
     fontFamily: "MONOSPACE",
     // textShadow: "1px 1px 0 rgba(255, 255, 255, 0.75)",
@@ -495,6 +505,17 @@ const styles = theme => ({
     maxHeight: "200px",
     overflowY: "auto",
     minHeight: "100px"
+  },
+  inputSearch: {
+    background: 'white',
+    height: 22,
+    borderRadius: 11,
+    border: '1px solid rgba(0,0,0, 0.5)',
+    padding: '0px 12px',
+    outline: 'none',
+    '&&:hover': {
+      border: '1px solid rgba(0,0,0, 0.8)',
+    }
   }
 });
 

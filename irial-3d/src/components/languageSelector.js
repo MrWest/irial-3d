@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import { Grid, Select, MenuItem, InputLabel } from '@material-ui/core';
+import SwitchTool from './switchTool';
+import { Grid, Select, MenuItem, InputLabel, Switch, FormControlLabel } from '@material-ui/core';
 import {setLanguageEn, setLanguageEs,
    sortTours, selectTour, sortModels, selectModel, sortProjects, selectProject,
    getSection, fetchSections, getCategory, getCategories, fetchPosts, selectPost, fetchTags,
@@ -39,6 +39,12 @@ const styles = theme => ({
   },
   menuItem: {
     color: "#434c5f"
+  },
+  label: {
+    fontFamily: 'MONOSPACE',
+    color: '#ffffff',
+    fontSize: 12,
+    marginRight: 8
   }
 });
 
@@ -94,39 +100,6 @@ class LanguageSelector extends React.Component {
 
 
 
-    
-    // if(view === "tours")
-    // {
-    //   this.props.fetchSections()      
-    //   this.props.getCategories();
-    //   this.props.fetchTags();
-    //   this.props.sortTours(param)
-    // }
-    // if(view === "tour" || view === "touredit")
-    // {
-    //   this.props.selectTour(param).then(resp => {
-    //     this.props.getCategory(resp.id_category);
-    //   })
-    // }
-    
-
-
-    // if(view === "attractions")
-    // {
-    //   this.props.fetchSections()      
-    //   this.props.getCategory();
-    //   this.props.fetchTags();
-    //   this.props.sortModels(param)
-      
-    // }
-    // if(view === "attraction" || view === "attractionedit")
-    // {
-    //   this.props.selectModel(param).then(resp => {
-    //     this.props.getCategory(resp.id_category);
-    //   })
-    // }
-
-  
 
     if(view === "sectionedit" )
       getSection(query);
@@ -143,18 +116,18 @@ class LanguageSelector extends React.Component {
     }
   }
 
-  handleChange = event => {
-    if(event.target.value === 'en')
+  handleChange = value => {
+    if(value === 'en')
     this.props.setLanguageEn()
-    if(event.target.value === 'es')
+    if(value === 'es')
     this.props.setLanguageEs()
-    this.setState({ value: event.target.value });
+    this.setState({ value: value });
    
     let {pathname} = this.props.history.location;
     let params = pathname.split("/")
     
     if(params.length>2)
-      this.dataRequest(params[1], params[2], event.target.value)
+      this.dataRequest(params[1], params[2], value)
 
     else{
       if(params[1] === "blog")
@@ -173,33 +146,19 @@ class LanguageSelector extends React.Component {
   };
 
   render() {
-    const { classes, style } = this.props;
+    const { classes, style, language } = this.props;
+    const { value } = this.state;
+    const translatedLabel = { en: language.english, es: language.spanish };
 
     return (
       <div className={classes.root} style={style}>
-       <FormControl  className={classes.formControl}>
-          {/* <InputLabel htmlFor="age-simple">Language</InputLabel> */}
-          <Select
-            value={this.props.language._language}
-            onChange={this.handleChange}
-            inputProps={{
-              name: 'age',
-              id: 'age-simple',
-            }}
-            classes ={ {
-              root: classes.select
-          }}
-          >
-         
-            <MenuItem value={'en'}   classes ={ {
-                        root: classes.menuItem
-                    }}><span style={{fontSize: 14}}>{this.props.language.english}</span></MenuItem>
-            <MenuItem value={'es'} classes ={{
-                        root: classes.menuItem
-                    }}><span style={{fontSize: 14}}>{this.props.language.spanish}</span></MenuItem>
-          </Select>
-        </FormControl>
-      
+            <FormControlLabel
+              classes={{ label: classes.label}}
+              value="start"
+              control={<SwitchTool  onItem="en" offItem="es" onChange={this.handleChange} />}
+              label={`${translatedLabel[value]}`}
+              labelPlacement="start"
+          />
       </div>
     );
   }

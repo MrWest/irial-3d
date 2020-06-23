@@ -521,7 +521,7 @@ class ModelEditForm extends React.Component {
                 <div style={{display: "table-cell", verticalAlign: "middle"}}>
                 <Link to="/account" style={{background: "#ffffff"}}>
                         <ArrowBack color="primary" ></ArrowBack>
-                      </Link>
+                 </Link>
                 </div>
                    
               </div>

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import PromoItems from "./promoItems";
 import PromoInfo from "./promoInfo";
+import PromoLinks from "./promoLinks";
 import { Grid } from "@material-ui/core";
 
 class PromoField extends Component {
@@ -19,9 +20,12 @@ class PromoField extends Component {
             <PromoInfo />
           </Grid>
         </Grid>
-        <Grid container>
-          <Grid item xs={12}>
+        <Grid container alignItems="flex-end">
+          <Grid item xs={9}>
             <PromoItems models={models}/>
+          </Grid>
+          <Grid item xs={3}>
+            <PromoLinks />
           </Grid>
         </Grid>
          
@@ -51,7 +55,8 @@ const styles = theme => ({
     width: "100%",
     display: "flex",    
     minHeight: "90vh",
-    paddingTop: 52,
+    paddingTop: 92,
+    paddingBottom: 32,
     objectFit: "cover",
     color: "#ffffff", 
     [theme.breakpoints.down("sm")]: {
