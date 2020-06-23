@@ -14,7 +14,7 @@ class SignIn extends Component {
     return (
       <main className={classes.container}>
          <Helmet>
-              <title>Viñales Traveler | Sign In</title>
+              <title>Irial 3D | Sign In</title>
               <meta name="description" content="Sign in to fully use all features." />
            </Helmet>
         <section className={classes.cover}>

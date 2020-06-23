@@ -33,7 +33,6 @@ const styles = theme => ({
     }
   },
   center: {
-    width: "100%",
     [theme.breakpoints.up("xl")]: {
       maxWidth: "1280px",
       paddingLeft: "0 !important"
@@ -103,10 +102,10 @@ class AboutContact extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div className={classes.root}>
-       <div  className={classes.center} align="center">
-        <Paper elevation={0} style={{ padding: 10, paddingBottom: 7}}>
-        <Grid id="aboutus"  container spacing={4} >
+      <Grid container justify="center">
+       <Grid item  className={classes.center}>
+        
+        <Grid container id="aboutus" spacing={4} >
           <Grid item xs={12} md={8}>
                 <Typography
                 variant="h3"
@@ -144,9 +143,9 @@ class AboutContact extends React.Component {
         </Grid>
          
 
-          </Paper>
-          </div>
-      </div>
+         
+          </Grid>
+      </Grid>
     );
   }
 }

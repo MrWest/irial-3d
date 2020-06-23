@@ -30,7 +30,7 @@ class FooterBar extends React.Component {
           <Grid container justify="center" alignItems="center" alignContent="center" style={{ height: '100%' }} >
             <Grid item>
             <p style={{color: "#337ab7", fontFamily: "Futura", fontSize: 12, textAlign: "center", 
-            fontWeight: "bold", textShadow: "2px 2px 0 rgba(255, 255, 255, 0.75)", display: "table-cell", verticalAlign: "middle"}}>Viñales Traveler</p>
+            fontWeight: "bold", textShadow: "2px 2px 0 rgba(255, 255, 255, 0.75)", display: "table-cell", verticalAlign: "middle"}}>Irial 3D</p>
             </Grid>
             
             </Grid>

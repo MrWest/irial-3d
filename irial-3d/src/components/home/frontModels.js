@@ -14,7 +14,9 @@ import { connect } from "react-redux";
 import { addToCart } from "../../actions";
 import DisplayModelsTool from "../models/displayModelsTool";
 
-const FrontModels = ({ models, classes, section, addToCart }) =>  {
+const FrontModels = ({ models, classes, sections, addToCart }) =>  {
+  const section = sections ? sections[1] : undefined;
+
   const handleAddItem = (item, openCart) => {
     addToCart({ id_item: item.id, name: item.name, image: item.images[0].url, price: item.price,
        lumion_version: item.lumion_version, section, category: section.categories.find(c => c.id === item.id_category),
@@ -23,20 +25,20 @@ const FrontModels = ({ models, classes, section, addToCart }) =>  {
 
   if(!section) return <div />
    return ( 
-        <Grid container justify="center" className={classes.root}>
-           <section className={classes.center}>
+     <div>
+        <Grid container justify="center">
+           <Grid item className={classes.center}>
             <div style={{padding: "0px 40px"}}>
                 <h3 className={classes.sectionTittle}>{section.name}</h3>
                 <p  className={classes.pText}>{section.description}</p>
             </div>
-            <Grid container  spacing={4}>
                 <DisplayModelsTool
                     models={models}
                     addToCart={handleAddItem}
                   /> 
-                </Grid>
-          </section>
+          </Grid>
         </Grid>
+        </div>
         
     );
  
@@ -44,22 +46,8 @@ const FrontModels = ({ models, classes, section, addToCart }) =>  {
 
   
   const styles = theme => ({
-    papercss: {
-      [theme.breakpoints.down("sm")]: {
-        marginBottom: "0px !important"
-      }
-    },
-  
     root: {
-        ...theme.mixins.gutters(),
-        paddingTop: 30,
-        paddingBottom: theme.spacing.unit * 2,
-        paddingRight: "0px !important",
-        paddingLeft: "0px !important",
-        background: "transparent",
-        display: "flex", 
-        alignItems: "center",
-        justifyContent: "center"
+        paddingTop: 30
       },
       themePadding: {
         border: "1px solid #ff1333",
@@ -69,7 +57,7 @@ const FrontModels = ({ models, classes, section, addToCart }) =>  {
         }
       },
       center: {
-        width: "100%",
+   
         [theme.breakpoints.up("xl")]: {
           maxWidth: "1280px",
           paddingLeft: "0 !important"
@@ -86,6 +74,7 @@ const FrontModels = ({ models, classes, section, addToCart }) =>  {
         fontWeight: "bold",
         fontFamily: "Futura",
         color: "#337ab7",
+        marginTop: 40,
         marginBottom: 20,
         textAlign: "center"
       },
@@ -99,9 +88,7 @@ const FrontModels = ({ models, classes, section, addToCart }) =>  {
   const mapStateToProps = state => {
   
     return {
-      language: state.language,
-      models: state.models,
-      section: state.sections[1]
+      language: state.language
     };
   };
   

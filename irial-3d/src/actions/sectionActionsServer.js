@@ -38,7 +38,6 @@ export const fetchSectionsServer = async reduxStore => {
       type: FETCH_SECTIONS,
       payload: results
     });
-
     return results;
   };
 

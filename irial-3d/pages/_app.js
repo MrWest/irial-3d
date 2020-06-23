@@ -2073,10 +2073,10 @@ class MyApp extends App {
       <>
       <Helmet
           meta={[
-            { property: 'og:title', content: 'Viñales Traveler' },
+            { property: 'og:title', content: 'Irial 3D' },
             { property: 'og:image', content: 'https://vinalestraveler.com/static/images/home/vinales_traveler.jpg' },
-            { property: 'og:image:alt', content: 'Viñales Traveler Tour Comany' },
-            { property: 'og:description', content: 'Viñales Traveler is a Tour Guide Company based in Pinar del Río, Cuba. We mostly offer ecological and sightseeing tours in Viñales and the rest of Pinar del Río province. Also a very populated catalog of Viñales’s attractions and lodgings."' },
+            { property: 'og:image:alt', content: 'Irial 3D Tour Comany' },
+            { property: 'og:description', content: 'Irial 3D is a Tour Guide Company based in Pinar del Río, Cuba. We mostly offer ecological and sightseeing tours in Viñales and the rest of Pinar del Río province. Also a very populated catalog of Viñales’s attractions and lodgings."' },
             { property: 'fb:app_id', content: '269776263974713' }
           ]}
         >
@@ -2087,7 +2087,7 @@ class MyApp extends App {
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
           <meta property="og:image" content="https://vinalestraveler.com/static/images/home/vinales_traveler.jpg" />
           <meta property="og:image:alt" content="Vinales Traveler" />
-          <meta property="og:description" content="Viñales Traveler is a Tour Guide Company based in Pinar del Río, Cuba. We mostly offer ecological and sightseeing tours in Viñales and the rest of Pinar del Río province. Also a very populated catalog of Viñales’s attractions and lodgings." />
+          <meta property="og:description" content="Irial 3D is a Tour Guide Company based in Pinar del Río, Cuba. We mostly offer ecological and sightseeing tours in Viñales and the rest of Pinar del Río province. Also a very populated catalog of Viñales’s attractions and lodgings." />
           <meta property="og:title" content="Vinales Traveler" />
           <meta property="og:app_id" content="269776263974713" />
           <meta name="author" content="Vinales Traveler" />

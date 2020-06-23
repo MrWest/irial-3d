@@ -17,11 +17,11 @@ class DisplayModelsTool extends Component {
     return (
       <main className={classes.container}>
         <Grid container alignItems="stretch" >
-        {models.filter( a => parseInt(a.status) > 0).map(model => (
-          <Grid key={model.id} item xs={12} sm={6} md={4} className={classes.itemContainer}>
-            <ItemCard  item={model} type='model' addToCart={addToCart} addToCartText={language.AddToCart} buyItem={language.Buy} />
-          </Grid>
-          ))}
+          {models.filter( a => parseInt(a.status) > 0).map(model => (
+            <Grid key={model.id} item xs={12} sm={6} md={4} className={classes.itemContainer}>
+              <ItemCard  item={model} type='model' addToCart={addToCart} addToCartText={language.AddToCart} buyItem={language.Buy} />
+            </Grid>
+            ))}
         </Grid>
         
       </main>

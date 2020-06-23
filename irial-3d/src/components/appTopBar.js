@@ -143,7 +143,7 @@ class AppTopBar extends Component {
                 <Link className={classes.logo} color="inherit" to="/" >
                     <IconVTLogo  height={60} width={80} fill1={"#e4e400"} fill2={"#337ab7"} className={classes.logo} />
                     <p style={{color: "#337ab7", marginBottom: 0, fontFamily: "Futura", textDecorationLine: "none !important",
-                     marginTop: -16, fontSize: 16, textAlign: "center", fontWeight: 'bolder', textShadow: "2px 2px 0 rgba(255, 255, 255, 0.75)"}}>Viñales Traveler</p>
+                     marginTop: -16, fontSize: 16, textAlign: "center", fontWeight: 'bolder', textShadow: "2px 2px 0 rgba(255, 255, 255, 0.75)"}}>Irial 3D</p>
                   </Link>
             </div>
           <div className={classes.appbar} style={{borderTop: "1px #337ab7 solid", textAlign: "center"}}>

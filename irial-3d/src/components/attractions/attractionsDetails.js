@@ -84,7 +84,7 @@ class AttractionDetails extends Component {
     return (
       <main className={classes.container}>
          <Helmet>
-              <title>Viñales Traveler | {attraction.name}</title>
+              <title>Irial 3D | {attraction.name}</title>
               <meta name="description" content={attraction.general_description} />
            </Helmet>
       <Grid container justify="center" spacing={0}>

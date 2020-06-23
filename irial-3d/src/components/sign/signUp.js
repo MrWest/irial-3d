@@ -13,7 +13,7 @@ class SignIn extends Component {
     return (
       <main className={classes.container}>
          <Helmet>
-              <title>Viñales Traveler | Sign Up</title>
+              <title>Irial 3D | Sign Up</title>
               <meta name="description" content="Sign up to place your business in our catalog." />
            </Helmet>
         <section className={classes.cover}>

@@ -8,6 +8,8 @@ class Index extends React.Component {
   
     const sections = await fetchSectionsServer(reduxStore);
     const models = await sortModelsServer('all', 'all', 0, reduxStore);
+    
+    console.log('xx', sections);
     return {sections, models};
   }
 
@@ -19,6 +21,8 @@ class Index extends React.Component {
 
   render () {
     const {sections, models}= this.props;
+    
+    console.log('ww', sections);
     return ( <Home server sections={sections} models={models} />)
   }
 }

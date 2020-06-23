@@ -1,6 +1,6 @@
 const strings = {
     en:{
-      welcome:"Welcome to Viñales Traveler",
+      welcome:"Welcome to Irial 3D",
       fistp:"A Tour Guide Company for you to enjoy your visit to the fullest.",
       secondp:"Reliables, locals and very experienced, we will guide you through, so you won’t miss a thing.",
       thirdp:"We will show you the good places, we will fill your time with amazing adventures.",
@@ -17,10 +17,10 @@ const strings = {
       ViewOffer: "View Offer",
       AllLodgings: "All Lodgings",
       AboutUs: "About Us",
-      AboutUsText: `Viñales Traveler is a Tour Company based in Pinar del Río, Cuba. Committed to show our province’s beauties and realities from inside, we will cover all of Pinar del Río Province’s tourist places via a wide range of customized ecological and sightseeing tours to natural, historical and cultural sites. Also providing tips and guide for lodgings, restaurants, and all sort of activities and attraction, through our catalog of Viñales's tourism businesses. 
+      AboutUsText: `Irial 3D is a Tour Company based in Pinar del Río, Cuba. Committed to show our province’s beauties and realities from inside, we will cover all of Pinar del Río Province’s tourist places via a wide range of customized ecological and sightseeing tours to natural, historical and cultural sites. Also providing tips and guide for lodgings, restaurants, and all sort of activities and attraction, through our catalog of Viñales's tourism businesses. 
       <br/>With over ten years of experience in the Tourism Industry as tour guides among other jobs, our very professional local staff have gathered all the necessary knowledge and expertise to fulfill our customers’ expectations.`,
        ContactUs: "Contact Us",
-      ContactUsText: "Viñales Traveler is at your service 24/7. Feel free to contact us by this means, we will be happy to attend your requests.",
+      ContactUsText: "Irial 3D is at your service 24/7. Feel free to contact us by this means, we will be happy to attend your requests.",
       FirstName: "First name",
       Name: "Name",
       ContactEmail: "Contact email",
@@ -122,9 +122,9 @@ const strings = {
       NewPassword: "New password",
       ConfirmPassword: "Confirm password",
       Reset: "Reset",
-      PageTittle: "Viñales Traveler",
-      HomePageTittle: "The Tour Guide for Viñales's Visitors",
-      HomePageDescription: "Viñales Traveler is a Tour Guide Company based in Pinar del Río, Cuba. We mostly offer ecological and sightseeing tours in Viñales and the rest of Pinar del Río province. Also a very populated catalog of Viñales’s attractions and lodgings.",
+      PageTittle: "Irial 3D",
+      HomePageTittle: "Lumion Networkig: 3D Models, Learning & Jobs",
+      HomePageDescription: "Irial 3D is a Tour Guide Company based in Pinar del Río, Cuba. We mostly offer ecological and sightseeing tours in Viñales and the rest of Pinar del Río province. Also a very populated catalog of Viñales’s attractions and lodgings.",
       HomePageTags: "vinales, viñales, vinales tour, viñales tour, vinales tour company, viñales tour company, ecological tour, sightseeing tours, nature, viñales lodgings, beautiful beaches,  tobacco, hiking, climbs, local food",
       ToursPageDescription: "In our tours you will get to know the natural wonders of the province of Pinar del Río, a land blessed by its peasant traditions in the cultivation of the best tobacco in the world, its beautiful beaches and incredible nature",
       ToursPageTags: "viñales tour company, ecological tour, nature, beach, landscape, tobacco, vinales, viñales, vinales tour, viñales tour, vinales tour company",
@@ -173,7 +173,7 @@ const strings = {
      
     },
     es: {
-      welcome:"Bienvenido a Viñales Traveler",
+      welcome:"Bienvenido a Irial 3D",
       fistp:"Una Compañía de Turismo para que disfrute su visita a Viñales al máximo.",
       secondp:"Confiables, locales y con mucha experiencia, lo guiaremos para que no se pierda de nada.",
       thirdp:"Les mostramos los mejores lugares, llenamos su estancia de maravillosas aventuras",
@@ -190,10 +190,10 @@ const strings = {
       ViewOffer: "Ver Oferta",
       AllLodgings: "Hospedajes",
       AboutUs: "Sobre Nosotros",
-      AboutUsText: `Viñales Traveler es una empresa de turismo con sede en Pinar del Río, Cuba. Comprometidos a mostrar las bellezas y realidades de nuestra provincia desde adentro, cubriremos todos los lugares turísticos de la provincia de Pinar del Río a través de una amplia gama de recorridos ecológicos y turísticos personalizados a sitios naturales, históricos y culturales. También brindamos consejos y guías para alojamientos, restaurantes y todo tipo de actividades y atracciones, a través de nuestro catálogo de negocios turísticos de Viñales.
+      AboutUsText: `Irial 3D es una empresa de turismo con sede en Pinar del Río, Cuba. Comprometidos a mostrar las bellezas y realidades de nuestra provincia desde adentro, cubriremos todos los lugares turísticos de la provincia de Pinar del Río a través de una amplia gama de recorridos ecológicos y turísticos personalizados a sitios naturales, históricos y culturales. También brindamos consejos y guías para alojamientos, restaurantes y todo tipo de actividades y atracciones, a través de nuestro catálogo de negocios turísticos de Viñales.
       <br/>Con más de diez años de experiencia en la industria del turismo como guías turísticos entre otros trabajos, nuestro personal local muy profesional ha reunido todo el conocimiento y la experiencia necesarios para cumplir con las expectativas de nuestros clientes.`,
      ContactUs: "Contáctenos",
-      ContactUsText: "Viñales Traveler esta a su servicio 24/7. Siéntase libre de contactarnos por este medio, estaremos felices de atender sus solicitudes.",
+      ContactUsText: "Irial 3D esta a su servicio 24/7. Siéntase libre de contactarnos por este medio, estaremos felices de atender sus solicitudes.",
       FirstName: "Nombre",
       Name: "Nombre",
       ContactEmail: "Correo de contacto",
@@ -295,9 +295,9 @@ const strings = {
       NewPassword: "Nueva contraseña",
       ConfirmPassword: "Confirmar contraseña",
       Reset: "Restablecer",
-      PageTittle: "Viñales Traveler",
-      HomePageTittle: "Guía Turística para los Visitantes de Viñales.",
-      HomePageDescription: "Viñales Traveler es una Compañia de Turismo radicada en Pinar del Río, Cuba. Ofrecemos mayormente tours de visita y ecológicos en Viñales y el resto de la provincia de Pinar del Río. Además amplio catálogo de atracciones y hospedajes en Viñales comentados y evaluados por turistas anteriores.",
+      PageTittle: "Irial 3D",
+      HomePageTittle: "Red de Usuarios de Lumion: models 3D, Aprendisaje, Empleos",
+      HomePageDescription: "Irial 3D es una Compañia de Turismo radicada en Pinar del Río, Cuba. Ofrecemos mayormente tours de visita y ecológicos en Viñales y el resto de la provincia de Pinar del Río. Además amplio catálogo de atracciones y hospedajes en Viñales comentados y evaluados por turistas anteriores.",
       HomePageTags: "turismo, viñales, vinales tour, viñales tour, compañía de turismo, agencia de turismo, tour ecológico, naturaleza, hospedaje, playa, paseos a caballo, caminatas, escaladas, comida local",
       ToursPageDescription: "En nuestros tours conocera las maravillas naturales de toda la provincia Pinar del Río, tierra bendecida por sus tradiciones campesinas en el cultivo del mejor tabaco del mundo, sus hermosas playas y naturaleza increíble.",
       ToursPageTags: "vinales, viñales, vinales tour, viñales tour, vinales tour company, viñales tour company, turismo ecológico, naturaleza, playa, paisajes, tabaco",

@@ -29,7 +29,7 @@ class HomeOut extends Component {
 
     // if(sections === undefined || sections.length < 1)
     //  return <div/>
-     
+     console.log('zz', sections);
     return (
 
          <div className={classes.container}>
@@ -40,8 +40,8 @@ class HomeOut extends Component {
               <meta name="keywords" content={language.HomePageTags} /> 
             </Helmet>
           <PromoField models={models} />
-          <FrontModels section={sections[1]}/>
-          <AboutContact></AboutContact>
+          <FrontModels sections={sections} models={models}/>
+          <AboutContact />
         </div>
     );
   }

@@ -202,7 +202,7 @@ class AccountHome extends Component {
     return (
       <div className={classes.container}>
         <Helmet>
-              <title>Viñales Traveler | Account</title>
+              <title>Irial 3D | Account</title>
               <meta name="description" content="This is what you want to show as the page content in the Google SERP Listing" />
            </Helmet>
        <section className={parseInt(this.props.accountView) === 1 && this.props.loginInfo.type === "business"?classes.cover: null} >
