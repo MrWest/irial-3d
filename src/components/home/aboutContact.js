@@ -10,28 +10,10 @@ import  FrontContactForm  from "../forms/frontContactForm";
 
 import { connect } from "react-redux";
 import { FacebookProvider, Like, Share, Group, Feed } from 'react-facebook';
-import EmbeddedPost from "react-facebook/dist/EmbeddedPost";
-import Page from "react-facebook/dist/Page";
+// import EmbeddedPost from "react-facebook/dist/EmbeddedPost";
+// import Page from "react-facebook/dist/Page";
 
 const styles = theme => ({
-  root: {
-    ...theme.mixins.gutters(),
-    paddingTop: 0,
-    paddingBottom: theme.spacing.unit * 2,
-    paddingRight: "0px !important",
-    paddingLeft: "0px !important",
-    background: "transparent",
-    display: "flex", 
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  themePadding: {
-    border: "1px solid #ff1333",
-    width: "100%",
-    [theme.breakpoints.up("lg")]: {
-      maxWidth: 1440
-    }
-  },
   center: {
     [theme.breakpoints.up("xl")]: {
       maxWidth: "1280px",
@@ -42,12 +24,6 @@ const styles = theme => ({
       paddingLeft: "0 !important",
       minWidth: "1100px"
     }
-  },
-  orderButton: {
-    background: "#ffffff",
-    color: "#3577D4",
-    fontWeight: "bold",
-    width: "100%"
   },
   cover: {
    display: 'none',
@@ -63,13 +39,6 @@ const styles = theme => ({
       justifyContent: "center",
       backgroundOpacity: 0.5
     }
-  },
-  orderBottomButton: {
-    color: "#ffffff",
-    borderColor: "#ffffff",
-    width: "100%",
-    fontWeight: "bold",
-    marginTop: 20
   },
   hrBar: {
     background: "#337ab7",
@@ -103,7 +72,9 @@ class AboutContact extends React.Component {
 
     return (
       <div>
+        kk
       <Grid container justify="center">
+        ll
        <Grid item  className={classes.center}>
         
         <Grid container id="aboutus" spacing={4} >
