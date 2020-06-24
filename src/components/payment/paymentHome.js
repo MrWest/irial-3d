@@ -19,11 +19,8 @@ import {
 } from "redux-form-validators";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchModels, sortModels } from "../../actions";
-import { ReduxTextField, ReduxSelectField } from '../global/reduxFormFields';
 import { thousandsSeparatedAndFixed } from '../../helpers/utils';
 import {Helmet} from 'react-helmet';
-import Loader from '../global/loader';
 import PaymentForm from './PaymentForm';
 import { isServer, getLanguage } from '../../apis/tools';
 import { downloadFile, doTransfers } from '../../actions';
