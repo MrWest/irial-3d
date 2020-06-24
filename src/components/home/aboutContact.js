@@ -72,9 +72,7 @@ class AboutContact extends React.Component {
 
     return (
       <div>
-        kk
       <Grid container justify="center">
-        ll
        <Grid item  className={classes.center}>
         
         <Grid container id="aboutus" spacing={4} >
