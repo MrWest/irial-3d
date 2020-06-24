@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles, Grid, Card, CardContent } from '@material-ui/core';
 import Link from 'next/link';
-import CategoryLabel from './CategoryLabel';
+import CategoryLabel from './categoryLabel';
 import { RoundedButtonLink } from '../buttons';
 import { AttachMoney as MoneySharp, AddShoppingCart } from '@material-ui/icons';
 import StarRatingComponent from 'react-star-rating-component';

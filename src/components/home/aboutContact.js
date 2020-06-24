@@ -102,6 +102,7 @@ class AboutContact extends React.Component {
     const { classes } = this.props;
 
     return (
+      <div>
       <Grid container justify="center">
        <Grid item  className={classes.center}>
         
@@ -146,6 +147,7 @@ class AboutContact extends React.Component {
          
           </Grid>
       </Grid>
+      </div>
     );
   }
 }
