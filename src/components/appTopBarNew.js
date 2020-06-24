@@ -141,10 +141,10 @@ class AppTopBar extends Component {
   };
 
   render() {
-    const { classes, language } = this.props;
+    const { classes, language, signInfo } = this.props;
    
 
-    const { anchorEl, isHovered, transparency } = this.state;
+    const { anchorEl, open, transparency } = this.state;
 
     const links = [
       {
@@ -222,6 +222,60 @@ class AppTopBar extends Component {
                     )}
                     </Grid>
                   ))}
+                  <Grid item>
+                      <Link
+                      aria-owns={open ? "render-props-menu" : undefined}
+                      aria-haspopup="true"
+                      onClick={this.handleToggle}
+                      to={signInfo.isLogged? "#":"/signin"}
+                    >
+                      <div className={classes.appBarButton}>
+                         {language.Account}
+                      </div>
+                     
+                    </Link>
+                    {signInfo.isLogged &&
+                    <Popper
+                      id="render-props-menu"
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={this.handleClose}
+                      className={classes.paper}
+                      placement={"bottom-end"}
+                      style={{ width: 282, paddingLeft: 30, paddingRight: 40 }}
+                    >
+                    {signInfo.loginInfo && signInfo.loginInfo.type !== "visitor" &&
+                    <MenuItem
+                        id={0}
+                        onClick={this.handleClose}
+                        style={{ paddingLeft: 10, paddingRight: 0 }}
+                      >
+                        {language.Profile} 
+                      </MenuItem>}
+                    {signInfo.loginInfo && signInfo.loginInfo.type !== "visitor" && <MenuItem
+                        id={1}
+                        onClick={this.handleClose}
+                        style={{ paddingLeft: 10, paddingRight: 0 }}
+                      >
+                      {language.Business}  
+                      </MenuItem>}
+                      {/* <MenuItem
+                        id={2}
+                        onClick={this.handleClose}
+                        style={{ paddingLeft: 10, paddingRight: 0 }}
+                      >
+                        Billing
+                      </MenuItem> */}
+                      <MenuItem
+                        onClick={this.handleCloseNLogout}
+                        style={{ paddingLeft: 10, paddingRight: 0 }}
+                      >
+                        {language.SignOut}
+                      </MenuItem>
+                    </Popper>
+                  
+                    } 
+                </Grid>
                   </Grid>
                 </Grid>
                 <Grid item>
@@ -427,7 +481,7 @@ const styles = theme => ({
     padding: "5px 0px 0px 0px"
   },
   paper: {
-    marginTop: 22,
+    marginTop: 0,
     width: 384,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],

@@ -152,13 +152,14 @@ class LanguageSelector extends React.Component {
 
     return (
       <div className={classes.root} style={style}>
-            <FormControlLabel
-              classes={{ label: classes.label}}
-              value="start"
-              control={<SwitchTool  onItem="en" offItem="es" onChange={this.handleChange} />}
-              label={`${translatedLabel[value]}`}
-              labelPlacement="start"
-          />
+        <Grid container>
+          <Grid item xs>
+            <span className={classes.label}>{translatedLabel[value]}</span>
+          </Grid>
+          <Grid item>
+            <SwitchTool  onItem="en" offItem="es" onChange={this.handleChange} />
+          </Grid>
+        </Grid>
       </div>
     );
   }
