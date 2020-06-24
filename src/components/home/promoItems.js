@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
-import ScrollMenu from 'react-horizontal-scrolling-menu';
 import { Grid } from "@material-ui/core";
 
 class PromoItems extends Component {
