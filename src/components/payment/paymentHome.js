@@ -21,7 +21,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { thousandsSeparatedAndFixed } from '../../helpers/utils';
 import {Helmet} from 'react-helmet';
-import PaymentForm from './PaymentForm';
+import PaymentForm from './paymentForm';
 import { isServer, getLanguage } from '../../apis/tools';
 import { downloadFile, doTransfers } from '../../actions';
 import CartItem from './CartItem';
