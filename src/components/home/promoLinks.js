@@ -47,18 +47,20 @@ const styles = theme => ({
     fontSize: 16
   },
   linkItem: {
-    fontFamily: 'MONOSPACE',
-    fontSize: 24,
+    fontFamily: 'Arial',
+    fontSize: 22,
     color: '#ffffff',
     border: '4px solid #ffffff',
     height: 42,
     borderRadius: 21,
-    marginTop: 24,
     padding: '0px 22px',
     background: 'rgba(0,0,0,0.5)',
     '&&:hover': {
       background: 'rgba(0,0,0,0.7)',
-      color: '#ffff00'
+      color: '#ffff00',
+      fontSize: 24,
+      borderRadius: 24,
+      height: 48
     }
   }
 });
@@ -78,12 +80,18 @@ class PromoLinks extends React.Component {
     return (
         <Grid container direction="column" alignItems="flex-end">
           {links.map(link => (
-            <Grid key={link.name} item>
-              <Link href={link.to}>
-                <Grid container justify="center" alignItems="center" className={classes.linkItem}>
-                  {link.name}
-                </Grid>
-              </Link>
+            <Grid key={link.name} item >
+              <Grid container justify="center" alignItems="center" style={{ height: 56 }}>
+               <Grid item>
+                  <Link href={link.to}>
+                    <Grid container justify="center" alignItems="center"  className={classes.linkItem}>
+                      <Grid item justify="center" alignItems="center">
+                        {link.name}
+                      </Grid>
+                    </Grid>
+                  </Link>
+              </Grid>
+              </Grid>
             </Grid>
           ))}
         </Grid>

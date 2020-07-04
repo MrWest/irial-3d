@@ -15,8 +15,9 @@ class PromoInfo extends React.Component {
 
     return (
       <div className={classes.root}>
-        <h1 className={classes.title}>Irial 3D</h1>
-        <h2 className={classes.content}>Lumion Networkig <br/> <span className={classes.subContent}>3D Models, Learning &amp; Jobs</span></h2>
+        <h1 className={classes.title}>Irial  3D</h1>
+        <h2 className={classes.content}>Lumion Networkig</h2>
+        <h3 className={classes.subContent}>3D Models, Learning &amp; Jobs</h3>
         
           {/* <h1 className={classes.pText}>{this.props.language.welcome}</h1>
           <p variant="p" component="p" className={classes.pTextSmallFirst}>
@@ -63,24 +64,28 @@ const styles = theme => ({
     
   },
   title: {
-    fontFamily: 'Futura',
-    fontSize: 124,
+    fontFamily: 'Delvon',
+    fontSize: 224,
+    letterSpacing: 12,
     margin:0,
-    color: '#ffffff',
+    color: '#1c5375',
     textShadow: "1px 1px 0 rgba(0, 0, 0, 0.75)",
     textTransform: 'uppercase'
   },
   content: {
-    fontFamily: 'MONOSPACE',
+    fontFamily: 'Gloss',
     fontSize: 56,
+    letterSpacing: 2,
     margin: 0,
-    color: '#ffdf00',
+    color: '#e3a304',
     textShadow: "1px 1px 0 rgba(0, 0, 0, 0.75)",
   },
   subContent: {
-    fontFamily: 'MONOSPACE',
-    fontSize: 38,
-    color: '#ffdf00',
+    fontFamily: 'Gloss',
+    fontSize: 28,
+    letterSpacing: 1,
+    margin: 0,
+    color: '#e3a304',
     textShadow: "1px 1px 0 rgba(0, 0, 0, 0.75)",
   },
   orderButton: {   

@@ -203,7 +203,16 @@ class Layout extends React.Component {
         url('/static/styles/webfonts/3842F8_0_0.ttf') format('truetype');
     }
     
-
+    @font-face {
+      font-family: 'Delvon';
+      src: url('/static/styles/webfonts/DELVON_DEMO.ttf');
+    }
+    @font-face {
+      font-family: 'Gloss';
+      src: url('/static/styles/webfonts/Gloss_And_Bloom.ttf');
+    }
+    
+    
     .item-options {
       position: absolute;
       top: 0;

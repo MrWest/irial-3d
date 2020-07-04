@@ -1,10 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import { withStylesMore } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import { Grid } from "@material-ui/core";
 import  FrontContactForm  from "../forms/frontContactForm";
 
@@ -13,6 +9,49 @@ import { FacebookProvider, Like, Share, Group, Feed } from 'react-facebook';
 // import EmbeddedPost from "react-facebook/dist/EmbeddedPost";
 // import Page from "react-facebook/dist/Page";
 
+const AboutContact = ({ classes, language }) => (
+      <Grid container justify="center">
+       <Grid item  >
+        
+        <Grid container id="aboutus" spacing={4} className={classes.center}>
+          <Grid item xs={12} md={8}>
+                <h3
+                className={classes.typographyText}
+              >
+                {language.AboutUs}
+              </h3>
+              <div className={classes.typographyTextSmall}>
+                <div className={classes.hrBar} />
+              </div>
+              
+              <div className={classes.typographyTextSmall}>
+              
+               {language.AboutUsText.split('<br/>').map(txt => (<p style={{ fontSize: 18 }}>{txt}</p>))}
+              </div>
+            </Grid>
+            <Grid item xs={12} md={4}>
+            <div style={{height: "100%", display: "table"}}>
+
+                  <div style={{display: "table-cell", verticalAlign: "bottom", maxWidth: 360}}>
+                    <FacebookProvider appId="269776263974713">
+                      <Like href="http://www.facebook.com/vinalestraveler" colorScheme="dark" showFaces={true} share  />
+                    </FacebookProvider>
+                  </div>
+            </div>
+            </Grid>
+            <Grid item xs={12} md={6} style={{paddingTop: 60}} className={classes.cover}>
+            
+            </Grid>
+            <Grid id="contactus" item xs={12} md={6} style={{paddingLeft: 24, marginBottom: 24}}>
+              <FrontContactForm ></FrontContactForm>
+            </Grid>
+        
+        </Grid>
+          </Grid>
+      </Grid>
+    );
+
+    
 const styles = theme => ({
   center: {
     [theme.breakpoints.up("xl")]: {
@@ -63,67 +102,6 @@ const styles = theme => ({
   }
 });
 
-class AboutContact extends React.Component {
-  state = {};
- 
-
-  render() {
-    const { classes } = this.props;
-
-    return (
-      <div>
-      <Grid container justify="center">
-       <Grid item  className={classes.center}>
-        
-        <Grid container id="aboutus" spacing={4} >
-          <Grid item xs={12} md={8}>
-                <Typography
-                variant="h3"
-                component="h3"
-                className={classes.typographyText}
-              >
-                {this.props.language.AboutUs}
-              </Typography>
-              <div className={classes.typographyTextSmall}>
-                <div className={classes.hrBar} />
-              </div>
-              
-              <div className={classes.typographyTextSmall}>
-              
-               {this.props.language.AboutUsText.split('<br/>').map(txt => (<p style={{ fontSize: 18 }}>{txt}</p>))}
-              </div>
-            </Grid>
-            <Grid item xs={12} md={4}>
-            <div style={{height: "100%", display: "table"}}>
-
-                  <div style={{display: "table-cell", verticalAlign: "bottom", maxWidth: 360}}>
-                    <FacebookProvider appId="269776263974713">
-                      <Like href="http://www.facebook.com/vinalestraveler" colorScheme="dark" showFaces={true} share  />
-                    </FacebookProvider>
-                  </div>
-            </div>
-            </Grid>
-            <Grid item xs={12} md={6} style={{paddingTop: 60}} className={classes.cover}>
-            
-            </Grid>
-            <Grid id="contactus" item xs={12} md={6} style={{paddingLeft: 24, marginBottom: 24}}>
-              <FrontContactForm ></FrontContactForm>
-            </Grid>
-        
-        </Grid>
-         
-
-         
-          </Grid>
-      </Grid>
-      </div>
-    );
-  }
-}
-
-AboutContact.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 
 const mapStateToProps = state => {
   
@@ -134,4 +112,4 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps
-)( withStyles(styles)(AboutContact));
+)(withStyles(styles)(AboutContact));

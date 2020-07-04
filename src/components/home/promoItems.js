@@ -27,7 +27,7 @@ class PromoItems extends Component {
              <Grid item>
              <Grid container justify="center" alignItems="center" style={{ height: '100%', width: '100%' }}>
               <Grid item>
-                <h3 className={classes.newProducts} >New Products</h3>
+                <p className={classes.newProducts} >New Products</p>
                 </Grid>
               </Grid>
              </Grid>
@@ -137,7 +137,7 @@ const styles = theme => ({
     textAlign: 'center'
   },
   newProducts: {
-    fontFamily: 'MONOSPACE',
+    fontFamily: 'Gloss',
     fontSize: 20,
     margin: '8px 0px',
     marginLeft: 22,

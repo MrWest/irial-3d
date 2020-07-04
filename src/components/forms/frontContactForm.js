@@ -257,14 +257,14 @@ class FrontContactForm extends React.Component {
         <Form  onSubmit={this.props.handleSubmit(this.realhandleSubmit.bind(this))}>
             <Grid container spacing={4}>
         <Grid item xs={12} >
-             <Typography
+             <h3
             variant="h3"
             component="h3"
             className={classes.typographyText}
           >
             {this.props.language.ContactUs}
            
-          </Typography> 
+          </h3> 
           <Grid container>
                 
                 <Grid item xs={9}></Grid>

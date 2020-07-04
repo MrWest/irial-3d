@@ -32,10 +32,10 @@ const FrontModels = ({ models, classes, sections, addToCart }) =>  {
                 <h3 className={classes.sectionTittle}>{section.name}</h3>
                 <p  className={classes.pText}>{section.description}</p>
             </div>
-                <DisplayModelsTool
+                {/* <DisplayModelsTool
                     models={models}
                     addToCart={handleAddItem}
-                  /> 
+                  />  */}
           </Grid>
         </Grid>
         </div>

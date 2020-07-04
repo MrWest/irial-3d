@@ -48,7 +48,7 @@ const styles = theme => ({
     height: "100%"
   },
   promoField: {
-    backgroundImage: "url(../static/images/home/irial-3d-font-city-blue.jpg)",
+    backgroundImage: "url(../static/images/home/irial-3d-city-front.png)",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "top-left",    

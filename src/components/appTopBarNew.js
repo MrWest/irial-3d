@@ -321,15 +321,15 @@ const styles = theme => ({
     objectFit: 'contain'
   },
   logoText: {
-    fontFamily: 'Futura',
+    fontFamily: 'Arial',
     fontSize: 16,
-    color: '#ffffff',
-    textShadow: "1px 1px 0 rgba(0, 0, 0, 0.75)",
+    fontWeight: 'bold',
+    color: '#1c5375'
   },
   logoTextBlue: {
-    fontFamily: 'Futura',
+    fontFamily: 'Arial',
     fontSize: 16,
-    color: '#337ab7',
+    color: '#1c5375',
     textShadow: "1px 1px 0 rgba(0, 0, 0, 0.75)",
   },
   userLoggingText: {
@@ -443,13 +443,12 @@ const styles = theme => ({
     width: 158
   },
   appBarButton: {
-    padding: "4px 12px",
-    paddingBottom: 5,
+    padding: "5px 12px",
+    height: '100%',
     fontSize: 16,
-    fontFamily: "MONOSPACE",
+    fontFamily: "Arial",
     // textShadow: "1px 1px 0 rgba(255, 255, 255, 0.75)",
     color: "#ffffff",
-    fontWeight: "bold",
     textDecorationLine: "none !important",
     '&&:hover': {
       backgroundColor: '#ffffff',
@@ -457,13 +456,14 @@ const styles = theme => ({
     }
   },
   appBarButtonHovered: {
-    padding: "0px 12px",
+    padding: "4px 12px",
+    paddingBottom: 5,
     fontSize: 16,
-    fontFamily: "MONOSPACE",
+    height: '100%',
+    fontFamily: "Arial",
     // textShadow: "1px 1px 0 rgba(255, 255, 255, 0.75)",
     backgroundColor: '#ffffff',
     color: "#000000",
-    fontWeight: "bold",
     textDecorationLine: "none !important"
   },
   menuButton: {
@@ -519,8 +519,7 @@ const styles = theme => ({
       paddingLeft: 10,
       paddingRight: 10,
       minHeight: "40px !important",
-      minWidth: "80px !important",
-      fontSize: 12
+      minWidth: "80px !important"
     }
   },
   ripplingLogoStyle: {
