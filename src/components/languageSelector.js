@@ -41,7 +41,7 @@ const styles = theme => ({
     color: "#434c5f"
   },
   label: {
-    fontFamily: 'MONOSPACE',
+    fontFamily: 'Arial',
     color: '#ffffff',
     fontSize: 12,
     marginRight: 8
@@ -152,7 +152,7 @@ class LanguageSelector extends React.Component {
 
     return (
       <div className={classes.root} style={style}>
-        <Grid container>
+        <Grid container alignItems="center">
           <Grid item xs>
             <span className={classes.label}>{translatedLabel[value]}</span>
           </Grid>

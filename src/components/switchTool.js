@@ -50,6 +50,7 @@ class SwitchTool extends React.Component {
 }
 const styles = theme => ({
   slideButtonContainer: {
+    fontFamily: 'Arial',
     width: 40,
     height: 20,
     borderRadius: 11,
