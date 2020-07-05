@@ -210,6 +210,7 @@ class Layout extends React.Component {
     @font-face {
       font-family: 'Gloss';
       src: url('/static/styles/webfonts/Gloss_And_Bloom.ttf');
+      letter-spacing: 2px;
     }
     
     

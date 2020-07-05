@@ -127,21 +127,28 @@ const styles = theme => ({
       marginTop: 20
     },
     hrBar: {
-      background: "#337ab7",
-      borderColor: "#337ab7",
+      background: "#e3a304",
+      borderColor: "#e3a304",
       color: "#337ab7 !important",
-      marginTop: 20,
+      marginTop: 0,
       marginBottom: 20,
       height: 3,
       width: "100%",
       textAlign: "right !important"
     },
     typographyText: {
-      color: "#337ab7 !important",
+      color: '#1c5375',
+      fontFamily: 'Gloss',
+      letterSpacing: 2,
+      marginBottom: 0,
+      fontSize: 28,
+      marginTop: 56,
+      textShadow: '1px 1px 0 #afafaf',
       textAlign: "right !important"
     },
     typographyTextSmall: {
       marginBottom: 10,
+      fontFamily: 'Arial',
       textAlign: "right !important"
     }
   });

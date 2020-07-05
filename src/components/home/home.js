@@ -48,7 +48,7 @@ class HomeOut extends Component {
 }
 const styles = theme => ({
   container: {
-    paddingBottom: 130
+    paddingBottom: 88
   }
 });
 

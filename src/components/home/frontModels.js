@@ -13,8 +13,9 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { addToCart } from "../../actions";
 import DisplayModelsTool from "../models/displayModelsTool";
+import ItemCard from "../itemCard/itemCard";
 
-const FrontModels = ({ models, classes, sections, addToCart }) =>  {
+const FrontModels = ({ models, classes, sections, addToCart, language }) =>  {
   const section = sections ? sections[1] : undefined;
 
   const handleAddItem = (item, openCart) => {
@@ -32,10 +33,15 @@ const FrontModels = ({ models, classes, sections, addToCart }) =>  {
                 <h3 className={classes.sectionTittle}>{section.name}</h3>
                 <p  className={classes.pText}>{section.description}</p>
             </div>
-                {/* <DisplayModelsTool
-                    models={models}
-                    addToCart={handleAddItem}
-                  />  */}
+            <div>
+            <Grid container alignItems="stretch" >
+              {models.filter( a => parseInt(a.status) > 0).map(model => (
+                <Grid key={model.id} item xs={12} sm={6} md={4} className={classes.itemContainer}>
+                  <ItemCard  item={model} type='model' addToCart={addToCart} addToCartText={language.AddToCart} buyItem={language.Buy} />
+                </Grid>
+                ))}
+            </Grid>
+            </div>
           </Grid>
         </Grid>
         </div>
@@ -72,15 +78,16 @@ const FrontModels = ({ models, classes, sections, addToCart }) =>  {
         margin: "10px 0px",
         fontSize: 32,
         fontWeight: "bold",
-        fontFamily: "Futura",
-        color: "#337ab7",
+        fontFamily: "Gloss",
+        letterSpacing: 1,
+        color: "#1c5375",
         marginTop: 40,
-        marginBottom: 20,
+        marginBottom: 0,
         textAlign: "center"
       },
       pText: {
         marginBottom: 40,
-        fontFamily: "Roboto",
+        fontFamily: "Arial",
         textAlign: "center"
       }
   });

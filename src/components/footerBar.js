@@ -7,6 +7,14 @@ import { Grid } from "@material-ui/core";
 import Link from 'next/link';
 import {IconVTLogo} from "./icons"
 
+const IrialLogo = ({ classes }) => ( 
+  <img
+    src="/static/images/public/irial-transparency-logo.png"
+    className={classes.logo}
+    alt="Irial-3D"
+  />
+);
+
 class FooterBar extends React.Component {
   state = {};
 
@@ -24,7 +32,7 @@ class FooterBar extends React.Component {
           <Grid container spacing={2}  alignItems="center">
          
           <Grid item  xs={12} md={"auto"} >
-            <IconVTLogo  height={46} width={52} fill1={"#e4e400"} fill2={"#337ab7"}  />
+            <IrialLogo classes={classes} />
           </Grid>
           <Grid item  xs={12} md={"auto"} align="center"  >
           <Grid container justify="center" alignItems="center" alignContent="center" style={{ height: '100%' }} >
@@ -40,7 +48,7 @@ class FooterBar extends React.Component {
           <Grid container justify="center" alignItems="center" alignContent="center" style={{ height: '100%' }} >
             <Grid item>
             <p style={{color: "#434c5f", fontSize: 12, textAlign: "center", marginTop: 5, 
-                fontWeight: "bold", textShadow: "2px 2px 0 rgba(255, 255, 255, 0.75)"}}> © 2019 </p>
+                fontWeight: "bold", textShadow: "2px 2px 0 rgba(255, 255, 255, 0.75)"}}> © 2020 </p>
             </Grid>
              
           </Grid>
@@ -62,7 +70,7 @@ class FooterBar extends React.Component {
                   <p  className="ptextmobile">
                     powered by WildWest Company{" "}
                     <span className="mobileNo">
-                      , Proudly based in Pinar del Rio • 535-488-4414 • vinalestraveler@gmail.com
+                      , Proudly based in Pinar del Rio • 535-488-4414 • irial3d@gmail.com
                     </span>
                   </p>
                 </Grid>
@@ -125,6 +133,12 @@ const styles = theme => ({
       height: "auto",
       textAlign: "center"
     }
+  },
+  logo: {
+    outline: "none",
+    textDecorationLine: "none !important",
+    height: 24,
+    objectFit: 'contain'
   },
   mobileSocials: {
     width: 24,
