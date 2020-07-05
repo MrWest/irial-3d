@@ -279,7 +279,11 @@ class AppTopBar extends Component {
                   </Grid>
                 </Grid>
                 <Grid item>
-                  <LanguageSelector />
+                  <Grid container alignItems="center" style={{ height: '100%' }}>
+                    <Grid item>
+                       <LanguageSelector />
+                    </Grid>
+                  </Grid>
                 </Grid>
            </Grid>
           </Grid>
@@ -322,15 +326,13 @@ const styles = theme => ({
   },
   logoText: {
     fontFamily: 'Arial',
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 18,
     color: '#1c5375'
   },
   logoTextBlue: {
     fontFamily: 'Arial',
-    fontSize: 16,
-    color: '#1c5375',
-    textShadow: "1px 1px 0 rgba(0, 0, 0, 0.75)",
+    fontSize: 20,
+    color: '#1c5375'
   },
   userLoggingText: {
     [theme.breakpoints.down("sm")]: {
