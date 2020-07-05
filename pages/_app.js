@@ -226,6 +226,30 @@ class Layout extends React.Component {
       padding-top: 12px;
       padding-bottom: 8px;
     }
+
+    .item-options-front {
+      position: absolute;
+      top: 0;
+      background: rgba(0,0,0,0.3);
+      width: 100%;
+      display: none;
+      padding-right: 20px;
+      padding-top: 12px;
+      padding-bottom: 8px;
+    }
+
+    .item-description {
+      position: absolute;
+      bottom: 32;
+      background: rgba(0,0,0,0.3);
+      width: 100%;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      display: none;
+      padding-right: 20px;
+      padding-top: 12px;
+      padding-bottom: 8px;
+    }
   
          p {
           margin: 0px;

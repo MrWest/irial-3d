@@ -69,7 +69,7 @@ const styles = theme => ({
     letterSpacing: 12,
     margin:0,
     color: '#1c5375',
-    textShadow: "1px 1px 0 rgba(0, 0, 0, 0.75)",
+    // textShadow: "1px 1px 0 rgba(0, 0, 0, 0.75)",
     textTransform: 'uppercase'
   },
   content: {
@@ -78,7 +78,7 @@ const styles = theme => ({
     letterSpacing: 2,
     margin: 0,
     color: '#e3a304',
-    textShadow: "1px 1px 0 rgba(0, 0, 0, 0.75)",
+    textShadow: "2px 4px 0 rgba(0, 0, 0, 0.55)",
   },
   subContent: {
     fontFamily: 'Gloss',

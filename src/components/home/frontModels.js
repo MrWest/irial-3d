@@ -13,7 +13,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { addToCart } from "../../actions";
 import DisplayModelsTool from "../models/displayModelsTool";
-import ItemCard from "../itemCard/itemCard";
+import ItemCardFront from "../itemCard/itemCardFront";
 
 const FrontModels = ({ models, classes, sections, addToCart, language }) =>  {
   const section = sections ? sections[1] : undefined;
@@ -33,11 +33,11 @@ const FrontModels = ({ models, classes, sections, addToCart, language }) =>  {
                 <h3 className={classes.sectionTittle}>{section.name}</h3>
                 <p  className={classes.pText}>{section.description}</p>
             </div>
-            <div>
-            <Grid container alignItems="stretch" >
+            <div style={{paddingBottom: 64 }}>
+            <Grid container alignItems="stretch"  spacing={2}>
               {models.filter( a => parseInt(a.status) > 0).map(model => (
                 <Grid key={model.id} item xs={12} sm={6} md={4} className={classes.itemContainer}>
-                  <ItemCard  item={model} type='model' addToCart={addToCart} addToCartText={language.AddToCart} buyItem={language.Buy} />
+                  <ItemCardFront  item={model} type='model' addToCart={addToCart} addToCartText={language.AddToCart} buyItem={language.Buy} />
                 </Grid>
                 ))}
             </Grid>
@@ -83,7 +83,8 @@ const FrontModels = ({ models, classes, sections, addToCart, language }) =>  {
         color: "#1c5375",
         marginTop: 40,
         marginBottom: 0,
-        textAlign: "center"
+        textAlign: "center",
+        textShadow: '1px 1px 0 #afafaf'
       },
       pText: {
         marginBottom: 40,
