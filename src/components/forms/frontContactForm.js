@@ -146,6 +146,39 @@ const styles = theme => ({
       textShadow: '1px 1px 0 #afafaf',
       textAlign: "right !important"
     },
+    actionButton: {
+      borderRadius: 4,
+      height: 36,
+      width: '40%',
+      fontFamily: 'Delvon',
+      fontSize: 24,
+      letterSpacing: 2,
+      fontStyle: 'normal',
+      color: '#ffffff',
+      backgroundColor: '#1c5375',
+      textTransform: 'none',
+      '&:hover': {
+        backgroundColor: '#559cd9'
+      }
+    },
+    actionIconDisabled: {
+      color: '#5f5f5f'
+    },
+    actionButtonDisabled: {
+      borderRadius: 4,
+      height: 36,
+      width: '40%',
+      fontFamily: 'Delvon',
+      fontSize: 24,
+      letterSpacing: 2,
+      fontStyle: 'normal',
+      color: '#5f5f5f !important',
+      backgroundColor: '#dedede',
+      textTransform: 'none',
+      '&:hover': {
+        cursor: 'default !important'
+      }
+    },
     typographyTextSmall: {
       marginBottom: 10,
       fontFamily: 'Arial',
@@ -338,10 +371,10 @@ class FrontContactForm extends React.Component {
             </Grid>
             
             <Grid item xs={12}  style={{ paddingTop: 10, textAlign: "right" }}>
-                    <CoolButton height={56} width={245} fill={"#337ab7"} color={"#ffffff"} disabled={pristine}>
+                    <Button  className={pristine ? classes.actionButtonDisabled : classes.actionButton}  disabled={pristine}>
                     
-                    {this.state.isSending? this.props.language.Sending : this.props.language.Send}
-                    </CoolButton>
+                      {this.state.isSending? this.props.language.Sending : this.props.language.Send}
+                    </Button>
             </Grid> 
             </Grid>
         </Form>

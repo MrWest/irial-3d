@@ -260,7 +260,7 @@ class Layout extends React.Component {
     .front-card-content {
       position: relative;
       cursor: pointer;
-      height: 100%;
+      min-height: 154px;
     }
 
     .front-card-content:hover .item-options-front {

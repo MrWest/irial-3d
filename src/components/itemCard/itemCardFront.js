@@ -19,6 +19,7 @@ const ItemCardFront = ({ classes, item, category, type, addToCart, addToCartText
       <div className="front-card-content" >
         <img
           style={{  width: '100%', height: '100%',
+          minHeight: 154,
           objectFit: 'cover'}}
           src={item.images && item.images.length > 0 ? item.images[0].url : undefined}
           title={item.name}
