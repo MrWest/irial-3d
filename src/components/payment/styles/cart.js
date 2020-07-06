@@ -85,7 +85,8 @@ const styles = theme => ({
     width: '100%'
   },
   deleteIcon: {
-    color: '#A12839'
+    color: '#A12839',
+    zIndex: 999
   },
   actionIcon: {
     color: '#ffffff',

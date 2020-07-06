@@ -8,12 +8,18 @@ import {
   MenuItem,
   Paper
 } from "@material-ui/core";
-
+import Masonry from 'react-masonry-css'
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { addToCart } from "../../actions";
-import DisplayModelsTool from "../models/displayModelsTool";
 import ItemCardFront from "../itemCard/itemCardFront";
+
+const breakpointColumnsObj = {
+  default: 4,
+  1100: 3,
+  700: 2,
+  500: 1
+};
 
 const FrontModels = ({ models, classes, sections, addToCart, language }) =>  {
   const section = sections ? sections[1] : undefined;
@@ -25,6 +31,8 @@ const FrontModels = ({ models, classes, sections, addToCart, language }) =>  {
    };
 
   if(!section) return <div />
+
+  
    return ( 
      <div>
         <Grid container justify="center">
@@ -34,17 +42,20 @@ const FrontModels = ({ models, classes, sections, addToCart, language }) =>  {
                 <p  className={classes.pText}>{section.description}</p>
             </div>
             <div style={{paddingBottom: 64 }}>
-            <Grid container alignItems="stretch"  spacing={2}>
+            <Masonry
+              breakpointCols={breakpointColumnsObj}
+              className="my-masonry-grid"
+              columnClassName="my-masonry-grid_column">
               {models.filter( a => parseInt(a.status) > 0).map(model => (
-                <Grid key={model.id} item xs={12} sm={6} md={4} className={classes.itemContainer}>
-                  <ItemCardFront  item={model} type='model' addToCart={addToCart} addToCartText={language.AddToCart} buyItem={language.Buy} />
-                </Grid>
-                ))}
-            </Grid>
+                <div key={model.id} style={{ height: '100%' }}>
+                  <ItemCardFront   item={model} type='model' addToCart={handleAddItem} addToCartText={language.AddToCart} buyItem={language.Buy} />
+                </div>
+               ))}
+            </Masonry>
             </div>
           </Grid>
         </Grid>
-        </div>
+      </div>
         
     );
  

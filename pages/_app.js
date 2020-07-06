@@ -240,15 +240,68 @@ class Layout extends React.Component {
 
     .item-description {
       position: absolute;
-      bottom: 32;
-      background: rgba(0,0,0,0.3);
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
       width: 100%;
-      border-top-left-radius: 20px;
-      border-top-right-radius: 20px;
       display: none;
+      padding-left: 20px;
       padding-right: 20px;
-      padding-top: 12px;
-      padding-bottom: 8px;
+      padding-top: 8px;
+      padding-bottom: 12px;
+    }
+
+    .item-description p {
+      color: #ffffff;
+      font-family: Delvon;
+      font-size: 22px;
+    }
+
+
+    .front-card-content {
+      position: relative;
+      cursor: pointer;
+      height: 100%;
+    }
+
+    .front-card-content:hover .item-options-front {
+      display: inherit;
+    }
+
+    .front-card-content:hover .item-description {
+      display: inherit;
+    }
+
+    .category-front {
+      height: 28px;
+      border-radius: 14px;
+      background-color: #faba1b;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 2.29;
+      color: #1c5375;
+      font-family: Arial;
+      padding: 0px 16px;
+      textAlign: center;
+      margin: 0 auto;
+    }
+
+
+    .my-masonry-grid {
+      display: -webkit-box; /* Not needed if autoprefixing */
+      display: -ms-flexbox; /* Not needed if autoprefixing */
+      display: flex;
+      margin-left: -30px; /* gutter size offset */
+      width: auto;
+    }
+    .my-masonry-grid_column {
+      padding-left: 30px; /* gutter size */
+      background-clip: padding-box;
+    }
+     
+    /* Style your items */
+    .my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
+      background: #1c5375;
+      margin-bottom: 30px;
     }
   
          p {

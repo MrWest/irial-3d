@@ -133,6 +133,7 @@ const styles = theme => ({
   },
   typographyTextSmall: {
     textAlign: "left",
+    fontFamily: 'Arial',
     color: '#ffffff',
     marginBottom: 0,
     fontSize: 18

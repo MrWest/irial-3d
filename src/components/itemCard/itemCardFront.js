@@ -13,11 +13,13 @@ const descriptionLeverage = description =>
   description && description.length > 120 ? `${description.substring(0, 120)}...` : description;
 
 const ItemCardFront = ({ classes, item, category, type, addToCart, addToCartText, buyItem }) => (
-  <Link href={`/${type}/${item.id}`}>
-    <Card className={classes.Card}>
-      <div style={{ position: 'relative' }}>
+  
+  <Link href={`/${type}/${item.id}`} >
+   
+      <div className="front-card-content" >
         <img
-          className={classes.Media}
+          style={{  width: '100%', height: '100%',
+          objectFit: 'cover'}}
           src={item.images && item.images.length > 0 ? item.images[0].url : undefined}
           title={item.name}
           alt={item.name}
@@ -47,7 +49,9 @@ const ItemCardFront = ({ classes, item, category, type, addToCart, addToCartText
               <Grid item xs>
                 <Grid container justify="flex-start">
                   <Grid item>
-                    <CategoryLabel category={item.category_name} variant="small" />
+                    <Grid container justify="center" alignItems="center" className="category-front">
+                      <Grid item>{item.category_name}</Grid>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
@@ -66,18 +70,18 @@ const ItemCardFront = ({ classes, item, category, type, addToCart, addToCartText
                 </Grid>
               </Grid>
             </Grid>
-            <Grid container alignItems="flex-end" >
+            <Grid container alignItems="flex-end" style={{ paddingTop: 8 }} >
               <Grid item xs style={{ maxWidth: '80%'}}>
-                <h4 className={classes.ItemTitle} title={item.name}>{item.name}{' '}<span style={{ fontSize: 12}}>{item.lumion_version}</span></h4>
+                <p  title={item.name}>{item.name}{' '}<span style={{ fontSize: 12}}>{item.lumion_version}</span></p>
               </Grid>
               <Grid item>
-                <p className={classes.ItemPrice} >${thousandsSeparatedAndFixed(item.price)}</p>
+                <p  >${thousandsSeparatedAndFixed(item.price)}</p>
               </Grid>
             </Grid>
           </div>
       </div>
-    </Card>
   </Link>
+   
 );
 
-export default withStyles(styles)(ItemCardFront);
+export default ItemCardFront;

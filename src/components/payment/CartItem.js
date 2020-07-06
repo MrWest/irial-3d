@@ -9,13 +9,15 @@ import Remove from "@material-ui/icons/Delete";
 import styles from './styles/cart';
 
 const CartItem = ({ classes, item, removeFromCart}) => (
-  <Link to={`/${item.type}/${item.id_item}`} >
+  
     <div className={classes.cartItemContainer}>
     <Grid container alignItems="center" spacing={2}>
       <Grid item>
-        <div className={classes.cartItemImgContainer}>
-          <img src={item.image} className={classes.itemImg} />
-        </div>
+        <Link to={`/${item.type}/${item.id_item}`} >
+          <div className={classes.cartItemImgContainer}>
+            <img src={item.image} className={classes.itemImg} />
+          </div>
+        </Link>
       </Grid>
       <Grid item xs>
         <p className={classes.cartItemName}>{item.name}</p>
@@ -30,7 +32,6 @@ const CartItem = ({ classes, item, removeFromCart}) => (
       </Grid>
     </Grid>
     </div>
-  </Link>
 );
 // const mapStateToProps = state => ({
 //   cart: state.cart,
