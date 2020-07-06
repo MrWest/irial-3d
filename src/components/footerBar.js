@@ -10,7 +10,7 @@ import {IconVTLogo} from "./icons"
 const IrialLogo = ({ classes }) => ( 
   <img
     src="/static/images/public/irial-transparency-logo.png"
-    className={classes.logo}
+    className="logo-footer"
     alt="Irial-3D"
   />
 );

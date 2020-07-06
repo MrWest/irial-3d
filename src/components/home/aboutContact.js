@@ -99,11 +99,11 @@ const styles = theme => ({
   coverContact: {
     display: 'none',
      [theme.breakpoints.up("sm")]: {
-       backgroundImage: "url(../static/images/home/dark-city.svg)",
+       backgroundImage: "url(../static/images/home/desk-computer-business-office-iral.svg)",
        backgroundRepeat: "no-repeat !important",
        display: 'inherit',
        // backgroundSize: "cover",
-       backgroundPosition: "left  !important",
+       backgroundPosition: "left top  !important",
        backgroundSize: "48% !important",
        width: "100%",
        alignItems: "center",

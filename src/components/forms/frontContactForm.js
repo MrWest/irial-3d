@@ -53,7 +53,7 @@ const renderTextArea = ({ input, label, placeholder, classes, meta }) => {
             placeholder={placeholder}
             error={meta.touched && meta.error && true}
             multiline={true}
-            rows={6}
+            rows={5}
             />
         {/* <TextField
           {...input}

@@ -15,7 +15,7 @@ import { addToCart } from "../../actions";
 import ItemCardFront from "../itemCard/itemCardFront";
 
 const breakpointColumnsObj = {
-  default: 4,
+  default: 3,
   1100: 3,
   700: 2,
   500: 1
@@ -46,8 +46,8 @@ const FrontModels = ({ models, classes, sections, addToCart, language }) =>  {
               breakpointCols={breakpointColumnsObj}
               className="my-masonry-grid"
               columnClassName="my-masonry-grid_column">
-              {models.filter( a => parseInt(a.status) > 0).map(model => (
-                <div key={model.id} style={{ height: '100%' }}>
+              {models.filter( a => parseInt(a.status) > 0).sort((m1, m2) => parseFloat(m1.price) - parseFloat(m2.price)).map(model => (
+                <div key={model.id} >
                   <ItemCardFront   item={model} type='model' addToCart={handleAddItem} addToCartText={language.AddToCart} buyItem={language.Buy} />
                 </div>
                ))}

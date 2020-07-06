@@ -230,7 +230,7 @@ class Layout extends React.Component {
     .item-options-front {
       position: absolute;
       top: 0;
-      background: rgba(0,0,0,0.3);
+      background: rgba(0,0,0,0.7);
       width: 100%;
       display: none;
       padding-right: 20px;
@@ -241,7 +241,7 @@ class Layout extends React.Component {
     .item-description {
       position: absolute;
       bottom: 0;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.7);
       width: 100%;
       display: none;
       padding-left: 20px;
@@ -300,7 +300,7 @@ class Layout extends React.Component {
      
     /* Style your items */
     .my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
-      background: #1c5375;
+      /*background: #1c5375;*/
       margin-bottom: 30px;
     }
   
@@ -319,7 +319,7 @@ class Layout extends React.Component {
           display: flex;
           align-items: center;
           justify-content: center;
-          background-color: #f3f3f3;
+          background-color: #fafafa;
       }
       .ptextmobile {
         margin-left: 15px !important;
@@ -329,7 +329,13 @@ class Layout extends React.Component {
         background: transparent !important;
       }
 
-      
+  .logo-footer {
+      outline: none;
+      text-decoration-line: none !important;
+      height: 24px;
+      object-fit: contain;
+  }
+
   .mobileSocials {
     width: 24px !important;
     height: 24px !important;
