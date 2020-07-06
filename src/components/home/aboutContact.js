@@ -49,8 +49,13 @@ const AboutContact = ({ classes, language }) => (
         <div className={classes.coverContact} >
            <Grid container justify="center">
               <Grid item className={classes.center}>
-              <Grid container>
-              <Grid item xs={12} md={6} style={{paddingTop: 60}} />
+              <Grid container alignItems="flex-end">
+              <Grid item xs={12} md={6} style={{paddingBottom: 42 }} >
+               
+                  <FacebookProvider appId="269776263974713">
+                    <Like href="http://www.facebook.com/vinalestraveler" colorScheme="dark" showFaces={true} share  />
+                  </FacebookProvider>
+              </Grid>
               <Grid id="contactus" item xs={12} md={6} style={{paddingLeft: 24, marginBottom: 24}}>
                 <FrontContactForm ></FrontContactForm>
               </Grid>
