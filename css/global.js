@@ -31,7 +31,7 @@ html {
   
   p {
     margin: 0px;
-    font-family: "Roboto";
+    font-family: "Arial";
     font-size: 18px;
   }
   
@@ -291,14 +291,14 @@ html {
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75)
   }
   .icon-path {
-    -webkit-filter: drop-shadow( 0px 0px 12px #337ab7);
-    filter: drop-shadow( 0px 0px 12px #337ab7);
+    -webkit-filter: drop-shadow( 0px 0px 12px #1c5375);
+    filter: drop-shadow( 0px 0px 12px #1c5375);
   }
   
   
   .button-path {
-    -webkit-filter: drop-shadow( 1px 1px 13px #337ab7);
-    filter: drop-shadow( 1px 1px 13px #337ab7);
+    -webkit-filter: drop-shadow( 1px 1px 13px #1c5375);
+    filter: drop-shadow( 1px 1px 13px #1c5375);
   }
   
   .category-paper:hover .category-tittle { 

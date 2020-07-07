@@ -142,7 +142,7 @@ class Layout extends React.Component {
     
     p {
       margin: 0px;
-      font-family: "Roboto";
+      font-family: "Arial";
       font-size: 18px;
     }
     
@@ -695,14 +695,14 @@ class Layout extends React.Component {
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75)
     }
     .icon-path {
-      -webkit-filter: drop-shadow( 0px 0px 12px #337ab7);
-      filter: drop-shadow( 0px 0px 12px #337ab7);
+      -webkit-filter: drop-shadow( 0px 0px 12px #1c5375);
+      filter: drop-shadow( 0px 0px 12px #1c5375);
     }
     
     
     .button-path {
-      -webkit-filter: drop-shadow( 1px 1px 13px #337ab7);
-      filter: drop-shadow( 1px 1px 13px #337ab7);
+      -webkit-filter: drop-shadow( 1px 1px 13px #1c5375);
+      filter: drop-shadow( 1px 1px 13px #1c5375);
     }
     
     .category-paper:hover .category-tittle { 
@@ -1827,11 +1827,11 @@ class Layout extends React.Component {
   filter: drop-shadow(0 2px 2px #1a1a1a); }
   @media (min-width: 768px) {
     .image-gallery-icon:hover {
-      color: #337ab7; }
+      color: #1c5375; }
       .image-gallery-icon:hover .image-gallery-svg {
         transform: scale(1.1); } }
   .image-gallery-icon:focus {
-    outline: 2px solid #337ab7; }
+    outline: 2px solid #1c5375; }
 
 .image-gallery-using-mouse .image-gallery-icon:focus {
   outline: none; }
@@ -2008,7 +2008,7 @@ class Layout extends React.Component {
       .image-gallery-bullets .image-gallery-bullet {
         padding: 2.7px; } }
     .image-gallery-bullets .image-gallery-bullet:focus, .image-gallery-bullets .image-gallery-bullet:hover {
-      background: #337ab7;
+      background: #1c5375;
       transform: scale(1.1); }
     .image-gallery-bullets .image-gallery-bullet.active {
       background: #fff; }
@@ -2077,10 +2077,10 @@ class Layout extends React.Component {
     line-height: 0; }
   .image-gallery-thumbnail.active, .image-gallery-thumbnail:hover, .image-gallery-thumbnail:focus {
     outline: none;
-    border: 4px solid #337ab7; }
+    border: 4px solid #1c5375; }
     @media (max-width: 768px) {
       .image-gallery-thumbnail.active, .image-gallery-thumbnail:hover, .image-gallery-thumbnail:focus {
-        border: 3px solid #337ab7; } }
+        border: 3px solid #1c5375; } }
 
 .image-gallery-thumbnail-label {
   box-sizing: border-box;

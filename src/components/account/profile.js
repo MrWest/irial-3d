@@ -432,10 +432,12 @@ const styles = theme => ({
     borderRadius: 4,
     height: 36,
     width: '100%',
-    fontWeight: 'bold',
+    fontFamily: 'Delvon',
+    fontSize: 24,
+    letterSpacing: 2,
     fontStyle: 'normal',
     color: '#ffffff',
-    backgroundColor: '#337ab7',
+    backgroundColor: '#1c5375',
     textTransform: 'none',
     '&:hover': {
       backgroundColor: '#559cd9'
@@ -448,13 +450,15 @@ const styles = theme => ({
     borderRadius: 4,
     height: 36,
     width: '100%',
-    fontWeight: 'bold',
+    fontFamily: 'Delvon',
+    fontSize: 24,
+    letterSpacing: 2,
     fontStyle: 'normal',
     color: '#5f5f5f !important',
     backgroundColor: '#dedede',
     textTransform: 'none',
     '&:hover': {
-      cursor: 'default !important'
+      cursor: 'not-allowed !important'
     }
   },
   inner: {
@@ -474,7 +478,7 @@ const styles = theme => ({
     width: '100%',
     fontWeight: 'bold',
     fontStyle: 'normal',
-    color: '#337ab7',
+    color: '#1c5375',
     backgroundColor: 'transparent',
     textTransform: 'none',
     '&:hover': {

@@ -129,7 +129,7 @@ const styles = theme => ({
     hrBar: {
       background: "#e3a304",
       borderColor: "#e3a304",
-      color: "#337ab7 !important",
+      color: "#1c5375 !important",
       marginTop: 0,
       marginBottom: 20,
       height: 3,
@@ -176,7 +176,7 @@ const styles = theme => ({
       backgroundColor: '#dedede',
       textTransform: 'none',
       '&:hover': {
-        cursor: 'default !important'
+        cursor: 'not-allowed !important'
       }
     },
     typographyTextSmall: {

@@ -37,7 +37,7 @@ class FooterBar extends React.Component {
           <Grid item  xs={12} md={"auto"} align="center"  >
           <Grid container justify="center" alignItems="center" alignContent="center" style={{ height: '100%' }} >
             <Grid item>
-            <p style={{color: "#337ab7", fontFamily: "Futura", fontSize: 12, textAlign: "center", 
+            <p style={{color: "#1c5375", fontFamily: "Futura", fontSize: 12, textAlign: "center", 
             fontWeight: "bold", textShadow: "2px 2px 0 rgba(255, 255, 255, 0.75)", display: "table-cell", verticalAlign: "middle"}}>Irial 3D</p>
             </Grid>
             
@@ -196,7 +196,7 @@ const styles = theme => ({
     flexGrow: 1
   },
   partnered: {
-    fontFamily: "Roboto",
+    fontFamily: "Arial",
     fontSize: 12,
     fontWeight: "bold",
     marginBottom: 0,
@@ -207,7 +207,7 @@ const styles = theme => ({
     marginLeft: 15,
     // display: "table-cell",
     verticalAlign: "middle",
-    fontFamily: "Roboto",
+    fontFamily: "Arial",
     maxHeight: 15,
     marginBottom: 0
   },

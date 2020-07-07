@@ -40,10 +40,10 @@ const styles = theme => ({
     }
   },
   cartItemText: {
-    fontFamily: 'Roboto'
+    fontFamily: 'Arial'
   }, 
   emptyCart: {
-    color: '#337ab7'
+    color: '#1c5375'
   },
   shoppingCart: {
     backgroundColor: 'rgba(0,0,0,0.2)',
@@ -59,7 +59,7 @@ const styles = theme => ({
   },
   cartTitle: {
     fontWeight: 'bold',
-    color: '#337ab7',
+    color: '#1c5375',
     fontSize: 18,
   },
   cartLightText: {
@@ -93,29 +93,36 @@ const styles = theme => ({
     fontSize: 18
   },
   actionButton: {
+    borderRadius: 4,
+    height: 36,
     width: '100%',
-    fontWeight: 'bold',
+    fontFamily: 'Delvon',
+    fontSize: 24,
+    letterSpacing: 2,
     fontStyle: 'normal',
-    fontFamily: 'Roboto',
     color: '#ffffff',
-    backgroundColor: '#337ab7',
+    backgroundColor: '#1c5375',
     textTransform: 'none',
     '&:hover': {
-      backgroundColor: '#559cd9 !important'
+      backgroundColor: '#559cd9'
     }
   },
   actionIconDisabled: {
     color: '#5f5f5f'
   },
   actionButtonDisabled: {
+    borderRadius: 4,
+    height: 36,
     width: '100%',
-    fontWeight: 'bold',
+    fontFamily: 'Delvon',
+    fontSize: 24,
+    letterSpacing: 2,
     fontStyle: 'normal',
     color: '#5f5f5f !important',
     backgroundColor: '#dedede',
     textTransform: 'none',
     '&:hover': {
-      backgroundColor: '#559cd9'
+      cursor: 'not-allowed !important'
     }
   }
 });
