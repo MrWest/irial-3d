@@ -25,6 +25,7 @@ import PaymentForm from './paymentForm';
 import { isServer, getLanguage } from '../../apis/tools';
 import { downloadFile, doTransfers } from '../../actions';
 import CartItem from './CartItem';
+import HorizontalCalendar from './horizontalCalendar';
 
 
 
@@ -75,6 +76,9 @@ return (
             </Helmet>
       <Grid container justify="center" spacing={0}>
         <Grid item className={classes.center}>
+          <Grid container>
+            <HorizontalCalendar />
+          </Grid>
           <Grid container spacing={4} > 
            <Grid item xs={8}>
                <h1 className={classes.categoryTittle}>Payment Info</h1>
@@ -102,7 +106,7 @@ return (
 
 const styles = theme => ({
   container: {
-    paddingTop: 120,
+    paddingTop: 56,
     paddingBottom: 130
   },
   mobilePadding: {   

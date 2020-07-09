@@ -734,6 +734,32 @@ class Layout extends React.Component {
       from {opacity: .4} 
       to {opacity: 1}
     }
+
+    @keyframes fadeOutLeft {
+      0% {
+        opacity: 0;
+        -webkit-transform: translateX(0px);
+        -ms-transform: translateX(0px);
+        transform: translateX(0px);
+      }
+    
+      100% {
+        opacity: 1;
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        transform: translateX(-50%);
+      }
+    }
+    
+    .fade-out-left {
+      -webkit-animation-name: fadeOutLeft;
+      -webkit-animation-duration: 0.3s;
+      animation-name: fadeOutLeft;
+      animation-duration: 0.3s;
+    }
+    
+  
+
     @media (max-width: 767px) {
     
       .swagup-big-banner {

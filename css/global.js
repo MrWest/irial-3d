@@ -244,8 +244,32 @@ html {
       transform: translateX(0px);
     }
   }
+
+
+  @keyframes fadeOutLeft {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateX(0px);
+      -ms-transform: translateX(0px);
+      transform: translateX(0px);
+    }
   
+    100% {
+      opacity: 1;
+      -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      transform: translateX(-50%);
+    }
+  }
   
+  .fade-out-left {
+    -webkit-animation-name: fadeOutLeft;
+    -webkit-animation-duration: 1s;
+    animation-name: fadeOutLeft;
+    animation-duration: 1s;
+  }
+  
+
   .category-paper:hover .bottom-button {
     -webkit-animation-name: fadeInRight;
     animation-name: fadeInRight;
