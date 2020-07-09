@@ -34,7 +34,7 @@ const styles = theme => ({
   cartItemContainer: {
     padding: '8px 12px',
     borderBottom: '1px solid #dedede',
-    color: '#434c5f',
+    color: '#1c5375',
     '&:hover': {
       background: '#dedee3'
     }
@@ -97,7 +97,7 @@ const styles = theme => ({
     height: 36,
     width: '100%',
     fontFamily: 'Delvon',
-    fontSize: 24,
+    fontSize: 22,
     letterSpacing: 2,
     fontStyle: 'normal',
     color: '#ffffff',
@@ -115,7 +115,7 @@ const styles = theme => ({
     height: 36,
     width: '100%',
     fontFamily: 'Delvon',
-    fontSize: 24,
+    fontSize: 22,
     letterSpacing: 2,
     fontStyle: 'normal',
     color: '#5f5f5f !important',

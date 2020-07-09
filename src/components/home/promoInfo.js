@@ -111,7 +111,7 @@ const styles = theme => ({
     textShadow: "4px 4px 0 rgba(0, 0, 0, 0.75)",
     textAlign: "center",
     marginTop: 100,
-    fontFamily: "Futura",
+    fontFamily: "Delvon",
     fontSize: 64,
     fontWeight: 900,
     fontStyle: "normal",

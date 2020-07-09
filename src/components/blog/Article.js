@@ -39,7 +39,7 @@ const Article = ({ classes, post }) => (
       font-style: normal;
       line-height: 1.06;
       letter-spacing: normal;
-      color: #0f2440;
+      color: #1c5375;
     }
 
     article p,

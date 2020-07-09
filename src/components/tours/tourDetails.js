@@ -91,7 +91,7 @@ class TourDetails extends Component {
         <Grid item className={classes.center}>
             <Grid container spacing={4} className={classes.mobilePadding}>
               <Grid item xs={12} md={8} >
-              <p style={{fontSize: 16, lineHeight: 1.3, color: '#0f2440 !important', fontFamily: 'Roboto !important'}}>
+              <p style={{fontSize: 16, lineHeight: 1.3, color: '#1c5375 !important', fontFamily: 'Roboto !important'}}>
                       <h1 variant="p" align="left" className={classes.categoryTittle} style={{ display: 'inline'}}>
                         {tour.name+ " "}
                       </h1>
@@ -139,7 +139,7 @@ class TourDetails extends Component {
                <p style={{fontWeight: "bold", marginTop: 20, fontSize: 18}} >{this.props.language.Program}:</p>
                <ul style={{ listStylePosition: 'outside', display: 'table' }}>
                  {tour.program.map(prg => (
-                   <li className={/^- /.test(prg.content) ? classes.bulletLess : classes.bullet}><p style={{ color: '#0f2440 !important'}}>{this.programFormat(prg.content)}</p></li>
+                   <li className={/^- /.test(prg.content) ? classes.bulletLess : classes.bullet}><p style={{ color: '#1c5375 !important'}}>{this.programFormat(prg.content)}</p></li>
                  ))}
                </ul>
                 </Fragment>

@@ -50,7 +50,7 @@ export const ProjectCardLeft = ({project, classes, language}) => {
       variant="p"
       component="p"
       className={classes.descriptionText}
-      style={{ fontSize: 16, color: '#0f2440 !important', fontFamily: 'Roboto !important' }}
+      style={{ fontSize: 16, color: '#1c5375 !important', fontFamily: 'Roboto !important' }}
     >
       {project.general_description}
     </p>
@@ -153,7 +153,7 @@ export const ProjectCardRight = ({project, classes, language}) =>{
         variant="p"
         component="p"
         className={classes.descriptionText}
-        style={{ fontSize: 16, color: '#0f2440 !important', fontFamily: 'Roboto !important' }}
+        style={{ fontSize: 16, color: '#1c5375 !important', fontFamily: 'Roboto !important' }}
       >
         {project.general_description}
       </p>

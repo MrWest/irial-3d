@@ -364,7 +364,7 @@ const styles = theme => ({
     height: 28
   },
   bottomBar: {
-    backgroundColor: '#000000',
+    backgroundColor: '#032D46',
     height: 28
   },
   grow: {

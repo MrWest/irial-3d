@@ -97,7 +97,7 @@ html {
     color: #3577d4 !important;
   }
   .main-theme-text {
-    color: #434c5f !important;
+    color: #1c5375 !important;
   }
   .red-text {
     color: #b00020 !important;

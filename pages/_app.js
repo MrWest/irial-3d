@@ -189,14 +189,14 @@ class Layout extends React.Component {
   
     @import url('//hello.myfonts.net/count/3842d3');
     @font-face {
-      font-family: 'FuturaLTPro';
+      font-family: 'Delvon';
       src: url('/static/styles/webfonts/3842D3_0_0.eot');
       src: url('/static/styles/webfonts/3842D3_0_0.eot?#iefix') format('embedded-opentype'),
         url('webfonts/3842D3_0_0.woff2') format('woff2'), url('/static/styles/webfonts/3842D3_0_0.woff') format('woff'),
         url('webfonts/3842D3_0_0.ttf') format('truetype');
     }
     @font-face {
-      font-family: 'Futura';
+      font-family: 'Delvon';
       src: url('/static/styles/webfonts/3842F8_0_0.eot');
       src: url('/static/styles/webfonts/3842F8_0_0.eot?#iefix') format('embedded-opentype'),
         url('/static/styles/webfonts/3842F8_0_0.woff2') format('woff2'), url('/static/styles/webfonts/3842F8_0_0.woff') format('woff'),
@@ -462,7 +462,7 @@ class Layout extends React.Component {
       color: #3577d4 !important;
     }
     .main-theme-text {
-      color: #434c5f !important;
+      color: #1c5375 !important;
     }
     .red-text {
       color: #b00020 !important;

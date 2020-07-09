@@ -230,7 +230,7 @@ class Profile extends React.Component {
                   <Grid container spacing={0} alignItems="flex-start"
                     className={classes.stripeloginButon}>
                     <Grid item xs> 
-                      <span style={{ color: '#666EE8', fontFamily: 'Futura', fontSize: 14, marginRight: 8 }}>
+                      <span style={{ color: '#666EE8', fontFamily: 'Delvon', fontSize: 14, marginRight: 8 }}>
                         Login into
                       </span>
                     </Grid>
@@ -433,7 +433,7 @@ const styles = theme => ({
     height: 36,
     width: '100%',
     fontFamily: 'Delvon',
-    fontSize: 24,
+    fontSize: 22,
     letterSpacing: 2,
     fontStyle: 'normal',
     color: '#ffffff',
@@ -451,7 +451,7 @@ const styles = theme => ({
     height: 36,
     width: '100%',
     fontFamily: 'Delvon',
-    fontSize: 24,
+    fontSize: 22,
     letterSpacing: 2,
     fontStyle: 'normal',
     color: '#5f5f5f !important',

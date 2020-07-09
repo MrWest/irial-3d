@@ -121,7 +121,7 @@ class ProjectsHome extends Component {
           <Grid container spacing={4} alignItems="center" > 
             <Grid item xs >
 
-              <p style={{fontSize: 16, lineHeight: 1.3, color: '#0f2440 !important', fontFamily: 'Roboto !important'}}>
+              <p style={{fontSize: 16, lineHeight: 1.3, color: '#1c5375 !important', fontFamily: 'Roboto !important'}}>
                   <h1 variant="p" align="left" className={classes.categoryTittle} style={{ display: 'inline'}}>
                   {filter === "all"? section.name+ " " : categories.find(c => parseInt(c.id) === parseInt(filter, 10)).name+ " "}  
                   </h1>
@@ -139,13 +139,13 @@ class ProjectsHome extends Component {
                       
                     >
                       <MenuItem value={"all"}>
-                        <p style={{ fontSize: 14, marginBottom: 0,  color: '#0f2440' }}>
+                        <p style={{ fontSize: 14, marginBottom: 0,  color: '#1c5375' }}>
                           <em>{language.ViewAll}</em>
                         </p>
                       </MenuItem>
                       {categories.map((category, index) => (
                         <MenuItem value={category.id}>
-                        <p style={{ fontSize: 14, marginBottom: 0,  color: '#0f2440' }}>
+                        <p style={{ fontSize: 14, marginBottom: 0,  color: '#1c5375' }}>
                           <strong>{category.name}</strong>
                         </p>
                       </MenuItem>
@@ -164,25 +164,25 @@ class ProjectsHome extends Component {
                     
                   >
                     <MenuItem value={"all"}>
-                           <em style={{ color: '#0f2440'}}>{this.props.language.None}</em>
+                           <em style={{ color: '#1c5375'}}>{this.props.language.None}</em>
                     </MenuItem>
                     <MenuItem value={"sort_price"}>
-                           <span style={{ color: '#0f2440'}}>{`${this.props.language.Price} - ${this.props.language.Ascending}`}</span>
+                           <span style={{ color: '#1c5375'}}>{`${this.props.language.Price} - ${this.props.language.Ascending}`}</span>
                     </MenuItem>
                     <MenuItem value={"sort_price_desc"}>
-                           <span style={{ color: '#0f2440'}}>{`${this.props.language.Price} - ${this.props.language.Descending}`}</span>
+                           <span style={{ color: '#1c5375'}}>{`${this.props.language.Price} - ${this.props.language.Descending}`}</span>
                     </MenuItem>
                     <MenuItem value={"sort_lumion"}>
-                           <span style={{ color: '#0f2440'}}>{`${this.props.language.LumionVersion} - ${this.props.language.Ascending}`}</span>
+                           <span style={{ color: '#1c5375'}}>{`${this.props.language.LumionVersion} - ${this.props.language.Ascending}`}</span>
                     </MenuItem>
                     <MenuItem value={"sort_capacity_desc"}>
-                           <span style={{ color: '#0f2440'}}>{`${this.props.language.LumionVersion} - ${this.props.language.Descending}`}</span>
+                           <span style={{ color: '#1c5375'}}>{`${this.props.language.LumionVersion} - ${this.props.language.Descending}`}</span>
                     </MenuItem>
                     <MenuItem value={"sort_rating"}>
-                           <span style={{ color: '#0f2440'}}>{`${this.props.language.Rating} - ${this.props.language.Ascending}`}</span>
+                           <span style={{ color: '#1c5375'}}>{`${this.props.language.Rating} - ${this.props.language.Ascending}`}</span>
                     </MenuItem>
                     <MenuItem value={"sort_rating_desc"}>
-                           <span style={{ color: '#0f2440'}}>{`${this.props.language.Rating} - ${this.props.language.Descending}`}</span>
+                           <span style={{ color: '#1c5375'}}>{`${this.props.language.Rating} - ${this.props.language.Descending}`}</span>
                     </MenuItem>
                     {/* {this.props.categories.map((category, index) => (
                       

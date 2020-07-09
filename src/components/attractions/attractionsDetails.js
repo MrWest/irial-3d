@@ -91,7 +91,7 @@ class AttractionDetails extends Component {
       <Grid item className={classes.center}>
             <Grid container spacing={4} className={classes.mobilePadding}>
               <Grid item xs={12} md={8} >
-              <p style={{fontSize: 16, lineHeight: 1.3, color: '#0f2440 !important', fontFamily: 'Roboto !important'}}>
+              <p style={{fontSize: 16, lineHeight: 1.3, color: '#1c5375 !important', fontFamily: 'Roboto !important'}}>
                       <h1 variant="p" align="left" className={classes.categoryTittle} style={{ display: 'inline'}}>
                         {attraction.name+ " "}
                       </h1>
@@ -130,7 +130,7 @@ class AttractionDetails extends Component {
                  <p style={{fontWeight: "bold", marginTop: 20, fontSize: 18}} >{this.props.language.Program}:</p>
                <ul>
                  {attraction.program.map(prg => (
-                   <li><p style={{ color: '#0f2440 !important'}}>{prg.content}</p></li>
+                   <li><p style={{ color: '#1c5375 !important'}}>{prg.content}</p></li>
                  ))}
                </ul>
                 </Fragment>

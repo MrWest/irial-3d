@@ -82,7 +82,7 @@ class AttractionsHome extends Component {
           <Grid container spacing={4} > 
             <Grid item  xs={12} md={8} className={classes.mobilePadding}>
 
-            <p style={{fontSize: 16, lineHeight: 1.3, color: '#0f2440 !important', fontFamily: 'Roboto !important'}}>
+            <p style={{fontSize: 16, lineHeight: 1.3, color: '#1c5375 !important', fontFamily: 'Roboto !important'}}>
                 <h1 variant="p" align="left" className={classes.categoryTittle} style={{ display: 'inline'}}>
                 {this.state.sort === "all"? this.props.section.name+ " " : this.state.category.name+ " "}  
                 </h1>
@@ -101,14 +101,14 @@ class AttractionsHome extends Component {
                     
                   >
                     <MenuItem value={"all"}>
-                      <p style={{ fontSize: 14, marginBottom: 0,  color: '#0f2440' }}>
+                      <p style={{ fontSize: 14, marginBottom: 0,  color: '#1c5375' }}>
                         <em>{this.props.language.ViewAll}</em>
                       </p>
                     </MenuItem>
                     {this.props.categories.map((category, index) => (
                       
                       <MenuItem value={category.id}>
-                       <p style={{ fontSize: 14, marginBottom: 0,  color: '#0f2440' }}>
+                       <p style={{ fontSize: 14, marginBottom: 0,  color: '#1c5375' }}>
                          <strong>{category.name}</strong>
                        </p>
                      </MenuItem>
