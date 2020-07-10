@@ -108,11 +108,13 @@ const HorizontalCalendar = props => {
     }, [selectedDate]);
 
     return (
-        <Grid id="horizontal-calendar" container alignItems="center">
-            <Grid item id="horizontal-calendar-button">
-                <Button onClick={() => setTranslationIndex(0)}>
-                   previous
-                </Button>
+        <Grid id="horizontal-calendar" container alignItems="stretch">
+            <Grid item id="horizontal-calendar-button" style={{ paddingTop: 68  }}> {/*arbitrary padding matchong the Month section height */}
+                <Grid container style={{ height: `100%` }}  alignItems="center">
+                    <Button onClick={() => setTranslationIndex(0)}>
+                        previous
+                    </Button>
+                </Grid>
             </Grid>
             <Grid item xs style={{ width: daysAreaWidth, display: 'grid', overflow: 'hidden', flexBasis: 'unset' }}>
                 <Grid container style={{ flexWrap: 'nowrap', transition: translationIndex !== 1 ? 'transform 0.8s ease-out 0.2s' : 'none', transform: `translate3d(-${translationIndex*33.33}%, 0px, 0px)` }}>
@@ -127,12 +129,14 @@ const HorizontalCalendar = props => {
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid item>
-                <Button onClick={() => { 
-                    setTranslationIndex(2);
-                }}>
-                    next
-                </Button>
+            <Grid item style={{ paddingTop: 68 }}>
+                <Grid container style={{ height: `100%` }}  alignItems="center">
+                    <Button onClick={() => { 
+                        setTranslationIndex(2);
+                    }}>
+                        next
+                    </Button>
+                </Grid>
             </Grid>
         </Grid>
     )
