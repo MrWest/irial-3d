@@ -76,9 +76,6 @@ return (
             </Helmet>
       <Grid container justify="center" spacing={0}>
         <Grid item className={classes.center}>
-          <Grid container>
-            <HorizontalCalendar />
-          </Grid>
           <Grid container spacing={4} > 
            <Grid item xs={8}>
                <h1 className={classes.categoryTittle}>Payment Info</h1>
