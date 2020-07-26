@@ -165,11 +165,13 @@ class AppTopBar extends Component {
       },
       {
         name: language.About,
-        to: '/#aboutus'
+        to: '/#aboutus',
+        hash: true
       },
       {
         name: language.Contact,
-        to: '/#contactus'
+        to: '/#contactus',
+        hash: true
       },
       {
         name: 'Blog',

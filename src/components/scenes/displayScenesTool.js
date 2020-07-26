@@ -3,7 +3,8 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
 import _ from "lodash";
-import ItemCard from '../itemCard/itemCard';
+// import ItemCard from '../itemCard/itemCard';
+import ItemCard from '../itemCard/itemCardFront';
 // import { SceneCardLeft, SceneImageLeft, SceneCardRight, SceneImageRight} from './scenesSections';
 
 class DisplayScenesTool extends Component {
@@ -15,7 +16,7 @@ class DisplayScenesTool extends Component {
   render() {
     const { classes , scenes, language, addToCart} = this.props;
     return (
-      <main className={classes.container}>
+      <main className={classes.container} spacing={2}>
         <Grid container alignItems="stretch" >
         {scenes.filter( a => parseInt(a.status) > 0).map(scene => (
           <Grid key={scene.id} item xs={12} sm={6} md={4} className={classes.itemContainer}>

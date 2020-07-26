@@ -18,6 +18,10 @@ class SwitchTool extends React.Component {
     this.handleOnClick = this.handleOnClick.bind(this);
   }
 
+  componentDidMount() {
+    this.setState({ on: this.props.value === this.props.onItem });
+  }
+
   handleOnClick() {
     const { onChange, onItem, offItem } = this.props;
 
@@ -29,7 +33,7 @@ class SwitchTool extends React.Component {
 //  element[0].style.cssText = `transition: transform 0.4s ease-out 0s; transform: translate3d(${newTranslation}, 0px, 0px)!important; text-align: left; user-select: none; white-space: nowrap;`;
   
   render() {
-    const { classes, onItem, offItem } = this.props;
+    const { classes, onItem, offItem, value } = this.props;
     const { on } = this.state;
     const defaultStyle = {transition: `transform 0.4s ease-out 0s`} ;
     const customStyle = !on ? { ...defaultStyle, transform: `translate3d(20px, 0px, 0px)`} : { ...defaultStyle, transform: `translate3d(0px, 0px, 0px)`} ;

@@ -157,7 +157,7 @@ class LanguageSelector extends React.Component {
             <span className={classes.label}>{translatedLabel[value]}</span>
           </Grid>
           <Grid item>
-            <SwitchTool  onItem="en" offItem="es" onChange={this.handleChange} />
+            <SwitchTool value={value} onItem="en" offItem="es" onChange={this.handleChange} />
           </Grid>
         </Grid>
       </div>
