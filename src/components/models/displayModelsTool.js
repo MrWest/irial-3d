@@ -3,8 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
 import _ from "lodash";
-// import ItemCard from '../itemCard/itemCard';
-import ItemCard from '../itemCard/itemCardFront';
+import ItemCard from '../itemCard/itemCard';
 // import { ModelCardLeft, ModelImageLeft, ModelCardRight, ModelImageRight} from './modelsSections';
 
 class DisplayModelsTool extends Component {
@@ -17,7 +16,7 @@ class DisplayModelsTool extends Component {
     const { classes , models, language, addToCart} = this.props;
     return (
       <main className={classes.container}>
-        <Grid container alignItems="stretch" spacing={2} >
+        <Grid container alignItems="stretch" >
           {models.filter( a => parseInt(a.status) > 0).map(model => (
             <Grid key={model.id} item xs={12} sm={6} md={4} className={classes.itemContainer}>
               <ItemCard  item={model} type='model' addToCart={addToCart} addToCartText={language.AddToCart} buyItem={language.Buy} />

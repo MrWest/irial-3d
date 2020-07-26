@@ -221,7 +221,7 @@ class ProjectsHome extends Component {
 
 const styles = theme => ({
   container: {
-    paddingTop: 120,
+    paddingTop: 56,
     paddingBottom: 130
   },
   mobilePadding: {   

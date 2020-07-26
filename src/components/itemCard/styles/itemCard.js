@@ -6,7 +6,7 @@ const styles = theme => ({
     height: '100%',
     border: 20,
     boxShadow: 'none',
-    padding: '0px 18px',
+    padding: '0px 12px',
     backgroundColor: 'transparent',
     // boxShadow: '0 32px 124px 0 rgba(26, 58, 98, 0.08)',
     '&&:hover': {
@@ -61,8 +61,8 @@ const styles = theme => ({
     }
   },
   ItemSummary: {
-    opacity: 1,
-    fontFamily: 'Roboto',
+    marginTop: 4,
+    fontFamily: 'Arial',
     fontSize: 16,
     lineHeight: 1.4,
     color: '#434d5c'
@@ -93,9 +93,7 @@ const styles = theme => ({
     fontFamily: 'Roboto',
     fontSize: 24,
     fontWeight: 600,
-    marginTop: 16,
-    marginBottom: 8,
-    lineHeight: 1.5,
+    marginTop: 12,
     color: '#0f2440',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
@@ -106,9 +104,7 @@ const styles = theme => ({
     fontFamily: 'Roboto',
     fontSize: 20,
     fontWeight: 600,
-    marginTop: 16,
-    marginBottom: 8,
-    lineHeight: 1.5,
+    marginTop: 12,
     color: '#0f2440',
     opacity: 0.85,
     whiteSpace: 'nowrap',

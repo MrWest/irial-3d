@@ -45,7 +45,7 @@ const ItemCard = ({ classes, item, category, type, addToCart, addToCartText, buy
       </div>
      
       {/* <CardContent> */}
-      <div style={{ padding: '12px 18px', paddingBottom: 24 }}>
+      <div style={{ padding: '12px 8px', paddingBottom: 24 }}>
         <Grid container alignContent="center">
           <Grid item xs>
             <Grid container justify="flex-start">
@@ -71,7 +71,7 @@ const ItemCard = ({ classes, item, category, type, addToCart, addToCartText, buy
         </Grid>
         <Grid container alignItems="flex-end" >
           <Grid item xs style={{ maxWidth: '80%'}}>
-            <h4 className={classes.ItemTitle} title={item.name}>{item.name}{' '}<span style={{ fontSize: 12}}>{item.lumion_version}</span></h4>
+            <p className={classes.ItemTitle} title={item.name}>{item.name}{' '}<span style={{ fontSize: 12}}>{item.lumion_version}</span></p>
           </Grid>
           <Grid item>
             <p className={classes.ItemPrice} >${thousandsSeparatedAndFixed(item.price)}</p>

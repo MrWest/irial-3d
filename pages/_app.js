@@ -217,7 +217,7 @@ class Layout extends React.Component {
     .item-options {
       position: absolute;
       top: 0;
-      background: rgba(0,0,0,0.3);
+      background: rgba(0,0,0,0.5);
       width: 100%;
       border-top-left-radius: 20px;
       border-top-right-radius: 20px;
