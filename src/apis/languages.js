@@ -17,8 +17,8 @@ const strings = {
       ViewOffer: "View Offer",
       AllLodgings: "All Lodgings",
       AboutUs: "About Us",
-      AboutUsText: `Irial 3D is a Tour Company based in Pinar del Río, Cuba. Committed to show our province’s beauties and realities from inside, we will cover all of Pinar del Río Province’s tourist places via a wide range of customized ecological and sightseeing tours to natural, historical and cultural sites. Also providing tips and guide for lodgings, restaurants, and all sort of activities and attraction, through our catalog of Viñales's tourism businesses. 
-      <br/>With over ten years of experience in the Tourism Industry as tour guides among other jobs, our very professional local staff have gathered all the necessary knowledge and expertise to fulfill our customers’ expectations.`,
+      AboutUsText: `IRIAL 3D is a virtual work network that encourages the creation and commercialization of digital content, technological learning, the development of employment sources, the dissemination of scientific results or projects, and feedback in a professional community; for Lumion users. 
+      <br/>In addition, it promotes a space where entrepreneurs and leaders in the architectural and real estate design sector can find highly qualified professionals capable of carrying out the most elegant and innovative ideas.`,
        ContactUs: "Contact Us",
       ContactUsText: "Irial 3D is at your service 24/7. Feel free to contact us by this means, we will be happy to attend your requests.",
       FirstName: "First name",
@@ -190,8 +190,8 @@ const strings = {
       ViewOffer: "Ver Oferta",
       AllLodgings: "Hospedajes",
       AboutUs: "Sobre Nosotros",
-      AboutUsText: `Irial 3D es una empresa de turismo con sede en Pinar del Río, Cuba. Comprometidos a mostrar las bellezas y realidades de nuestra provincia desde adentro, cubriremos todos los lugares turísticos de la provincia de Pinar del Río a través de una amplia gama de recorridos ecológicos y turísticos personalizados a sitios naturales, históricos y culturales. También brindamos consejos y guías para alojamientos, restaurantes y todo tipo de actividades y atracciones, a través de nuestro catálogo de negocios turísticos de Viñales.
-      <br/>Con más de diez años de experiencia en la industria del turismo como guías turísticos entre otros trabajos, nuestro personal local muy profesional ha reunido todo el conocimiento y la experiencia necesarios para cumplir con las expectativas de nuestros clientes.`,
+      AboutUsText: `IRIAL 3D es una red de trabajo virtual que incentiva la creación y comercialización de contenido digital, el aprendizaje tecnológico, el desarrollo de fuentes de empleo, la difusión de resultados científicos o proyectos, y la retroalimentación en una comunidad profesional; para usuarios de Lumion.
+      <br/>Además, promueve un espacio donde los empresarios y líderes del sector del diseño arquitectónico e inmobiliario, puedan encontrar profesionales altamente calificados capaces de llevar a cabo las ideas más elegantes y renovadoras.`,
      ContactUs: "Contáctenos",
       ContactUsText: "Irial 3D esta a su servicio 24/7. Siéntase libre de contactarnos por este medio, estaremos felices de atender sus solicitudes.",
       FirstName: "Nombre",
