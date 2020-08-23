@@ -11,7 +11,8 @@ import {
   InputLabel,
   FormHelperText,
   Typography,
-  TextField
+  TextField,
+  OutlinedInput 
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
@@ -32,11 +33,11 @@ import {
   
     return (
       <FormControl fullWidth className="">
-        <InputLabel >{label}</InputLabel>
-        <Input
+        <OutlinedInput
           {...input}
           error={meta.touched && meta.error && true}
-          placeholder={placeholder}
+          placeholder={label}
+          classes={{ input: classes }}
         />
         {renderError(meta)}
       </FormControl>
@@ -47,12 +48,12 @@ const renderTextArea = ({ input, label, placeholder, classes, meta }) => {
   
     return (
       <FormControl fullWidth className="">
-        <InputLabel >{label}</InputLabel>
-        <Input
+        <OutlinedInput
             {...input}
-            placeholder={placeholder}
+            placeholder={label}
             error={meta.touched && meta.error && true}
             multiline={true}
+            classes={{ root: classes }}
             rows={5}
             />
         {/* <TextField
@@ -126,63 +127,40 @@ const styles = theme => ({
       fontWeight: "bold",
       marginTop: 20
     },
-    hrBar: {
-      background: "#e3a304",
-      borderColor: "#e3a304",
-      color: "#1c5375 !important",
-      marginTop: 0,
-      marginBottom: 20,
-      height: 3,
-      width: "100%",
-      textAlign: "right !important"
-    },
-    typographyText: {
-      color: '#1c5375',
-      fontFamily: 'Gloss',
-      letterSpacing: 2,
-      marginBottom: 0,
-      fontSize: 28,
-      marginTop: 56,
-      textShadow: '1px 1px 0 #afafaf',
-      textAlign: "right !important"
-    },
     actionButton: {
       borderRadius: 4,
-      height: 36,
-      width: '40%',
-      fontFamily: 'Delvon',
+      height: 52,
+      width: '100%',
       fontSize: 24,
       letterSpacing: 2,
       fontStyle: 'normal',
-      color: '#ffffff',
+      color: '#e3a304',
       backgroundColor: '#1c5375',
       textTransform: 'none',
       '&:hover': {
-        backgroundColor: '#559cd9'
+        backgroundColor: '#0c4365',
+        color: '#f3b314',
       }
+    },
+    renderInput: {
+      border: '2px solid #1c5375'
     },
     actionIconDisabled: {
       color: '#5f5f5f'
     },
     actionButtonDisabled: {
       borderRadius: 4,
-      height: 36,
-      width: '40%',
-      fontFamily: 'Delvon',
+      height: 52,
+      width: '100%',
       fontSize: 24,
       letterSpacing: 2,
       fontStyle: 'normal',
-      color: '#5f5f5f !important',
-      backgroundColor: '#dedede',
+      color: '#5ca3c5 !important',
+      backgroundColor: '#1c5375',
       textTransform: 'none',
       '&:hover': {
         cursor: 'not-allowed !important'
       }
-    },
-    typographyTextSmall: {
-      marginBottom: 10,
-      fontFamily: 'Arial',
-      textAlign: "right !important"
     }
   });
 
@@ -296,31 +274,8 @@ class FrontContactForm extends React.Component {
       return (
         <Form  onSubmit={this.props.handleSubmit(this.realhandleSubmit.bind(this))}>
             <Grid container spacing={4}>
-        <Grid item xs={12} >
-             <h3
-            variant="h3"
-            component="h3"
-            className={classes.typographyText}
-          >
-            {this.props.language.ContactUs}
-           
-          </h3> 
-          <Grid container>
-                
-                <Grid item xs={9}></Grid>
-                <Grid item xs={3}>
-                <div className={classes.hrBar} />
-                </Grid>
-          </Grid>
-          
-          <p
-            className={classes.typographyTextSmall}
-          >
-          
-          {this.props.language.ContactUsText}
-          </p>
-            </Grid>           
-               <Grid item xs={12}  style={{ paddingTop: 0 }}>
+             
+               <Grid item xs={12} md={6} style={{ paddingTop: 0 }}>
                 <Field
                 name="first_name"
                 margin="small"
@@ -329,10 +284,11 @@ class FrontContactForm extends React.Component {
                 autoComplete="first_name"
                 component={renderTextField}
                 label={this.props.language.Name}
+                classes={classes.renderInput}
                 />
             </Grid>
 
-            <Grid item xs={12}  style={{ paddingTop: 0 }}>
+            <Grid item xs={12} md={6}  style={{ paddingTop: 0 }}>
                 <Field
                 name="email"
                 margin="small"
@@ -340,6 +296,7 @@ class FrontContactForm extends React.Component {
                 fullWidth
                 autoComplete="email"
                 component={renderTextField}
+                classes={classes.renderInput}
                 label={this.props.language.ContactEmail}
                 />
             </Grid>
@@ -352,6 +309,7 @@ class FrontContactForm extends React.Component {
                 autoComplete="subject"
                 type="text"
                 component={renderTextField}
+                classes={classes.renderInput}
                 label={this.props.language.Subject}
                 />
             </Grid>
@@ -362,20 +320,21 @@ class FrontContactForm extends React.Component {
                 margin="small"
                 fullWidth
                 type="text"
+                classes={classes.renderInput}
                 label={this.props.language.Message}
                 />
             </Grid>
-            
-           <Grid item xs={12} style={{paddingBottom: 0, minHeight: 36}}>
-              {this.state.emailStatus && <p style={{textAlign: "right", color: this.state.emailStatus === "Your message was sent successfully!" ? "#3aa53a" : "#f44336" }}>{this.state.emailStatus}</p>}
-            </Grid>
-            
-            <Grid item xs={12}  style={{ paddingTop: 10, textAlign: "right" }}>
+            <Grid item xs={4}  style={{ paddingTop: 10, textAlign: "right" }}>
                     <Button  className={pristine ? classes.actionButtonDisabled : classes.actionButton}  disabled={pristine}>
                     
                       {this.state.isSending? this.props.language.Sending : this.props.language.Send}
                     </Button>
             </Grid> 
+           <Grid item xs={8} style={{paddingBottom: 0, minHeight: 36}}>
+              {this.state.emailStatus && <p style={{textAlign: "right", color: this.state.emailStatus === "Your message was sent successfully!" ? "#3aa53a" : "#f44336" }}>{this.state.emailStatus}</p>}
+            </Grid>
+            
+           
             </Grid>
         </Form>
   );

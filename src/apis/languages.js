@@ -169,7 +169,11 @@ const strings = {
       ScenesPageTittle: 'Lumion Scene Configurations Catalog',
       ScenesPageDescription: '',
       ScenesPageTags: '',
-      Search: 'Search'
+      Search: 'Search',
+      Phone: 'Phone',
+      FollowUs: "Follow us on LinkedIn, Facebook, Google+",
+      WhatWeOffer: "What we offer",
+      WhatWeOfferText: "• The ability to create your own way of life as a developer of digital products for the Lumion community. <br/> • A platform where you can find amazing digital content and the necessary professional advice to raise the quality of your architectural presentations with Lumion to the highest standards in the industry. <br/> • The appropriate framework for the promotion and commercialization of your personal projects, as well as for the provision of other services. <br/> • A form of remote employment, not only attractive in these times of COVID-19; but also with a view to the imminent future. <br/> • A space to interact and request professional services of excellence in the use of Lumion. <br/> • One reason to choose Lumion is the decision that will change your life."
      
     },
     es: {
@@ -342,7 +346,12 @@ const strings = {
       ScenesPageTittle: 'Catálogo de Configuración de Escenas de Lumion',
       ScenesPageDescription: '',
       ScenesPageTags: '',
-      Search: 'Buscar'
+      Search: 'Buscar',
+      Phone: 'Teléfono',
+      FollowUs: "Siguenos en LinkedIn, Faccebook, Google+",
+      WhatWeOffer: "Lo que ofrecemos",
+      WhatWeOfferText: "•	La posibilidad de crear tu propia forma de vida como desarrollador de productos digitales para la comunidad de Lumion. <br/> •	Una plataforma donde encontrar asombrosos contenidos digitales y el asesoramiento profesional necesario, para elevar la calidad de tus presentaciones arquitectónicas con Lumion a los más altos estándares de la industria. <br/> •	El marco adecuado para la promoción y comercialización de tus proyectos personales, así como para la prestación de otros servicios <br/> •	Una forma de empleo a distancia, no solo atractiva en estos momentos de COVID-19; sino también con vistas al futuro inminente. <br/> •	Un espacio para interactuar y solicitar servicios profesionales de excelencia en el uso de Lumion. <br/> •	Una razón por la cual elegir Lumion, es la decisión que cambiará tu vida."
+     
 
     }
    }
