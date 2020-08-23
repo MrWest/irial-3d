@@ -56,7 +56,7 @@ const AboutContact = ({ classes, language }) => (
             </Grid>
         </div>
         <Grid container className={classes.coverContact} >
-           <Grid container justify="center" style={{paddingBottom: 42, paddingTop: 42, background: 'rgba(255,255,255,0.6)' }}>
+           <Grid container justify="center" style={{paddingBottom: 64, paddingTop: 42, background: 'rgba(255,255,255,0.6)' }}>
               <Grid item className={classes.center}>
               <Grid container >
               <Grid item xs={12} md={8} style={{ paddingTop: 32 }}>
@@ -90,6 +90,7 @@ const AboutContact = ({ classes, language }) => (
             </Grid>
            
             </Grid>
+            <div style={{ height: 16, width: '100%', backgroundImage: 'linear-gradient(rgba(255,255,255,0.6), transparent)' }} />
             <Grid container justify="center" style={{ paddingTop: 104, paddingBottom: 104 }}>
               <Grid item className={classes.center}>
                 <Grid container justify="center">
