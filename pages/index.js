@@ -7,10 +7,10 @@ class Index extends React.Component {
   static async getInitialProps ({ reduxStore, req }) {
   
     const sections = await fetchSectionsServer(reduxStore);
-    //const models = await sortModelsServer('all', 'all', 0, reduxStore);
+    const models = await sortModelsServer('all', 'all', 0, reduxStore);
     
     console.log('xx', sections);
-    return {sections, models: []};
+    return {sections, models};
   }
 
   componentDidMount () {
