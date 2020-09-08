@@ -14,7 +14,7 @@ import { fetchSections, fetchTags, sortModels } from "../../actions";
 
 class HomeOut extends Component {
   state = {};
-  componentWillMount() {
+  componentDidMount() {
     if(!isServer)
     {
       const { fetchSections, fetchTags, sortModels } = this.props;

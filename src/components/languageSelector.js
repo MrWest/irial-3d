@@ -53,10 +53,6 @@ class LanguageSelector extends React.Component {
     value: this.props.language._language
   };
 
-  componentWillMount(){
-
-    // console.log("LANG",this.props.language)
-  }
 
   dataRequest(view, query, lang){
 
