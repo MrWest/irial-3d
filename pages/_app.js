@@ -54,7 +54,7 @@ class Layout extends React.Component {
     const { children } = this.props
     return <div className='layout'>
     <div className="main-layout" id="mainLayout" style={{ minHeight: "calc(100vh - 0px)"}}>
-    <Header /> 
+    {/* <Header />  */}
     {isServer? children : (
       // <Switch>
       //   <Route path="/" component={Home} exact /> 
