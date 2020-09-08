@@ -56,47 +56,46 @@ class Layout extends React.Component {
     <div className="main-layout" id="mainLayout" style={{ minHeight: "calc(100vh - 0px)"}}>
     {/* <Header />  */}
     {isServer? children : (
-      // <Switch>
-      //   <Route path="/" component={Home} exact /> 
-      //   <Route path="/signin" component={SignIn} exact />
-      //   <Route path="/signup" component={SignUp} exact />
-      //   <Route path="/forgot" component={ForgotPassword} exact />
-      //   <Route path="/infotextemail" component={InfoSendEmail} exact />
-      //   <Route path="/confirmrp" component={ConfirmResetP} exact />
-      //   <Route path="/rpassword/:info" component={ResetPassword} exact />     
-      //   <Route path="/account" component={AccountHome} exact />       
-      //   <Route path="/tours/:category" component={ToursHome} exact />
-      //   <Route path="/tour/:id" component={TourDetails} exact />
-      //   <Route path="/sectionedit/:id" component={SectionEditForm} exact />
-      //   <Route path="/categoryedit/:id" component={CategoryEditForm} exact />
-      //   <Route path="/touradd/:id" component={TourAddForm} exact />
-      //   <Route path="/categoryadd/:id" component={CategoryAddForm} exact />
-      //   <Route path="/touredit/:id" component={TourEditForm} exact />
-      //   <Route path="/blog" component={BlogHome}  />
-      //   <Route path="/posts/:slug" component={BlogExpanded} exact />
-      //   <Route path="/models/:query" component={ModelsHome} exact />
-      //   <Route path="/model/:id" component={ModelDetails} exact />
-      //   <Route path="/modeladd/:id" component={ModelAddForm} exact />
-      //   <Route path="/modeledit/:id" component={ModelEditForm} exact />
-      //   <Route path="/projects/:query" component={ProjectsHome} exact />
-      //   <Route path="/project/:id" component={ProjectDetails} exact />
-      //   <Route path="/projectadd/:id" component={ProjectAddForm} exact />
-      //   <Route path="/projectedit/:id" component={ProjectEditForm} exact />
-      //   <Route path="/textures/:query" component={TexturesHome} exact />
-      //   <Route path="/texture/:id" component={TextureDetails} exact />
-      //   <Route path="/textureadd/:id" component={TextureAddForm} exact />
-      //   <Route path="/textureedit/:id" component={TextureEditForm} exact />
-      //   <Route path="/scenes/:query" component={ScenesHome} exact />
-      //   <Route path="/scene/:id" component={SceneDetails} exact />
-      //   <Route path="/sceneadd/:id" component={SceneAddForm} exact />
-      //   <Route path="/sceneedit/:id" component={SceneEditForm} exact />
-      //   <Route path="/payment" component={PaymentHome} exact />
-      //   <Route path="/thanks" component={ThankyouPage} exact />
+      <Switch>
+        <Route path="/" component={Home} exact /> 
+        <Route path="/signin" component={SignIn} exact />
+        <Route path="/signup" component={SignUp} exact />
+        <Route path="/forgot" component={ForgotPassword} exact />
+        <Route path="/infotextemail" component={InfoSendEmail} exact />
+        <Route path="/confirmrp" component={ConfirmResetP} exact />
+        <Route path="/rpassword/:info" component={ResetPassword} exact />     
+        <Route path="/account" component={AccountHome} exact />       
+        <Route path="/tours/:category" component={ToursHome} exact />
+        <Route path="/tour/:id" component={TourDetails} exact />
+        <Route path="/sectionedit/:id" component={SectionEditForm} exact />
+        <Route path="/categoryedit/:id" component={CategoryEditForm} exact />
+        <Route path="/touradd/:id" component={TourAddForm} exact />
+        <Route path="/categoryadd/:id" component={CategoryAddForm} exact />
+        <Route path="/touredit/:id" component={TourEditForm} exact />
+        <Route path="/blog" component={BlogHome}  />
+        <Route path="/posts/:slug" component={BlogExpanded} exact />
+        <Route path="/models/:query" component={ModelsHome} exact />
+        <Route path="/model/:id" component={ModelDetails} exact />
+        <Route path="/modeladd/:id" component={ModelAddForm} exact />
+        <Route path="/modeledit/:id" component={ModelEditForm} exact />
+        <Route path="/projects/:query" component={ProjectsHome} exact />
+        <Route path="/project/:id" component={ProjectDetails} exact />
+        <Route path="/projectadd/:id" component={ProjectAddForm} exact />
+        <Route path="/projectedit/:id" component={ProjectEditForm} exact />
+        <Route path="/textures/:query" component={TexturesHome} exact />
+        <Route path="/texture/:id" component={TextureDetails} exact />
+        <Route path="/textureadd/:id" component={TextureAddForm} exact />
+        <Route path="/textureedit/:id" component={TextureEditForm} exact />
+        <Route path="/scenes/:query" component={ScenesHome} exact />
+        <Route path="/scene/:id" component={SceneDetails} exact />
+        <Route path="/sceneadd/:id" component={SceneAddForm} exact />
+        <Route path="/sceneedit/:id" component={SceneEditForm} exact />
+        <Route path="/payment" component={PaymentHome} exact />
+        <Route path="/thanks" component={ThankyouPage} exact />
         
-      //   <Route component={Home} exact /> 
+        <Route component={Home} exact /> 
         
-      // </Switch>
-      <h1>FUck</h1>
+      </Switch>
     )}
     </div>
     <div className="footer-nav-ex" >
