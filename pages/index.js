@@ -23,7 +23,8 @@ class Index extends React.Component {
     const {sections, models}= this.props;
     
     console.log('ww', sections);
-    return ( <Home server sections={sections} models={models} />)
+    // return ( <Home server sections={sections} models={models} />)
+    return <h1> Fuck </h1>
   }
 }
 
