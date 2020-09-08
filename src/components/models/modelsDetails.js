@@ -16,6 +16,7 @@ import {
 import CommentsTool from '../tools/commentsTool';
 import Loader from '../global/loader';
 import { isServer, isInCart } from '../../apis/tools';
+import { imageResizedUrl } from '../../helpers/utils';
 // import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 const Tag = ({ classes, tag }) => (
@@ -28,7 +29,7 @@ const RelatedModelCard = ({ classes, model }) => (
   <Link to={`/model/${model.id}`}>
   <div style={{ padding: 4, border: '1px solid #dddddd', borderRadius: 4, cursor: 'pointer' }}>
       <div className={classes.modelCard}>
-        <img src={model.image} className={classes.modelCardImg} />
+        <img src={imageResizedUrl(model.image, 150)} className={classes.modelCardImg} alt={model.name} />
       </div>
       <p style={{ textAlign: 'center', marginTop: 4, color: '#4d4e53', fontFamily: 'Arial' }}>{model.name}</p>
   </div>
@@ -114,8 +115,8 @@ class ModelDetails extends Component {
            <Grid item xs={12} />
            <Grid item md={8} xs={12}>
              <ImageGallery items={model.images.map((image) => ({
-               original: image.url,
-               thumbnail: image.url,
+               original: imageResizedUrl(image.url, 475),
+               thumbnail: imageResizedUrl(image.url, 150),
              }))}
              />
               <div style={{paddingTop: 20}}>

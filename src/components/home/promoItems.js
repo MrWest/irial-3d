@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import { imageResizedUrl } from "../../helpers/utils";
 import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
 import { Grid } from "@material-ui/core";
 
@@ -55,7 +56,7 @@ class PromoItems extends Component {
                    <Grid container justify="center" alignItems="center" style={{ height: '100%', width: '100%' }}>
                      <Grid item>
                         <div className={classes.itemView}>
-                        <img src={item.images[0].url} className={classes.itemImg} alt={item.name}/>
+                        <img src={imageResizedUrl(item.images[0].url, 150)} className={classes.itemImg} alt={item.name}/>
                        </div>
                      
                      </Grid>

@@ -118,3 +118,15 @@ export { isServer, theme, managePosts, getFeaturedmedia, contentAppJSON, content
 export function reverseString(str) {
   return str.split("").reverse().join("");
 };
+
+
+
+export function imageResizedUrl(url, size) {
+  
+  const index = url.lastIndexOf('.');
+  const replacement = `-${size}.`;
+  return url && url.substring(0, index) + replacement + url.substring(index + 1);
+}
+
+
+

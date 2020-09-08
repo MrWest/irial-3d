@@ -7,7 +7,7 @@ import { AttachMoney as MoneySharp, AddShoppingCart } from '@material-ui/icons';
 import StarRatingComponent from 'react-star-rating-component';
 import { isInCart } from '../../apis/tools';
 import styles from './styles/itemCard';
-import { thousandsSeparatedAndFixed } from '../../helpers/utils';
+import { thousandsSeparatedAndFixed, imageResizedUrl } from '../../helpers/utils';
 
 const descriptionLeverage = description =>
   description && description.length > 120 ? `${description.substring(0, 120)}...` : description;
@@ -18,7 +18,7 @@ const ItemCard = ({ classes, item, category, type, addToCart, addToCartText, buy
       <div style={{ position: 'relative' }}>
         <img
           className={classes.Media}
-          src={item.images && item.images.length > 0 ? item.images[0].url : undefined}
+          src={imageResizedUrl(item.images && item.images.length > 0 ? item.images[0].url : undefined, 370)}
           title={item.name}
           alt={item.name}
         />
