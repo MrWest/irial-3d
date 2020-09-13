@@ -114,23 +114,19 @@ class LanguageSelector extends React.Component {
 
   handleChange = value => {
     if(value === 'en')
-    this.props.setLanguageEn()
+    this.props.setLanguageEn();
     if(value === 'es')
-    this.props.setLanguageEs()
+    this.props.setLanguageEs();
     this.setState({ value: value });
    
     let {pathname} = this.props.history.location;
-    let params = pathname.split("/")
+    let params = pathname.split("/");
     
     if(params.length>2)
-      this.dataRequest(params[1], params[2], value)
-
+      this.dataRequest(params[1], params[2], value);
     else{
       if(params[1] === "blog")
-      {
-       
         this.props.fetchPosts();
-      }
       else
       this.props.fetchSections();
       

@@ -8,6 +8,7 @@ import FrontLodgingPromo from "./frontLodgingPromo"
 import AboutContact from "./aboutContact"
 import { connect } from "react-redux";
 import {Helmet} from 'react-helmet';
+import _ from 'lodash';
 import {getLanguage, isServer} from "../../apis/tools";
 import { fetchSections, fetchTags, sortModels } from "../../actions";
 
@@ -18,8 +19,11 @@ class HomeOut extends Component {
     if(!isServer)
     {
       const { fetchSections, fetchTags, sortModels } = this.props;
+      if(!_.isEmpty(fetchSections))
       fetchSections();
+      if(!_.isEmpty(fetchTags))
       fetchTags();
+      if(!_.isEmpty(sortModels))
       sortModels();
     }
     
