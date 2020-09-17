@@ -120,6 +120,7 @@ class LanguageSelector extends React.Component {
     this.setState({ value: value });
    
     let {pathname} = this.props.history.location;
+    if(!pathname) return pathname;
     let params = pathname.split("/");
     
     if(params.length>2)
