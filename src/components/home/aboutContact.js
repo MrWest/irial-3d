@@ -30,7 +30,7 @@ const AboutContact = ({ classes, language }) => (
                       
                       <div className={classes.typographyTextSmall} style={{ textAlign: 'justify' }}>
                       
-                      {language.AboutUsText?.split('<br/>').map(txt => (<p style={{ fontSize: 18 }}>{txt}</p>))}
+                      {language.AboutUsText && language.AboutUsText.split('<br/>').map(txt => (<p style={{ fontSize: 18 }}>{txt}</p>))}
                       </div>
                     </div>
                   </Grid> 
@@ -47,7 +47,7 @@ const AboutContact = ({ classes, language }) => (
                       
                       <div className={classes.typographyTextSmall} style={{ textAlign: 'justify' }}>
                       
-                      {language.WhatWeOfferText?.split('<br/>').map(txt => (<p style={{ fontSize: 18 }}>{txt}</p>))}
+                      {language.WhatWeOfferText && language.WhatWeOfferText.split('<br/>').map(txt => (<p style={{ fontSize: 18 }}>{txt}</p>))}
                       </div>
                     </div>
                  </Grid>
