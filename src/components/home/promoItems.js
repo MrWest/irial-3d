@@ -70,7 +70,7 @@ class PromoItems extends Component {
                    <Grid container justify="center" alignItems="center" style={{ height: '100%', width: '100%' }}>
                      <Grid item>
                         <div className={classes.itemView}>
-                        <img src={item.images[0].url} className={classes.itemImg} alt={item.name}/>
+                        <img src={imageResizedUrl(item.images[0].url, 150)} className={classes.itemImg} alt={item.name}/>
                        </div>
                      
                      </Grid>

@@ -10,7 +10,7 @@ class PromoField extends Component {
   state = {};
   render() {
     const { classes, models } = this.props;
-    console.log(models);
+    // console.log(models);
     return (
       <Grid container justify="center" className={classes.promoField}>
         <Grid container className={classes.center} spacing={0}>
