@@ -55,7 +55,8 @@ class Layout extends React.Component {
     return <div className='layout'>
     <div className="main-layout" id="mainLayout" style={{ minHeight: "calc(100vh - 0px)"}}>
     <Header /> 
-    {isServer? children : (
+    {children}
+    {/* {isServer? children : (
       <Switch>
         <Route path="/" component={Home} exact /> 
         <Route path="/signin" component={SignIn} exact />
@@ -95,7 +96,7 @@ class Layout extends React.Component {
         <Route component={Home} exact /> 
         
       </Switch>
-    )}
+    )} */}
     </div>
     <div className="footer-nav-ex" >
            {!children.noFooter && <FooterBar />}

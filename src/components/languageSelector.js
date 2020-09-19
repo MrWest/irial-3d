@@ -95,8 +95,6 @@ class LanguageSelector extends React.Component {
     }
 
 
-
-
     if(view === "sectionedit" )
       getSection(query);
     
