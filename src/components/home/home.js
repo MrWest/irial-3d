@@ -33,7 +33,7 @@ class HomeOut extends Component {
 
     // if(sections === undefined || sections.length < 1)
     //  return <div/>
-     console.log('zz', sections);
+    //  console.log('zz', sections);
     return (
 
          <div className={classes.container}>

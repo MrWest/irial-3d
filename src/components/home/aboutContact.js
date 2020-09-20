@@ -35,7 +35,7 @@ const AboutContact = ({ classes, language }) => (
                     </div>
                   </Grid> 
                  <Grid item xs={12} md={8}>
-                 <div className={classes.offerContent} sty>
+                 <div className={classes.offerContent} >
                         <h3
                         className={classes.typographyTextBlue}
                       >
@@ -138,7 +138,7 @@ const styles = theme => ({
   },
   offerContent: {
     paddingTop: 24,
-    paddingBottom: 72,
+    paddingBottom: 92,
   [theme.breakpoints.down('sm')]: {
     paddingTop: 56
   }
