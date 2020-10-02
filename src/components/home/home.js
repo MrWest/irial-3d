@@ -19,11 +19,8 @@ class HomeOut extends Component {
     if(!isServer)
     {
       const { fetchSections, fetchTags, sortModels } = this.props;
-      if(!_.isEmpty(fetchSections))
       fetchSections();
-      if(!_.isEmpty(fetchTags))
       fetchTags();
-      if(!_.isEmpty(sortModels))
       sortModels();
     }
     
