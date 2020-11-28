@@ -151,7 +151,7 @@ class ModelDetails extends Component {
         <Grid container justify="center">
           <Grid container spacing={3} className={classes.center}>
             <Grid item xs={12} className={classes.onMobile}>
-              <Grid container>
+              <Grid container spacing={2}>
                 <Grid item xs={8}>
                  <ItemDetails classes={classes} model={model} section={section} language={language} category={category} />
                 </Grid>
