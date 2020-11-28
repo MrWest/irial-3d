@@ -41,7 +41,7 @@ class TourCarouselTool extends React.Component {
               maxHeight: 440,
             }}
             className={classNames(
-              this.state.index != children.indexOf(child)
+              this.state.index !== children.indexOf(child)
                 ? classes.mySlides
                 : {},
               "fade"

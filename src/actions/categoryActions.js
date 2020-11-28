@@ -123,7 +123,7 @@ export const addCategory = (category) => async (dispatch) => {
     { headers }
   );
 
-  //  getCategories(1)
+  return categoriesDb;
 };
 
 export const uploadCategoryImage = (info) => async (dispatch) => {
@@ -145,7 +145,7 @@ export const uploadCategoryImage = (info) => async (dispatch) => {
       { headers }
     );
 
-    // getCategory(info.idCategory)
+   return categoryAPI;
   }
 };
 
@@ -157,10 +157,12 @@ export const deleteCategory = (id) => async (dispatch) => {
     type: DELETE_CATEGORY,
     payload: id,
   });
+  return categoriesDb;
 };
 
 export const deleteCategoryImage = (id) => async (dispatch) => {
   const categoriesDb = await DashBoard.post(
     "/categories/delete_category_image.php" + generatePHPParameters({ id })
   );
+  return categoriesDb;
 };

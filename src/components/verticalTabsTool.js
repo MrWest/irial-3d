@@ -46,7 +46,7 @@ class VerticalTabsTool extends React.Component {
               <div
                 style={{ opacity: 1 }}
                 className={classNames(
-                  this.state.index != children.indexOf(child)
+                  this.state.index !== children.indexOf(child)
                     ? classes.mySlides
                     : {},
                   "fade"

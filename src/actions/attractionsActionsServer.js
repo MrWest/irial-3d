@@ -1,21 +1,12 @@
 import {
   FETCH_ATTRACTIONS,
-  SELECT_ATTRACTION,
-  DELETE_ATTRACTION,
-  UPDATE_ATTRACTION,
-  ADD_ATTRACTION,
-  CHANGE_ATTRACTION_PROGRAM,
-  ADD_ATTRACTION_COMMENT,
-  DELETE_ATTRACTION_COMMENT,
-  CHANGE_ATTRACTION_COMMENT,
-  SET_USER_SERVICE_RATE,
+  SELECT_ATTRACTION
 } from "./types";
 
 import DashBoard from "../apis/DashBoard";
 import {
   generatePHPParameters,
-  getLanguage,
-  generateAppendParameters,
+  getLanguage
 } from "../apis/tools";
 
 export const fetchAttractionsServer = async (reduxStore) => {
@@ -36,10 +27,8 @@ export const sortAttractionsServer = async (category, reduxStore) => {
   let completeUrl =
     category === "all"
       ? generatePHPParameters({ lang })
-      : generatePHPParameters({ category, lang });
-  // if(category === "all")
-  // attractionsDb = await DashBoard.get("/attractions/get_attractions.php"+ generatePHPParameters({lang}))
-  //  else
+      : generatePHPParameters({ category, lang })
+      
   await DashBoard.get("/attractions/get_attractions.php" + completeUrl).then(
     async (attractionsDb) => {
       var attractionsRslt = attractionsDb.data.slice();
@@ -50,15 +39,6 @@ export const sortAttractionsServer = async (category, reduxStore) => {
             generatePHPParameters({ idAttraction: attraction.id })
         );
         attraction.images = attractionImagesDb.data;
-
-        //  const attractionsprogramDb = await DashBoard.get("/attractions/get_attraction_program.php"+ generatePHPParameters({idAttraction: attraction.id, lang}))
-        //  attraction.program = attractionsprogramDb.data
-
-        //  const attractionscommentsDb = await DashBoard.get("/attractions/get_attraction_comments.php"+ generatePHPParameters({idAttraction: attraction.id}))
-        //  attraction.comments = attractionscommentsDb.data
-
-        //  const attractionsvideosDb = await DashBoard.get("/attractions/get_attraction_videos.php"+ generatePHPParameters({idAttraction: attraction.id}))
-        //  attraction.videos = attractionsvideosDb.data
 
         const attractionsRateDb = await DashBoard.get(
           "/attractions/get_attraction_rate.php" +

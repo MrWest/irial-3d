@@ -1,31 +1,24 @@
 import React from "react";
-import { Grid, Button, Link } from "@material-ui/core";
+import { Grid, Link } from "@material-ui/core";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import MuiExpansionPanel from "@material-ui/core/ExpansionPanel";
 import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import { Form, reduxForm, initialize } from "redux-form";
+import { reduxForm, initialize } from "redux-form";
 import Typography from "@material-ui/core/Typography";
 import CardSection from "../global/cardSection";
-import CommonForm from "../global/commonForm";
 import {
   updateBillingInfo,
   createConnectedAccount,
-  createExternalBankAccount,
   updateStripeAccountInfo,
-  tosAcceptanceStripe,
-  deleteStripeAccount,
-  getAllStripeConnectedAccounts,
   getStripeAccountLoginLink,
 } from "../../actions";
 import {
   fieldValidation,
   runFieldValidations,
 } from "../../helpers/commonValidations";
-import { isServer } from "../../apis/tools";
-// import { CustomWidthButton } from "../buttons";
-// import CustomizedExpansionPanels from '../global/expansionPanels';
+import { isServer } from "../../apis/tools"
 // Specify a string key:
 // Don't do this though, your keys should most likely be stored in env variables
 // and accessed via process.env.MY_SECRET_KEY
@@ -114,8 +107,8 @@ class Billing extends React.Component {
     // if(false) {
     const { updateBillingInfo, profile, stripeAccountId } = this.props;
     const { stripeToken } = this.state;
-    console.log("xxx0: ", data, stripeToken, stripeAccountId);
-    const updatedUser = await updateBillingInfo({ ...data, id: profile.id });
+    console.log("stripeToken: ", data, stripeToken, stripeAccountId);
+    await updateBillingInfo({ ...data, id: profile.id });
 
     if (!stripeAccountId && stripeToken) {
       const createdAccount = await createConnectedAccount({
@@ -131,34 +124,14 @@ class Billing extends React.Component {
           stripe_account_id: createdAccount.id,
           stripe_account_type: createdAccount.type,
         });
-
-        //   //  const acceptance = await tosAcceptanceStripe({ id: 'acct_1GkuOEG9wbUmr7k7' });
-        //   //  console.log('xxx13: ', acceptance);
-        //    const createdBankAccount = await createExternalBankAccount({id: createdAccount.id, nounce: stripeToken.id });
-        //    console.log('xxx1: ', createdBankAccount);
-
-        //    await updateStripeAccountInfo({ id: profile.id, stripe_external_account_id: createdBankAccount.id });
       }
     }
-    // }
-    // else {
-    //     console.log('xxx1: ', { id: 44, stripeId: 'acct_1GhGr7C6FIK1fqnv' });
-    //     const deletedAccount = await getAllStripeConnectedAccounts();
-    //     console.log('xxx1: ', deletedAccount);
-    // }
   };
 
   render() {
-    const { expanded, stripeToken, loginLink } = this.state;
+    const { expanded, loginLink } = this.state;
     const {
-      pristine,
-      submitting,
-      invalid,
       classes,
-      language,
-      handleSubmit,
-      stripeAccountId,
-      country,
       profile,
       stripe_account_status,
     } = this.props;

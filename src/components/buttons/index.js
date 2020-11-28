@@ -51,6 +51,7 @@ export function StylessButton({
   onLoad,
   textAlign = "center",
   fontFamily = "Roboto",
+  style
 }) {
   return (
     <button
@@ -69,6 +70,7 @@ export function StylessButton({
         border: 0,
         padding: 0,
         backgroundColor: "transparent",
+        ...style
       }}
     >
       <div

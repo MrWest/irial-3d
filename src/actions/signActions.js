@@ -31,8 +31,6 @@ export const logIn = (logIn) => async (dispatch) => {
     logInRslt.login = "success";
     console.log("success", logInRslt);
   }
-  // console.log("hash:", logInRslt)
-  //  alert("fuck")
   dispatch({
     type: "LOG_IN",
     payload: logInRslt,

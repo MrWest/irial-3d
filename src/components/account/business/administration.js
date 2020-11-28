@@ -1,14 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core";
-import SwipeableViews from "react-swipeable-views";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import SectionEditForm from "../../forms/sectionEditForm";
+import { Grid } from "@material-ui/core"
 import Nameable from "./nameable";
 import { connect } from "react-redux";
-import nameable from "./nameable";
 import {
   getCategories,
   sortTours,
@@ -22,6 +17,7 @@ import {
 import AddIcon from "@material-ui/icons/AddCircle";
 import { RoundedButtonLink } from "../../buttons";
 import { withRouter } from "react-router-dom";
+import styles from "./styles/administration";
 
 class Administration extends Component {
   state = {
@@ -47,7 +43,6 @@ class Administration extends Component {
     return services;
   }
   selectSection = (event) => {
-    // console.log("fuck:",event)
     this.setState({
       sectionIndex: event.currentTarget.id,
       categoryIndex: -1,
@@ -110,7 +105,6 @@ class Administration extends Component {
   };
 
   render() {
-    const { classes } = this.props;
     return (
       <main>
         <Grid container spacing={4} style={{ paddingBottom: 40 }}>
@@ -176,7 +170,7 @@ class Administration extends Component {
                 style={{
                   paddingRight: 15,
                   visibility:
-                    this.state.sectionIndex != -1 ? "inherit" : "hidden",
+                    this.state.sectionIndex !==-1 ? "inherit" : "hidden",
                 }}
               >
                 <RoundedButtonLink
@@ -184,7 +178,7 @@ class Administration extends Component {
                   size={40}
                   border={0}
                   to={
-                    this.state.sectionIndex != -1
+                    this.state.sectionIndex !==-1
                       ? "/categoryadd/" + this.state.sectionIndex
                       : "#"
                   }
@@ -240,7 +234,7 @@ class Administration extends Component {
                 style={{
                   paddingRight: 15,
                   visibility:
-                    this.state.categoryIndex != -1 ? "inherit" : "hidden",
+                    this.state.categoryIndex !==-1 ? "inherit" : "hidden",
                 }}
               >
                 {this.state.services === "tours" && (
@@ -249,7 +243,7 @@ class Administration extends Component {
                     size={40}
                     border={0}
                     to={
-                      this.state.categoryIndex != -1
+                      this.state.categoryIndex !==-1
                         ? "/touradd/" + this.state.categoryIndex
                         : "#"
                     }
@@ -266,7 +260,7 @@ class Administration extends Component {
                     size={40}
                     border={0}
                     to={
-                      this.state.categoryIndex != -1
+                      this.state.categoryIndex !==-1
                         ? "/attractionadd/" + this.state.categoryIndex
                         : "#"
                     }
@@ -284,7 +278,7 @@ class Administration extends Component {
                     size={40}
                     border={0}
                     to={
-                      this.state.categoryIndex != -1
+                      this.state.categoryIndex !==-1
                         ? "/modeladd/" + this.state.categoryIndex
                         : "#"
                     }
@@ -355,79 +349,7 @@ class Administration extends Component {
   }
 }
 
-const styles = (theme) => ({
-  container: {
-    paddingTop: 107,
-    paddingBottom: 130,
-    height: "100%",
-    backgroundColor: "#ffffff",
-  },
-  grow: {
-    width: "100%",
-    flex: 1,
-  },
-  cover: {
-    [theme.breakpoints.up("sm")]: {
-      backgroundImage: "url(../images/sign/artwork.svg)",
-      backgroundRepeat: "no-repeat",
-      // backgroundSize: "cover",
-      backgroundPosition: "right",
-      backgroundSize: "contain",
-      width: "100%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    [theme.breakpoints.up("xl")]: {
-      paddingBottom: "200 !important",
-    },
-    [theme.breakpoints.up("lg")]: {
-      paddingBottom: "85 !important",
-    },
-  },
-  center: {
-    [theme.breakpoints.up("lg")]: {
-      maxWidth: "1280px",
-      paddingLeft: "0 !important",
-      minWidth: "1280px",
-    },
-    [theme.breakpoints.down("lg")]: {
-      maxWidth: "1120px",
-      paddingLeft: "0 !important",
-      minWidth: "1120px",
-    },
-  },
-  signForm: {
-    [theme.breakpoints.up("xl")]: {
-      maxWidth: "486",
-      paddingLeft: "60px !important",
-    },
-    [theme.breakpoints.up("lg")]: {
-      maxWidth: "486",
-      paddingLeft: "60px !important",
-      minWidth: "400",
-    },
-  },
-  tabItem: {
-    opacity: "0.54",
-    fontFamily: "Roboto",
-    fontSize: "14px",
-    fontWeight: "bold",
-    fontStyle: "normal",
-    fontStretch: "normal",
-    lineHeight: "normal",
-    letterSpacing: "normal",
-    textAlign: "center",
-    textTransform: "none",
-    color: "#434c5f",
-    minWidth: 140,
-    width: 130,
-    [theme.breakpoints.down("sm")]: {
-      flexGrow: 0,
-      fontSize: 12,
-    },
-  },
-});
+
 
 Administration.propTypes = {
   classes: PropTypes.object.isRequired,

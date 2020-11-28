@@ -7,7 +7,6 @@ import {
 } from "./types";
 import DashBoard from "../apis/DashBoard";
 import { generatePHPParameters, getLanguage } from "../apis/tools";
-import { __await } from "tslib";
 
 //employee-orders_list
 export const fetchTags = () => async (dispatch) => {
@@ -30,14 +29,14 @@ export const fetchTags = () => async (dispatch) => {
 export const toggleModelTags = (model, tag, toogle) => async (dispatch) => {
   const lang = getLanguage();
 
-  var tags = model.tags;
+  let tags = model.tags;
 
   if (toogle && model.tags.length < 4) {
     const tagsDb = await DashBoard.get(
       "/tags/add_model_tag.php" +
         generatePHPParameters({ lang, idModel: model.id, idTag: tag })
     );
-    var tags = tagsDb.data.slice();
+    tags = tagsDb.data.slice();
   }
 
   if (!toogle && model.tags.length > 0) {
@@ -45,7 +44,7 @@ export const toggleModelTags = (model, tag, toogle) => async (dispatch) => {
       "/tags/delete_model_tag.php" +
         generatePHPParameters({ lang, idModel: model.id, idTag: tag })
     );
-    var tags = tagsDb.data.slice();
+    tags = tagsDb.data.slice();
   }
 
   dispatch({
@@ -57,14 +56,14 @@ export const toggleModelTags = (model, tag, toogle) => async (dispatch) => {
 export const toggleProjectTags = (project, tag, toogle) => async (dispatch) => {
   const lang = getLanguage();
 
-  var tags = project.tags;
+  let tags = project.tags;
 
   if (toogle && project.tags.length < 4) {
     const tagsDb = await DashBoard.get(
       "/tags/add_project_tag.php" +
         generatePHPParameters({ lang, idProject: project.id, idTag: tag })
     );
-    var tags = tagsDb.data.slice();
+    tags = tagsDb.data.slice();
   }
 
   if (!toogle && project.tags.length > 0) {
@@ -72,7 +71,7 @@ export const toggleProjectTags = (project, tag, toogle) => async (dispatch) => {
       "/tags/delete_project_tag.php" +
         generatePHPParameters({ lang, idProject: project.id, idTag: tag })
     );
-    var tags = tagsDb.data.slice();
+     tags = tagsDb.data.slice();
   }
 
   dispatch({
@@ -84,14 +83,14 @@ export const toggleProjectTags = (project, tag, toogle) => async (dispatch) => {
 export const toggleTextureTags = (texture, tag, toogle) => async (dispatch) => {
   const lang = getLanguage();
 
-  var tags = texture.tags;
+  let tags = texture.tags;
 
   if (toogle && texture.tags.length < 4) {
     const tagsDb = await DashBoard.get(
       "/tags/add_texture_tag.php" +
         generatePHPParameters({ lang, idTexture: texture.id, idTag: tag })
     );
-    var tags = tagsDb.data.slice();
+    tags = tagsDb.data.slice();
   }
 
   if (!toogle && texture.tags.length > 0) {
@@ -99,7 +98,7 @@ export const toggleTextureTags = (texture, tag, toogle) => async (dispatch) => {
       "/tags/delete_texture_tag.php" +
         generatePHPParameters({ lang, idTexture: texture.id, idTag: tag })
     );
-    var tags = tagsDb.data.slice();
+    tags = tagsDb.data.slice();
   }
 
   dispatch({
@@ -111,14 +110,14 @@ export const toggleTextureTags = (texture, tag, toogle) => async (dispatch) => {
 export const toggleSceneTags = (scene, tag, toogle) => async (dispatch) => {
   const lang = getLanguage();
 
-  var tags = scene.tags;
+  let tags = scene.tags;
 
   if (toogle && scene.tags.length < 4) {
     const tagsDb = await DashBoard.get(
       "/tags/add_scene_tag.php" +
         generatePHPParameters({ lang, idScene: scene.id, idTag: tag })
     );
-    var tags = tagsDb.data.slice();
+    tags = tagsDb.data.slice();
   }
 
   if (!toogle && scene.tags.length > 0) {
@@ -126,7 +125,7 @@ export const toggleSceneTags = (scene, tag, toogle) => async (dispatch) => {
       "/tags/delete_scene_tag.php" +
         generatePHPParameters({ lang, idScene: scene.id, idTag: tag })
     );
-    var tags = tagsDb.data.slice();
+    tags = tagsDb.data.slice();
   }
 
   dispatch({

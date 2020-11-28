@@ -7,8 +7,7 @@ import {
   CHANGE_ATTRACTION_PROGRAM,
   ADD_ATTRACTION_COMMENT,
   DELETE_ATTRACTION_COMMENT,
-  CHANGE_ATTRACTION_COMMENT,
-  SET_USER_SERVICE_RATE,
+  CHANGE_ATTRACTION_COMMENT
 } from "./types";
 
 import DashBoard from "../apis/DashBoard";
@@ -36,9 +35,6 @@ export const sortAttractions = (category) => async (dispatch) => {
     category === "all"
       ? generatePHPParameters({ lang })
       : generatePHPParameters({ category, lang });
-  // if(category === "all")
-  // attractionsDb = await DashBoard.get("/attractions/get_attractions.php"+ generatePHPParameters({lang}))
-  //  else
   await DashBoard.get("/attractions/get_attractions.php" + completeUrl).then(
     async (attractionsDb) => {
       var attractionsRslt = attractionsDb.data.slice();
@@ -49,16 +45,7 @@ export const sortAttractions = (category) => async (dispatch) => {
             generatePHPParameters({ idAttraction: attraction.id })
         );
         attraction.images = attractionImagesDb.data;
-
-        //  const attractionsprogramDb = await DashBoard.get("/attractions/get_attraction_program.php"+ generatePHPParameters({idAttraction: attraction.id, lang}))
-        //  attraction.program = attractionsprogramDb.data
-
-        //  const attractionscommentsDb = await DashBoard.get("/attractions/get_attraction_comments.php"+ generatePHPParameters({idAttraction: attraction.id}))
-        //  attraction.comments = attractionscommentsDb.data
-
-        //  const attractionsvideosDb = await DashBoard.get("/attractions/get_attraction_videos.php"+ generatePHPParameters({idAttraction: attraction.id}))
-        //  attraction.videos = attractionsvideosDb.data
-
+        
         const attractionsRateDb = await DashBoard.get(
           "/attractions/get_attraction_rate.php" +
             generatePHPParameters({ idAttraction: attraction.id })
@@ -313,14 +300,14 @@ export const selectAttraction = (id) => async (dispatch) => {
 };
 
 export const deleteAttraction = (id) => async (dispatch) => {
-  const categoriesDb = await DashBoard.post(
-    "/attractions/delete_attraction.php" + generatePHPParameters({ id })
-  );
+  const rslt = await DashBoard.post(
+    "/attractions/delete_attraction.php" + generatePHPParameters({ id }));
 
   dispatch({
     type: DELETE_ATTRACTION,
     payload: id,
   });
+  return rslt;
 };
 
 export const uploadAttractionImage = (info) => async (dispatch) => {
@@ -342,14 +329,15 @@ export const uploadAttractionImage = (info) => async (dispatch) => {
       { headers, onUploadProgress: info.onProgress }
     );
 
-    // getCategory(info.idCategory)
+    return attractionAPI;
   }
 };
 
 export const deleteAttractionImage = (id) => async (dispatch) => {
-  const categoriesDb = await DashBoard.post(
-    "/attractions/delete_attraction_image.php" + generatePHPParameters({ id })
-  );
+  const attractionAPI = await DashBoard.post(
+    "/attractions/delete_attraction_image.php" + generatePHPParameters({ id }));
+  
+  return attractionAPI;
 };
 
 export const uploadAttractionVideo = (info) => async (dispatch) => {
@@ -371,14 +359,15 @@ export const uploadAttractionVideo = (info) => async (dispatch) => {
       { headers, onUploadProgress: info.onProgress }
     );
 
-    // getCategory(info.idCategory)
+   return attractionAPI;
   }
 };
 
 export const deleteAttractionVideo = (id) => async (dispatch) => {
-  const categoriesDb = await DashBoard.post(
+  const attractionAPI = await DashBoard.post(
     "/attractions/delete_attraction_video.php" + generatePHPParameters({ id })
   );
+  return attractionAPI;
 };
 
 export const updateAttractionProgram = (program) => async (dispatch) => {
@@ -447,6 +436,7 @@ export const addAttractionProgram = (program) => async (dispatch) => {
     uploadInfo,
     { headers }
   );
+  return attractionsDb;
 };
 
 export const deleteAttractionProgram = (id) => async (dispatch) => {
@@ -464,6 +454,7 @@ export const deleteAttractionProgram = (id) => async (dispatch) => {
     uploadInfo,
     { headers }
   );
+  return attractionsDb;
 };
 
 export const changeAttractionProgram = (info) => async (dispatch) => {

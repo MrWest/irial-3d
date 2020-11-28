@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
-import SwipeableViews from "react-swipeable-views";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import SectionEditForm from "../../forms/sectionEditForm";
 import Nameable from "./nameable";
 import { connect } from "react-redux";
 import nameable from "./nameable";
@@ -14,7 +10,6 @@ import {
   sortTours,
   deleteCategory,
   deleteTour,
-  deleteAttraction,
   deleteModel,
   deleteProject,
   deleteTexture,
@@ -31,6 +26,7 @@ import {
 import AddIcon from "@material-ui/icons/AddCircle";
 import { RoundedButtonLink } from "../../buttons";
 import { withRouter } from "react-router-dom";
+import styles from "./styles/administration";
 
 class UserAdministration extends Component {
   state = {
@@ -262,7 +258,7 @@ class UserAdministration extends Component {
                   align="right"
                   style={{
                     paddingRight: 15,
-                    visibility: categoryIndex != -1 ? "inherit" : "hidden",
+                    visibility: categoryIndex !== -1 ? "inherit" : "hidden",
                   }}
                 >
                   {services === "models" && (
@@ -271,7 +267,7 @@ class UserAdministration extends Component {
                       size={40}
                       border={0}
                       to={
-                        categoryIndex != -1 ? `/modeladd/${categoryIndex}` : "#"
+                        categoryIndex !== -1 ? `/modeladd/${categoryIndex}` : "#"
                       }
                     >
                       <AddIcon
@@ -397,80 +393,6 @@ class UserAdministration extends Component {
     );
   }
 }
-
-const styles = (theme) => ({
-  container: {
-    paddingTop: 107,
-    paddingBottom: 130,
-    height: "100%",
-    backgroundColor: "#ffffff",
-  },
-  grow: {
-    width: "100%",
-    flex: 1,
-  },
-  cover: {
-    [theme.breakpoints.up("sm")]: {
-      backgroundImage: "url(../images/sign/artwork.svg)",
-      backgroundRepeat: "no-repeat",
-      // backgroundSize: "cover",
-      backgroundPosition: "right",
-      backgroundSize: "contain",
-      width: "100%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    [theme.breakpoints.up("xl")]: {
-      paddingBottom: "200 !important",
-    },
-    [theme.breakpoints.up("lg")]: {
-      paddingBottom: "85 !important",
-    },
-  },
-  center: {
-    [theme.breakpoints.up("lg")]: {
-      maxWidth: "1280px",
-      paddingLeft: "0 !important",
-      minWidth: "1280px",
-    },
-    [theme.breakpoints.down("lg")]: {
-      maxWidth: "1120px",
-      paddingLeft: "0 !important",
-      minWidth: "1120px",
-    },
-  },
-  signForm: {
-    [theme.breakpoints.up("xl")]: {
-      maxWidth: "486",
-      paddingLeft: "60px !important",
-    },
-    [theme.breakpoints.up("lg")]: {
-      maxWidth: "486",
-      paddingLeft: "60px !important",
-      minWidth: "400",
-    },
-  },
-  tabItem: {
-    opacity: "0.54",
-    fontFamily: "Roboto",
-    fontSize: "14px",
-    fontWeight: "bold",
-    fontStyle: "normal",
-    fontStretch: "normal",
-    lineHeight: "normal",
-    letterSpacing: "normal",
-    textAlign: "center",
-    textTransform: "none",
-    color: "#434c5f",
-    minWidth: 140,
-    width: 130,
-    [theme.breakpoints.down("sm")]: {
-      flexGrow: 0,
-      fontSize: 12,
-    },
-  },
-});
 
 UserAdministration.propTypes = {
   classes: PropTypes.object.isRequired,

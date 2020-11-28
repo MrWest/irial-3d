@@ -2,14 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
-import SwipeableViews from "react-swipeable-views";
-import Tabs from "@material-ui/core/Tabs";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import SectionIcon from "@material-ui/icons/Dashboard";
-import Tab from "@material-ui/core/Tab";
-import SectionEditForm from "../../forms/sectionEditForm";
-import { RoundedButtonLink } from "../../buttons";
+import { RoundedButtonLink, StylessButton } from "../../buttons";
 
 class Nameable extends Component {
   state = { selectedIndex: 0 };
@@ -38,7 +34,7 @@ class Nameable extends Component {
     if (size === "medium") innerPadding = "30px 10px";
 
     return (
-      <a id={id} onClick={onClick} style={{ cursor: "pointer" }}>
+      <StylessButton id={id} onClick={onClick} style={{ cursor: "pointer", width: "100%" }}>
         <main
           style={{ marginBottom: 5, padding: innerPadding }}
           className={selected ? classes.selected : classes.normal}
@@ -63,9 +59,7 @@ class Nameable extends Component {
                     width: "100%",
                   }}
                 >
-                  <div
-                    style={{ textAlign: "center", width: 20, margin: "auto" }}
-                  >
+                  <div style={{ textAlign: "center", width: 20, margin: "auto" }}>
                     <RoundedButtonLink
                       id={id}
                       color={"#cccccc"}
@@ -127,7 +121,7 @@ class Nameable extends Component {
             </Grid>
           </Grid>
         </main>
-      </a>
+      </StylessButton>
     );
   }
 }
