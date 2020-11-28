@@ -41,7 +41,7 @@ class HomeOut extends Component {
               <meta name="keywords" content={language.HomePageTags} /> 
             </Helmet>
           <PromoField models={models} />
-          <FrontModels sections={sections} models={models}/>
+          {/* <FrontModels sections={sections} models={models}/> */}
           <AboutContact />
         </div>
     );

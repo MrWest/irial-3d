@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import PromoItems from "./promoItems";
 import PromoInfo from "./promoInfo";
 import PromoLinks from "./promoLinks";
 import { Grid } from "@material-ui/core";
@@ -28,14 +27,6 @@ class PromoField extends Component {
             <PromoLinks />
           </Grid>
         </Grid>
-         
-          {/* <Grid item sm={12} md={3} ></Grid> */}
-          {/* <Grid item sm={12} md={4} >
-           <div   className={classes.table}>
-            <PromoImg />
-          
-            </div>
-          </Grid> */}
         </Grid>
       </Grid>
     );
@@ -71,7 +62,6 @@ const styles = theme => ({
     }
   },
   center: {
-   
     [theme.breakpoints.up("xl")]: {
       maxWidth: "1280px",
       paddingLeft: "0 !important"
