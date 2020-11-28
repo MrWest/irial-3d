@@ -103,11 +103,7 @@ class LanguageSelector extends React.Component {
     
    
     if(view === "posts")
-    {
-
-      // this.props.selectPost(param);
       history.push(`/${view}/${slugWorkout(param, lang)}`);
-    }
   }
 
   handleChange = value => {
