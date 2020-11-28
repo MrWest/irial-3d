@@ -22,7 +22,7 @@ class PromoField extends Component {
         </Grid>
         <Grid container alignItems="flex-end">
           <Grid item xs={9}>
-            <PromoItems models={models}/>
+            {/* <PromoItems models={models}/> */}
           </Grid>
           <Grid item xs={3}>
             <PromoLinks />

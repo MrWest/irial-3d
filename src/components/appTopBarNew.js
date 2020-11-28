@@ -272,7 +272,7 @@ class AppTopBar extends Component {
                 <Grid item>
                   <Grid container alignItems="center" style={{ height: '100%' }}>
                     <Grid item>
-                       {/* <LanguageSelector /> */}
+                       <LanguageSelector />
                     </Grid>
                   </Grid>
                 </Grid>
