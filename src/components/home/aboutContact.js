@@ -33,10 +33,7 @@ const AboutContact = ({ classes, language }) => (
                     <div className={classes.hrBarGold} />
                   </div>
 
-                  <div
-                    className={classes.typographyTextSmall}
-                    style={{ textAlign: "justify" }}
-                  >
+                  <div className={classes.typographyTextSmall} style={{ textAlign: "justify" }}>
                     {language.AboutUsText &&
                       language.AboutUsText.split("<br/>").map((txt) => (
                         <p key={txt} style={{ fontSize: 18 }}>
@@ -47,7 +44,7 @@ const AboutContact = ({ classes, language }) => (
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item md={8}>
+            <Grid item md={9} sm={10} xs={12}>
               <div className={classes.offerContent}>
                 <h3 className={classes.typographyTextBlue}>
                   {language.WhatWeOffer}
@@ -55,11 +52,7 @@ const AboutContact = ({ classes, language }) => (
                 <div className={classes.typographyTextSmall}>
                   <div className={classes.hrBarGold} />
                 </div>
-
-                <div
-                  className={classes.typographyTextSmall}
-                  style={{ textAlign: "justify" }}
-                >
+                <div className={classes.typographyTextSmall} style={{ textAlign: "justify" }}>
                   {language.WhatWeOfferText &&
                     language.WhatWeOfferText.split("<br/>").map((txt) => (
                       <p key={txt} style={{ fontSize: 18 }}>
@@ -85,7 +78,7 @@ const AboutContact = ({ classes, language }) => (
       >
         <Grid item className={classes.center}>
           <Grid container>
-            <Grid item xs={12} sm={8} style={{ paddingTop: 32 }}>
+            <Grid item xs={12} sm={8} className={classes.formContainer}>
               <p className={classes.typographyTextSmallBlue}>
                 {language.ContactUsText}
               </p>
@@ -96,18 +89,15 @@ const AboutContact = ({ classes, language }) => (
               item
               xs={12}
               sm={4}
-              style={{ paddingLeft: 56 }}
+              className={classes.contactUsForm}
             >
               <Grid item xs={12}>
-                <h3
-                  variant="h3"
-                  component="h3"
-                  className={classes.typographyTextBlue}
-                >
-                  {language.ContactUs}
-                </h3>
-                <div className={classes.hrBarGold} />
-
+                <div  className={classes.noMobile}>
+                  <h3 className={classes.typographyTextBlue}>
+                    {language.ContactUs}
+                  </h3>
+                  <div className={classes.hrBarGold} />
+                </div>
                 <p
                   className={classes.typographyTextSmallBlue}
                   style={{ marginBottom: 16 }}

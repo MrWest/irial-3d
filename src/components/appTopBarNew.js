@@ -7,7 +7,6 @@ import Popper from "@material-ui/core/Popper";
 import { withRouter } from "react-router-dom";
 import { Grid } from "@material-ui/core";
 import { connect } from "react-redux";
-import _ from "lodash";
 import LanguageSelector from "./languageSelector";
 import { HashLink } from "react-router-hash-link";
 import { isLogged, selectAccountView } from "../actions/index";
@@ -182,11 +181,7 @@ class AppTopBar extends Component {
                     <IrialLogo classes={classes} />
                   </Grid>
                   <Grid item xs>
-                    <p
-                      className={
-                        transparency ? classes.logoText : classes.logoTextBlue
-                      }
-                    >
+                    <p className={transparency ? classes.logoText : classes.logoTextBlue}>
                       Irial 3D
                     </p>
                   </Grid>
@@ -243,11 +238,7 @@ class AppTopBar extends Component {
                         onClose={this.handleClose}
                         className={classes.paper}
                         placement={"bottom-end"}
-                        style={{
-                          width: 282,
-                          paddingLeft: 30,
-                          paddingRight: 40,
-                        }}
+                        style={{ width: 282, paddingLeft: 30, paddingRight: 40 }}
                       >
                         {signInfo.loginInfo &&
                           signInfo.loginInfo.type !== "visitor" && (

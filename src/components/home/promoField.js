@@ -46,6 +46,7 @@ const styles = (theme) => ({
     color: "#ffffff",
     [theme.breakpoints.down("sm")]: {
       backgroundSize: "scale",
+      paddingTop: 116
     },
   },
   center: {

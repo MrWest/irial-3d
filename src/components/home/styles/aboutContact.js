@@ -46,19 +46,15 @@ const styles = (theme) => ({
     },
   },
   coverContact: {
-    display: "none",
-    [theme.breakpoints.up("sm")]: {
       backgroundImage: "url(../static/images/home/about-us-background.png)",
       backgroundRepeat: "no-repeat !important",
       display: "inherit",
       backgroundSize: "cover",
       backgroundPosition: "left top  !important",
-      //  backgroundSize: "48% !important",
       width: "100%",
       alignItems: "center",
       justifyContent: "center",
-      backgroundOpacity: 0.5,
-    },
+      backgroundOpacity: 0.5
   },
   aboutPic: {
     backgroundImage: "url(../static/images/home/city-hill.svg)",
@@ -110,6 +106,22 @@ const styles = (theme) => ({
     fontFamily: "Gloss",
     letterSpacing: 2,
     textShadow: "1px 1px 0 rgba(20, 20, 20, 0.75)",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: 16
+    },
+  },
+  formContainer: {
+    paddingTop: 32,
+    [theme.breakpoints.down("xs")]: {
+      paddingLeft: 8,
+      paddingRight: 8,
+      paddingBottom: 56
+    },
+  },
+  noMobile: {
+    [theme.breakpoints.down("xs")]: {
+      display: 'none'
+    },
   },
   typographyTextSmall: {
     textAlign: "left",
@@ -124,6 +136,15 @@ const styles = (theme) => ({
     marginBottom: 32,
     fontSize: 18,
   },
+  contactUsForm: {
+    paddingLeft: 56,
+    [theme.breakpoints.down("sm")]: {
+      paddingLeft: 24,
+    },
+    [theme.breakpoints.down("xs")]: {
+      paddingLeft: 16,
+    },
+  }
 });
 
 export default styles;

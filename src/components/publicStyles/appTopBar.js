@@ -71,6 +71,9 @@ const styles = (theme) => ({
   bottomBar: {
     backgroundColor: "#032D46",
     height: 28,
+    [theme.breakpoints.down("xs")]: {
+      height: 64
+    },
   },
   grow: {
     width: "100%",
@@ -160,6 +163,10 @@ const styles = (theme) => ({
     "&&:hover": {
       backgroundColor: "#ffffff",
       color: "#000000",
+    },
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 12,
+      padding: "3px 8px"
     },
   },
   appBarButtonHovered: {

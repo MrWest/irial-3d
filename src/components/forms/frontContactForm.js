@@ -2,30 +2,19 @@ import React from "react";
 import {
   Grid,
   Button,
-  Select,
-  RadioGroup,
-  FormControlLabel,
-  Checkbox,
-  Input,
   FormControl,
-  InputLabel,
   FormHelperText,
-  Typography,
-  TextField,
   OutlinedInput,
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
-import { FixedButton, CoolButton } from "../buttons";
 import { sendEmail } from "../../actions";
 import { Form, reduxForm, Field, initialize } from "redux-form";
 
 import {
   required,
   email,
-  date,
   length,
-  numericality,
   format,
 } from "redux-form-validators";
 
@@ -54,15 +43,6 @@ const renderTextArea = ({ input, label, placeholder, classes, meta }) => {
         classes={{ root: classes }}
         rows={5}
       />
-      {/* <TextField
-          {...input}
-          error={meta.touched && meta.error && true}
-          placeholder={placeholder}
-          multiLine={true}
-            rows={4}
-            rowsMax={4}
-        /> */}
-
       {renderError(meta)}
     </FormControl>
   );
@@ -77,32 +57,6 @@ const renderError = ({ error, touched }) => {
     );
   }
 };
-
-const renderRadioGroup = ({ input, ...rest }) => (
-  <RadioGroup
-    {...input}
-    {...rest}
-    valueSelected={input.value}
-    onChange={(event, value) => input.onChange(value)}
-  />
-);
-
-const renderSelectField = ({
-  input,
-  label,
-  meta: { touched, error },
-  children,
-  ...custom
-}) => (
-  <Select
-    floatingLabelText={label}
-    errorText={touched && error}
-    {...input}
-    onChange={(event, index, value) => input.onChange(event)}
-    children={children}
-    {...custom}
-  />
-);
 
 const styles = (theme) => ({
   root: {
@@ -159,23 +113,14 @@ const styles = (theme) => ({
       cursor: "not-allowed !important",
     },
   },
+  formInner: {
+    [theme.breakpoints.down("xs")]: {
+     paddingBottom: 124
+    }
+  }
 });
 
 const validations = {
-  // amount: [
-  //   required({ msg: "Required" }),
-  //   numericality({
-  //     int: true,
-  //     ">=": 50,
-  //     msg: { greaterThanOrEqualTo: "You must be at least 50 swag packs" }
-  //   })
-  // ],
-  // budget: [
-  //   required({ msg: "Required" }),
-  //   numericality({
-  //     int: true
-  //   })
-  // ],
 
   email: [
     required({ msg: "Required" }),
@@ -258,12 +203,12 @@ class FrontContactForm extends React.Component {
   };
 
   render() {
-    const { pristine, reset, submitting, classes } = this.props;
+    const { pristine, classes } = this.props;
     return (
       <Form
         onSubmit={this.props.handleSubmit(this.realhandleSubmit.bind(this))}
       >
-        <Grid container spacing={4}>
+        <Grid container spacing={4} classes={classes.formInner}>
           <Grid item xs={12} md={6} style={{ paddingTop: 0 }}>
             <Field
               name="first_name"
@@ -354,27 +299,7 @@ const mapStateToProps = (state) => {
     company: state.company,
     userInfo: state.sign.userInfo,
     language: state.language,
-    initialValues: state.signFacebook,
-    //     first_name: state.sign.userInfo.given_name,
-    //     last_name: state.sign.userInfo.family_name,
-    //     phone_number: state.profile.phone_number,
-    //     email: state.sign.userInfo.email,
-    //     name: state.company.name,
-    //     phone: state.company.phone,
-    //     shipping_address1: state.company.shipping_address1,
-    //     shipping_address2: state.company.shipping_address2,
-    //     shipping_city: state.company.shipping_city,
-    //     shipping_zip: state.company.shipping_zip,
-    //     shipping_state: state.company.shipping_state,
-    //     billing_address1: state.company.billing_address1,
-    //     billing_address2: state.company.billing_address2? state.company.billing_address2:"",
-    //     billing_city: state.company.billing_city,
-    //     billing_zip: state.company.billing_zip,
-    //     billing_state: state.company.billing_state,
-    //     cardNumber: state.company.payment_profile?state.company.payment_profile.credit_card?state.company.payment_profile.credit_card.cardNumber:"": "",
-    //     cardType: state.company.payment_profile?state.company.payment_profile.credit_card?state.company.payment_profile.credit_card.cardType:"": "",
-    //     expirationDate: state.company.payment_profile?state.company.payment_profile.credit_card?state.company.payment_profile.credit_card.expirationDate:"": "",
-    //   }
+    initialValues: state.signFacebook
   };
 };
 export default connect(mapStateToProps, { initialize, sendEmail })(

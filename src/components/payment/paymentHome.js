@@ -120,6 +120,9 @@ const styles = (theme) => ({
   container: {
     paddingTop: 56,
     paddingBottom: 130,
+    [theme.breakpoints.down("sm")]: {
+paddingTop: 92
+}
   },
   mobilePadding: {
     [theme.breakpoints.down("sm")]: {

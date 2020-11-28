@@ -68,6 +68,9 @@ const styles = (theme) => ({
     color: "#ffffff",
     fontSize: 12,
     marginRight: 8,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 10
+    },
   },
 });
 

@@ -2,10 +2,8 @@ import React, { Component } from "react";
 // import OrderDisplayTool from "./orderDisplayTool";
 import {
   Grid,
-  Button,
   Select,
   FormControl,
-  OutlinedInput,
   MenuItem,
   InputLabel,
 } from "@material-ui/core";
@@ -81,16 +79,6 @@ class ModelsHome extends Component {
   handleChange = (event) => {
     if (this.state.filter !== event.target.value) {
       const { history } = this.props;
-      //   this.setState({ sort: event.target.value, busy: true });
-      //   this.props.sortModels(event.target.value).then(() => {
-      //     this.setState({ busy: false });
-      //   });
-
-      //   this.props.categories.map(c =>{
-      //     if(c.id === event.target.value)
-      //       this.setState({category: c})
-
-      // });
       history.push(`/models/${event.target.value}-${this.state.sort}`);
     }
   };
@@ -130,14 +118,8 @@ class ModelsHome extends Component {
           <Grid item className={classes.center}>
             <Grid container spacing={4} alignItems="center">
               <Grid item xs>
-                <p
-                  style={{
-                    fontSize: 16,
-                    lineHeight: 1.3,
-                    color: "#1c5375 !important",
-                    fontFamily: "Roboto !important",
-                  }}
-                >
+                <p style={{ fontSize: 16, lineHeight: 1.3, color: "#1c5375 !important",
+                    fontFamily: "Roboto !important" }}>
                   <h1
                     variant="p"
                     align="left"
@@ -236,17 +218,6 @@ class ModelsHome extends Component {
                         style={{ color: "#1c5375" }}
                       >{`${this.props.language.Rating} - ${this.props.language.Descending}`}</span>
                     </MenuItem>
-                    {/* {this.props.categories.map((category, index) => (
-                      
-                       <MenuItem value={category.id}>
-                       <p style={{ fontSize: 14, marginBottom: 0 }}>
-                         <strong>{category.name}</strong>
-                       </p>
-                     </MenuItem>
-                      
-                         
-                        
-                    ))} */}
                   </Select>
                 </FormControl>
               </Grid>
@@ -278,6 +249,9 @@ const styles = (theme) => ({
   container: {
     paddingTop: 56,
     paddingBottom: 130,
+    [theme.breakpoints.down("sm")]: {
+paddingTop: 92
+}
   },
   mobilePadding: {
     [theme.breakpoints.down("sm")]: {
@@ -300,9 +274,13 @@ const styles = (theme) => ({
     },
     [theme.breakpoints.down("sm")]: {
       maxWidth: "100vw",
-      paddingLeft: "0 !important",
-      paddingRight: "0 !important",
       minWidth: "100vw",
+      paddingLeft: "24px !important",
+      paddingRight: "24px !important"
+    },
+    [theme.breakpoints.down("xs")]: {
+      paddingLeft: "8px !important",
+      paddingRight: "8px !important"
     },
   },
   seletcTool: {
