@@ -1,10 +1,6 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
 import PromoField from "./promoField";
-import FrontTourPromo from "./frontTourPromo";
-import FrontModels from "./frontModels"
-import FrontLodgingPromo from "./frontLodgingPromo"
+import FrontModels from "./frontModels";
 import AboutContact from "./aboutContact"
 import { connect } from "react-redux";
 import {Helmet} from 'react-helmet';
@@ -12,7 +8,7 @@ import _ from 'lodash';
 import {getLanguage, isServer} from "../../apis/tools";
 import { fetchSections, fetchTags, sortModels } from "../../actions";
 
-const HomeOut =  ({ classes, language, models, sections, fetchSections, fetchTags, sortModels }) =>  {
+const HomeOut =  ({ language, models, sections, fetchSections, fetchTags, sortModels }) =>  {
  
   useEffect(() => {
     if(!isServer)

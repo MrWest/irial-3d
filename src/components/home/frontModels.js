@@ -23,7 +23,7 @@ const FrontModels = ({ models, classes, sections, addToCart, language }) =>  {
         destination: item.ownerInfo.stripe_account_id, file: item.server_path, type: 'model' }, openCart);
    };
 
-  if(!section) return <div />
+  if(!section) return <div />;
 
   
    return ( 
