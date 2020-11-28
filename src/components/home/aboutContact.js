@@ -5,6 +5,7 @@ import  FrontContactForm  from "../forms/frontContactForm";
 import { Facebook, LinkedIn, GTranslate } from "@material-ui/icons";
 import { connect } from "react-redux";
 import { FacebookProvider, Like } from 'react-facebook';
+import styles from './styles/aboutContact';
 // import EmbeddedPost from "react-facebook/dist/EmbeddedPost";
 // import Page from "react-facebook/dist/Page";
 
@@ -14,15 +15,15 @@ const AboutContact = ({ classes, language }) => (
         <div className={classes.cover} >
           <Grid container id="aboutus" justify="center" >
           <Grid item className={classes.center}>
-            <Grid container >
-              <Grid item xs={12} md={6} />
-                <Grid item xs={12} md={6}>
-                  <div className={classes.aboutContent}>
-                        <h3
-                        className={classes.typographyTextBlue}
-                      >
-                        {language.AboutUs}
-                      </h3>
+            <Grid container spacing={8} alignItems="stretch" >
+              <Grid item xs={12} md={6} style={{ backgroundImage: 'url(../static/images/home/city-hill.svg)',
+               backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }} />
+                <Grid item xs={12} md={6} style={{ paddingBottom: 0 }}>
+                  <Grid container alignItems="flex-end" className={classes.aboutContent}>
+                    <Grid item style={{ paddingBottom: 0 }}>
+                        <h3 className={classes.typographyTextBlue} >
+                          {language.AboutUs}
+                        </h3>
                       <div className={classes.typographyTextSmall}>
                         <div className={classes.hrBarGold} />
                       </div>
@@ -31,7 +32,8 @@ const AboutContact = ({ classes, language }) => (
                       
                       {language.AboutUsText && language.AboutUsText.split('<br/>').map(txt => (<p key={txt} style={{ fontSize: 18 }}>{txt}</p>))}
                       </div>
-                    </div>
+                      </Grid>
+                      </Grid>
                   </Grid> 
                  <Grid item xs={12} md={8}>
                  <div className={classes.offerContent} >
@@ -127,120 +129,6 @@ const AboutContact = ({ classes, language }) => (
        
           </Grid>
     );
-
-    
-const styles = theme => ({
-  aboutContent: {
-    paddingTop: 56,
-    paddingBottom: 0
-  },
-  offerContent: {
-    paddingTop: 24,
-    paddingBottom: 92,
-  [theme.breakpoints.down('sm')]: {
-    paddingTop: 56
-  }
-  },
-  center: {
-    [theme.breakpoints.up("xl")]: {
-      maxWidth: "1280px",
-      paddingLeft: "0 !important"
-    },
-    [theme.breakpoints.up("lg")]: {
-      maxWidth: "1180px",
-      paddingLeft: "0 !important",
-      minWidth: "1100px"
-    }
-  },
-  cover: {
-   display: 'none',
-    [theme.breakpoints.up("sm")]: {
-      // backgroundImage: "url(../static/images/home/about-contact.jpg)",
-      backgroundRepeat: "no-repeat !important",
-      display: 'inherit',
-      // backgroundSize: "cover",
-      backgroundPosition: "right  !important",
-      backgroundSize: "contain !important",
-      width: "100%",
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundOpacity: 0.5
-    }
-  },
-  coverContact: {
-    display: 'none',
-     [theme.breakpoints.up("sm")]: {
-       backgroundImage: "url(../static/images/home/about-us-background.png)",
-       backgroundRepeat: "no-repeat !important",
-       display: 'inherit',
-       backgroundSize: "cover",
-       backgroundPosition: "left top  !important",
-      //  backgroundSize: "48% !important",
-       width: "100%",
-       alignItems: "center",
-       justifyContent: "center",
-       backgroundOpacity: 0.5
-     }
-   },
-  hrBar: {
-    background: "#fafafa",
-    borderColor: "#fafafa",
-    color: "#fafafa !important",
-    marginTop: 0,
-    marginBottom: 20,
-    height: 3,
-    width: "25%",
-    textAlign: "left !important"
-  },
-  hrBarGold: {
-    background: "#e3a304",
-    borderColor: "#e3a304",
-    color: "#e3a304 !important",
-    marginTop: 0,
-    marginBottom: 20,
-    height: 3,
-    width: "25%",
-    textAlign: "left !important"
-  },
-  followUs: {
-    color: "#e3a304",
-    fontSize: 32,
-    marginBottom: 32
-  },
-  typographyText: {
-    textAlign: "left",
-    margin: "20px 0px",
-    marginBottom: 0,
-    fontSize: 28,
-    color: '#e3a304',
-    fontFamily: 'Gloss',
-    letterSpacing: 2,
-    textShadow: '1px 1px 0 rgba(20, 20, 20, 0.75)'
-  },
-  typographyTextBlue: {
-    textAlign: "left",
-    margin: "20px 0px",
-    marginBottom: 0,
-    fontSize: 28,
-    color: "#1c5375",
-    fontFamily: 'Gloss',
-    letterSpacing: 2,
-    textShadow: '1px 1px 0 rgba(20, 20, 20, 0.75)'
-  },
-  typographyTextSmall: {
-    textAlign: "left",
-    fontFamily: 'Arial',
-    marginBottom: 0,
-    fontSize: 18
-  },
-  typographyTextSmallBlue: {
-    textAlign: "left",
-    fontFamily: 'Arial',
-    color: "#1c5375",
-    marginBottom: 32,
-    fontSize: 18
-  }
-});
 
 
 const mapStateToProps = state => {

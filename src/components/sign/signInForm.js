@@ -155,7 +155,7 @@ class SignInForm extends Component {
         this.props.history.push( "/account");
       }
       else
-      this.setState({generalError: type === "site"? this.props.language.WrontCredentials : this.props.language.FacebookLoginFailed})
+      this.setState({generalError: type === "site"? this.props.language.WrongCredentials : this.props.language.FacebookLoginFailed})
 
     }
     else {
@@ -165,7 +165,7 @@ class SignInForm extends Component {
         this.props.setRedirectUrl("");  
       }         
       else
-        this.setState({generalError: type === "site"? this.props.language.WrontCredentials : this.props.language.FacebookLoginFailed})
+        this.setState({generalError: type === "site"? this.props.language.WrongCredentials : this.props.language.FacebookLoginFailed})
        
     }
      
