@@ -74,6 +74,7 @@ export function StylessButton({
       }}
     >
       <div
+        id={id}
         style={{
           verticalAlign: "middle",
           fontFamily,

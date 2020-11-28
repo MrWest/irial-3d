@@ -1,29 +1,21 @@
 import React, { Fragment } from "react";
 import {
   Grid,
-  Button,
-  Select,
-  RadioGroup,
-  FormControlLabel,
-  Checkbox,
   Input,
   FormControl,
   InputLabel,
   FormHelperText,
-  Typography,
-  TextField,
+  Typography
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
-import { FixedButton, CoolButton } from "../buttons";
+import { CoolButton } from "../buttons";
 import { Form, reduxForm, Field, initialize } from "redux-form";
 import {
   required,
   email,
-  date,
   length,
-  numericality,
-  format,
+  numericality
 } from "redux-form-validators";
 import { sendEmail } from "../../actions";
 
@@ -53,14 +45,6 @@ const renderTextArea = ({ input, label, placeholder, classes, meta }) => {
         rows={6}
         rowsMax={4}
       />
-      {/* <TextField
-          {...input}
-          error={meta.touched && meta.error && true}
-          placeholder={placeholder}
-          multiLine={true}
-            rows={4}
-            rowsMax={4}
-        /> */}
 
       {renderError(meta)}
     </FormControl>
@@ -95,31 +79,6 @@ const renderDateField = ({ input, label, placeholder, classes, meta }) => {
   );
 };
 
-const renderRadioGroup = ({ input, ...rest }) => (
-  <RadioGroup
-    {...input}
-    {...rest}
-    valueSelected={input.value}
-    onChange={(event, value) => input.onChange(value)}
-  />
-);
-
-const renderSelectField = ({
-  input,
-  label,
-  meta: { touched, error },
-  children,
-  ...custom
-}) => (
-  <Select
-    floatingLabelText={label}
-    errorText={touched && error}
-    {...input}
-    onChange={(event, index, value) => input.onChange(event)}
-    children={children}
-    {...custom}
-  />
-);
 
 const styles = (theme) => ({
   root: {
@@ -175,11 +134,7 @@ const validations = {
 
   email: [
     required({ msg: "Required" }),
-    email(),
-    // format({
-    //   width: /^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(gmail|aol|hotmail|yahoo|outlook|icloud|inbox|mail)\.com$/i,
-    //   message: { defaultMessage: "Must use corporate email address" }
-    // })
+    email()
   ],
   first_name: [required({ msg: "Required" }), length({ min: 3 })],
 };

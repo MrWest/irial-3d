@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Link from "./buttons/extension";
-import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import MenuItem from "@material-ui/core/MenuItem";
 import { withStyles } from "@material-ui/core/styles";
@@ -12,7 +11,6 @@ import { Grid, Menu } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { IconVTLogo } from "./icons";
 import { connect } from "react-redux";
-import _ from "lodash";
 import LanguageSelector from "./languageSelector";
 import { HashLink } from "react-router-hash-link";
 import { isLogged, selectAccountView } from "../actions/index";
@@ -120,13 +118,6 @@ class AppTopBar extends Component {
 
   render() {
     const { classes, language } = this.props;
-    const ripplingLogo = (
-      <img
-        src="images/public/rippling-logo-vector-with-text.png"
-        className="logoBanner"
-      />
-    );
-
     const { anchorEl, isHovered } = this.state;
 
     return (
@@ -135,13 +126,7 @@ class AppTopBar extends Component {
           className={classes.center}
           style={{ textAlign: "center !important" }}
         >
-          <div
-            style={{
-              width: "100%",
-              textAlign: "center  !important",
-              paddingBottom: 5,
-            }}
-          >
+          <div style={{ width: "100%", textAlign: "center  !important", paddingBottom: 5 }}>
             <Link className={classes.logo} color="inherit" to="/">
               <IconVTLogo
                 height={60}
@@ -621,7 +606,6 @@ const styles = (theme) => ({
   },
   appBarButtonMenu: {
     minHeight: "100% !important",
-    fontFamily: "inherit",
     fontFamily: "Futura",
     fontSize: "inherit",
     textDecorationLine: "none !important",
@@ -631,7 +615,6 @@ const styles = (theme) => ({
   appBarButtonHovered: {
     padding: "2px 20px",
     fontSize: 16,
-    backgroundColor: "#c",
     fontFamily: "Futura",
     color: "#ffffff",
     backgroundColor: "#337ab7",
@@ -694,8 +677,7 @@ const styles = (theme) => ({
       paddingLeft: 10,
       paddingRight: 10,
       minHeight: "40px !important",
-      minWidth: "80px !important",
-      fontSize: 12,
+      minWidth: "80px !important"
     },
   },
   ripplingLogoStyle: {
@@ -714,7 +696,6 @@ const styles = (theme) => ({
   notiPop: {
     background: "#ffa926",
     position: "absolute",
-
     right: -12,
     top: -12,
     height: 20,
@@ -722,13 +703,7 @@ const styles = (theme) => ({
     borderRadius: 10,
     fontSize: 10,
     padding: 3,
-    border: "1px solid #434c5f",
-    right: -10,
-    top: -10,
-    height: 16,
-    width: 16,
-    borderRadius: 8,
-    fontSize: 8,
+    border: "1px solid #434c5f"
   },
   bagContainer: {
     maxHeight: "200px",

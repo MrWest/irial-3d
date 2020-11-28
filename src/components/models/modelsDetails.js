@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 // import OrderDisplayTool from "./orderDisplayTool";
 import { Grid, Button } from "@material-ui/core";
 import { AttachMoney as MoneySharp, AddShoppingCart } from "@material-ui/icons";
@@ -22,6 +22,7 @@ import CommentsTool from "../tools/commentsTool";
 import Loader from "../global/loader";
 import { isServer, isInCart } from "../../apis/tools";
 import { imageResizedUrl } from "../../helpers/utils";
+import styles from './styles/modelsDetails';
 // import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 const Tag = ({ classes, tag }) => (
@@ -30,34 +31,34 @@ const Tag = ({ classes, tag }) => (
 
 const RelatedModelCard = ({ classes, model }) => (
   <Link to={`/model/${model.id}`}>
-    <div
-      style={{
-        padding: 4,
-        border: "1px solid #dddddd",
-        borderRadius: 4,
-        cursor: "pointer",
-      }}
-    >
+    <div style={{ padding: 4, border: "1px solid #dddddd", borderRadius: 4, cursor: "pointer" }} >
       <div className={classes.modelCard}>
-        <img
-          src={imageResizedUrl(model.image, 150)}
-          className={classes.modelCardImg}
-          alt={model.name}
-        />
+        <img src={imageResizedUrl(model.image, 150)} className={classes.modelCardImg} alt={model.name} />
       </div>
-      <p
-        style={{
-          textAlign: "center",
-          marginTop: 4,
-          color: "#4d4e53",
-          fontFamily: "Arial",
-        }}
-      >
+      <p style={{ textAlign: "center",  marginTop: 4, color: "#4d4e53", fontFamily: "Arial" }}>
         {model.name}
       </p>
     </div>
   </Link>
 );
+
+const ItemDetails = ({ classes, model, section, category, language }) => (
+  <div>
+      <p className={classes.modelName}>{model.name}</p>
+        <p
+          className={classes.modelText}
+        >{`${section.name}/${category.name}`}</p>
+        <p className={classes.modelText}>{model.full_description}</p>
+        <p className={classes.modelText}>
+          <strong>{language.LumionVersion}: </strong>
+          {model.lumion_version}
+        </p>
+        <p className={classes.modelPrice}>
+          <strong>{language.Price}: </strong>
+          {`${model.price} ${model.currency}`}
+        </p>
+  </div>
+)
 
 class ModelDetails extends Component {
   state = {
@@ -75,8 +76,6 @@ class ModelDetails extends Component {
         });
       });
     }
-
-    // alert(id+"sss")
   }
 
   componentDidMount() {
@@ -88,17 +87,13 @@ class ModelDetails extends Component {
     if (parseInt(this.state.idModel) !== parseInt(id)) {
       this.props.selectModel(id);
       this.setState({ idModel: id });
-      // alert(this.state.idmodel)
     }
-
-    // alert(id)
   }
 
   getCategory(value) {
     let category = "All";
 
     this.props.categories.map((cat) => {
-      // alert( cat.id+ " - "+ value)
       if (parseInt(cat.id) === parseInt(value)) {
         category = cat.name;
       }
@@ -155,7 +150,56 @@ class ModelDetails extends Component {
         </Helmet>
         <Grid container justify="center">
           <Grid container spacing={3} className={classes.center}>
-            <Grid item xs={12} />
+            <Grid item xs={12} className={classes.onMobile}>
+              <Grid container>
+                <Grid item xs={8}>
+                 <ItemDetails classes={classes} model={model} section={section} language={language} category={category} />
+                </Grid>
+                <Grid item xs={4}>
+                      <Button
+                        className={
+                          cantAddToCart
+                            ? classes.actionButtonDisabled
+                            : classes.actionButton
+                        }
+                        endIcon={
+                          <AddShoppingCart
+                            className={
+                              cantAddToCart
+                                ? classes.actionIconDisabled
+                                : classes.actionIcon
+                            }
+                          />
+                        }
+                        onClick={this.handleAddItem}
+                        disabled={cantAddToCart}
+                      >
+                        {language.AddToCart}
+                  </Button>
+                   <div style={{ height: 8 }} />
+                  <Button
+                        className={classes.actionButton}
+                        endIcon={
+                          <MoneySharp
+                            className={
+                              cantAddToCart
+                                ? classes.actionIconDisabled
+                                : classes.actionIcon
+                            }
+                          />
+                        }
+                        onClick={() => {
+                          if (!cantAddToCart) this.handleAddItem(false);
+                        }}
+                        to={cantAddToCart || "/payment"}
+                        disabled={cantAddToCart}
+                      >
+                        {language.Buy}
+                      </Button>
+                </Grid>
+              </Grid>
+               
+            </Grid>
             <Grid item md={8} xs={12}>
               <ImageGallery
                 items={model.images.map((image) => ({
@@ -178,20 +222,9 @@ class ModelDetails extends Component {
               </div>
             </Grid>
             <Grid item md={4} xs={12}>
-              <p className={classes.modelName}>{model.name}</p>
-              <p
-                className={classes.modelText}
-              >{`${section.name}/${category.name}`}</p>
-              <p className={classes.modelText}>{model.full_description}</p>
-              <p className={classes.modelText}>
-                <strong>{language.LumionVersion}: </strong>
-                {model.lumion_version}
-              </p>
-              <p className={classes.modelPrice}>
-                <strong>{language.Price}: </strong>
-                {`${model.price} ${model.currency}`}
-              </p>
-              <Grid container spacing={2} style={{ paddingTop: 24 }}>
+              <div className={classes.noMobile}>
+                  <ItemDetails classes={classes} model={model} section={section} language={language} category={category} />
+                  <Grid container spacing={2} style={{ paddingTop: 24 }}>
                 <Grid item xs={6}>
                   <Link
                     endIcon={
@@ -252,39 +285,22 @@ class ModelDetails extends Component {
                     </p>
                     <Grid container spacing={2} itemsAlign="center">
                       <Grid item>
-                        <img
-                          style={{ height: 38, width: 38, borderRadius: 19 }}
-                          src={
-                            model.ownerInfo.picture ||
-                            "./static/images/public/user.png"
-                          }
-                        />
+                        <img style={{ height: 38, width: 38, borderRadius: 19 }} src={model.ownerInfo.picture || "./static/images/public/user.png"}
+                          alt="user" />
                       </Grid>
                       <Grid item>
-                        <p
-                          className={classes.modelText}
-                          style={{ marginBottom: 8 }}
-                        >
+                        <p className={classes.modelText} style={{ marginBottom: 8 }}>
                           {model.ownerInfo.first_name}
                         </p>
-                        <p
-                          className={classes.modelText}
-                          style={{ marginBottom: 0 }}
-                        >
+                        <p className={classes.modelText} style={{ marginBottom: 0 }}>
                           {model.ownerInfo.last_name}
                         </p>
                       </Grid>
                       <Grid item>
-                        <p
-                          className={classes.modelText}
-                          style={{ marginBottom: 8 }}
-                        >
+                        <p className={classes.modelText} style={{ marginBottom: 8 }} >
                           <strong>{section.name}</strong>
                         </p>
-                        <p
-                          className={classes.modelText}
-                          style={{ marginBottom: 0, textAlign: "center" }}
-                        >
+                        <p className={classes.modelText} style={{ marginBottom: 0, textAlign: "center" }} >
                           {model.ownerInfo.owner_models}
                         </p>
                       </Grid>
@@ -327,6 +343,7 @@ class ModelDetails extends Component {
                   </Grid>
                 )}
               </Grid>
+              </div>
             </Grid>
           </Grid>
         </Grid>
@@ -335,192 +352,6 @@ class ModelDetails extends Component {
     );
   }
 }
-
-const styles = (theme) => ({
-  container: {
-    paddingTop: 120,
-    paddingBottom: 130,
-  },
-  center: {
-    [theme.breakpoints.up("lg")]: {
-      maxWidth: "1280px",
-      paddingLeft: "0 !important",
-      paddingRight: "0 !important",
-      minWidth: "1280px",
-    },
-    [theme.breakpoints.down("lg")]: {
-      maxWidth: "1180px",
-      paddingLeft: "0 !important",
-      paddingRight: "0 !important",
-      minWidth: "1180px",
-    },
-    [theme.breakpoints.down("sm")]: {
-      maxWidth: "100vw",
-      paddingLeft: "0 !important",
-      paddingRight: "0 !important",
-      minWidth: "100vw",
-    },
-  },
-  imgSet: {
-    objectFit: "contain",
-    width: "auto !important",
-    height: "424",
-  },
-  imgContainer: {
-    width: "100%",
-    height: 420,
-    "& img": {
-      objectFit: "contain",
-      width: "auto !important",
-      height: "100%",
-    },
-  },
-  tagContainer: {
-    borderRadius: 28,
-    backgroundColor: "#326787",
-    border: "3px solid #dedede",
-    padding: "6px 12px",
-    width: "100%",
-    color: "#ffffff",
-    textAlign: "center",
-    cursor: "pointer",
-  },
-  seletcTool: {
-    width: 220,
-    marginTop: 20,
-    [theme.breakpoints.down("sm")]: {
-      marginLeft: 24,
-    },
-  },
-  onMoblie: {
-    [theme.breakpoints.down("sm")]: {
-      paddingTop: "16px !important",
-    },
-  },
-  mobilePadding: {
-    [theme.breakpoints.down("sm")]: {
-      paddingLeft: "16px !important",
-      paddingRight: "16px !important",
-    },
-  },
-  mobileAlign: {
-    textAlign: "right",
-    marginTop: 16,
-    [theme.breakpoints.down("sm")]: {
-      marginTop: 0,
-      textAlign: "left",
-    },
-  },
-  modelCardImg: {
-    height: "100%",
-    width: "100%",
-    objectFit: "contain",
-    borderRadius: 4,
-  },
-  modelCard: {
-    height: 92,
-    width: "100%",
-    backgroundColor: "#245580",
-    borderRadius: 4,
-  },
-  actionIcon: {
-    color: "#ffffff",
-  },
-  actionButton: {
-    borderRadius: 4,
-    height: 36,
-    width: "100%",
-    fontFamily: "Delvon",
-    fontSize: 22,
-    letterSpacing: 2,
-    fontStyle: "normal",
-    color: "#ffffff",
-    backgroundColor: "#1c5375",
-    textTransform: "none",
-    "&:hover": {
-      backgroundColor: "#559cd9",
-    },
-  },
-  actionIconDisabled: {
-    color: "#5f5f5f",
-  },
-  actionButtonDisabled: {
-    borderRadius: 4,
-    height: 36,
-    width: "100%",
-    fontFamily: "Delvon",
-    fontSize: 22,
-    letterSpacing: 2,
-    fontStyle: "normal",
-    color: "#5f5f5f !important",
-    backgroundColor: "#dedede",
-    textTransform: "none",
-    "&:hover": {
-      cursor: "not-allowed !important",
-    },
-  },
-  modelName: {
-    marginBottom: 16,
-    fontFamily: "Arial",
-    fontSize: 28,
-    fontWeight: "bold",
-    fontStyle: "normal",
-    color: "#1c5375",
-    [theme.breakpoints.down("sm")]: {
-      marginBottom: 0,
-    },
-  },
-  modelText: {
-    marginBottom: 12,
-    fontFamily: "Arial",
-    fontSize: 16,
-    fontStyle: "normal",
-    [theme.breakpoints.down("sm")]: {
-      marginBottom: 0,
-    },
-  },
-  modelPrice: {
-    marginBottom: 12,
-    fontFamily: "Arial",
-    fontSize: 18,
-    fontWeight: "normal",
-    [theme.breakpoints.down("sm")]: {
-      marginBottom: 0,
-    },
-  },
-  orderList: {
-    paddingLeft: "15px",
-    paddingRight: "15px",
-  },
-  gray: {
-    backgroundColor: "#dddddd",
-  },
-  yellow: {
-    color: "#a0a010",
-    backgroundColor: "#f9f9c9",
-  },
-  green: {
-    color: "#10a000",
-    backgroundColor: "#c9f999",
-  },
-  submitButton: {
-    width: "282px",
-    height: "56px",
-    "& span": {
-      fontFamily: "Delvon",
-      fontSize: "16px",
-      fontWeight: "bold",
-      fontStyle: "normal",
-      fontStretch: "normal",
-      lineHeight: "normal",
-      letterSpacing: "normal",
-    },
-    textAlign: "center",
-    color: "#ffffff",
-    borderRadius: "4px",
-    backgroundColor: "#1c5375",
-  },
-});
 
 ModelDetails.propTypes = {
   classes: PropTypes.object.isRequired,

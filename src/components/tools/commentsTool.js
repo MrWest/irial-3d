@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { setRedirectUrl, getUserRate } from "../../actions";
 import StarRatingComponent from "react-star-rating-component";
 import { getFacebookFreeUserProfileUrl } from "../../apis/tools";
+import { StylessButton } from "../buttons";
 
 class CommentsTool extends React.Component {
   state = {
@@ -210,6 +211,7 @@ class CommentsTool extends React.Component {
                         )
                       : "../static/images/public/user.png"
                   }
+                  alt="user"
                 />
               </Grid>
               <Grid item xs={10} md={11}>
@@ -236,7 +238,7 @@ class CommentsTool extends React.Component {
 
               <Grid item xs={12} align="right">
                 <p>
-                  <a
+                  <StylessButton
                     className={classes.link}
                     style={{
                       marginRight: 8,
@@ -246,11 +248,10 @@ class CommentsTool extends React.Component {
                     }}
                     onClick={this.handleOnClickAdd.bind(this)}
                   >
-                    {" "}
                     Post
-                  </a>
+                  </StylessButton>
                   |
-                  <a
+                  <StylessButton
                     className={classes.link}
                     style={{
                       marginLeft: 0,
@@ -261,9 +262,8 @@ class CommentsTool extends React.Component {
                     }}
                     onClick={() => this.setState({ isAdding: false })}
                   >
-                    {" "}
                     Cancel
-                  </a>
+                  </StylessButton>
                 </p>
               </Grid>
             </Grid>
@@ -281,6 +281,7 @@ class CommentsTool extends React.Component {
                       ? "../static/images/public/user.png"
                       : getFacebookFreeUserProfileUrl(comment.user_picture)
                   }
+                  alt="user"
                 />
               </Grid>
               <Grid item xs={10} md={11}>
@@ -333,41 +334,27 @@ class CommentsTool extends React.Component {
                   parseInt(comment.id_user) && (
                   <Grid item xs={12} align="right">
                     <p style={{ fontSize: 14 }}>
-                      <a
+                      <StylessButton
                         id={comment.id}
                         className={classes.link}
-                        style={{
-                          marginRight: 8,
-                          color: "#3577d4",
-                          fontSize: 12,
-                          cursor: "pointer",
-                          fontWeight: "normal",
-                        }}
-                        onClick={this.handleOnClickEdit.bind(this)}
-                      >
-                        {" "}
-                        {language.Edit}{" "}
-                      </a>
+                        style={{ marginRight: 8, color: "#3577d4", fontSize: 12,
+                          cursor: "pointer", fontWeight: "normal" }}
+                        onClick={this.handleOnClickEdit.bind(this)}>
+                        {language.Edit}
+                      </StylessButton>
                       |
                       {this.state.toEdit ? (
-                        <a
+                        <StylessButton
                           className={classes.link}
-                          style={{
-                            marginLeft: 0,
-                            color: "#434c5f",
-                            fontSize: 12,
-                            cursor: "pointer",
-                            fontWeight: "normal",
-                          }}
+                          style={{ marginLeft: 0, color: "#434c5f", fontSize: 12,
+                            cursor: "pointer", fontWeight: "normal" }}
                           onClick={() =>
                             this.setState({ newComment: "", toEdit: undefined })
-                          }
-                        >
-                          {" "}
+                          }>
                           {language.Cancel}
-                        </a>
+                        </StylessButton>
                       ) : (
-                        <a
+                        <StylessButton
                           id={comment.id}
                           className={classes.link}
                           style={{
@@ -381,7 +368,7 @@ class CommentsTool extends React.Component {
                         >
                           {" "}
                           {language.Delete}
-                        </a>
+                        </StylessButton>
                       )}
                     </p>
                   </Grid>

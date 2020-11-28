@@ -1,15 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import FormControl from "@material-ui/core/FormControl";
 import SwitchTool from "./switchTool";
 import {
-  Grid,
-  Select,
-  MenuItem,
-  InputLabel,
-  Switch,
-  FormControlLabel,
+  Grid
 } from "@material-ui/core";
 import {
   setLanguageEn,
@@ -135,7 +129,7 @@ class LanguageSelector extends React.Component {
 
     if (view === "categoryedit") getCategory(query);
 
-    if (view === "posts") history.push(`/${view}/${slugWorkout(param, lang)}`);
+    if (view === "posts") history.push(`/${view}/${slugWorkout(query, lang)}`);
   }
 
   handleChange = (value) => {
