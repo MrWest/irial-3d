@@ -25,18 +25,6 @@ const styles = theme => ({
         maxWidth: 1440
       }
     },
-    center: {
-     
-      [theme.breakpoints.up("xl")]: {
-        maxWidth: "1280px",
-        paddingLeft: "0 !important"
-      },
-      [theme.breakpoints.up("lg")]: {
-        maxWidth: "1180px",
-        paddingLeft: "0 !important",
-        minWidth: "1100px"
-      }
-    },
     downloadButton: {
       background: 'green',
       cursor: 'pointer'
@@ -49,9 +37,11 @@ const styles = theme => ({
     newProducts: {
       fontFamily: 'Gloss',
       fontSize: 20,
-      margin: '8px 0px',
-      marginLeft: 22,
-      marginRight: 22
+      margin: '8px 22px',
+      [theme.breakpoints.down("sm")]: {
+        fontSize: 16,
+        margin: '4px 12px'
+      }
     },
     itemsPanel: {
       width: 'auto',
@@ -59,13 +49,21 @@ const styles = theme => ({
     },
     itemViewContainer: {
       height: 156,
-      width: 198
+      width: 198,
+      [theme.breakpoints.down("sm")]: {
+        height: 92,
+        width: 104,
+      }
     },
     downloadViewContainer: {
       height: 156,
       width: 92,
       background: 'green',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      [theme.breakpoints.down("sm")]: {
+        height: 92,
+        width: 72,
+      }
     },
     itemView: {
       height: 104,
@@ -74,6 +72,10 @@ const styles = theme => ({
       '&&:hover': {
         height: 132,
         width: 198,
+      },
+      [theme.breakpoints.down("sm")]: {
+         height: 72,
+         width: 104,
       }
     },
     itemImg: {

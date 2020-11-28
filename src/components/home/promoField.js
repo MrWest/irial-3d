@@ -14,11 +14,11 @@ const PromoField = ({ classes, models })  => (
             <PromoInfo />
           </Grid>
         </Grid>
-        <Grid container alignItems="flex-end">
-          <Grid item xs={9}>
+        <Grid container justify="flex-end" alignItems="flex-end">
+          <Grid item md={9} sm={8} className={classes.noMobile}>
             <PromoItems models={models}/>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item md={3} sm={4} xs={8}>
             <PromoLinks />
           </Grid>
         </Grid>
@@ -27,9 +27,10 @@ const PromoField = ({ classes, models })  => (
     );
     
 const styles = theme => ({
-  table: {
-    display: "table",
-    height: "100%"
+  noMobile: {
+    [theme.breakpoints.down('xs')]: {
+      display: "none"
+    }
   },
   promoField: {
     backgroundImage: "url(../static/images/home/irial-3d-city-front.png)",
@@ -47,13 +48,6 @@ const styles = theme => ({
       backgroundSize: "scale",
     } 
   },
-  themePadding: {
-    border: "1px solid #ff1333",
-    width: "100%",
-    [theme.breakpoints.up("lg")]: {
-      maxWidth: 1440
-    }
-  },
   center: {
     [theme.breakpoints.up("xl")]: {
       maxWidth: "1280px",
@@ -63,7 +57,15 @@ const styles = theme => ({
       maxWidth: "1180px",
       paddingLeft: "0 !important",
       minWidth: "1100px"
-    }
+    }, 
+    [theme.breakpoints.down("sm")]: {
+     paddingLeft: 24,
+     paddingRight:  24
+    }, 
+    [theme.breakpoints.down("xs")]: {
+     paddingLeft: 8,
+     paddingRight:  8
+    } 
   },
 });
 
