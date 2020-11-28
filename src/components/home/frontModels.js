@@ -67,7 +67,6 @@ const FrontModels = ({ models, classes, sections, addToCart, language }) =>  {
         }
       },
       center: {
-   
         [theme.breakpoints.up("xl")]: {
           maxWidth: "1280px",
           paddingLeft: "0 !important"
@@ -76,7 +75,15 @@ const FrontModels = ({ models, classes, sections, addToCart, language }) =>  {
           maxWidth: "1180px",
           paddingLeft: "0 !important",
           minWidth: "1100px"
-        }
+        }, 
+        [theme.breakpoints.down("sm")]: {
+         paddingLeft: 24,
+         paddingRight:  24
+        }, 
+        [theme.breakpoints.down("xs")]: {
+         paddingLeft: 8,
+         paddingRight:  8
+        } 
       },
       sectionTittle: {
         margin: "10px 0px",
@@ -88,7 +95,10 @@ const FrontModels = ({ models, classes, sections, addToCart, language }) =>  {
         marginTop: 40,
         marginBottom: 0,
         textAlign: "center",
-        textShadow: '1px 1px 0 #afafaf'
+        textShadow: '1px 1px 0 #afafaf', 
+        [theme.breakpoints.down("xs")]: {
+          fontSize: 24
+        } 
       },
       pText: {
         marginBottom: 40,

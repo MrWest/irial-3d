@@ -66,7 +66,7 @@ const styles = theme => ({
      paddingLeft: 8,
      paddingRight:  8
     } 
-  },
+  }
 });
 
 PromoField.propTypes = {

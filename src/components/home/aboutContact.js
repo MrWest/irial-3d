@@ -16,10 +16,10 @@ const AboutContact = ({ classes, language }) => (
           <Grid container id="aboutus" justify="center" >
           <Grid item className={classes.center}>
             <Grid container spacing={4} alignItems="stretch" >
-                <Grid item xs={12} md={6}  >
+                <Grid item md={6} sm={4} xs={12} >
                   <div className={classes.aboutPic}/>
                 </Grid>
-                <Grid item xs={12} md={6}>
+                <Grid item  md={6} sm={8} xs={12}>
                   <Grid container alignItems="flex-end" className={classes.aboutContent}>
                     <Grid item>
                         <h3 className={classes.typographyTextBlue} >
@@ -36,16 +36,14 @@ const AboutContact = ({ classes, language }) => (
                       </Grid>
                       </Grid>
                   </Grid> 
-                 <Grid item xs={12} md={8}>
+                 <Grid item md={8}>
                  <div className={classes.offerContent} >
-                        <h3
-                        className={classes.typographyTextBlue}
-                      >
-                        {language.WhatWeOffer}
-                      </h3>
-                      <div className={classes.typographyTextSmall}>
-                        <div className={classes.hrBarGold} />
-                      </div>
+                        <h3 className={classes.typographyTextBlue}>
+                          {language.WhatWeOffer}
+                        </h3>
+                        <div className={classes.typographyTextSmall}>
+                          <div className={classes.hrBarGold} />
+                        </div>
                       
                       <div className={classes.typographyTextSmall} style={{ textAlign: 'justify' }}>
                       
@@ -61,13 +59,13 @@ const AboutContact = ({ classes, language }) => (
            <Grid container justify="center" style={{paddingBottom: 64, paddingTop: 42, background: 'rgba(255,255,255,0.6)' }}>
               <Grid item className={classes.center}>
               <Grid container >
-              <Grid item xs={12} md={8} style={{ paddingTop: 32 }}>
+              <Grid item xs={12} sm={8} style={{ paddingTop: 32 }}>
               <p className={classes.typographyTextSmallBlue}>
                   {language.ContactUsText}
                </p>
                 <FrontContactForm ></FrontContactForm>    
               </Grid>
-              <Grid id="contactus" item xs={12} md={4} style={{paddingLeft: 56}}>
+              <Grid id="contactus" item xs={12} sm={4} style={{paddingLeft: 56}}>
               <Grid item xs={12} >
                 <h3
                 variant="h3"
