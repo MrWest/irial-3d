@@ -1,160 +1,133 @@
 import DashBoard from "./DashBoard";
 
-import { initializeStore } from '../../store'
+import { initializeStore } from "../../store";
 
 import { loadState } from "./LocalStorage";
 let loadedInitialState = loadState();
 
+export const isServer = typeof window === "undefined";
+const __NEXT_REDUX_STORE__ = "__NEXT_REDUX_STORE__";
 
-export const isServer = typeof window === 'undefined'
-const __NEXT_REDUX_STORE__ = '__NEXT_REDUX_STORE__'
-
-function getOrCreateStore (initialState = loadedInitialState) {
+function getOrCreateStore(initialState = loadedInitialState) {
   // Always make a new store if server, otherwise state is shared between requests
   if (isServer) {
-    return initializeStore(initialState)
+    return initializeStore(initialState);
   }
 
   // Create store if unavailable on the client and set it on the window object
   if (!window[__NEXT_REDUX_STORE__]) {
-    window[__NEXT_REDUX_STORE__] = initializeStore(initialState)
+    window[__NEXT_REDUX_STORE__] = initializeStore(initialState);
   }
-  return window[__NEXT_REDUX_STORE__]
+  return window[__NEXT_REDUX_STORE__];
 }
 
-export const generatePHPParameters = ramdomObject => {
-
-    var urlParams = ""
-    var fisrt = true
-    for (var x in ramdomObject) {
-      if(fisrt){
-        urlParams += "?"   + x + "=" + ramdomObject[x];
-        fisrt = false
-      }
-      else
-      urlParams += "&"   + x + "=" + ramdomObject[x];
-     
-    }
-  
-    return urlParams
+export const generatePHPParameters = (ramdomObject) => {
+  var urlParams = "";
+  var fisrt = true;
+  for (var x in ramdomObject) {
+    if (fisrt) {
+      urlParams += "?" + x + "=" + ramdomObject[x];
+      fisrt = false;
+    } else urlParams += "&" + x + "=" + ramdomObject[x];
   }
 
-  
-  export const headers = {
-    "Content-Type": "multipart/form-data"
-  };
+  return urlParams;
+};
 
-  export const generateAppendParameters = ramdomObject => {
+export const headers = {
+  "Content-Type": "multipart/form-data",
+};
 
-    let uploadInfo = new FormData();
-    for (var x in ramdomObject)      
-      uploadInfo.append( x ,  ramdomObject[x]);
-  
-    return uploadInfo
-  }
+export const generateAppendParameters = (ramdomObject) => {
+  let uploadInfo = new FormData();
+  for (var x in ramdomObject) uploadInfo.append(x, ramdomObject[x]);
 
+  return uploadInfo;
+};
 
-  export const getLanguage = reduxStore => {
-
-    if(reduxStore)
-    {
-      const state = reduxStore.getState();
-      const language = state.language
-
-      return language._language
-    }
-    const store = getOrCreateStore();
-    const state = store.getState();
-    const language = state.language
+export const getLanguage = (reduxStore) => {
+  if (reduxStore) {
+    const state = reduxStore.getState();
+    const language = state.language;
 
     return language._language;
   }
+  const store = getOrCreateStore();
+  const state = store.getState();
+  const language = state.language;
 
+  return language._language;
+};
 
-  export const isInCart = item => {
-    
-    const store = getOrCreateStore();
-    const state = store.getState();
-    const cart = state.cart
+export const isInCart = (item) => {
+  const store = getOrCreateStore();
+  const state = store.getState();
+  const cart = state.cart;
 
+  return cart.items.find(
+    (itm) =>
+      itm.id_item === item.id &&
+      itm.section.categories.find((cat) => cat.id === item.id_category)
+  );
+};
 
-    return  cart.items.find( itm => itm.id_item === item.id &&
-      itm.section.categories.find(cat => cat.id === item.id_category)); 
-  }
+export const sendNotificationEmail = async (DashBoard, data) => {
+  let sendData = Object.assign({}, data);
 
+  var headers = {
+    "Content-Type": "multipart/form-data",
+  };
 
-  export const sendNotificationEmail = async (DashBoard, data) => {
+  const lang = getLanguage();
 
-    let sendData  = Object.assign({}, data);
+  if (data.subject) sendData.subject += " (" + lang + ")";
 
-    var headers = {
-      "Content-Type": "multipart/form-data"
-    };
+  let uploadInfo = generateAppendParameters(sendData);
 
-    const lang = getLanguage();
-    
-     if(data.subject)
-     sendData.subject += " ("+lang+")"
-    
-    let uploadInfo = generateAppendParameters(sendData);
+  const promises = await DashBoard.post(
+    "/mail/notificationemail.php",
+    uploadInfo,
+    { headers }
+  );
 
+  const results = await promises;
 
+  return results;
+};
 
-    const promises = await DashBoard.post("/mail/notificationemail.php", uploadInfo,  {headers})
-    
-    
+export const sendConfirmationEmail = async (DashBoard, data) => {
+  let sendData = Object.assign({}, data);
 
-      const results = await promises
-      
+  var headers = {
+    "Content-Type": "multipart/form-data",
+  };
 
+  // const lang = getLanguage();
 
-   
-    return results
-  }
+  //  if(data.subject)
+  //  sendData.subject += " ("+lang+")"
 
+  let uploadInfo = generateAppendParameters(sendData);
 
-  export const sendConfirmationEmail = async (DashBoard, data) => {
+  const promises = await DashBoard.post(
+    "/mail/confirmationemail.php",
+    uploadInfo,
+    { headers }
+  );
 
-    let sendData  = Object.assign({}, data);
+  const results = await promises;
 
-    var headers = {
-      "Content-Type": "multipart/form-data"
-    };
+  return results;
+};
 
-    // const lang = getLanguage();
-    
-    //  if(data.subject)
-    //  sendData.subject += " ("+lang+")"
-    
-    let uploadInfo = generateAppendParameters(sendData);
+export function getFacebookFreeUserProfileUrl(bloqued) {
+  const id = bloqued.substring(bloqued.indexOf("=") + 1, bloqued.indexOf("&"));
+  return `https://graph.facebook.com/${id}/picture?type=small`;
+}
 
+const key = "WILDWEST_COMPANY__KILLER-PRODUCTION_INC.__IRIAL-3D";
 
-
-    const promises = await DashBoard.post("/mail/confirmationemail.php", uploadInfo,  {headers})
-    
-    
-
-      const results = await promises
-      
-
-
-   
-    return results
-  }
-
-  export function getFacebookFreeUserProfileUrl( bloqued ) {
-
-    const id = bloqued.substring(bloqued.indexOf('=')+1, bloqued.indexOf('&'));
-    return `https://graph.facebook.com/${id}/picture?type=small`;
-  }
-
-
-  
-const key = 'WILDWEST_COMPANY__KILLER-PRODUCTION_INC.__IRIAL-3D';
- 
 // Create an encryptor:
-export const encryptor = require('simple-encryptor')(key);
+export const encryptor = require("simple-encryptor")(key);
 
-   // First, checks if it isn't implemented yet.
-
-  
+// First, checks if it isn't implemented yet.

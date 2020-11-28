@@ -6,27 +6,24 @@ import PropTypes from "prop-types";
 
 class TourCarouselTool extends React.Component {
   state = {
-    index: 0
+    index: 0,
   };
 
   next() {
-    if (this.state.index < 1){
-
+    if (this.state.index < 1) {
       //  alert("this.props.onChange");
-       this.props.onChange(this.state.index + 1);
+      this.props.onChange(this.state.index + 1);
 
       this.setState({
-        index: this.state.index + 1
+        index: this.state.index + 1,
       });
-
     }
-     
   }
 
   prev() {
     if (this.state.index > 0)
       this.setState({
-        index: this.state.index - 1
+        index: this.state.index - 1,
       });
   }
 
@@ -35,9 +32,14 @@ class TourCarouselTool extends React.Component {
 
     return (
       <div className={classes.slideshowContainer}>
-        {children.map(child => (
+        {children.map((child) => (
           <div
-            style={{ opacity: 1 , verticalAlign: "middle", textAlign: "center", maxHeight: 440}}
+            style={{
+              opacity: 1,
+              verticalAlign: "middle",
+              textAlign: "center",
+              maxHeight: 440,
+            }}
             className={classNames(
               this.state.index != children.indexOf(child)
                 ? classes.mySlides
@@ -50,31 +52,42 @@ class TourCarouselTool extends React.Component {
         ))}
 
         <a
-         
-          className={this.state.index > 0? classes.cursorPrev: classes.cursorPrevDisabled}
+          className={
+            this.state.index > 0
+              ? classes.cursorPrev
+              : classes.cursorPrevDisabled
+          }
           onClick={() => {
-            if(this.props.onChange !== undefined)
-            this.props.onChange(this.state.index > 0 ? this.state.index - 1 : this.state.index);
+            if (this.props.onChange !== undefined)
+              this.props.onChange(
+                this.state.index > 0 ? this.state.index - 1 : this.state.index
+              );
             this.setState({
               index:
-                this.state.index > 0 ? this.state.index - 1 : this.state.index
+                this.state.index > 0 ? this.state.index - 1 : this.state.index,
             });
           }}
         >
           &#10094;
         </a>
         <a
-          className={this.state.index < children.length - 1? classes.cursorNext: classes.cursorNextDisabled}
+          className={
+            this.state.index < children.length - 1
+              ? classes.cursorNext
+              : classes.cursorNextDisabled
+          }
           onClick={() => {
-            if(this.props.onChange !== undefined)
-            this.props.onChange(this.state.index < children.length - 1
-              ? this.state.index + 1
-              : this.state.index);
+            if (this.props.onChange !== undefined)
+              this.props.onChange(
+                this.state.index < children.length - 1
+                  ? this.state.index + 1
+                  : this.state.index
+              );
             this.setState({
               index:
                 this.state.index < children.length - 1
                   ? this.state.index + 1
-                  : this.state.index
+                  : this.state.index,
             });
           }}
         >
@@ -84,14 +97,14 @@ class TourCarouselTool extends React.Component {
     );
   }
 }
-const styles = theme => ({
+const styles = (theme) => ({
   slideshowContainer: {
     maxWidth: 690,
     position: "relative",
-    margin: "auto"
+    margin: "auto",
   },
   mySlides: {
-    display: "none"
+    display: "none",
   },
   cursorPrev: {
     cursor: "pointer",
@@ -106,7 +119,7 @@ const styles = theme => ({
     transition: "0.6s ease",
     borderRadius: "0 3px 3px 0",
     userSelect: "none",
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
   },
   cursorPrevDisabled: {
     cursor: "pointer",
@@ -122,7 +135,7 @@ const styles = theme => ({
     borderRadius: "0 3px 3px 0",
     userSelect: "none",
     backgroundColor: "#cccccc",
-    display: "none"
+    display: "none",
   },
   cursorNext: {
     cursor: "pointer",
@@ -138,7 +151,7 @@ const styles = theme => ({
     userSelect: "none",
     borderRadius: "3px 0 0 3px",
     right: 0,
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
   },
   cursorNextDisabled: {
     cursor: "pointer",
@@ -155,13 +168,13 @@ const styles = theme => ({
     borderRadius: "3px 0 0 3px",
     right: 0,
     backgroundColor: "#cccccc",
-    display: "none"
-  }
+    display: "none",
+  },
 });
 
 TourCarouselTool.propTypes = {
   children: PropTypes.node.isRequired,
-  onChange: PropTypes.node.isRequired
+  onChange: PropTypes.node.isRequired,
 };
 
 export default withStyles(styles)(TourCarouselTool);

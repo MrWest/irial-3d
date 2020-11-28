@@ -1,10 +1,10 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { incrementCount, decrementCount, resetCount } from '../store'
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { incrementCount, decrementCount, resetCount } from "../store";
 
 export default () => {
-  const count = useSelector(state => state.count)
-  const dispatch = useDispatch()
+  const count = useSelector((state) => state.count);
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -15,5 +15,5 @@ export default () => {
       <button onClick={() => dispatch(decrementCount())}>-1</button>
       <button onClick={() => dispatch(resetCount())}>Reset</button>
     </div>
-  )
-}
+  );
+};

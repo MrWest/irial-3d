@@ -1,4 +1,9 @@
-import { FETCH_TOURS, DELETE_TOUR, UPDATE_TOUR, ADD_TOUR } from "../actions/types";
+import {
+  FETCH_TOURS,
+  DELETE_TOUR,
+  UPDATE_TOUR,
+  ADD_TOUR,
+} from "../actions/types";
 import _ from "lodash";
 
 const ToursReducer = (state = [], action) => {
@@ -6,43 +11,33 @@ const ToursReducer = (state = [], action) => {
     case FETCH_TOURS:
       return action.payload;
     case DELETE_TOUR:
-    let newState = []
+      let newState = [];
 
+      _.map(state, (tour, index) => {
+        if (parseInt(tour.id) !== parseInt(action.payload)) newState.push(tour);
+      });
 
-    _.map(state, (tour, index) => {
-      if(parseInt(tour.id) !== parseInt(action.payload))
-     newState.push(tour)
-   
-  
-   });
- 
-    return newState
+      return newState;
     case UPDATE_TOUR:
-     newState = []
+      newState = [];
 
+      _.map(state, (tour, index) => {
+        if (parseInt(tour.id) === parseInt(action.payload.id))
+          newState.push(action.payload);
+        else newState.push(tour);
+      });
 
-    _.map(state, (tour, index) => {
-      if(parseInt(tour.id) === parseInt(action.payload.id))
-          newState.push(action.payload)
-          else
-          newState.push(tour)
-  
-   });
- 
-    return newState
+      return newState;
     case ADD_TOUR:
-     newState = []
+      newState = [];
 
+      _.map(state, (tour, index) => {
+        newState.push(tour);
+      });
 
-    _.map(state, (tour, index) => {
-      
-          newState.push(tour)
-  
-   });
-   
-   newState.push(action.payload)
- 
-    return newState
+      newState.push(action.payload);
+
+      return newState;
     default:
       return state;
   }

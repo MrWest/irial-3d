@@ -1,7 +1,7 @@
-import React from 'react';
-import { withStyles, Grid } from '@material-ui/core';
-import styles from './styles/Article';
-import ArticleInformation from './ArticleInformation';
+import React from "react";
+import { withStyles, Grid } from "@material-ui/core";
+import styles from "./styles/Article";
+import ArticleInformation from "./ArticleInformation";
 
 const Article = ({ classes, post }) => (
   <section>

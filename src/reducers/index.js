@@ -13,8 +13,8 @@ import SelectedTourReducer from "./selectedTourReducer";
 import AttractionsReducer from "./attractionsReducer";
 import SelectedAttractionsReducer from "./selectedAttractionReducer";
 import CategoriesReducer from "./categoriesReducer";
-import SelectedSectionReducer from "./selectedSectionReducer"
-import SelectedCategoryReducer from "./selectedCategoryReducer"
+import SelectedSectionReducer from "./selectedSectionReducer";
+import SelectedCategoryReducer from "./selectedCategoryReducer";
 import LanguageReducer from "./languageReducer";
 import SignFacebookReducer from "./signFacebookReducer";
 import RedirectUrlReducer from "./redirectUrlReducer";
@@ -32,7 +32,6 @@ import ScenesReducer from "./scenesReducer";
 import SelectedSceneReducer from "./selectedSceneReducer";
 import TagsReducer from "./tagsReducer";
 import CartReducer from "./cartReducer";
-
 
 export default combineReducers({
   accountView: AccountViewReducer,
@@ -63,7 +62,7 @@ export default combineReducers({
   scenes: ScenesReducer,
   selectedScene: SelectedSceneReducer,
   tags: TagsReducer,
-  cart: CartReducer
+  cart: CartReducer,
 });
 
 //Will Change

@@ -1,171 +1,166 @@
-import { FETCH_CATEGORIES, SELECT_CATEGORY, DELETE_CATEGORY} from "./types";
+import { FETCH_CATEGORIES, SELECT_CATEGORY, DELETE_CATEGORY } from "./types";
 import DashBoard from "../apis/DashBoard";
-import {generatePHPParameters, getLanguage} from "../apis/tools";
+import { generatePHPParameters, getLanguage } from "../apis/tools";
 
-export const getCategories = idSection => async dispatch => {
+export const getCategories = (idSection) => async (dispatch) => {
+  const lang = getLanguage();
 
-    const lang = getLanguage()
+  const categoriesDb = await DashBoard.post(
+    "/categories/get_categories.php" +
+      generatePHPParameters({ idSection, lang })
+  );
 
-    const categoriesDb = await DashBoard.post("/categories/get_categories.php"+generatePHPParameters({idSection, lang}))
-    
-    var categoriesRslt = categoriesDb.data.slice()
-        
-       
-  
-       dispatch({
-        type: FETCH_CATEGORIES,
-        payload: categoriesRslt//fromDB
-      });
-  
-  
-    };
+  var categoriesRslt = categoriesDb.data.slice();
 
-    export const getCategory = id => async dispatch => {
+  dispatch({
+    type: FETCH_CATEGORIES,
+    payload: categoriesRslt, //fromDB
+  });
+};
 
-      const lang = getLanguage()
+export const getCategory = (id) => async (dispatch) => {
+  const lang = getLanguage();
 
+  const categoriesDb = await DashBoard.post(
+    "/categories/get_category.php" + generatePHPParameters({ id, lang })
+  );
 
-      const categoriesDb = await DashBoard.post("/categories/get_category.php"+generatePHPParameters({id, lang}))
-      
-      var categoryRslt = categoriesDb.data
-          
-      const sectionCategoryImagesDb = await DashBoard.get("/categories/get_category_images.php"+ generatePHPParameters({idCategory: categoryRslt.id}))
-      categoryRslt.images = sectionCategoryImagesDb.data
-         
-    
-         dispatch({
-          type: SELECT_CATEGORY,
-          payload: categoryRslt//fromDB
-        });
-    
-        return categoryRslt;
-      };
+  var categoryRslt = categoriesDb.data;
 
-      export const getCategoryServer = async (id, reduxStore) => {
+  const sectionCategoryImagesDb = await DashBoard.get(
+    "/categories/get_category_images.php" +
+      generatePHPParameters({ idCategory: categoryRslt.id })
+  );
+  categoryRslt.images = sectionCategoryImagesDb.data;
 
-        const lang = getLanguage()
-  
-  
-        const categoriesDb = await DashBoard.post("/categories/get_category.php"+generatePHPParameters({id, lang}))
-        
-        var categoryRslt = categoriesDb.data
-            
-        const sectionCategoryImagesDb = await DashBoard.get("/categories/get_category_images.php"+ generatePHPParameters({idCategory: categoryRslt.id}))
-        categoryRslt.images = sectionCategoryImagesDb.data
-           
-      
-        if(reduxStore)
-        reduxStore.dispatch({
-            type: SELECT_CATEGORY,
-            payload: categoryRslt//fromDB
-          });
-      
-          return categoryRslt;
-        };
+  dispatch({
+    type: SELECT_CATEGORY,
+    payload: categoryRslt, //fromDB
+  });
 
-        
-      export const updateCategory = category => async dispatch => {
+  return categoryRslt;
+};
 
-        const lang = getLanguage()
-        var headers = {
-          "Content-Type": "multipart/form-data"
-        };
+export const getCategoryServer = async (id, reduxStore) => {
+  const lang = getLanguage();
 
-      
-        let uploadInfo = new FormData();
-        uploadInfo.append("id", category.id);
-        uploadInfo.append("name", category.name);
-        uploadInfo.append("slogan", category.slogan);
-        uploadInfo.append("promotion", category.promotion);
-        uploadInfo.append("lang", lang);
-        if(category.icon_path !== null){
+  const categoriesDb = await DashBoard.post(
+    "/categories/get_category.php" + generatePHPParameters({ id, lang })
+  );
 
-          uploadInfo.append("icon_path", category.icon_path);
+  var categoryRslt = categoriesDb.data;
 
-        }
+  const sectionCategoryImagesDb = await DashBoard.get(
+    "/categories/get_category_images.php" +
+      generatePHPParameters({ idCategory: categoryRslt.id })
+  );
+  categoryRslt.images = sectionCategoryImagesDb.data;
 
-    
-        const categoriesDb = await DashBoard.post("/categories/update_category.php", uploadInfo,  {headers})
-      
-       var categoryRslt = categoriesDb.data
-          
-      const sectionCategoryImagesDb = await DashBoard.get("/categories/get_category_images.php"+ generatePHPParameters({idCategory: categoryRslt.id}))
-      categoryRslt.images = sectionCategoryImagesDb.data
-         
-    
-         dispatch({
-          type: SELECT_CATEGORY,
-          payload: categoryRslt//fromDB
-        });
-    
-      };
+  if (reduxStore)
+    reduxStore.dispatch({
+      type: SELECT_CATEGORY,
+      payload: categoryRslt, //fromDB
+    });
 
-      export const addCategory = category => async dispatch => {
-      
-        var headers = {
-          "Content-Type": "multipart/form-data"
-        };
+  return categoryRslt;
+};
 
-      
-        let uploadInfo = new FormData();
-        
-        uploadInfo.append("id_section", category.id_section);
-        uploadInfo.append("name", category.name);
-        uploadInfo.append("slogan", category.slogan);
-        uploadInfo.append("promotion", category.promotion);
-    
-        if(category.icon_path !== null){
+export const updateCategory = (category) => async (dispatch) => {
+  const lang = getLanguage();
+  var headers = {
+    "Content-Type": "multipart/form-data",
+  };
 
-          uploadInfo.append("icon_path", category.icon_path);
+  let uploadInfo = new FormData();
+  uploadInfo.append("id", category.id);
+  uploadInfo.append("name", category.name);
+  uploadInfo.append("slogan", category.slogan);
+  uploadInfo.append("promotion", category.promotion);
+  uploadInfo.append("lang", lang);
+  if (category.icon_path !== null) {
+    uploadInfo.append("icon_path", category.icon_path);
+  }
 
-        }
-        else
-        uploadInfo.append("icon_path", "");
+  const categoriesDb = await DashBoard.post(
+    "/categories/update_category.php",
+    uploadInfo,
+    { headers }
+  );
 
-    
-        const categoriesDb = await DashBoard.post("/categories/add_category.php", uploadInfo,  {headers})
-      
-       //  getCategories(1)
-    
-      };
+  var categoryRslt = categoriesDb.data;
 
-      export const uploadCategoryImage = info => async dispatch => {
-      
-        var headers = {
-          "Content-Type": "multipart/form-data"
-        };
+  const sectionCategoryImagesDb = await DashBoard.get(
+    "/categories/get_category_images.php" +
+      generatePHPParameters({ idCategory: categoryRslt.id })
+  );
+  categoryRslt.images = sectionCategoryImagesDb.data;
 
-      
-        let uploadInfo = new FormData();
-        uploadInfo.append("categoryId", info.categoryId);
-        uploadInfo.append("fileName", info.fileName);
-        uploadInfo.append("categoryName", info.categoryName);
-    
-        if(info.file !== null){
+  dispatch({
+    type: SELECT_CATEGORY,
+    payload: categoryRslt, //fromDB
+  });
+};
 
-          uploadInfo.append("file", info.file);
+export const addCategory = (category) => async (dispatch) => {
+  var headers = {
+    "Content-Type": "multipart/form-data",
+  };
 
-          const categoryAPI = await DashBoard.post("/categories/upload_category_image.php", uploadInfo,  {headers});
+  let uploadInfo = new FormData();
 
-          // getCategory(info.idCategory)
-        }
+  uploadInfo.append("id_section", category.id_section);
+  uploadInfo.append("name", category.name);
+  uploadInfo.append("slogan", category.slogan);
+  uploadInfo.append("promotion", category.promotion);
 
+  if (category.icon_path !== null) {
+    uploadInfo.append("icon_path", category.icon_path);
+  } else uploadInfo.append("icon_path", "");
 
+  const categoriesDb = await DashBoard.post(
+    "/categories/add_category.php",
+    uploadInfo,
+    { headers }
+  );
 
-        
-      };
+  //  getCategories(1)
+};
 
-      export const deleteCategory= id => async dispatch => {
+export const uploadCategoryImage = (info) => async (dispatch) => {
+  var headers = {
+    "Content-Type": "multipart/form-data",
+  };
 
-        const categoriesDb = await DashBoard.post("/categories/delete_category.php"+ generatePHPParameters({id}))
-        dispatch({
-          type: DELETE_CATEGORY,
-          payload: id
-        });
-      }
+  let uploadInfo = new FormData();
+  uploadInfo.append("categoryId", info.categoryId);
+  uploadInfo.append("fileName", info.fileName);
+  uploadInfo.append("categoryName", info.categoryName);
 
-      export const deleteCategoryImage = id => async dispatch => {
+  if (info.file !== null) {
+    uploadInfo.append("file", info.file);
 
-        const categoriesDb = await DashBoard.post("/categories/delete_category_image.php"+ generatePHPParameters({id}))
+    const categoryAPI = await DashBoard.post(
+      "/categories/upload_category_image.php",
+      uploadInfo,
+      { headers }
+    );
 
-      }
+    // getCategory(info.idCategory)
+  }
+};
+
+export const deleteCategory = (id) => async (dispatch) => {
+  const categoriesDb = await DashBoard.post(
+    "/categories/delete_category.php" + generatePHPParameters({ id })
+  );
+  dispatch({
+    type: DELETE_CATEGORY,
+    payload: id,
+  });
+};
+
+export const deleteCategoryImage = (id) => async (dispatch) => {
+  const categoriesDb = await DashBoard.post(
+    "/categories/delete_category_image.php" + generatePHPParameters({ id })
+  );
+};

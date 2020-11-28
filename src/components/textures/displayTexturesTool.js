@@ -3,84 +3,95 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
 import _ from "lodash";
-import ItemCard from '../itemCard/itemCard';
+import ItemCard from "../itemCard/itemCard";
 // import { TextureCardLeft, TextureImageLeft, TextureCardRight, TextureImageRight} from './texturesSections';
 
 class DisplayTexturesTool extends Component {
- 
-  handleSelectPack = pack => {
-   
-  };
+  handleSelectPack = (pack) => {};
 
   render() {
-    const { classes , textures, language, addToCart} = this.props;
+    const { classes, textures, language, addToCart } = this.props;
     return (
       <main className={classes.container}>
-        <Grid container alignItems="stretch" >
-        {textures.filter( a => parseInt(a.status) > 0).map(texture => (
-          <Grid key={texture.id} item xs={12} sm={6} md={4} className={classes.itemContainer}>
-            <ItemCard  item={texture} type='texture' addToCart={addToCart} addToCartText={language.AddToCart} buyItem={language.Buy} />
-          </Grid>
-          ))}
+        <Grid container alignItems="stretch">
+          {textures
+            .filter((a) => parseInt(a.status) > 0)
+            .map((texture) => (
+              <Grid
+                key={texture.id}
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                className={classes.itemContainer}
+              >
+                <ItemCard
+                  item={texture}
+                  type="texture"
+                  addToCart={addToCart}
+                  addToCartText={language.AddToCart}
+                  buyItem={language.Buy}
+                />
+              </Grid>
+            ))}
         </Grid>
-        
       </main>
     );
   }
 }
 
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
     paddingTop: 40,
-    paddingBottom: 80
+    paddingBottom: 80,
   },
   center: {
     [theme.breakpoints.up("lg")]: {
       maxWidth: "1280px",
       paddingLeft: "0 !important",
       paddingRight: "0 !important",
-      minWidth: "1280px"
+      minWidth: "1280px",
     },
     [theme.breakpoints.down("lg")]: {
       maxWidth: "1180px",
       paddingLeft: "0 !important",
       paddingRight: "0 !important",
-      minWidth: "1180px"
+      minWidth: "1180px",
     },
     [theme.breakpoints.down("sm")]: {
       maxWidth: "100vw",
       paddingLeft: "0 !important",
       paddingRight: "0 !important",
-      minWidth: "100vw"
-    }
+      minWidth: "100vw",
+    },
   },
   noMobile: {
-    display: 'inherit',
+    display: "inherit",
     [theme.breakpoints.down("sm")]: {
-      display: 'none',
-    }
+      display: "none",
+    },
   },
   onMobile: {
-    display: 'none',
+    display: "none",
     [theme.breakpoints.down("sm")]: {
-      display: 'inherit',
-    }
+      display: "inherit",
+    },
   },
   itemContainer: {
-    marginBottom: 32
+    marginBottom: 32,
   },
   packNameText: {
     fontFamily: "Futura",
     fontSize: 40,
     fontWeight: "bold",
     color: "#337ab7",
-    margin: 0
+    margin: 0,
   },
   itemContent: {
     backgroundImage: "url(../static/images/home/about-contact.jpg)",
     backgroundRepeat: "no-repeat",
     height: 320,
-    display: 'inherit',
+    display: "inherit",
     // backgroundSize: "cover",
     backgroundPosition: "right",
     backgroundSize: "contain",
@@ -89,9 +100,9 @@ const styles = theme => ({
     fontFamily: "Futura",
     fontSize: 28,
     fontWeight: "bold",
-    textAlign: 'center',
+    textAlign: "center",
     color: "#337ab7",
-    margin: 0
+    margin: 0,
   },
   packPriceText: {
     fontFamily: "Futura",
@@ -112,7 +123,7 @@ const styles = theme => ({
     fontFamily: "Roboto",
     fontSize: 15,
     lineHeight: 1.43,
-    marginTop: 24
+    marginTop: 24,
     // maxWidth: 282
   },
   // themePadding: {
@@ -120,16 +131,15 @@ const styles = theme => ({
   //   paddingRight: "7%",
   // },
   textLeft: {
-    textAlign: "left"
+    textAlign: "left",
   },
   textRight: {
-    textAlign: "right"
+    textAlign: "right",
   },
   packImg: {
-    
     width: "100%",
     objectFit: "cover",
-    maxHeight: 360
+    maxHeight: 360,
   },
   hrBlue: {
     width: 78,
@@ -145,14 +155,13 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       marginTop: 16,
       paddingTop: 36,
-
-    }
+    },
   },
   whiteBackground: {
     backgroundColor: "#ffffff",
     border: "1px solid #ffffff",
     paddingTop: "20px",
-    paddingBottom: "20px"
+    paddingBottom: "20px",
   },
   packDisclaimer: {
     fontFamily: "Roboto",
@@ -163,8 +172,8 @@ const styles = theme => ({
     lineHeight: "normal",
     letterSpacing: "normal",
     color: "#434c5f",
-    marginTop: "16px"
-  }
+    marginTop: "16px",
+  },
   // container: {
   //   backgroundColor: "#fafafa",
   //   border: "1px solid #fafafa",
@@ -175,11 +184,12 @@ const styles = theme => ({
 // DisplayPacksTool.propTypes = {
 //   classes: PropTypes.node.isRequired
 // };
-const mapStateTopProps = state => {
+const mapStateTopProps = (state) => {
   return {
-    
-    language: state.language
+    language: state.language,
   };
 };
 
-export default connect(mapStateTopProps)(withStyles(styles)(DisplayTexturesTool));
+export default connect(mapStateTopProps)(
+  withStyles(styles)(DisplayTexturesTool)
+);

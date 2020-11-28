@@ -8,15 +8,15 @@ class FileImageInput extends React.Component {
 
   onChange(e) {
     const {
-      input: { onChange }
+      input: { onChange },
     } = this.props;
-   
+
     onChange(e.target.files[0]);
   }
 
   render() {
-     const { input } = this.props
-     delete input.value;
+    const { input } = this.props;
+    delete input.value;
     return (
       <input
         type="file"

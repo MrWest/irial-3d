@@ -7,7 +7,7 @@ import { Grid, MenuItem } from "@material-ui/core";
 
 class VerticalTabsTool extends React.Component {
   state = {
-    index: this.getIndex()
+    index: this.getIndex(),
   };
 
   getIndex() {
@@ -21,28 +21,28 @@ class VerticalTabsTool extends React.Component {
 
     return (
       <Grid container spacing={0}>
-        <Grid item xs={12} md={1}  style={{paddingRight: 10}}>
-         <Grid container>
-          {labels.map(label => (
-            <Grid item xs={6} md={12}>
+        <Grid item xs={12} md={1} style={{ paddingRight: 10 }}>
+          <Grid container>
+            {labels.map((label) => (
+              <Grid item xs={6} md={12}>
                 <MenuItem
-                style={{height: "auto", textAlign: "center"}}
+                  style={{ height: "auto", textAlign: "center" }}
                   onClick={() => {
                     this.setState({ index: labels.indexOf(label) });
-                    onChange(labels.indexOf(label))
+                    onChange(labels.indexOf(label));
                   }}
                 >
                   {this.state.index == labels.indexOf(label)
                     ? label.selected
                     : label.normal}
                 </MenuItem>
-            </Grid>
-          ))}
+              </Grid>
+            ))}
           </Grid>
         </Grid>
-        <Grid xs={12} md={11}  >
+        <Grid xs={12} md={11}>
           <div className={classes.slideshowContainer}>
-            {children.map(child => (
+            {children.map((child) => (
               <div
                 style={{ opacity: 1 }}
                 className={classNames(
@@ -61,14 +61,14 @@ class VerticalTabsTool extends React.Component {
     );
   }
 }
-const styles = theme => ({
+const styles = (theme) => ({
   slideshowContainer: {
     width: "100%",
     position: "relative",
-    margin: "auto"
+    margin: "auto",
   },
   mySlides: {
-    display: "none"
+    display: "none",
   },
   cursorPrev: {
     cursor: "pointer",
@@ -83,7 +83,7 @@ const styles = theme => ({
     transition: "0.6s ease",
     borderRadius: "0 3px 3px 0",
     userSelect: "none",
-    backgroundColor: "#434c5f"
+    backgroundColor: "#434c5f",
   },
   cursorNext: {
     cursor: "pointer",
@@ -99,12 +99,12 @@ const styles = theme => ({
     userSelect: "none",
     borderRadius: "3px 0 0 3px",
     right: 0,
-    backgroundColor: "#434c5f"
-  }
+    backgroundColor: "#434c5f",
+  },
 });
 
 VerticalTabsTool.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export default withStyles(styles)(VerticalTabsTool);

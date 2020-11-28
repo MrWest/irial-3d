@@ -26,11 +26,10 @@
   text-align: right;
 }
 
-.submit-button { 
+.submit-button {
   margin-top: 40px !important;
   margin-bottom: 20px !important;
 }
-
 
 @media (max-width: 767px) {
   .right-frame {
@@ -52,11 +51,9 @@
   cursor: pointer;
 }
 
-
 .carousel-control-prev {
-
   position: absolute;
   top: 50%;
   cursor: pointer;
-  left: 0
+  left: 0;
 }

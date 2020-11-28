@@ -6,7 +6,8 @@
     "build": "next build",
     "start": "node server_express/server.js",
     "lint": "eslint",
-    "lintfix-src": "eslint --fix src"
+    "lintfix-src": "eslint --fix src",
+    "fix:prettier": "prettier --write \"**/*.*\""
   },
   "dependencies": {
     "@emotion/core": "^10.0.20",

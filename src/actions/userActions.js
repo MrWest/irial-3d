@@ -2,9 +2,8 @@
 // import DashBoard from "../apis/DashBoard";
 // import {generateAppendParameters} from "../apis/tools";
 
-
 // export const updateBillingInfo = info => async dispatch => {
- 
+
 //   var headers = {
 //     "Content-Type": "multipart/form-data"
 //   };

@@ -1,112 +1,98 @@
 import { FETCH_SECTIONS, SELECT_SECTION, UPDATE_SECTION } from "./types";
-import serverFetch from '../apis/serverFetch';
+import serverFetch from "../apis/serverFetch";
 import DashBoard from "../apis/DashBoard";
-import {generatePHPParameters, getLanguage} from "../apis/tools";
+import { generatePHPParameters, getLanguage } from "../apis/tools";
 import { __await } from "tslib";
 
-export const fetchSectionsServer = async reduxStore => {
-  
-    const lang = getLanguage();
-    let results;
+export const fetchSectionsServer = async (reduxStore) => {
+  const lang = getLanguage();
+  let results;
 
-    await DashBoard.get("/sections/get_sections.php"+ generatePHPParameters({lang})).then( async sectionsDb =>{
+  await DashBoard.get(
+    "/sections/get_sections.php" + generatePHPParameters({ lang })
+  ).then(async (sectionsDb) => {
+    var sectionsRslt = sectionsDb.data.slice();
 
-      var sectionsRslt = sectionsDb.data.slice()
+    const promises = sectionsRslt.map(async (section) => {
+      const sectionCategoriesDb = await DashBoard.get(
+        "/categories/get_categories.php" +
+          generatePHPParameters({ idSection: section.id, lang })
+      );
+      const categories = sectionCategoriesDb.data;
 
-      const promises = sectionsRslt.map( async section => {   
-           
-          const sectionCategoriesDb = await DashBoard.get("/categories/get_categories.php"+ generatePHPParameters({idSection: section.id, lang}))
-          const categories = sectionCategoriesDb.data;
-          
-          const imagesPromises = categories.map( async category => {   
-              const sectionCategoryImagesDb = await DashBoard.get("/categories/get_category_images.php"+ generatePHPParameters({idCategory: category.id}))
-              category.images = sectionCategoryImagesDb.data;
-              return category
-          })
-          section.categories = await Promise.all(imagesPromises)
-          return section
-          
-        })
-   
-        results = await Promise.all(promises)
+      const imagesPromises = categories.map(async (category) => {
+        const sectionCategoryImagesDb = await DashBoard.get(
+          "/categories/get_category_images.php" +
+            generatePHPParameters({ idCategory: category.id })
+        );
+        category.images = sectionCategoryImagesDb.data;
+        return category;
+      });
+      section.categories = await Promise.all(imagesPromises);
+      return section;
+    });
 
-    })
-    
+    results = await Promise.all(promises);
+  });
 
-    if(reduxStore)
+  if (reduxStore)
     reduxStore.dispatch({
       type: FETCH_SECTIONS,
-      payload: results
+      payload: results,
     });
-    return results;
-  };
+  return results;
+};
 
+// export const getSection = id => async dispatch => {
 
-  // export const getSection = id => async dispatch => {
+//   const lang = getLanguage();
 
-    
-  //   const lang = getLanguage();
+//   const sectionsDb = await DashBoard.get("/sections/get_section.php"+ generatePHPParameters({id, lang}))
 
-  //   const sectionsDb = await DashBoard.get("/sections/get_section.php"+ generatePHPParameters({id, lang}))
-    
-  //   var sectionsRslt = sectionsDb.data
+//   var sectionsRslt = sectionsDb.data
 
-   
-         
-  //       const sectionCategoriesDb = await DashBoard.get("/categories/get_categories.php"+ generatePHPParameters({idSection: sectionsRslt.id, lang}))
-  //       const categories = sectionCategoriesDb.data
-        
-  //       const imagesPromises = categories.map( async category => {   
-  //           const sectionCategoryImagesDb = await DashBoard.get("/categories/get_category_images.php"+ generatePHPParameters({idCategory: sectionsRslt.id}))
-  //           category.images = sectionCategoryImagesDb.data
-  //           return category
-  //       })
+//       const sectionCategoriesDb = await DashBoard.get("/categories/get_categories.php"+ generatePHPParameters({idSection: sectionsRslt.id, lang}))
+//       const categories = sectionCategoriesDb.data
 
-  //       sectionsRslt.categories = await Promise.all(imagesPromises)
-      
-        
-     
- 
-  //   //   const results = await Promise.all(promises)
+//       const imagesPromises = categories.map( async category => {
+//           const sectionCategoryImagesDb = await DashBoard.get("/categories/get_category_images.php"+ generatePHPParameters({idCategory: sectionsRslt.id}))
+//           category.images = sectionCategoryImagesDb.data
+//           return category
+//       })
 
-    
-  //   dispatch({
-  //     type: SELECT_SECTION,
-  //     payload: sectionsRslt
-  //   });
-  // };
+//       sectionsRslt.categories = await Promise.all(imagesPromises)
 
-  // export const updateSection = section => async dispatch => {
-      
-  //   const lang = getLanguage();
-  //   const sectionsDb = await DashBoard.post("/sections/update_section.php"+ generatePHPParameters({id: section.id, name: section.name,
-  //   description: section.description, promotion: section.promotion, lang}))
-    
-  //   var sectionsRslt = sectionsDb.data
+//   //   const results = await Promise.all(promises)
 
-   
-         
-  //       const sectionCategoriesDb = await DashBoard.get("/categories/get_categories.php"+ generatePHPParameters({idSection: sectionsRslt.id, lang}))
-  //       const categories = sectionCategoriesDb.data
-        
-  //       const imagesPromises = categories.map( async category => {   
-  //           const sectionCategoryImagesDb = await DashBoard.get("/categories/get_category_images.php"+ generatePHPParameters({idCategory: sectionsRslt.id}))
-  //           category.images = sectionCategoryImagesDb.data
-  //           return category
-  //       })
+//   dispatch({
+//     type: SELECT_SECTION,
+//     payload: sectionsRslt
+//   });
+// };
 
-  //       sectionsRslt.categories = await Promise.all(imagesPromises)
-      
-        
-     
- 
-  //   //   const results = await Promise.all(promises)
+// export const updateSection = section => async dispatch => {
 
-    
-  //   dispatch({
-  //     type: UPDATE_SECTION,
-  //     payload: sectionsRslt
-  //   });
-  // };
+//   const lang = getLanguage();
+//   const sectionsDb = await DashBoard.post("/sections/update_section.php"+ generatePHPParameters({id: section.id, name: section.name,
+//   description: section.description, promotion: section.promotion, lang}))
 
- 
+//   var sectionsRslt = sectionsDb.data
+
+//       const sectionCategoriesDb = await DashBoard.get("/categories/get_categories.php"+ generatePHPParameters({idSection: sectionsRslt.id, lang}))
+//       const categories = sectionCategoriesDb.data
+
+//       const imagesPromises = categories.map( async category => {
+//           const sectionCategoryImagesDb = await DashBoard.get("/categories/get_category_images.php"+ generatePHPParameters({idCategory: sectionsRslt.id}))
+//           category.images = sectionCategoryImagesDb.data
+//           return category
+//       })
+
+//       sectionsRslt.categories = await Promise.all(imagesPromises)
+
+//   //   const results = await Promise.all(promises)
+
+//   dispatch({
+//     type: UPDATE_SECTION,
+//     payload: sectionsRslt
+//   });
+// };

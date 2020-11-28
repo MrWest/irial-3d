@@ -1,21 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import LinkServer from 'next/link';
-import { HashLink } from 'react-router-hash-link';
+import LinkServer from "next/link";
+import { HashLink } from "react-router-hash-link";
 import { Grid } from "@material-ui/core";
 
-const isServer = typeof window === 'undefined';
+const isServer = typeof window === "undefined";
 
 export function ImageLink({ href, children }) {
-
-  return isServer? (<LinkServer href={href}>
-    {children}
-  </LinkServer>) : (
-    <Link to={href}>
-      {children}
-    </Link>
-  )
-
+  return isServer ? (
+    <LinkServer href={href}>{children}</LinkServer>
+  ) : (
+    <Link to={href}>{children}</Link>
+  );
 }
 
 export function FontMovilButton({ className, href, children, onClick }) {
@@ -33,7 +29,7 @@ export function FontMovilButton({ className, href, children, onClick }) {
           fontFamily: "Futura",
           fontWeight: "bold",
           lineHeight: 1.75,
-          letterSpacing: "normal"
+          letterSpacing: "normal",
         }}
       >
         {" "}
@@ -43,19 +39,18 @@ export function FontMovilButton({ className, href, children, onClick }) {
   );
 }
 
-
 export function StylessButton({
   id,
   className,
   children,
-  width = 'auto',
-  height = 'auto',
+  width = "auto",
+  height = "auto",
   onClick,
   onMouseEnter,
   onMouseLeave,
   onLoad,
-  textAlign = 'center',
-  fontFamily = 'Roboto'
+  textAlign = "center",
+  fontFamily = "Roboto",
 }) {
   return (
     <button
@@ -67,21 +62,21 @@ export function StylessButton({
       className={className}
       onLoad={onLoad}
       style={{
-        cursor: 'pointer',
+        cursor: "pointer",
         textAlign,
-        textDecorationLine: 'none',
+        textDecorationLine: "none",
         outline: 0,
         border: 0,
         padding: 0,
-        backgroundColor: 'transparent'
+        backgroundColor: "transparent",
       }}
     >
       <div
         style={{
-          verticalAlign: 'middle',
+          verticalAlign: "middle",
           fontFamily,
-          letterSpacing: 'normal',
-          textAlign
+          letterSpacing: "normal",
+          textAlign,
         }}
       >
         {children}
@@ -102,7 +97,7 @@ export function StandarButton({ className, href, children, onClick }) {
           fontWeight: "bold",
           lineHeight: 1.75,
           letterSpacing: "normal",
-          textTransform: "uppercase"
+          textTransform: "uppercase",
         }}
       >
         {" "}
@@ -126,7 +121,7 @@ export function FixedButton({ className, href, children, onClick }) {
         color: "#ffffff",
         textDecorationLine: "none",
         paddingTop: 14,
-        paddingBottom: 15
+        paddingBottom: 15,
       }}
     >
       <div
@@ -139,7 +134,7 @@ export function FixedButton({ className, href, children, onClick }) {
           lineHeight: 1.75,
           letterSpacing: "normal",
           textAlign: "center",
-          textTransform: "uppercase"
+          textTransform: "uppercase",
         }}
       >
         {" "}
@@ -148,7 +143,13 @@ export function FixedButton({ className, href, children, onClick }) {
     </a>
   );
 }
-export function FixedButtonInverse({ className, href, children, onClick, color }) {
+export function FixedButtonInverse({
+  className,
+  href,
+  children,
+  onClick,
+  color,
+}) {
   return (
     <a
       href={href}
@@ -159,10 +160,10 @@ export function FixedButtonInverse({ className, href, children, onClick, color }
         borderRadius: 4,
         width: 282,
         backgroundColor: "#ffffff",
-        color: color? color : "#337ab7",
+        color: color ? color : "#337ab7",
         textDecorationLine: "none",
         paddingTop: 14,
-        paddingBottom: 15
+        paddingBottom: 15,
       }}
     >
       <div
@@ -175,7 +176,7 @@ export function FixedButtonInverse({ className, href, children, onClick, color }
           lineHeight: 1.75,
           letterSpacing: "normal",
           textAlign: "center",
-          textTransform: "uppercase"
+          textTransform: "uppercase",
         }}
       >
         {" "}
@@ -189,7 +190,7 @@ export function CustomWidthButton({
   href,
   children,
   width,
-  onClick
+  onClick,
 }) {
   return (
     <button
@@ -208,7 +209,7 @@ export function CustomWidthButton({
         color: "#ffffff",
         textDecorationLine: "none",
         paddingTop: 14,
-        paddingBottom: 14
+        paddingBottom: 14,
       }}
     >
       <div
@@ -220,7 +221,7 @@ export function CustomWidthButton({
           lineHeight: 1.75,
           letterSpacing: "normal",
           textAlign: "center",
-          textTransform: "uppercase"
+          textTransform: "uppercase",
         }}
       >
         {" "}
@@ -235,7 +236,7 @@ export function CustomWidthButtonInverse({
   href,
   children,
   width,
-  onClick
+  onClick,
 }) {
   return (
     <a
@@ -250,7 +251,7 @@ export function CustomWidthButtonInverse({
         color: "#3577d4",
         textDecorationLine: "none",
         paddingTop: 14,
-        paddingBottom: 15
+        paddingBottom: 15,
       }}
     >
       <div
@@ -263,7 +264,7 @@ export function CustomWidthButtonInverse({
           lineHeight: 1.75,
           letterSpacing: "normal",
           textAlign: "center",
-          textTransform: "uppercase"
+          textTransform: "uppercase",
         }}
       >
         {" "}
@@ -278,7 +279,7 @@ export function CustomWidthButtonLink({
   href,
   children,
   width,
-  onClick
+  onClick,
 }) {
   return (
     <a
@@ -297,7 +298,7 @@ export function CustomWidthButtonLink({
         color: "#ffffff",
         textDecorationLine: "none",
         paddingTop: 14,
-        paddingBottom: 14
+        paddingBottom: 14,
       }}
     >
       <div
@@ -309,7 +310,7 @@ export function CustomWidthButtonLink({
           lineHeight: 1.75,
           letterSpacing: "normal",
           textAlign: "center",
-          textTransform: "uppercase"
+          textTransform: "uppercase",
         }}
       >
         {" "}
@@ -319,37 +320,32 @@ export function CustomWidthButtonLink({
   );
 }
 
-
 export function CustomButtonLink({
   className,
   to,
   children,
   iconLeft,
   iconRight,
-  onClick
+  onClick,
 }) {
   return (
-    <Link
-      to={to}
-      onClick={onClick}
-      
-    >
+    <Link to={to} onClick={onClick}>
       <div
-      
-       className={className}
-       style={{
-        cursor: "pointer",
-        width: '100%',
-        fontWeight: 'bold',
-        fontStyle: 'normal',
-        color: '#ffffff',
-        borderRadius: 4,
-        backgroundColor: '#337ab7',
-        textTransform: 'none',
-        padding: '7px 24px',
-        fontSize: '0.875rem'
-      }}>
-        <Grid container justify="center" alignItems="center" >
+        className={className}
+        style={{
+          cursor: "pointer",
+          width: "100%",
+          fontWeight: "bold",
+          fontStyle: "normal",
+          color: "#ffffff",
+          borderRadius: 4,
+          backgroundColor: "#337ab7",
+          textTransform: "none",
+          padding: "7px 24px",
+          fontSize: "0.875rem",
+        }}
+      >
+        <Grid container justify="center" alignItems="center">
           <Grid item>{iconLeft}</Grid>
           <Grid item>{children}</Grid>
           <Grid item>{iconRight}</Grid>
@@ -358,8 +354,6 @@ export function CustomButtonLink({
     </Link>
   );
 }
-
-
 
 export function CoolButton({
   className,
@@ -370,7 +364,7 @@ export function CoolButton({
   fill,
   color,
   onClick,
-  disabled
+  disabled,
 }) {
   return (
     <button
@@ -380,7 +374,6 @@ export function CoolButton({
       onClick={onClick}
       className={className}
       style={{
-      
         cursor: "pointer",
         textAlign: "center !important",
         border: 0,
@@ -389,19 +382,26 @@ export function CoolButton({
         borderRadius: 4,
         color: "#ffffff",
         textDecorationLine: "none",
-        outline: "none"
+        outline: "none",
       }}
     >
-    <div style={{position: "relative", textAlign: "center"}}>
-            <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-              width={width? width : "583pt"} height={height? height : "128pt"} viewBox="0 0 583.000000 128.000000"
-              preserveAspectRatio="xMidYMid meet">
-              <metadata>
-              
-              </metadata>
-              <g transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)"
-              fill={disabled ? 'gray' : fill? fill : "#ffffff"} stroke="none">
-              <path d="M695 1200 l-30 -8 32 -1 c61 -2 46 -21 -17 -21 -41 0 -66 -5 -76 -15
+      <div style={{ position: "relative", textAlign: "center" }}>
+        <svg
+          version="1.0"
+          xmlns="http://www.w3.org/2000/svg"
+          width={width ? width : "583pt"}
+          height={height ? height : "128pt"}
+          viewBox="0 0 583.000000 128.000000"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <metadata></metadata>
+          <g
+            transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)"
+            fill={disabled ? "gray" : fill ? fill : "#ffffff"}
+            stroke="none"
+          >
+            <path
+              d="M695 1200 l-30 -8 32 -1 c61 -2 46 -21 -17 -21 -41 0 -66 -5 -76 -15
               -9 -8 -26 -15 -40 -15 -13 0 -24 -4 -24 -8 0 -10 64 -38 107 -47 70 -14 40
               -25 -65 -23 -89 2 -114 -1 -135 -15 -15 -10 -27 -21 -27 -26 0 -10 95 -51 119
               -51 9 0 29 -7 45 -15 15 -8 39 -15 52 -15 32 0 40 -18 12 -29 -13 -6 -17 -10
@@ -440,35 +440,31 @@ export function CoolButton({
               0 -757 -3 -1660 -8 -1092 -5 -1643 -4 -1643 3 0 5 -13 10 -30 10 -16 0 -27 -4
               -24 -9 3 -4 -17 -8 -45 -8 -27 0 -51 4 -53 10 -3 11 -28 13 -110 7 -32 -2 -55
               0 -52 4 3 5 -8 7 -23 4 -88 -13 -112 -14 -119 -4 -4 8 -28 10 -70 6 -39 -4
-              -64 -2 -64 3 0 11 -2 11 -45 0z"/>
-              </g>
-            </svg>
-    
-  
-  
-       <div
-        style={{
-          verticalAlign: "middle",
-          fontFamily: "Futura",
-          fontSize: 16,
-          fontWeight: "bold",
-          lineHeight: 1.75,
-          letterSpacing: "normal",
-          textAlign: "center",
-          textTransform: "uppercase",
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          color: color? color : "#ffffff"
-        }}
-      >
-       
-        {children}
+              -64 -2 -64 3 0 11 -2 11 -45 0z"
+            />
+          </g>
+        </svg>
+
+        <div
+          style={{
+            verticalAlign: "middle",
+            fontFamily: "Futura",
+            fontSize: 16,
+            fontWeight: "bold",
+            lineHeight: 1.75,
+            letterSpacing: "normal",
+            textAlign: "center",
+            textTransform: "uppercase",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            color: color ? color : "#ffffff",
+          }}
+        >
+          {children}
+        </div>
       </div>
-    </div>
-    
-      
     </button>
   );
 }
@@ -483,13 +479,12 @@ export function CoolButtonSign({
   color,
   onClick,
   disabled,
-  type = 'submit'
+  type = "submit",
 }) {
-
   let viewBox = "0 0 ";
-  viewBox += width? width : "504.000000"
-  viewBox += " "
-  viewBox += height? height : "142.000000"
+  viewBox += width ? width : "504.000000";
+  viewBox += " ";
+  viewBox += height ? height : "142.000000";
   return (
     <button
       type={type}
@@ -498,7 +493,6 @@ export function CoolButtonSign({
       onClick={onClick}
       className={className}
       style={{
-      
         cursor: "pointer",
         textAlign: "center !important",
         border: 0,
@@ -507,20 +501,27 @@ export function CoolButtonSign({
         borderRadius: 4,
         color: "#ffffff",
         textDecorationLine: "none",
-        outline: "none"
+        outline: "none",
       }}
     >
-    <div style={{position: "relative", textAlign: "center"}}>
-            <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-              width={width? width : "504pt"} height={height? height : "142pt"} viewBox={viewBox}
-              preserveAspectRatio="xMidYMid meet">
-              <metadata>
-              
-              </metadata>
-              
-             <g transform="translate(-15.000000,65.000000) scale(0.07000,-0.055000)"
-            fill={fill? fill : "#ffffff"} stroke="none">
-          <path d="M4160 1255 c0 -13 -190 -15 -1597 -15 -1039 0 -1593 4 -1583 10 13 8
+      <div style={{ position: "relative", textAlign: "center" }}>
+        <svg
+          version="1.0"
+          xmlns="http://www.w3.org/2000/svg"
+          width={width ? width : "504pt"}
+          height={height ? height : "142pt"}
+          viewBox={viewBox}
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <metadata></metadata>
+
+          <g
+            transform="translate(-15.000000,65.000000) scale(0.07000,-0.055000)"
+            fill={fill ? fill : "#ffffff"}
+            stroke="none"
+          >
+            <path
+              d="M4160 1255 c0 -13 -190 -15 -1597 -15 -1039 0 -1593 4 -1583 10 13 8
           13 10 -2 10 -9 0 -19 -4 -22 -9 -9 -13 -54 -19 -65 -8 -5 5 -44 11 -86 12 -69
           3 -78 2 -82 -16 -3 -12 -14 -19 -29 -19 -13 0 -24 -4 -24 -10 0 -5 11 -10 25
           -10 14 0 25 -5 25 -11 0 -17 -32 -38 -57 -39 -18 0 -23 -6 -23 -25 0 -15 -9
@@ -552,42 +553,35 @@ export function CoolButtonSign({
           -15 17 -17 16 -11 -6 -25 -2 -25 7 0 6 11 10 24 10 14 0 28 5 32 11 4 7 0 9
           -12 6 -44 -12 -119 -18 -155 -12 -33 6 -43 13 -56 41 -9 18 -20 31 -25 28 -4
           -3 -5 2 -2 10 4 10 -4 16 -25 21 -27 6 -30 9 -20 27 10 19 9 20 -13 15 -15 -4
-          -39 1 -61 12 -25 13 -38 15 -41 7 -3 -7 -5 -7 -5 2 -1 17 -21 15 -21 -3z"/>
+          -39 1 -61 12 -25 13 -38 15 -41 7 -3 -7 -5 -7 -5 2 -1 17 -21 15 -21 -3z"
+            />
           </g>
-          </svg>
-    
-  
-  
-       <div
-        style={{
-          verticalAlign: "middle",
-          fontFamily: "Futura",
-          fontSize: 16,
-          fontWeight: "bold",
-          lineHeight: 1.75,
-          letterSpacing: "normal",
-          textAlign: "center",
-          textTransform: "uppercase",
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          color: color? color : "#ffffff",
-          width: "100%"
-        }}
-      >
-       
-        {children}
+        </svg>
+
+        <div
+          style={{
+            verticalAlign: "middle",
+            fontFamily: "Futura",
+            fontSize: 16,
+            fontWeight: "bold",
+            lineHeight: 1.75,
+            letterSpacing: "normal",
+            textAlign: "center",
+            textTransform: "uppercase",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            color: color ? color : "#ffffff",
+            width: "100%",
+          }}
+        >
+          {children}
+        </div>
       </div>
-    </div>
-    
-      
     </button>
   );
 }
-
-
-
 
 export function CoolLink({
   className,
@@ -604,13 +598,11 @@ export function CoolLink({
 }) {
   return (
     <Link
-      
       disabled={disabled}
-      to={href?href:"#"}
+      to={href ? href : "#"}
       onClick={onClick}
       className={className}
       style={{
-      
         cursor: "pointer",
         textAlign: "center !important",
         border: 0,
@@ -620,23 +612,36 @@ export function CoolLink({
         color: "#ffffff",
         textDecorationLine: "none",
         outline: "none",
-        width: width? width : "583pt",
-         height: height? height : "128pt"
+        width: width ? width : "583pt",
+        height: height ? height : "128pt",
       }}
-
       {...custom}
     >
-    <div style={{position: "relative", textAlign: "center", width: width? width : "583pt",
-         height: height? height : "128pt"}}>
-            <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-              width={width? width : "583pt"} height={height? height : "128pt"} viewBox="0 0 583.000000 128.000000"
-              preserveAspectRatio="xMidYMid meet" className={svgClass}>
-              <metadata>
-              
-              </metadata>
-              <g transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)"
-              fill={fill? fill : "#ffffff"} stroke="none" >
-              <path  d="M695 1200 l-30 -8 32 -1 c61 -2 46 -21 -17 -21 -41 0 -66 -5 -76 -15
+      <div
+        style={{
+          position: "relative",
+          textAlign: "center",
+          width: width ? width : "583pt",
+          height: height ? height : "128pt",
+        }}
+      >
+        <svg
+          version="1.0"
+          xmlns="http://www.w3.org/2000/svg"
+          width={width ? width : "583pt"}
+          height={height ? height : "128pt"}
+          viewBox="0 0 583.000000 128.000000"
+          preserveAspectRatio="xMidYMid meet"
+          className={svgClass}
+        >
+          <metadata></metadata>
+          <g
+            transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)"
+            fill={fill ? fill : "#ffffff"}
+            stroke="none"
+          >
+            <path
+              d="M695 1200 l-30 -8 32 -1 c61 -2 46 -21 -17 -21 -41 0 -66 -5 -76 -15
               -9 -8 -26 -15 -40 -15 -13 0 -24 -4 -24 -8 0 -10 64 -38 107 -47 70 -14 40
               -25 -65 -23 -89 2 -114 -1 -135 -15 -15 -10 -27 -21 -27 -26 0 -10 95 -51 119
               -51 9 0 29 -7 45 -15 15 -8 39 -15 52 -15 32 0 40 -18 12 -29 -13 -6 -17 -10
@@ -675,49 +680,42 @@ export function CoolLink({
               0 -757 -3 -1660 -8 -1092 -5 -1643 -4 -1643 3 0 5 -13 10 -30 10 -16 0 -27 -4
               -24 -9 3 -4 -17 -8 -45 -8 -27 0 -51 4 -53 10 -3 11 -28 13 -110 7 -32 -2 -55
               0 -52 4 3 5 -8 7 -23 4 -88 -13 -112 -14 -119 -4 -4 8 -28 10 -70 6 -39 -4
-              -64 -2 -64 3 0 11 -2 11 -45 0z"/>
-              </g>
-            </svg>
-    
-  
-  
-       <div
-        style={{
-          verticalAlign: "middle",
-          fontFamily: "Futura",
-          fontSize: 16,
-          fontWeight: "bold",
-          lineHeight: 1.75,
-          letterSpacing: "normal",
-          textAlign: "center",
-          textTransform: "uppercase",
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          color: color? color : "#ffffff"
-        }}
-      >
-       
-        {children}
-      </div>
-      <style jsx>{`
-        .icon-path {
-          -webkit-filter: drop-shadow( 0px 0px 12px #337ab7);
-          filter: drop-shadow( 0px 0px 12px #337ab7);
-        }
-        
-        
-        .button-path {
-          -webkit-filter: drop-shadow( 1px 1px 13px #337ab7);
-          filter: drop-shadow( 1px 1px 13px #337ab7);
-        }
-        
-      `}</style>
+              -64 -2 -64 3 0 11 -2 11 -45 0z"
+            />
+          </g>
+        </svg>
 
-    </div>
-    
-      
+        <div
+          style={{
+            verticalAlign: "middle",
+            fontFamily: "Futura",
+            fontSize: 16,
+            fontWeight: "bold",
+            lineHeight: 1.75,
+            letterSpacing: "normal",
+            textAlign: "center",
+            textTransform: "uppercase",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            color: color ? color : "#ffffff",
+          }}
+        >
+          {children}
+        </div>
+        <style jsx>{`
+          .icon-path {
+            -webkit-filter: drop-shadow(0px 0px 12px #337ab7);
+            filter: drop-shadow(0px 0px 12px #337ab7);
+          }
+
+          .button-path {
+            -webkit-filter: drop-shadow(1px 1px 13px #337ab7);
+            filter: drop-shadow(1px 1px 13px #337ab7);
+          }
+        `}</style>
+      </div>
     </Link>
   );
 }
@@ -736,13 +734,12 @@ export function CoolHashLink({
 }) {
   return (
     <HashLink
-    smooth 
+      smooth
       disabled={disabled}
-      to={href?href:"#"}
+      to={href ? href : "#"}
       onClick={onClick}
       className={className}
       style={{
-      
         cursor: "pointer",
         textAlign: "center !important",
         border: 0,
@@ -752,23 +749,35 @@ export function CoolHashLink({
         color: "#ffffff",
         textDecorationLine: "none",
         outline: "none",
-        width: width? width : "583pt",
-         height: height? height : "128pt"
+        width: width ? width : "583pt",
+        height: height ? height : "128pt",
       }}
-
       {...custom}
     >
-    <div style={{position: "relative", textAlign: "center", width: width? width : "583pt",
-         height: height? height : "128pt"}}>
-            <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-              width={width? width : "583pt"} height={height? height : "128pt"} viewBox="0 0 583.000000 128.000000"
-              preserveAspectRatio="xMidYMid meet">
-              <metadata>
-              
-              </metadata>
-              <g transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)"
-              fill={fill? fill : "#ffffff"} stroke="none">
-              <path d="M695 1200 l-30 -8 32 -1 c61 -2 46 -21 -17 -21 -41 0 -66 -5 -76 -15
+      <div
+        style={{
+          position: "relative",
+          textAlign: "center",
+          width: width ? width : "583pt",
+          height: height ? height : "128pt",
+        }}
+      >
+        <svg
+          version="1.0"
+          xmlns="http://www.w3.org/2000/svg"
+          width={width ? width : "583pt"}
+          height={height ? height : "128pt"}
+          viewBox="0 0 583.000000 128.000000"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <metadata></metadata>
+          <g
+            transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)"
+            fill={fill ? fill : "#ffffff"}
+            stroke="none"
+          >
+            <path
+              d="M695 1200 l-30 -8 32 -1 c61 -2 46 -21 -17 -21 -41 0 -66 -5 -76 -15
               -9 -8 -26 -15 -40 -15 -13 0 -24 -4 -24 -8 0 -10 64 -38 107 -47 70 -14 40
               -25 -65 -23 -89 2 -114 -1 -135 -15 -15 -10 -27 -21 -27 -26 0 -10 95 -51 119
               -51 9 0 29 -7 45 -15 15 -8 39 -15 52 -15 32 0 40 -18 12 -29 -13 -6 -17 -10
@@ -807,35 +816,31 @@ export function CoolHashLink({
               0 -757 -3 -1660 -8 -1092 -5 -1643 -4 -1643 3 0 5 -13 10 -30 10 -16 0 -27 -4
               -24 -9 3 -4 -17 -8 -45 -8 -27 0 -51 4 -53 10 -3 11 -28 13 -110 7 -32 -2 -55
               0 -52 4 3 5 -8 7 -23 4 -88 -13 -112 -14 -119 -4 -4 8 -28 10 -70 6 -39 -4
-              -64 -2 -64 3 0 11 -2 11 -45 0z"/>
-              </g>
-            </svg>
-    
-  
-  
-       <div
-        style={{
-          verticalAlign: "middle",
-          fontFamily: "Futura",
-          fontSize: 16,
-          fontWeight: "bold",
-          lineHeight: 1.75,
-          letterSpacing: "normal",
-          textAlign: "center",
-          textTransform: "uppercase",
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          color: color? color : "#ffffff"
-        }}
-      >
-       
-        {children}
+              -64 -2 -64 3 0 11 -2 11 -45 0z"
+            />
+          </g>
+        </svg>
+
+        <div
+          style={{
+            verticalAlign: "middle",
+            fontFamily: "Futura",
+            fontSize: 16,
+            fontWeight: "bold",
+            lineHeight: 1.75,
+            letterSpacing: "normal",
+            textAlign: "center",
+            textTransform: "uppercase",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            color: color ? color : "#ffffff",
+          }}
+        >
+          {children}
+        </div>
       </div>
-    </div>
-    
-      
     </HashLink>
   );
 }
@@ -849,19 +854,19 @@ export function RoundedButtonLink({
   color,
   border = 1,
   onClick,
-  id
+  id,
 }) {
   return (
     <Link
-     id={id}
+      id={id}
       type="submit"
-      to={to?to:"#"}
+      to={to ? to : "#"}
       onClick={onClick}
       className={className}
       style={{
         display: "table",
         cursor: "pointer",
-        textAlign: "center !important",          
+        textAlign: "center !important",
         color: color === undefined ? "transparent" : fill,
         textDecorationLine: "none",
       }}
@@ -869,15 +874,15 @@ export function RoundedButtonLink({
       <div
         style={{
           display: "table-cell",
-          verticalAlign: "middle",         
-          textAlign: "center",          
-          border: border+"px #cccccc solid",
-          borderRadius: size === undefined ? 0 : size/2,
+          verticalAlign: "middle",
+          textAlign: "center",
+          border: border + "px #cccccc solid",
+          borderRadius: size === undefined ? 0 : size / 2,
           width: size === undefined ? "auto" : size,
           height: size === undefined ? "auto" : size,
           backgroundColor: fill === undefined ? "transparent" : fill,
         }}
-      >       
+      >
         {children}
       </div>
     </Link>

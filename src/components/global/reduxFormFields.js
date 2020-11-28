@@ -1,12 +1,18 @@
-
-
-import React from 'react';
-import { FormControl, InputLabel, Select, Input, FormControlLabel, Checkbox, Radio } from '@material-ui/core';
-import { FormHelperText } from '@material-ui/core';
+import React from "react";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  Input,
+  FormControlLabel,
+  Checkbox,
+  Radio,
+} from "@material-ui/core";
+import { FormHelperText } from "@material-ui/core";
 
 const ErrorText = ({ error, touched }) =>
   touched && error ? (
-    <FormHelperText id="component-error-text" style={{ color: '#f44336' }}>
+    <FormHelperText id="component-error-text" style={{ color: "#f44336" }}>
       {error}
     </FormHelperText>
   ) : null;
@@ -24,12 +30,20 @@ const ReduxTextField = ({ input, label, placeholder, fontSize, meta }) => (
   </FormControl>
 );
 
-const ReduxSelectField = ({ input, label, children, classes, meta, onSelectChange, ...custom }) => (
+const ReduxSelectField = ({
+  input,
+  label,
+  children,
+  classes,
+  meta,
+  onSelectChange,
+  ...custom
+}) => (
   <FormControl fullWidth>
     <InputLabel htmlFor="outlined-age-simple">{label}</InputLabel>
     <Select
       {...input}
-      onChange={event => {
+      onChange={(event) => {
         input.onChange(event.target.value);
         if (onSelectChange) onSelectChange(event);
       }}
@@ -40,10 +54,25 @@ const ReduxSelectField = ({ input, label, children, classes, meta, onSelectChang
   </FormControl>
 );
 
-const ReduxCheckBox = ({ label, value, className, checked, onClick, margin }) => (
+const ReduxCheckBox = ({
+  label,
+  value,
+  className,
+  checked,
+  onClick,
+  margin,
+}) => (
   <FormControlLabel
-    margin={margin === undefined ? 'normal' : margin}
-    control={<Checkbox value={value} color="primary" className={className} checked={checked} onClick={onClick} />}
+    margin={margin === undefined ? "normal" : margin}
+    control={
+      <Checkbox
+        value={value}
+        color="primary"
+        className={className}
+        checked={checked}
+        onClick={onClick}
+      />
+    }
     label={label}
   />
 );
@@ -52,7 +81,7 @@ const ReduxRadio = ({ className, myvalue, checked, onClick, label }) => (
   <FormControlLabel
     margin="small"
     className={className}
-    style={{ color: '#3577d4 !important' }}
+    style={{ color: "#3577d4 !important" }}
     control={
       <Radio
         value={myvalue}

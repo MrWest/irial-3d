@@ -1,12 +1,14 @@
-import React from 'react';
-import { withStyles, Grid, Card, CardContent } from '@material-ui/core';
-import Link from '../buttons/extension';
-import CategoryLabel from './CategoryLabel';
-import styles from './styles/PostCard';
+import React from "react";
+import { withStyles, Grid, Card, CardContent } from "@material-ui/core";
+import Link from "../buttons/extension";
+import CategoryLabel from "./CategoryLabel";
+import styles from "./styles/PostCard";
 // import { getFeaturedmedia } from '../../helpers/utils';
 
-const descriptionLeverage = description =>
-  description && description.length > 120 ? `${description.substring(0, 120)}...` : description;
+const descriptionLeverage = (description) =>
+  description && description.length > 120
+    ? `${description.substring(0, 120)}...`
+    : description;
 
 const PostCard = ({ classes, post, category }) => (
   <Link to={`/posts/${post.slug}`}>
@@ -18,7 +20,7 @@ const PostCard = ({ classes, post, category }) => (
         title="Paella dish"
       />
       <CardContent>
-        <div style={{ padding: '8px 18px' }}>
+        <div style={{ padding: "8px 18px" }}>
           <Grid container>
             <Grid item xs={6}>
               <Grid container justify="flex-start">
@@ -28,11 +30,15 @@ const PostCard = ({ classes, post, category }) => (
               </Grid>
             </Grid>
             <Grid item xs={6} align="right">
-              <div className={classes.TimeReading}>{post.readtime} min read</div>
+              <div className={classes.TimeReading}>
+                {post.readtime} min read
+              </div>
             </Grid>
           </Grid>
           <h3 className={classes.PostTitle}>{post.title}</h3>
-          <p className={classes.PostSummary}>{descriptionLeverage(post.description)}</p>
+          <p className={classes.PostSummary}>
+            {descriptionLeverage(post.description)}
+          </p>
         </div>
       </CardContent>
     </Card>

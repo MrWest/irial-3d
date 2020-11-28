@@ -7,45 +7,55 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Paper from "@material-ui/core/Paper";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { Link } from "react-router-dom";
-import { Field, reduxForm, Form, initialize} from 'redux-form';
-import { signUp,  FuckIngshit, addAttraction, signFacebook, notifyActivity } from "../../actions";
+import { Field, reduxForm, Form, initialize } from "redux-form";
+import {
+  signUp,
+  FuckIngshit,
+  addAttraction,
+  signFacebook,
+  notifyActivity,
+} from "../../actions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { Grid, Select, Checkbox, FormControlLabel, MenuItem, FormHelperText } from "@material-ui/core";
-import {CoolButtonSign} from "../buttons"
-import {isMobile} from 'react-device-detect';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import {
+  Grid,
+  Select,
+  Checkbox,
+  FormControlLabel,
+  MenuItem,
+  FormHelperText,
+} from "@material-ui/core";
+import { CoolButtonSign } from "../buttons";
+import { isMobile } from "react-device-detect";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
-
-const validate =  values => {
-  const errors = {}
+const validate = (values) => {
+  const errors = {};
   const requiredFields = [
-    'first_name',
-    'last_name',
-    'email',
-    'password',
-    'retype_password'
-  ]
-  requiredFields.forEach(field => {
+    "first_name",
+    "last_name",
+    "email",
+    "password",
+    "retype_password",
+  ];
+  requiredFields.forEach((field) => {
     if (!values[field]) {
-      errors[field] = 'Required'
+      errors[field] = "Required";
     }
-  })
+  });
   if (
     values.email &&
     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
   ) {
-    errors.email = 'Invalid email address'
+    errors.email = "Invalid email address";
   }
-  if (
-    values.password !== values.retype_password
-  ) {
-    errors.password = 'Password must coincide'
-    errors.retype_password = 'Password must coincide'
+  if (values.password !== values.retype_password) {
+    errors.password = "Password must coincide";
+    errors.retype_password = "Password must coincide";
   }
   // if(values.email)
   // {
-   
+
   //    let response = await FuckIngshit({email: values.email, password: values.password})
 
   //    console.log("res", response.message)
@@ -55,10 +65,18 @@ const validate =  values => {
   //    }
   // }
   // console.log("errors", errors)
-  return errors
-}
+  return errors;
+};
 
-const renderTextField = ({ input, label, placeholder, classes, meta, readOnly, myerror  }) => {
+const renderTextField = ({
+  input,
+  label,
+  placeholder,
+  classes,
+  meta,
+  readOnly,
+  myerror,
+}) => {
   return (
     <FormControl fullWidth className="">
       <InputLabel>{label}</InputLabel>
@@ -66,14 +84,12 @@ const renderTextField = ({ input, label, placeholder, classes, meta, readOnly, m
         {...input}
         error={meta.touched && meta.error && true}
         placeholder={placeholder}
-        readOnly={readOnly }
+        readOnly={readOnly}
       />
-      {myerror? renderError(myerror):  renderError(meta)}
+      {myerror ? renderError(myerror) : renderError(meta)}
     </FormControl>
   );
 };
-
-
 
 const renderError = ({ error, touched }) => {
   if (touched && error) {
@@ -85,9 +101,16 @@ const renderError = ({ error, touched }) => {
   }
 };
 
-const renderCheckbox = ({ input, label, value, className, checked, onClick }) => (
-    <FormControlLabel
-     control={
+const renderCheckbox = ({
+  input,
+  label,
+  value,
+  className,
+  checked,
+  onClick,
+}) => (
+  <FormControlLabel
+    control={
       <Checkbox
         value={value}
         color="primary"
@@ -98,8 +121,7 @@ const renderCheckbox = ({ input, label, value, className, checked, onClick }) =>
     }
     label={label}
   />
-
-)
+);
 
 const renderSelectField = ({
   input,
@@ -120,8 +142,8 @@ const renderSelectField = ({
       children={children}
       {...custom}
     />
-   
-     {renderError(meta)}
+
+    {renderError(meta)}
   </FormControl>
 );
 
@@ -141,91 +163,102 @@ const renderTextFieldPsswrd = ({ input, label, placeholder, error, meta }) => {
 };
 
 class SignUpForm extends Component {
-  state = {myerror: undefined};
+  state = { myerror: undefined };
 
-handleTextChange = async event => {
-
-  // alert(event.target.value)
-    if(event.target.value &&
-      /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(event.target.value))
-    {
+  handleTextChange = async (event) => {
+    // alert(event.target.value)
+    if (
+      event.target.value &&
+      /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(event.target.value)
+    ) {
       // alert(event.target.value)
-       let response = await FuckIngshit({email: event.target.value, login_type: "facebook", password: "values.password"})
-  
-       console.log("res", response.message)
-      if(response.message !== "No such user is registered"){
-         this.setState({myerror: {error: 'There is an account using this email already', touched: true}})
-          console.log("resIn", response)
-       }
-       else
-       this.setState({myerror: undefined})
+      let response = await FuckIngshit({
+        email: event.target.value,
+        login_type: "facebook",
+        password: "values.password",
+      });
+
+      console.log("res", response.message);
+      if (response.message !== "No such user is registered") {
+        this.setState({
+          myerror: {
+            error: "There is an account using this email already",
+            touched: true,
+          },
+        });
+        console.log("resIn", response);
+      } else this.setState({ myerror: undefined });
     }
-   
-}
+  };
 
-  realhandleSubmit = async data => {
-
+  realhandleSubmit = async (data) => {
     //console.log("SinIn-Submit: ", data);
     //  alert(data)
 
-    if(!this.state.myerror){
+    if (!this.state.myerror) {
+      let user = undefined;
 
-    let user = undefined;
+      user = await this.props.signUp({
+        first_name: data.first_name,
+        last_name: data.last_name,
+        email: data.email,
+        login_type: this.props.signFacebookInfo.first_name
+          ? "facebook"
+          : "site",
+        password: data.password,
+        picture: this.props.signFacebookInfo.first_name
+          ? this.props.signFacebookInfo.picture
+          : undefined,
+      });
 
-    user = await this.props.signUp({first_name: data.first_name, last_name: data.last_name, email: data.email,
-    login_type: this.props.signFacebookInfo.first_name? "facebook" : "site",  password: data.password,
-    picture: this.props.signFacebookInfo.first_name? this.props.signFacebookInfo.picture : undefined})
+      // console.log("SinIn-user: ", user)
 
-     // console.log("SinIn-user: ", user)
-     
-     //this.props.addAttraction({id_category: data.business_category, name: data.business_name, id_user: user.id})
-  
+      //this.props.addAttraction({id_category: data.business_category, name: data.business_name, id_user: user.id})
 
-     let message = data.first_name + " " + data.last_name + " has signed up to irial 3d";
+      let message =
+        data.first_name + " " + data.last_name + " has signed up to irial 3d";
 
-     let subject = "New user registration";
+      let subject = "New user registration";
 
-     let email = data.email;
+      let email = data.email;
 
-     notifyActivity({ message, subject, email});
+      notifyActivity({ message, subject, email });
 
-
-     this.props.signFacebook({})
-     this.props.history.push( "/account");
-
+      this.props.signFacebook({});
+      this.props.history.push("/account");
     }
+  };
 
-    
-    
+  isIn(array, id) {
+    let rslt = false;
+
+    array.map((element) => {
+      if (parseInt(element.id) === parseInt(id)) rslt = true;
+    });
+
+    return rslt;
   }
 
-  isIn(array, id){
-    let rslt = false
-
-    array.map(element => {
-      if(parseInt(element.id) === parseInt(id))
-        rslt = true
-    })
-
-    return rslt
-  }
-
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({ state: event.target.value });
   };
-  responseFacebook =  async (response) => {
+  responseFacebook = async (response) => {
     // console.log(response);
-    if(response.first_name){
-      this.props.signFacebook({id_login: response.id, email: response.email, first_name: response.first_name,
-         last_name: response.last_name, picture: response.picture.data.url, type: "business",
-         password: response.id, retype_password: response.id,})
+    if (response.first_name) {
+      this.props.signFacebook({
+        id_login: response.id,
+        email: response.email,
+        first_name: response.first_name,
+        last_name: response.last_name,
+        picture: response.picture.data.url,
+        type: "business",
+        password: response.id,
+        retype_password: response.id,
+      });
 
-         this.handleTextChange({target: {value: response.email}})
-   
+      this.handleTextChange({ target: { value: response.email } });
     }
-     
-    
-  }
+  };
   render() {
     const { classes } = this.props;
 
@@ -233,7 +266,11 @@ handleTextChange = async event => {
       <main className={classes.main}>
         <CssBaseline />
 
-        <Paper className={classes.paper} elevation={0} style={{paddingBottom: 60}}>
+        <Paper
+          className={classes.paper}
+          elevation={0}
+          style={{ paddingBottom: 60 }}
+        >
           <div className="full-width">
             <p
               variant="p"
@@ -244,143 +281,144 @@ handleTextChange = async event => {
               {this.props.language.CreateAccount}
             </p>
           </div>
-          
 
-          
-          <Form onSubmit={this.props.handleSubmit(this.realhandleSubmit.bind(this))} className={classes.form}>
-           
-         
-          <Grid container spacing={4}>
+          <Form
+            onSubmit={this.props.handleSubmit(this.realhandleSubmit.bind(this))}
+            className={classes.form}
+          >
+            <Grid container spacing={4}>
               <Grid item xs={12} md={6}>
-                   <Field
-                    name="first_name"
-                    required fullWidth
-                    autoComplete="first_name" autoFocus
-                    // value={this.state.signUpFacebook && this.state.signUpFacebook.first_name}
-                    component={renderTextField}
-                    label={this.props.language.FirstName}
-                    readOnly = {this.props.signFacebookInfo.first_name}
-                    />
-                    
-               
-              </Grid>
-              <Grid item xs={12} md={6}>
-              
-                  <Field
-                    name="last_name"
-                    required fullWidth
-                   
-                    autoComplete="last_name" 
-                    component={renderTextField}
-                    label={this.props.language.LastName}
-                    readOnly = {this.props.signFacebookInfo.last_name}
-                    />
-                  
-
-              </Grid>
-           
-           <Grid item xs={12} md={12}  style={{paddingTop: 5}}>
-
-             <Field
-                name="email"
-                required fullWidth
-                autoComplete="email" 
-                htmlFor="text"
-                component={renderTextField}
-                label={this.props.language.EmailAddress}
-                readOnly = {this.props.signFacebookInfo.email}
-                myerror={this.state.myerror}
-                onChange={this.handleTextChange.bind(this)}
-                />
-              {/* {this.state.myerror} */}
-            </Grid>     
-            
-            <Grid item xs={12} md={6}  style={{paddingTop: 5}}>
-              {!this.props.signFacebookInfo.first_name &&
-                 <Field
-                  name="password"
-                  type="password"
-                  required fullWidth
-                  autoComplete="current-password" 
-                  component={renderTextFieldPsswrd}
-                  label={this.props.language.Password}
-                  htmlFor="password"
-                  />
-              }
-              </Grid>
-              <Grid item xs={12} md={6}  style={{paddingTop: 5}}>
-              {!this.props.signFacebookInfo.first_name &&
                 <Field
-                  name="retype_password"
-                  type="password"
-                  required fullWidth
-                  autoComplete="repeat-password" 
-                  component={renderTextFieldPsswrd}
-                  label={this.props.language.RepeatPassword}
-                  htmlFor="password"
+                  name="first_name"
+                  required
+                  fullWidth
+                  autoComplete="first_name"
+                  autoFocus
+                  // value={this.state.signUpFacebook && this.state.signUpFacebook.first_name}
+                  component={renderTextField}
+                  label={this.props.language.FirstName}
+                  readOnly={this.props.signFacebookInfo.first_name}
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Field
+                  name="last_name"
+                  required
+                  fullWidth
+                  autoComplete="last_name"
+                  component={renderTextField}
+                  label={this.props.language.LastName}
+                  readOnly={this.props.signFacebookInfo.last_name}
+                />
+              </Grid>
+
+              <Grid item xs={12} md={12} style={{ paddingTop: 5 }}>
+                <Field
+                  name="email"
+                  required
+                  fullWidth
+                  autoComplete="email"
+                  htmlFor="text"
+                  component={renderTextField}
+                  label={this.props.language.EmailAddress}
+                  readOnly={this.props.signFacebookInfo.email}
+                  myerror={this.state.myerror}
+                  onChange={this.handleTextChange.bind(this)}
+                />
+                {/* {this.state.myerror} */}
+              </Grid>
+
+              <Grid item xs={12} md={6} style={{ paddingTop: 5 }}>
+                {!this.props.signFacebookInfo.first_name && (
+                  <Field
+                    name="password"
+                    type="password"
+                    required
+                    fullWidth
+                    autoComplete="current-password"
+                    component={renderTextFieldPsswrd}
+                    label={this.props.language.Password}
+                    htmlFor="password"
                   />
-              }
+                )}
+              </Grid>
+              <Grid item xs={12} md={6} style={{ paddingTop: 5 }}>
+                {!this.props.signFacebookInfo.first_name && (
+                  <Field
+                    name="retype_password"
+                    type="password"
+                    required
+                    fullWidth
+                    autoComplete="repeat-password"
+                    component={renderTextFieldPsswrd}
+                    label={this.props.language.RepeatPassword}
+                    htmlFor="password"
+                  />
+                )}
               </Grid>
             </Grid>
 
-            <div align="left"  style={{paddingTop: 40}}>
-            <Grid container spacing={0}>
+            <div align="left" style={{ paddingTop: 40 }}>
+              <Grid container spacing={0}>
                 <Grid item>
-                      <CoolButtonSign
-                      size="large"
-                      type="submit"
-                      variant="contained"
-                      width={335}
-                      height={56}
-                      fill={!this.props.signFacebookInfo.first_name?"#337ab7": "#4c69ba"}
-                      
-                    >
-                  
+                  <CoolButtonSign
+                    size="large"
+                    type="submit"
+                    variant="contained"
+                    width={335}
+                    height={56}
+                    fill={
+                      !this.props.signFacebookInfo.first_name
+                        ? "#337ab7"
+                        : "#4c69ba"
+                    }
+                  >
                     <strong>{this.props.language.SignUp}</strong>
-                  
-                    
-                    </CoolButtonSign>
+                  </CoolButtonSign>
                 </Grid>
-            
-                {this.props.signFacebookInfo.first_name && 
-                    <Grid item>
-                    <div  className={classes.cancelDiv}>
-                        <Link to="/signup" className={classes.cancelLink} onClick={()=> {
-                            this.props.signFacebook({})
-                            this.setState({myerror: undefined})
-                        }  }>
-                      
-                      <strong>{this.props.language.Cancel}</strong>
-                    
-                      </Link>
-                      </div>
-                </Grid>
-                }
-            </Grid>
-              
-              
-              
 
-              {!this.props.signFacebookInfo.first_name && 
-              <div style={{paddingTop: 20}}>
-               
-               <FacebookLogin
+                {this.props.signFacebookInfo.first_name && (
+                  <Grid item>
+                    <div className={classes.cancelDiv}>
+                      <Link
+                        to="/signup"
+                        className={classes.cancelLink}
+                        onClick={() => {
+                          this.props.signFacebook({});
+                          this.setState({ myerror: undefined });
+                        }}
+                      >
+                        <strong>{this.props.language.Cancel}</strong>
+                      </Link>
+                    </div>
+                  </Grid>
+                )}
+              </Grid>
+
+              {!this.props.signFacebookInfo.first_name && (
+                <div style={{ paddingTop: 20 }}>
+                  <FacebookLogin
                     appId="269776263974713"
-                    autoLoad = {false}
+                    autoLoad={false}
                     fields="first_name, last_name,email,picture"
-                    callback={this.responseFacebook}                   
+                    callback={this.responseFacebook}
                     disableMobileRedirect={isMobile}
-                    render={renderProps => (
-                      <CoolButtonSign width={335} type='submit'
-                      height={56}
-                      fill={"#4c69ba"} onClick={renderProps.onClick}>{this.props.language.SignUpFacebook}</CoolButtonSign>
+                    render={(renderProps) => (
+                      <CoolButtonSign
+                        width={335}
+                        type="submit"
+                        height={56}
+                        fill={"#4c69ba"}
+                        onClick={renderProps.onClick}
+                      >
+                        {this.props.language.SignUpFacebook}
+                      </CoolButtonSign>
                     )}
                   />
-                    
+                </div>
+              )}
             </div>
-            }
-            </div>
-            <div style={{width: 335}}>
+            <div style={{ width: 335 }}>
               <p
                 variant="p"
                 component="p"
@@ -388,37 +426,34 @@ handleTextChange = async event => {
                 className={classes.bottomText}
               >
                 {this.props.language.AlreadyMember}
-                <Link className={classes.link}  to="/signin">
-                {this.props.language.SignIn}
+                <Link className={classes.link} to="/signin">
+                  {this.props.language.SignIn}
                 </Link>
               </p>
             </div>
           </Form>
-       
-
         </Paper>
       </main>
     );
   }
 
- 
   // logIn() {
   //   this.props.logIn();
   // }
 }
 
-const styles = theme => ({
+const styles = (theme) => ({
   link: {
     color: "#3aa53a",
     fontFamily: "Roboto",
     fontWeight: "bold",
-    paddingLeft: "5px !important"
+    paddingLeft: "5px !important",
   },
   main: {},
   color: {
-    color: "#3577D4 !important"
+    color: "#3577D4 !important",
   },
-  
+
   paper: {
     marginTop: theme.spacing.unit * 8,
     display: "flex",
@@ -428,74 +463,74 @@ const styles = theme => ({
     paddingRight: "0px !important",
     backgroundColor: "transparent",
     [theme.breakpoints.down("sm")]: {
-     
       paddingLeft: "16px !important",
-      paddingRight: "16px !important"
-    }
+      paddingRight: "16px !important",
+    },
   },
   submitButton: {
     marginTop: 40,
     "&: hover": {
       backgroundColor: "#ffffff",
-      color: "#3577D4"
-    }
+      color: "#3577D4",
+    },
   },
   cancelDiv: {
     height: "100%",
     display: "table",
-    paddingLeft: 40
+    paddingLeft: 40,
   },
   cancelLink: {
     verticalAlign: "middle",
-    display: "table-cell"
+    display: "table-cell",
   },
   avatar: {
     margin: theme.spacing.unit,
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing.unit
+    marginTop: theme.spacing.unit,
   },
-    ptittle: {
-      fontSize: 36,
-      color: "#337ab7",
-      fontWeight: "bold",
-      fontFamily: "Futura"
+  ptittle: {
+    fontSize: 36,
+    color: "#337ab7",
+    fontWeight: "bold",
+    fontFamily: "Futura",
   },
   forgot: {
     fontSize: 13,
     fontWeight: "bold",
-    textAlign: "right"
+    textAlign: "right",
   },
   bottomText: {
     marginTop: 40,
     color: "#434c5f",
-  }
+  },
 });
 
 SignUpForm.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
-
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    language: state.language  ,
-   // categories: state.sections[1]? state.sections[1].categories : [],
-   // lodgingsCategories: state.sections[2]? state.sections[2].categories: [],
+    language: state.language,
+    // categories: state.sections[1]? state.sections[1].categories : [],
+    // lodgingsCategories: state.sections[2]? state.sections[2].categories: [],
     signFacebookInfo: state.signFacebook,
     initialValues: state.signFacebook,
-   
-   
   };
 };
-export default connect(
-  mapStateToProps,
-  {initialize, signUp, addAttraction, signFacebook}
-)(reduxForm({
-  form: 'SignUpForm', // a unique identifier for this form 
-  enableReinitialize: true,
-  validate,
-  onSubmit: signUp
-})(withStyles(styles)(withRouter(SignUpForm))));
+export default connect(mapStateToProps, {
+  initialize,
+  signUp,
+  addAttraction,
+  signFacebook,
+})(
+  reduxForm({
+    form: "SignUpForm", // a unique identifier for this form
+    enableReinitialize: true,
+    validate,
+    onSubmit: signUp,
+  })(withStyles(styles)(withRouter(SignUpForm)))
+);

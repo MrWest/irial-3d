@@ -1,6 +1,6 @@
-import React from 'react';
-import { withStyles, Grid } from '@material-ui/core';
-import styles from './styles/CategporyLabel';
+import React from "react";
+import { withStyles, Grid } from "@material-ui/core";
+import styles from "./styles/CategporyLabel";
 
 const CategporyLabel = ({ classes, category }) => (
   <Grid container justify="center">

@@ -1479,4 +1479,4 @@ body.video-react-full-window .video-react-fullscreen {
     transform: scale(2);
   }
 }  
-`
+`;

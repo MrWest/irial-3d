@@ -13,33 +13,28 @@ import { logIn, setRedirectUrl } from "../../actions";
 import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
 import { CoolButtonSign } from "../buttons";
-import { FormHelperText} from '@material-ui/core';
+import { FormHelperText } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
-import {isMobile} from 'react-device-detect';
-import { Field, reduxForm, Form } from 'redux-form';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { isMobile } from "react-device-detect";
+import { Field, reduxForm, Form } from "redux-form";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
-
-
-const validate = values => {
-  const errors = {}
-  const requiredFields = [
-    'password',
-    'email'
-  ]
-  requiredFields.forEach(field => {
+const validate = (values) => {
+  const errors = {};
+  const requiredFields = ["password", "email"];
+  requiredFields.forEach((field) => {
     if (!values[field]) {
-      errors[field] = 'Required'
+      errors[field] = "Required";
     }
-  })
+  });
   if (
     values.email &&
     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
   ) {
-    errors.email = 'Invalid email address'
+    errors.email = "Invalid email address";
   }
-  return errors
-}
+  return errors;
+};
 
 const renderTextField = ({ input, label, placeholder, error, meta }) => {
   return (
@@ -87,7 +82,7 @@ const renderCheckbox = ({
   className,
   checked,
   onClick,
-  margin
+  margin,
 }) => (
   <FormControlLabel
     margin={margin === undefined ? "normal" : margin}
@@ -104,74 +99,71 @@ const renderCheckbox = ({
   />
 );
 
-
 class SignInForm extends Component {
-
   constructor() {
     super();
     this.state = {
       remember: "remember",
-      generalError: undefined
+      generalError: undefined,
     };
 
-    
     this.realhandleSubmit = this.realhandleSubmit.bind(this);
   }
 
-  realhandleSubmit = async data => {
+  realhandleSubmit = async (data) => {
+    var result = await this.props.logIn({
+      email: data.email,
+      password: data.password,
+      login_type: "site",
+    });
 
-    var result = await this.props.logIn({email: data.email, password: data.password, login_type: "site"})
-    
-    
-    this.redirect(result, "site")
-  }
+    this.redirect(result, "site");
+  };
 
-  responseFacebook =  async (response) => {
-   // console.log(response);
-    if(response.first_name){
-      var result = await this.props.logIn({id_login: response.id, email: response.email, 
-        first_name: response.first_name, last_name: response.last_name, picture: response.picture.data.url, type: "visitor",
-        password: response.id, login_type: "facebook"})
-  
-        this.redirect(result, "facebook")
-      
+  responseFacebook = async (response) => {
+    // console.log(response);
+    if (response.first_name) {
+      var result = await this.props.logIn({
+        id_login: response.id,
+        email: response.email,
+        first_name: response.first_name,
+        last_name: response.last_name,
+        picture: response.picture.data.url,
+        type: "visitor",
+        password: response.id,
+        login_type: "facebook",
+      });
+
+      this.redirect(result, "facebook");
+    } else {
+      this.setState({ generalError: this.props.language.FacebookLoginFailed });
     }
-    else{
-      this.setState({generalError: this.props.language.FacebookLoginFailed})
+  };
+
+  redirect(result, type) {
+    if (this.props.redirectUrl === "") {
+      if (result["login"] === "success") {
+        if (result["type"] === "visitor") this.props.history.push("/");
+        else this.props.history.push("/account");
+      } else
+        this.setState({
+          generalError:
+            type === "site"
+              ? this.props.language.WrongCredentials
+              : this.props.language.FacebookLoginFailed,
+        });
+    } else {
+      if (result["login"] === "success") {
+        this.props.history.push(this.props.redirectUrl);
+        this.props.setRedirectUrl("");
+      } else
+        this.setState({
+          generalError:
+            type === "site"
+              ? this.props.language.WrongCredentials
+              : this.props.language.FacebookLoginFailed,
+        });
     }
-     
-    
-  }
-
-  redirect(result, type){
-
-   
-    if(this.props.redirectUrl === ""){
-
-      if(result['login']==="success") {
-        if(result['type']==="visitor")  
-        this.props.history.push( "/");
-        else
-        this.props.history.push( "/account");
-      }
-      else
-      this.setState({generalError: type === "site"? this.props.language.WrongCredentials : this.props.language.FacebookLoginFailed})
-
-    }
-    else {
-
-      if(result['login']==="success") {
-        this.props.history.push( this.props.redirectUrl);
-        this.props.setRedirectUrl("");  
-      }         
-      else
-        this.setState({generalError: type === "site"? this.props.language.WrongCredentials : this.props.language.FacebookLoginFailed})
-       
-    }
-     
-    
-      
-    
   }
 
   render() {
@@ -180,126 +172,135 @@ class SignInForm extends Component {
       <main className={classes.main}>
         <CssBaseline />
 
-        <Paper className={classes.paper} elevation={0} style={{paddingBottom: 60}}>
+        <Paper
+          className={classes.paper}
+          elevation={0}
+          style={{ paddingBottom: 60 }}
+        >
           <div className="full-width">
             <p align="left" className={classes.ptittle}>
-             {this.props.language.SignAccount}
+              {this.props.language.SignAccount}
             </p>
           </div>
-         
-           <Form  onSubmit={this.props.handleSubmit(this.realhandleSubmit)} className={classes.form} >
-          <p align="right" style={{ fontSize: 14, color: "#f44336" }}>{this.state.generalError}</p>
-          <Grid container spacing={4} >
-           <Grid item xs={12}>
+
+          <Form
+            onSubmit={this.props.handleSubmit(this.realhandleSubmit)}
+            className={classes.form}
+          >
+            <p align="right" style={{ fontSize: 14, color: "#f44336" }}>
+              {this.state.generalError}
+            </p>
+            <Grid container spacing={4}>
+              <Grid item xs={12}>
                 <Field
-                      name="email"
-                      required fullWidth
-                      autoComplete="email" autoFocus
-                      htmlFor="email"
-                      component={renderTextField}
-                      label={this.props.language.AccountEmailAddress}
-                      
-                      />
-           </Grid>
-           <Grid item xs={12} style={{paddingTop: 5}}>
-              <Field
-                    name="password"
-                    type="password"
-                    required fullWidth
-                    autoComplete="current-password" 
-                    component={renderTextFieldPsswrd}
-                    label={this.props.language.Password}
-                    htmlFor="password"
-                    />
-           </Grid>
-          
-          </Grid>
-           
-               
-                  <Grid container spacing={4}>
-                    <Grid item sm={12} md={6}>
+                  name="email"
+                  required
+                  fullWidth
+                  autoComplete="email"
+                  autoFocus
+                  htmlFor="email"
+                  component={renderTextField}
+                  label={this.props.language.AccountEmailAddress}
+                />
+              </Grid>
+              <Grid item xs={12} style={{ paddingTop: 5 }}>
+                <Field
+                  name="password"
+                  type="password"
+                  required
+                  fullWidth
+                  autoComplete="current-password"
+                  component={renderTextFieldPsswrd}
+                  label={this.props.language.Password}
+                  htmlFor="password"
+                />
+              </Grid>
+            </Grid>
 
-                    <Field
-                    value="remember"
-                    label={this.props.language.RememberMe}
-                    component={renderCheckbox}
-                    className={classes.color}
-                    checked={this.state.remember === "remember"}
-                    onClick={() =>
-                      this.state.remember ==="remember"
-                        ? this.setState({ remember: "" })
-                        : this.setState({ remember: "remember" })
-                    }
-                        />
-                    
-                    </Grid>
-                    <Grid
-                        item
-                        sm={12}
-                        md={6}
-                        alignItems="flex-end"
-                        style={{ textAlign: "right" }}
-                    >
-                    <div style={{ textAlign: "right", paddingTop: 16 }}>
-                        <Link className={classes.forgot} to="/forgot">
-                        {this.props.language.ForgotPassword}
-                        </Link>
-                        </div>
-                    </Grid>
-                </Grid>
+            <Grid container spacing={4}>
+              <Grid item sm={12} md={6}>
+                <Field
+                  value="remember"
+                  label={this.props.language.RememberMe}
+                  component={renderCheckbox}
+                  className={classes.color}
+                  checked={this.state.remember === "remember"}
+                  onClick={() =>
+                    this.state.remember === "remember"
+                      ? this.setState({ remember: "" })
+                      : this.setState({ remember: "remember" })
+                  }
+                />
+              </Grid>
+              <Grid
+                item
+                sm={12}
+                md={6}
+                alignItems="flex-end"
+                style={{ textAlign: "right" }}
+              >
+                <div style={{ textAlign: "right", paddingTop: 16 }}>
+                  <Link className={classes.forgot} to="/forgot">
+                    {this.props.language.ForgotPassword}
+                  </Link>
+                </div>
+              </Grid>
+            </Grid>
 
-                <div style={{paddingTop: 40}}>
-                  <CoolButtonSign
-                    size="large"
-                    variant="contained"
-                    width={335}
-                    height={56}
-                    fill={"#337ab7"}
-                    // onClick={() => this.logIn()}
-                  >
-                   {this.props.language.SignIn}
-                  </CoolButtonSign>
+            <div style={{ paddingTop: 40 }}>
+              <CoolButtonSign
+                size="large"
+                variant="contained"
+                width={335}
+                height={56}
+                fill={"#337ab7"}
+                // onClick={() => this.logIn()}
+              >
+                {this.props.language.SignIn}
+              </CoolButtonSign>
 
-                  <div style={{paddingTop: 20}}>
-                  <FacebookLogin
-                    appId="269776263974713"
-                    autoLoad = {false}
-                    fields="first_name, last_name ,email,picture"
-                    disableMobileRedirect={isMobile}
-                    callback={this.responseFacebook}
-                    render={renderProps => (
-                      <CoolButtonSign width={335} type='button'
+              <div style={{ paddingTop: 20 }}>
+                <FacebookLogin
+                  appId="269776263974713"
+                  autoLoad={false}
+                  fields="first_name, last_name ,email,picture"
+                  disableMobileRedirect={isMobile}
+                  callback={this.responseFacebook}
+                  render={(renderProps) => (
+                    <CoolButtonSign
+                      width={335}
+                      type="button"
                       height={56}
-                      fill={"#4c69ba"} onClick={renderProps.onClick}>{this.props.language.SignInFacebook}</CoolButtonSign>
-                    )}
-                  />
-                  {/* <FacebookLogin
+                      fill={"#4c69ba"}
+                      onClick={renderProps.onClick}
+                    >
+                      {this.props.language.SignInFacebook}
+                    </CoolButtonSign>
+                  )}
+                />
+                {/* <FacebookLogin
                     appId="269776263974713"
                     autoLoad={true}
                     fields="name,email,picture"
                     // onClick={componentClicked}
                     callback={this.responseFacebook} /> */}
-                  </div>
-                </div>
+              </div>
+            </div>
 
-                <div style={{width: 335}}>
-                  <p
-                    variant="p"
-                    component="p"
-                    align="center"
-                    className={classes.bottomText}
-                  >
-                   {this.props.language.DontAccount}
-                    <Link className={classes.link} to="/signup">
-                   {this.props.language.SignUp}
-                    </Link>
-                  </p>
-                </div>      
-
-
-            </Form>
-
-     
+            <div style={{ width: 335 }}>
+              <p
+                variant="p"
+                component="p"
+                align="center"
+                className={classes.bottomText}
+              >
+                {this.props.language.DontAccount}
+                <Link className={classes.link} to="/signup">
+                  {this.props.language.SignUp}
+                </Link>
+              </p>
+            </div>
+          </Form>
         </Paper>
       </main>
     );
@@ -310,25 +311,25 @@ class SignInForm extends Component {
   }
 }
 
-const styles = theme => ({
+const styles = (theme) => ({
   link: {
     color: "#3aa53a",
     fontFamily: "Roboto",
     fontWeight: "bold",
-    paddingLeft: "5px !important"
+    paddingLeft: "5px !important",
   },
   main: {
-    paddingLeft: "0 !important"
+    paddingLeft: "0 !important",
   },
   color: {
-    color: "#3aa53a !important"
+    color: "#3aa53a !important",
   },
   submitButton: {
     marginTop: 40,
     "&: hover": {
       backgroundColor: "#ffffff",
-      color: "#3aa53a"
-    }
+      color: "#3aa53a",
+    },
   },
   paper: {
     marginTop: theme.spacing.unit * 8,
@@ -339,24 +340,23 @@ const styles = theme => ({
     paddingLeft: "0px !important",
     paddingRight: "0px !important",
     [theme.breakpoints.down("sm")]: {
-     
       paddingLeft: "16px !important",
-      paddingRight: "16px !important"
-    }
+      paddingRight: "16px !important",
+    },
   },
   avatar: {
     margin: theme.spacing.unit,
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   ptittle: {
     fontSize: 36,
     color: "#337ab7",
     fontWeight: "bold",
-    fontFamily: "Futura"
+    fontFamily: "Futura",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing.unit
+    marginTop: theme.spacing.unit,
   },
   submit: {
     backgroundColor: "#3aa53a",
@@ -366,8 +366,8 @@ const styles = theme => ({
     "&: hover": {
       backgroundColor: "#2466C3 !important",
       color: "#ffffff !important",
-      fontWeight: "bold"
-    }
+      fontWeight: "bold",
+    },
   },
   forgot: {
     fontSize: 14,
@@ -378,27 +378,25 @@ const styles = theme => ({
   bottomText: {
     marginTop: 40,
     color: "#434c5f",
-  }
+  },
 });
 
 SignInForm.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
-
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     language: state.language,
-    redirectUrl: state.redirectUrl  
+    redirectUrl: state.redirectUrl,
   };
 };
 export default reduxForm({
-  form: 'SignInForm', // a unique identifier for this form
+  form: "SignInForm", // a unique identifier for this form
   validate,
-  onSubmit: logIn
-})(connect(
-  mapStateToProps,
-  { logIn, setRedirectUrl }
-)(withStyles(styles)(withRouter(SignInForm))));
-
-
+  onSubmit: logIn,
+})(
+  connect(mapStateToProps, { logIn, setRedirectUrl })(
+    withStyles(styles)(withRouter(SignInForm))
+  )
+);

@@ -1,126 +1,129 @@
 import { FETCH_TOURS, SELECT_TOUR } from "./types";
 import DashBoard from "../apis/DashBoard";
-import {generatePHPParameters, getLanguage, generateAppendParameters} from "../apis/tools";
+import {
+  generatePHPParameters,
+  getLanguage,
+  generateAppendParameters,
+} from "../apis/tools";
 import { log } from "util";
 
-
-
-
-
-export const fetchToursServer =  async reduxStore => {
+export const fetchToursServer = async (reduxStore) => {
   const toursDb = await DashBoard.post("/tours/get_tours.php");
-  
-  var toursRslt = toursDb.data.slice()
-      
-     const promises = toursRslt.map( async tour => {   
-         
-       const toursImagesDb = await DashBoard.get("/tours/get_tour_images.php"+ generatePHPParameters({idTour: tour.id}))
-       tour.images = toursImagesDb.data
-       tour.program = []
-       tour.comments = []
 
-       return tour
-       
-     })
+  var toursRslt = toursDb.data.slice();
 
-     const results = await Promise.all(promises)
+  const promises = toursRslt.map(async (tour) => {
+    const toursImagesDb = await DashBoard.get(
+      "/tours/get_tour_images.php" + generatePHPParameters({ idTour: tour.id })
+    );
+    tour.images = toursImagesDb.data;
+    tour.program = [];
+    tour.comments = [];
 
-     reduxStore.dispatch({
-      type: FETCH_TOURS,
-      payload: results//fromDB
-    });
+    return tour;
+  });
 
-    return results;
-  };
+  const results = await Promise.all(promises);
 
-  
-  export const sortToursServer = async (category, reduxStore) => {
+  reduxStore.dispatch({
+    type: FETCH_TOURS,
+    payload: results, //fromDB
+  });
 
-   
-    const lang = getLanguage(reduxStore);
- 
-    let results;
-    
-    let completeUrl = category === "all"?  generatePHPParameters({lang}) : generatePHPParameters({category, lang});
-    await DashBoard.post("/tours/get_tours.php"+ completeUrl).then( async toursDb => {
+  return results;
+};
 
-      
-     var toursRslt = toursDb.data.slice()
-      
-     const promises = toursRslt.map( async tour => {   
-         
-       const toursImagesDb = await DashBoard.get("/tours/get_tour_images.php"+ generatePHPParameters({idTour: tour.id}))
-       tour.images = toursImagesDb.data
-       
-      //  const toursprogramDb = await DashBoard.get("/tours/get_tour_program.php"+ generatePHPParameters({idTour: tour.id, lang}))
-      //  tour.program = toursprogramDb.data
+export const sortToursServer = async (category, reduxStore) => {
+  const lang = getLanguage(reduxStore);
 
-      //  const tourscommentsDb = await DashBoard.get("/tours/get_tour_comments.php"+ generatePHPParameters({idTour: tour.id}))
-      //  tour.comments = tourscommentsDb.data
-      
-      //  const toursvideosDb = await DashBoard.get("/tours/get_tour_videos.php"+ generatePHPParameters({idTour: tour.id}))
-      //  tour.videos = toursvideosDb.data
+  let results;
 
-       const toursRateDb = await DashBoard.get("/tours/get_tour_rate.php"+ generatePHPParameters({idTour: tour.id}))
-       tour.rate = toursRateDb.data
+  let completeUrl =
+    category === "all"
+      ? generatePHPParameters({ lang })
+      : generatePHPParameters({ category, lang });
+  await DashBoard.post("/tours/get_tours.php" + completeUrl).then(
+    async (toursDb) => {
+      var toursRslt = toursDb.data.slice();
 
-       
-       return tour
-       
-     })
+      const promises = toursRslt.map(async (tour) => {
+        const toursImagesDb = await DashBoard.get(
+          "/tours/get_tour_images.php" +
+            generatePHPParameters({ idTour: tour.id })
+        );
+        tour.images = toursImagesDb.data;
 
-     
+        //  const toursprogramDb = await DashBoard.get("/tours/get_tour_program.php"+ generatePHPParameters({idTour: tour.id, lang}))
+        //  tour.program = toursprogramDb.data
 
-     results = await Promise.all(promises)
+        //  const tourscommentsDb = await DashBoard.get("/tours/get_tour_comments.php"+ generatePHPParameters({idTour: tour.id}))
+        //  tour.comments = tourscommentsDb.data
 
-          })
+        //  const toursvideosDb = await DashBoard.get("/tours/get_tour_videos.php"+ generatePHPParameters({idTour: tour.id}))
+        //  tour.videos = toursvideosDb.data
 
+        const toursRateDb = await DashBoard.get(
+          "/tours/get_tour_rate.php" +
+            generatePHPParameters({ idTour: tour.id })
+        );
+        tour.rate = toursRateDb.data;
 
-     
-          reduxStore.dispatch({
-      type: FETCH_TOURS,
-      payload: results//fromDB
-    });
-    
-  
-    return results;
+        return tour;
+      });
 
-   
-  };
+      results = await Promise.all(promises);
+    }
+  );
 
-  export const selectTourServer = async (id, reduxStore) => {
-  
-    const lang = getLanguage();
-    const toursDb = await DashBoard.post("/tours/get_tour.php"+ generatePHPParameters({id: id, lang}))
-  
-       var toursRslt = toursDb.data
-      
-           
-       const toursImagesDb = await DashBoard.get("/tours/get_tour_images.php"+ generatePHPParameters({idTour: toursRslt.id}))
-       toursRslt.images = toursImagesDb.data
+  reduxStore.dispatch({
+    type: FETCH_TOURS,
+    payload: results, //fromDB
+  });
 
-       const toursprogramDb = await DashBoard.get("/tours/get_tour_program.php"+ generatePHPParameters({idTour: toursRslt.id, lang}))
-       toursRslt.program = toursprogramDb.data
+  return results;
+};
 
-       const tourscommentsDb = await DashBoard.get("/tours/get_tour_comments.php"+ generatePHPParameters({idTour: toursRslt.id}))
-       toursRslt.comments = tourscommentsDb.data
-      
-       const toursvideosDb = await DashBoard.get("/tours/get_tour_videos.php"+ generatePHPParameters({idTour: toursRslt.id}))
-       toursRslt.videos = toursvideosDb.data
+export const selectTourServer = async (id, reduxStore) => {
+  const lang = getLanguage();
+  const toursDb = await DashBoard.post(
+    "/tours/get_tour.php" + generatePHPParameters({ id: id, lang })
+  );
 
-       const toursRateDb = await DashBoard.get("/tours/get_tour_rate.php"+ generatePHPParameters({idTour: toursRslt.id}))
-       toursRslt.rate = toursRateDb.data
+  var toursRslt = toursDb.data;
 
+  const toursImagesDb = await DashBoard.get(
+    "/tours/get_tour_images.php" +
+      generatePHPParameters({ idTour: toursRslt.id })
+  );
+  toursRslt.images = toursImagesDb.data;
 
-    
+  const toursprogramDb = await DashBoard.get(
+    "/tours/get_tour_program.php" +
+      generatePHPParameters({ idTour: toursRslt.id, lang })
+  );
+  toursRslt.program = toursprogramDb.data;
 
-       reduxStore.dispatch({
-      type: SELECT_TOUR,
-      payload: toursRslt//fromDB
-    });
- 
-    return toursRslt;
-   
-  };
+  const tourscommentsDb = await DashBoard.get(
+    "/tours/get_tour_comments.php" +
+      generatePHPParameters({ idTour: toursRslt.id })
+  );
+  toursRslt.comments = tourscommentsDb.data;
 
+  const toursvideosDb = await DashBoard.get(
+    "/tours/get_tour_videos.php" +
+      generatePHPParameters({ idTour: toursRslt.id })
+  );
+  toursRslt.videos = toursvideosDb.data;
 
+  const toursRateDb = await DashBoard.get(
+    "/tours/get_tour_rate.php" + generatePHPParameters({ idTour: toursRslt.id })
+  );
+  toursRslt.rate = toursRateDb.data;
+
+  reduxStore.dispatch({
+    type: SELECT_TOUR,
+    payload: toursRslt, //fromDB
+  });
+
+  return toursRslt;
+};

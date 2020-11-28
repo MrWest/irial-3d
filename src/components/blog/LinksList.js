@@ -1,7 +1,7 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core';
-import Link from '../buttons/extension';
-import styles from './styles/LinksList';
+import React from "react";
+import { withStyles } from "@material-ui/core";
+import Link from "../buttons/extension";
+import styles from "./styles/LinksList";
 
 const LinksList = ({ classes, links }) => (
   <ul className={classes.PagesList}>

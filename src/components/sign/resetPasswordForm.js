@@ -6,48 +6,35 @@ import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import Paper from "@material-ui/core/Paper";
 import withStyles from "@material-ui/core/styles/withStyles";
-import {CoolButton, CoolLink} from "../buttons";
+import { CoolButton, CoolLink } from "../buttons";
 import { connect } from "react-redux";
 import { Form, reduxForm, Field } from "redux-form";
-import {resetPassword} from "../../actions";
-import {
-  required
-} from "redux-form-validators";
+import { resetPassword } from "../../actions";
+import { required } from "redux-form-validators";
 import { FormHelperText } from "@material-ui/core";
 
 const validations = {
-  password: [
-    required({ msg: "Required" })
-  ],
-  cpassword: [
-    required({ msg: "Required" })
-    
-  ]
-  
+  password: [required({ msg: "Required" })],
+  cpassword: [required({ msg: "Required" })],
 };
 
 // Reusable with any other form
-const validate = values => {
+const validate = (values) => {
   const errors = {};
   for (let field in validations) {
     let value = values[field];
     errors[field] = validations[field]
-      .map(validateField => {
+      .map((validateField) => {
         return validateField(value, values);
       })
-      .find(x => x);
+      .find((x) => x);
   }
- 
-  
-if(values['password'] !== '' &&  values['password'] !==  values['cpassword']){
- 
-  errors.cpassword = "Password values must coincide";
 
-}
+  if (values["password"] !== "" && values["password"] !== values["cpassword"]) {
+    errors.cpassword = "Password values must coincide";
+  }
   return errors;
 };
-
-
 
 const renderTextFieldPsswrd = ({ input, label, placeholder, error, meta }) => {
   return (
@@ -75,78 +62,69 @@ const renderError = ({ error, touched }) => {
 };
 
 class ResetPasswordForm extends Component {
-  state = {formStatus: undefined};
+  state = { formStatus: undefined };
 
-  realhandleSubmit =  async data => {
-   
-     data.email = this.props.email;
-      this.props.resetPassword(data).then(res =>{        
-        this.setState({formStatus: true})
-      })
-      
-   
- 
-};
+  realhandleSubmit = async (data) => {
+    data.email = this.props.email;
+    this.props.resetPassword(data).then((res) => {
+      this.setState({ formStatus: true });
+    });
+  };
 
   render() {
-    const { classes,email, language } = this.props;
+    const { classes, email, language } = this.props;
     const { formStatus } = this.state;
 
-    if(formStatus){
+    if (formStatus) {
       return (
         <Paper className={classes.paper} elevation={0}>
-        <div >
-          <p
-            align="left"
-            className={classes.pTittle}
-          >
-            {language.SuccessfulPasswordReset}
-          </p>
-          <p
-            align="left"
-            className={classes.pExplain}
-          >
-            {language.SuccessfulPasswordResetInstructions}
-          </p>
-          
-        </div>
-        <form className={classes.form}>
-       
-
-          <div className="text-center" style={{paddingTop: 40}} align="left">
-            <CoolLink to="/signin" height={56} width={280} fill={"#337ab7"} color={"#ffffff"} >
-              {language.SignIn}
-            </CoolLink>
+          <div>
+            <p align="left" className={classes.pTittle}>
+              {language.SuccessfulPasswordReset}
+            </p>
+            <p align="left" className={classes.pExplain}>
+              {language.SuccessfulPasswordResetInstructions}
+            </p>
           </div>
-        </form>
-      </Paper>
-   
-      )
+          <form className={classes.form}>
+            <div
+              className="text-center"
+              style={{ paddingTop: 40 }}
+              align="left"
+            >
+              <CoolLink
+                to="/signin"
+                height={56}
+                width={280}
+                fill={"#337ab7"}
+                color={"#ffffff"}
+              >
+                {language.SignIn}
+              </CoolLink>
+            </div>
+          </form>
+        </Paper>
+      );
     }
     return (
       <main className={classes.main}>
         <CssBaseline />
-        <Form onSubmit={this.props.handleSubmit(this.realhandleSubmit.bind(this))} className={classes.form}>
-        <Paper className={classes.paper} elevation={0}>
-          <div >
-            <p
-              align="left"
-              className={classes.pTittle}
-            >
-              {language.ResetPassword}
-            </p>
-            <p
-              align="left"
-              className={classes.pExplain}
-            >
-             {language.ResetPasswordInstructions.format(email)}
-            </p>
-            
-          </div>
-          <form className={classes.form}>
-         
-            <FormControl margin="normal" required fullWidth>
-                  <Field
+        <Form
+          onSubmit={this.props.handleSubmit(this.realhandleSubmit.bind(this))}
+          className={classes.form}
+        >
+          <Paper className={classes.paper} elevation={0}>
+            <div>
+              <p align="left" className={classes.pTittle}>
+                {language.ResetPassword}
+              </p>
+              <p align="left" className={classes.pExplain}>
+                {language.ResetPasswordInstructions.format(email)}
+              </p>
+            </div>
+            <form className={classes.form}>
+              <FormControl margin="normal" required fullWidth>
+                <Field
                   name="password"
                   type="password"
                   margin="small"
@@ -156,40 +134,46 @@ class ResetPasswordForm extends Component {
                   label={language.NewPassword}
                   htmlFor="password"
                 />
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-                    <Field
-                    name="cpassword"
-                    type="password"
-                    margin="small"
-                    fullWidth
-                    autoComplete="current-password"
-                    component={renderTextFieldPsswrd}
-                    label={language.ConfirmPassword}
-                    htmlFor="password"
-                  />
-            </FormControl>
+              </FormControl>
+              <FormControl margin="normal" required fullWidth>
+                <Field
+                  name="cpassword"
+                  type="password"
+                  margin="small"
+                  fullWidth
+                  autoComplete="current-password"
+                  component={renderTextFieldPsswrd}
+                  label={language.ConfirmPassword}
+                  htmlFor="password"
+                />
+              </FormControl>
 
-            <div className="text-center" style={{paddingTop: 40}} align="left">
-              <CoolButton height={56} width={230} fill={"#337ab7"} color={"#ffffff"} >
-                 {language.Reset}
-              </CoolButton>
-            </div>
-          </form>
-        </Paper>
+              <div
+                className="text-center"
+                style={{ paddingTop: 40 }}
+                align="left"
+              >
+                <CoolButton
+                  height={56}
+                  width={230}
+                  fill={"#337ab7"}
+                  color={"#ffffff"}
+                >
+                  {language.Reset}
+                </CoolButton>
+              </div>
+            </form>
+          </Paper>
         </Form>
       </main>
     );
   }
-
- 
 }
 
-const styles = theme => ({
+const styles = (theme) => ({
   main: {
     width: "auto",
     display: "block", // Fix IE 11 issue.
-   
   },
   paper: {
     marginTop: theme.spacing.unit * 8,
@@ -197,23 +181,21 @@ const styles = theme => ({
     flexDirection: "column",
     maxWidth: 496,
     alignItems: "center",
-    padding: `${8}px ${theme.spacing.unit * 3}px ${theme
-      .spacing.unit * 3}px`,
+    padding: `${8}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
     backgroundColor: "transparent",
     paddingBottom: 60,
     [theme.breakpoints.down("sm")]: {
-     
       paddingLeft: "16px !important",
-      paddingRight: "16px !important"
-    }
+      paddingRight: "16px !important",
+    },
   },
   avatar: {
     margin: theme.spacing.unit,
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing.unit
+    marginTop: theme.spacing.unit,
   },
   submit: {
     backgroundColor: "#3577D4",
@@ -223,42 +205,43 @@ const styles = theme => ({
     "&: hover": {
       backgroundColor: "#2466C3 !important",
       color: "#ffffff !important",
-      fontWeight: "bold"
-    }
+      fontWeight: "bold",
+    },
   },
   forgot: {
     fontSize: 13,
     fontWeight: "bold",
-    textAlign: "right"
+    textAlign: "right",
   },
   bottomText: {
-    marginTop: 15
+    marginTop: 15,
   },
   pTittle: {
     fontSize: 36,
     color: "#434c5f",
     fontWeight: "bold",
-    fontFamily: "Futura"
+    fontFamily: "Futura",
   },
   pExplain: {
     fontSize: 18,
     color: "#434c5f",
     fontFamily: "Roboto",
-    marginTop: 24
+    marginTop: 24,
   },
 });
 
 ResetPasswordForm.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    language: state.language
+    language: state.language,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  {resetPassword}
-)( reduxForm({ form: "ResetPaswordForm", enableReinitialize: true, validate })(withStyles(styles)(ResetPasswordForm)));
+export default connect(mapStateToProps, { resetPassword })(
+  reduxForm({ form: "ResetPaswordForm", enableReinitialize: true, validate })(
+    withStyles(styles)(ResetPasswordForm)
+  )
+);

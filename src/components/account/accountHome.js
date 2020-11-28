@@ -8,15 +8,14 @@ import Billing from "./billing";
 import BusinessHome from "./business/businessHome";
 import { connect } from "react-redux";
 import { loadProfile, selectAccountView } from "../../actions";
-import {Helmet} from 'react-helmet';
+import { Helmet } from "react-helmet";
 import {
   required,
   email,
   length,
   numericality,
-  format
+  format,
 } from "redux-form-validators";
-
 
 function IconProfile({ fill }) {
   return (
@@ -103,144 +102,166 @@ function IconBilling({ fill }) {
 }
 
 class AccountHome extends Component {
-
   componentDidMount() {
     const { loadProfile, loginInfo } = this.props;
-    if(loginInfo.id)
-      loadProfile(loginInfo.id);
+    if (loginInfo.id) loadProfile(loginInfo.id);
   }
 
-  verticalText(text){
-
-    var chars = []
-    for(var index = 0; index < text.length; index++) {
-     chars.push({char: text[index]})
+  verticalText(text) {
+    var chars = [];
+    for (var index = 0; index < text.length; index++) {
+      chars.push({ char: text[index] });
     }
 
     return (
       <div>
-      {chars.map(char =>(
-        <div style={{lineHeight: 1, margin: "auto", width: 30, textAlign: "center", textTransform: "sentence"}}> <strong>{char.char}</strong></div>
-      ))}
+        {chars.map((char) => (
+          <div
+            style={{
+              lineHeight: 1,
+              margin: "auto",
+              width: 30,
+              textAlign: "center",
+              textTransform: "sentence",
+            }}
+          >
+            {" "}
+            <strong>{char.char}</strong>
+          </div>
+        ))}
       </div>
-    )
+    );
   }
   render() {
-    const { classes, valid, stripe_account_status, profileStipeInfo } = this.props;
+    const {
+      classes,
+      valid,
+      stripe_account_status,
+      profileStipeInfo,
+    } = this.props;
 
     const labels = [
       {
-        normal: (        
-
-          <div style={{ textAlign: "center", width: "100%", height: 30}}>
+        normal: (
+          <div style={{ textAlign: "center", width: "100%", height: 30 }}>
             <IconProfile fill="#434C5F" />
-             {/* {this.verticalText( "Profile")} */}
+            {/* {this.verticalText( "Profile")} */}
           </div>
-         
-            
+
           // </Grid>
         ),
         selected: (
-         
-          <div style={{color: "#3577d4", textAlign: "center", width: "100%", height: 30}}>
+          <div
+            style={{
+              color: "#3577d4",
+              textAlign: "center",
+              width: "100%",
+              height: 30,
+            }}
+          >
             <IconProfile fill="#3577d4" />
-             {/* {this.verticalText( "Profile")} */}
+            {/* {this.verticalText( "Profile")} */}
           </div>
-         
-          
+
           // </Grid>
-        )
+        ),
       },
       {
         normal: (
-        
-        
-          <div style={{textAlign: "center", width: "100%", height: 30}}>
-           <IconCompany fill="#434C5F" />
-             {/* {this.verticalText( "Business")}  */}
+          <div style={{ textAlign: "center", width: "100%", height: 30 }}>
+            <IconCompany fill="#434C5F" />
+            {/* {this.verticalText( "Business")}  */}
           </div>
-           
-        
         ),
         selected: (
-          
-             <div style={{color: "#3577d4", textAlign: "center", width: "100%", height: 30}}>
-               <IconCompany fill="#3577d4" />
-              {/* {this.verticalText( "Business")}  */}
-            </div>
-            
-         
-        )
+          <div
+            style={{
+              color: "#3577d4",
+              textAlign: "center",
+              width: "100%",
+              height: 30,
+            }}
+          >
+            <IconCompany fill="#3577d4" />
+            {/* {this.verticalText( "Business")}  */}
+          </div>
+        ),
       },
       // {
       //   normal: (
-        
-        
+
       //     <div style={{textAlign: "center", width: "100%", height: 30}}>
       //      <IconBilling fill="#434C5F" />
       //        {/* {this.verticalText( "Business")}  */}
       //     </div>
-           
-        
+
       //   ),
       //   selected: (
-          
+
       //        <div style={{color: "#3577d4", textAlign: "center", width: "100%", height: 30}}>
       //          <IconBilling fill="#3577d4" />
       //         {/* {this.verticalText( "Business")}  */}
       //       </div>
-            
-         
+
       //   )
       // },
-     
     ];
 
-    if(!this.props.sign.isLogged || this.props.loginInfo.type === "visitor")
-    return (null)
+    if (!this.props.sign.isLogged || this.props.loginInfo.type === "visitor")
+      return null;
 
     return (
       <div className={classes.container}>
         <Helmet>
-              <title>Irial 3D | Account</title>
-              <meta name="description" content="This is what you want to show as the page content in the Google SERP Listing" />
-           </Helmet>
-       <section className={parseInt(this.props.accountView) === 1 && this.props.loginInfo.type === "business"?classes.cover: null} >
-   
-      <Grid container justify="center" spacing={0}>
-       <Grid item className={classes.center}>
-       
-            <Grid container spacing={0}>
-              <Grid item xs={12} style={{paddingTop: 60}}>
-                <VerticalTabsTool
-                  labels={labels}
-                  index={parseInt(this.props.accountView)}
-                  onChange={index => this.props.selectAccountView(index)}
-                >
-                  <Profile profileStipeInfo={profileStipeInfo} stripe_account_status={stripe_account_status}/>
-                  <BusinessHome/>
-                  {/* <Billing company={this.props.company} stripe_account_status={stripe_account_status} /> */}
-                  {/* <Company company={this.props.company} />
+          <title>Irial 3D | Account</title>
+          <meta
+            name="description"
+            content="This is what you want to show as the page content in the Google SERP Listing"
+          />
+        </Helmet>
+        <section
+          className={
+            parseInt(this.props.accountView) === 1 &&
+            this.props.loginInfo.type === "business"
+              ? classes.cover
+              : null
+          }
+        >
+          <Grid container justify="center" spacing={0}>
+            <Grid item className={classes.center}>
+              <Grid container spacing={0}>
+                <Grid item xs={12} style={{ paddingTop: 60 }}>
+                  <VerticalTabsTool
+                    labels={labels}
+                    index={parseInt(this.props.accountView)}
+                    onChange={(index) => this.props.selectAccountView(index)}
+                  >
+                    <Profile
+                      profileStipeInfo={profileStipeInfo}
+                      stripe_account_status={stripe_account_status}
+                    />
+                    <BusinessHome />
+                    {/* <Billing company={this.props.company} stripe_account_status={stripe_account_status} /> */}
+                    {/* <Company company={this.props.company} />
                   <Billing company={this.props.company} /> */}
-                </VerticalTabsTool>
+                  </VerticalTabsTool>
+                </Grid>
               </Grid>
-               </Grid>
-        
             </Grid>
-        </Grid>
+          </Grid>
         </section>
       </div>
     );
   }
 }
 
-const styles = theme => ({
+const styles = (theme) => ({
   alignRight: {
-    textAlign: "right"
+    textAlign: "right",
   },
   container: {
     paddingTop: 107,
-     paddingBottom: 130,
+    paddingBottom: 130,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -255,63 +276,61 @@ const styles = theme => ({
       width: "100%",
       alignItems: "center",
       justifyContent: "center",
-      backgroundOpacity: 0.5
-    }
+      backgroundOpacity: 0.5,
+    },
   },
-  center: {   
+  center: {
     [theme.breakpoints.up("lg")]: {
       maxWidth: "1280px",
       paddingLeft: "0 !important",
       paddingRight: "0 !important",
-      minWidth: "1280px"
+      minWidth: "1280px",
     },
     [theme.breakpoints.down("lg")]: {
       maxWidth: "1180px",
       paddingLeft: "0 !important",
       paddingRight: "0 !important",
-      minWidth: "1180px"
+      minWidth: "1180px",
     },
     [theme.breakpoints.down("sm")]: {
       maxWidth: "100vw",
       paddingLeft: "16px !important",
       paddingRight: "16px !important",
-      minWidth: "100vw"
-    }
-  }, 
+      minWidth: "100vw",
+    },
+  },
   inner: {
-    paddingTop: 40
+    paddingTop: 40,
   },
   aproveButton: {
     backgroundColor: "#3577d4",
     color: "#ffffff",
     textDecorationLine: "none !important",
     paddingTop: 14,
-     paddingBottom: 14,
-    width: "100%"
+    paddingBottom: 14,
+    width: "100%",
   },
   cancelButton: {
     textDecorationLine: "none !important",
     fontSize: 16,
     paddingTop: 18,
-     paddingBottom: 14,
+    paddingBottom: 14,
     fontWeight: "bold",
     width: "100%",
     display: "block",
     cursor: "pointer",
     color: "#3577d4 !important",
-    textAlign: "right"
-  }
+    textAlign: "right",
+  },
 });
 
-
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     accountView: state.accountView,
     sign: state.sign,
-    loginInfo: state.sign.loginInfo
+    loginInfo: state.sign.loginInfo,
   };
 };
-export default connect(
-  mapStateToProps,
-  { loadProfile,  selectAccountView }
-)(withStyles(styles)(AccountHome));
+export default connect(mapStateToProps, { loadProfile, selectAccountView })(
+  withStyles(styles)(AccountHome)
+);

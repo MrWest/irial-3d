@@ -1,41 +1,76 @@
-import React from 'react';
-import { withStyles, Grid, Card, CardContent } from '@material-ui/core';
-import Link from 'next/link';
-import CategoryLabel from './categoryLabel';
-import { RoundedButtonLink } from '../buttons';
-import { AttachMoney as MoneySharp, AddShoppingCart } from '@material-ui/icons';
-import StarRatingComponent from 'react-star-rating-component';
-import { isInCart } from '../../apis/tools';
-import styles from './styles/itemCard';
-import { thousandsSeparatedAndFixed, imageResizedUrl } from '../../helpers/utils';
+import React from "react";
+import { withStyles, Grid, Card, CardContent } from "@material-ui/core";
+import Link from "next/link";
+import CategoryLabel from "./categoryLabel";
+import { RoundedButtonLink } from "../buttons";
+import { AttachMoney as MoneySharp, AddShoppingCart } from "@material-ui/icons";
+import StarRatingComponent from "react-star-rating-component";
+import { isInCart } from "../../apis/tools";
+import styles from "./styles/itemCard";
+import {
+  thousandsSeparatedAndFixed,
+  imageResizedUrl,
+} from "../../helpers/utils";
 
-const descriptionLeverage = description =>
-  description && description.length > 120 ? `${description.substring(0, 120)}...` : description;
+const descriptionLeverage = (description) =>
+  description && description.length > 120
+    ? `${description.substring(0, 120)}...`
+    : description;
 
-const ItemCard = ({ classes, item, category, type, addToCart, addToCartText, buyItem }) => (
+const ItemCard = ({
+  classes,
+  item,
+  category,
+  type,
+  addToCart,
+  addToCartText,
+  buyItem,
+}) => (
   <Link href={`/${type}/${item.id}`}>
     <Card className={classes.Card}>
-      <div style={{ position: 'relative' }}>
+      <div style={{ position: "relative" }}>
         <img
           className={classes.Media}
-          src={imageResizedUrl(item.images && item.images.length > 0 ? item.images[0].url : undefined, 370)}
+          src={imageResizedUrl(
+            item.images && item.images.length > 0
+              ? item.images[0].url
+              : undefined,
+            370
+          )}
           title={item.name}
           alt={item.name}
         />
         {!isInCart(item) && (
-          <div className='item-options'>
+          <div className="item-options">
             <Grid container justify="flex-end" spacing={2}>
               <Grid item>
                 <div title={buyItem}>
-                  <RoundedButtonLink  color={"#ffffff"} size={24} border={0} to={`/payment`} onClick={() => addToCart(item,false)} >
-                    <MoneySharp color="#ffffff" style={{fontSize: 24, color: "#ffffff"}}></MoneySharp>
+                  <RoundedButtonLink
+                    color={"#ffffff"}
+                    size={24}
+                    border={0}
+                    to={`/payment`}
+                    onClick={() => addToCart(item, false)}
+                  >
+                    <MoneySharp
+                      color="#ffffff"
+                      style={{ fontSize: 24, color: "#ffffff" }}
+                    ></MoneySharp>
                   </RoundedButtonLink>
                 </div>
               </Grid>
               <Grid item>
                 <div title={addToCartText}>
-                  <RoundedButtonLink  color={"#ffffff"} size={24} border={0} onClick={() => addToCart(item,true)} >
-                      <AddShoppingCart color="#ffffff" style={{fontSize: 24, color: "#ffffff"}}></AddShoppingCart>
+                  <RoundedButtonLink
+                    color={"#ffffff"}
+                    size={24}
+                    border={0}
+                    onClick={() => addToCart(item, true)}
+                  >
+                    <AddShoppingCart
+                      color="#ffffff"
+                      style={{ fontSize: 24, color: "#ffffff" }}
+                    ></AddShoppingCart>
                   </RoundedButtonLink>
                 </div>
               </Grid>
@@ -43,9 +78,9 @@ const ItemCard = ({ classes, item, category, type, addToCart, addToCartText, buy
           </div>
         )}
       </div>
-     
+
       {/* <CardContent> */}
-      <div style={{ padding: '12px 8px', paddingBottom: 24 }}>
+      <div style={{ padding: "12px 8px", paddingBottom: 24 }}>
         <Grid container alignContent="center">
           <Grid item xs>
             <Grid container justify="flex-start">
@@ -55,30 +90,44 @@ const ItemCard = ({ classes, item, category, type, addToCart, addToCartText, buy
             </Grid>
           </Grid>
           <Grid item xs>
-            <Grid container justify="flex-end" alignItems="center" style={{ height: '100%' }}>
+            <Grid
+              container
+              justify="flex-end"
+              alignItems="center"
+              style={{ height: "100%" }}
+            >
               <Grid item>
-              <StarRatingComponent 
-                  name="rate1" 
+                <StarRatingComponent
+                  name="rate1"
                   editing={false}
                   starCount={5}
                   value={item.rate}
-                  emptyStarColor={"#ccc"} /* color of non-selected icons, default `#333` */
+                  emptyStarColor={
+                    "#ccc"
+                  } /* color of non-selected icons, default `#333` */
                   // onStarClick={this.onStarClick.bind(this)}
                 />
               </Grid>
             </Grid>
           </Grid>
         </Grid>
-        <Grid container alignItems="flex-end" >
-          <Grid item xs style={{ maxWidth: '80%'}}>
-            <p className={classes.ItemTitle} title={item.name}>{item.name}{' '}<span style={{ fontSize: 12}}>{item.lumion_version}</span></p>
+        <Grid container alignItems="flex-end">
+          <Grid item xs style={{ maxWidth: "80%" }}>
+            <p className={classes.ItemTitle} title={item.name}>
+              {item.name}{" "}
+              <span style={{ fontSize: 12 }}>{item.lumion_version}</span>
+            </p>
           </Grid>
           <Grid item>
-            <p className={classes.ItemPrice} >${thousandsSeparatedAndFixed(item.price)}</p>
+            <p className={classes.ItemPrice}>
+              ${thousandsSeparatedAndFixed(item.price)}
+            </p>
           </Grid>
         </Grid>
-        
-        <p className={classes.ItemSummary}>{descriptionLeverage(item.general_description)}</p>
+
+        <p className={classes.ItemSummary}>
+          {descriptionLeverage(item.general_description)}
+        </p>
       </div>
       {/* </CardContent> */}
     </Card>

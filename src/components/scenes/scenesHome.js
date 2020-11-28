@@ -7,64 +7,79 @@ import {
   FormControl,
   OutlinedInput,
   MenuItem,
-  InputLabel
+  InputLabel,
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchScenes, sortScenes, addToCart } from "../../actions";
-import {Helmet} from 'react-helmet';
-import Loader from '../global/loader';
+import { Helmet } from "react-helmet";
+import Loader from "../global/loader";
 import DisplayScenesTool from "./displayScenesTool";
-import Paginator from '../paginator';
-import {getLanguage} from "../../apis/tools";
-import { isServer } from '../../apis/tools';
+import Paginator from "../paginator";
+import { getLanguage } from "../../apis/tools";
+import { isServer } from "../../apis/tools";
 
 class ScenesHome extends Component {
   state = {
     sort: "all",
-    filter: 'all',
+    filter: "all",
     category: {},
-    busy: false
+    busy: false,
   };
 
-  loadView = async force => {
-    if(!isServer) {
-      const { sortScenes, match: { params: { query }} } = this.props;
+  loadView = async (force) => {
+    if (!isServer) {
+      const {
+        sortScenes,
+        match: {
+          params: { query },
+        },
+      } = this.props;
       const { filter, sort } = this.state;
-      const settings = query.split('-');
-      const queryFilter =  settings[0] || 'all';
-      const querySort = settings[1] || 'all';
-      if(filter !== queryFilter || sort !== querySort || force) {
-        this.setState({filter: queryFilter, sort: querySort });
+      const settings = query.split("-");
+      const queryFilter = settings[0] || "all";
+      const querySort = settings[1] || "all";
+      if (filter !== queryFilter || sort !== querySort || force) {
+        this.setState({ filter: queryFilter, sort: querySort });
         this.setState({ busy: true });
-        sortScenes(queryFilter, querySort).then(response => {
+        sortScenes(queryFilter, querySort).then((response) => {
           this.setState({ busy: false, total: response });
         });
       }
-    
     }
-  }
-  
+  };
+
   componentDidMount() {
-   this.loadView(true);
-    // this.myRef = React.createRef()   // Create a ref object 
+    this.loadView(true);
+    // this.myRef = React.createRef()   // Create a ref object
   }
 
   componentDidUpdate() {
     this.loadView();
   }
 
-
   handleAddItem = (item, openCart) => {
     const { categories, section, addToCart } = this.props;
-    addToCart({ id_item: item.id, name: item.name, image: item.images[0].url, price: item.price,
-       lumion_version: item.lumion_version, section, category: categories.find(c => c.id === item.id_category), destination: item.ownerInfo.stripe_account_id, file: item.server_path, type: 'scene' }, openCart);
-   }
+    addToCart(
+      {
+        id_item: item.id,
+        name: item.name,
+        image: item.images[0].url,
+        price: item.price,
+        lumion_version: item.lumion_version,
+        section,
+        category: categories.find((c) => c.id === item.id_category),
+        destination: item.ownerInfo.stripe_account_id,
+        file: item.server_path,
+        type: "scene",
+      },
+      openCart
+    );
+  };
 
-  handleChange = event => {
-    if(this.state.filter !==  event.target.value)
-    {
+  handleChange = (event) => {
+    if (this.state.filter !== event.target.value) {
       const { history } = this.props;
       //   this.setState({ sort: event.target.value, busy: true });
       //   this.props.sortScenes(event.target.value).then(() => {
@@ -78,111 +93,148 @@ class ScenesHome extends Component {
       // });
       history.push(`/scenes/${event.target.value}-${this.state.sort}`);
     }
-    
   };
 
-  handleSortChange = event => {
-    if(this.state.sort !==  event.target.value)
-    {
+  handleSortChange = (event) => {
+    if (this.state.sort !== event.target.value) {
       const { history } = this.props;
       history.push(`/scenes/${this.state.filter}-${event.target.value}`);
-     
     }
-    
   };
 
-  paginate = async offset => {
+  paginate = async (offset) => {
     const { sortScenes } = this.props;
     const { filter, sort } = this.state;
     this.setState({ busy: true });
-    await sortScenes(filter, sort, offset ).then(response => {
+    await sortScenes(filter, sort, offset).then((response) => {
       this.setState({ busy: false, total: response });
       return response;
     });
-  
   };
 
-
   render() {
-    const { classes, section, language, scenes, categories } = this.props;    
+    const { classes, section, language, scenes, categories } = this.props;
     const { busy, filter, total, sort } = this.state;
-    if(!section)
-       return <div/>; 
+    if (!section) return <div />;
     return (
-      <main  ref={this.myRef} className={classes.container}>
-          <Helmet>
-              <meta name="language" content={getLanguage()}/>
-              <title>{language.PageTittle} | {language.ScenesPageTittle} </title>
-              <meta name="description" content={language.ScenesPageDescription} />
-              <meta name="keywords" content={language.ScenesPageTags}  /> 
-            </Helmet>
-      <Grid container justify="center" spacing={0}>
-        <Grid item className={classes.center}>
-          <Grid container spacing={4} alignItems="center" > 
-            <Grid item xs >
-
-              <p style={{fontSize: 16, lineHeight: 1.3, color: '#1c5375 !important', fontFamily: 'Roboto !important'}}>
-                  <h1 variant="p" align="left" className={classes.categoryTittle} style={{ display: 'inline'}}>
-                  {filter === "all"? section.name+ " " : categories.find(c => parseInt(c.id) === parseInt(filter, 10)).name+ " "}  
+      <main ref={this.myRef} className={classes.container}>
+        <Helmet>
+          <meta name="language" content={getLanguage()} />
+          <title>
+            {language.PageTittle} | {language.ScenesPageTittle}{" "}
+          </title>
+          <meta name="description" content={language.ScenesPageDescription} />
+          <meta name="keywords" content={language.ScenesPageTags} />
+        </Helmet>
+        <Grid container justify="center" spacing={0}>
+          <Grid item className={classes.center}>
+            <Grid container spacing={4} alignItems="center">
+              <Grid item xs>
+                <p
+                  style={{
+                    fontSize: 16,
+                    lineHeight: 1.3,
+                    color: "#1c5375 !important",
+                    fontFamily: "Roboto !important",
+                  }}
+                >
+                  <h1
+                    variant="p"
+                    align="left"
+                    className={classes.categoryTittle}
+                    style={{ display: "inline" }}
+                  >
+                    {filter === "all"
+                      ? section.name + " "
+                      : categories.find(
+                          (c) => parseInt(c.id) === parseInt(filter, 10)
+                        ).name + " "}
                   </h1>
-                {filter === "all"? section.description : this.state.category.promotion}
-              </p>
-                
+                  {filter === "all"
+                    ? section.description
+                    : this.state.category.promotion}
+                </p>
               </Grid>
-              <Grid item >
-                   <FormControl variant="outlined" className={classes.seletcTool}>
-                   <InputLabel htmlFor="idsimple">{language.Filter}</InputLabel>
-                    <Select
-                      value={filter}
-                      onChange={this.handleChange}
-                      margin="none"
-                      
-                    >
-                      <MenuItem value={"all"}>
-                        <p style={{ fontSize: 14, marginBottom: 0,  color: '#1c5375' }}>
-                          <em>{language.ViewAll}</em>
-                        </p>
-                      </MenuItem>
-                      {categories.map((category, index) => (
-                        <MenuItem value={category.id}>
-                        <p style={{ fontSize: 14, marginBottom: 0,  color: '#1c5375' }}>
+              <Grid item>
+                <FormControl variant="outlined" className={classes.seletcTool}>
+                  <InputLabel htmlFor="idsimple">{language.Filter}</InputLabel>
+                  <Select
+                    value={filter}
+                    onChange={this.handleChange}
+                    margin="none"
+                  >
+                    <MenuItem value={"all"}>
+                      <p
+                        style={{
+                          fontSize: 14,
+                          marginBottom: 0,
+                          color: "#1c5375",
+                        }}
+                      >
+                        <em>{language.ViewAll}</em>
+                      </p>
+                    </MenuItem>
+                    {categories.map((category, index) => (
+                      <MenuItem value={category.id}>
+                        <p
+                          style={{
+                            fontSize: 14,
+                            marginBottom: 0,
+                            color: "#1c5375",
+                          }}
+                        >
                           <strong>{category.name}</strong>
                         </p>
                       </MenuItem>
-                      ))}
-                    </Select>
+                    ))}
+                  </Select>
                 </FormControl>
-                </Grid> 
-                         
-                <Grid item >
-                   <FormControl variant="outlined" className={classes.seletcTool}>
-                   <InputLabel htmlFor="idsimple">{this.props.language.SortBy}</InputLabel>
+              </Grid>
+
+              <Grid item>
+                <FormControl variant="outlined" className={classes.seletcTool}>
+                  <InputLabel htmlFor="idsimple">
+                    {this.props.language.SortBy}
+                  </InputLabel>
                   <Select
                     value={sort}
                     onChange={this.handleSortChange}
                     margin="none"
-                    
                   >
                     <MenuItem value={"all"}>
-                           <em style={{ color: '#1c5375'}}>{this.props.language.None}</em>
+                      <em style={{ color: "#1c5375" }}>
+                        {this.props.language.None}
+                      </em>
                     </MenuItem>
                     <MenuItem value={"sort_price"}>
-                           <span style={{ color: '#1c5375'}}>{`${this.props.language.Price} - ${this.props.language.Ascending}`}</span>
+                      <span
+                        style={{ color: "#1c5375" }}
+                      >{`${this.props.language.Price} - ${this.props.language.Ascending}`}</span>
                     </MenuItem>
                     <MenuItem value={"sort_price_desc"}>
-                           <span style={{ color: '#1c5375'}}>{`${this.props.language.Price} - ${this.props.language.Descending}`}</span>
+                      <span
+                        style={{ color: "#1c5375" }}
+                      >{`${this.props.language.Price} - ${this.props.language.Descending}`}</span>
                     </MenuItem>
                     <MenuItem value={"sort_lumion"}>
-                           <span style={{ color: '#1c5375'}}>{`${this.props.language.LumionVersion} - ${this.props.language.Ascending}`}</span>
+                      <span
+                        style={{ color: "#1c5375" }}
+                      >{`${this.props.language.LumionVersion} - ${this.props.language.Ascending}`}</span>
                     </MenuItem>
                     <MenuItem value={"sort_capacity_desc"}>
-                           <span style={{ color: '#1c5375'}}>{`${this.props.language.LumionVersion} - ${this.props.language.Descending}`}</span>
+                      <span
+                        style={{ color: "#1c5375" }}
+                      >{`${this.props.language.LumionVersion} - ${this.props.language.Descending}`}</span>
                     </MenuItem>
                     <MenuItem value={"sort_rating"}>
-                           <span style={{ color: '#1c5375'}}>{`${this.props.language.Rating} - ${this.props.language.Ascending}`}</span>
+                      <span
+                        style={{ color: "#1c5375" }}
+                      >{`${this.props.language.Rating} - ${this.props.language.Ascending}`}</span>
                     </MenuItem>
                     <MenuItem value={"sort_rating_desc"}>
-                           <span style={{ color: '#1c5375'}}>{`${this.props.language.Rating} - ${this.props.language.Descending}`}</span>
+                      <span
+                        style={{ color: "#1c5375" }}
+                      >{`${this.props.language.Rating} - ${this.props.language.Descending}`}</span>
                     </MenuItem>
                     {/* {this.props.categories.map((category, index) => (
                       
@@ -197,21 +249,24 @@ class ScenesHome extends Component {
                     ))} */}
                   </Select>
                 </FormControl>
-                </Grid>    
-              
-              
+              </Grid>
             </Grid>
             <Grid item xs={12}>
-               <DisplayScenesTool
-                 scenes={scenes}
-                 addToCart={this.handleAddItem}
-               />
-            
-           </Grid>
+              <DisplayScenesTool
+                scenes={scenes}
+                addToCart={this.handleAddItem}
+              />
+            </Grid>
           </Grid>
           <Grid container justify="center" style={{ paddingTop: 20 }}>
-              <Paginator previous={this.paginate} next={this.paginate} items={12} total={total} source={scenes} />
-           </Grid>
+            <Paginator
+              previous={this.paginate}
+              next={this.paginate}
+              items={12}
+              total={total}
+              source={scenes}
+            />
+          </Grid>
         </Grid>
         {busy && <Loader />}
       </main>
@@ -219,57 +274,54 @@ class ScenesHome extends Component {
   }
 }
 
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
     paddingTop: 56,
-    paddingBottom: 130
+    paddingBottom: 130,
   },
-  mobilePadding: {   
+  mobilePadding: {
     [theme.breakpoints.down("sm")]: {
-      
       paddingLeft: "24px !important",
-      paddingRight: "16px !important"
-    }
+      paddingRight: "16px !important",
+    },
   },
   center: {
-   
     [theme.breakpoints.up("lg")]: {
       maxWidth: "1280px",
       paddingLeft: "0 !important",
       paddingRight: "0 !important",
-      minWidth: "1280px"
+      minWidth: "1280px",
     },
     [theme.breakpoints.down("lg")]: {
       maxWidth: "1180px",
       paddingLeft: "0 !important",
       paddingRight: "0 !important",
-      minWidth: "1180px"
-    }
-    ,
+      minWidth: "1180px",
+    },
     [theme.breakpoints.down("sm")]: {
       maxWidth: "100vw",
       paddingLeft: "0 !important",
       paddingRight: "0 !important",
-      minWidth: "100vw"
-    }
+      minWidth: "100vw",
+    },
   },
   seletcTool: {
     width: 220,
     marginTop: 20,
-    '& div': {
-      maxHeight: '52px !important'
+    "& div": {
+      maxHeight: "52px !important",
     },
-    '& em, p': {
-      paddingRight: '8px !important'
+    "& em, p": {
+      paddingRight: "8px !important",
     },
-    '& label': {
-      transform: 'translate(14px, -14px) scale(0.75) !important'
+    "& label": {
+      transform: "translate(14px, -14px) scale(0.75) !important",
     },
     [theme.breakpoints.down("sm")]: {
       marginTop: 8,
       marginLeft: 24,
-      marginRight: 8
-    }
+      marginRight: 8,
+    },
   },
   categoryTittle: {
     marginBottom: 0,
@@ -281,25 +333,25 @@ const styles = theme => ({
     lineHeight: 1,
     letterSpacing: "normal",
     color: "#434c5f",
-    display: 'inline',
+    display: "inline",
     [theme.breakpoints.down("sm")]: {
-      marginBottom: 0
-    }
+      marginBottom: 0,
+    },
   },
   orderList: {
     paddingLeft: "15px",
-    paddingRight: "15px"
+    paddingRight: "15px",
   },
   gray: {
-    backgroundColor: "#dddddd"
+    backgroundColor: "#dddddd",
   },
   yellow: {
     color: "#a0a010",
-    backgroundColor: "#f9f9c9"
+    backgroundColor: "#f9f9c9",
   },
   green: {
     color: "#10a000",
-    backgroundColor: "#c9f999"
+    backgroundColor: "#c9f999",
   },
   submitButton: {
     width: "282px",
@@ -311,26 +363,30 @@ const styles = theme => ({
       fontStyle: "normal",
       fontStretch: "normal",
       lineHeight: "normal",
-      letterSpacing: "normal"
+      letterSpacing: "normal",
     },
     textAlign: "center",
     color: "#ffffff",
     borderRadius: "4px",
-    backgroundColor: "#337ab7"
-  }
+    backgroundColor: "#337ab7",
+  },
 });
 
 ScenesHome.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
-const mapStateTopProps = state => {
+const mapStateTopProps = (state) => {
   return {
     scenes: state.scenes,
-    categories: state.sections[4]? state.sections[4].categories : [],
+    categories: state.sections[4] ? state.sections[4].categories : [],
     section: state.sections[4],
-    language: state.language
+    language: state.language,
   };
 };
 
-export default connect(mapStateTopProps, {fetchScenes, sortScenes, addToCart })(withStyles(styles)(ScenesHome));
+export default connect(mapStateTopProps, {
+  fetchScenes,
+  sortScenes,
+  addToCart,
+})(withStyles(styles)(ScenesHome));

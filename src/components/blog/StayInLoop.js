@@ -1,7 +1,7 @@
-import React from 'react';
-import { withStyles, Grid, Fab, FormControl } from '@material-ui/core';
-import Subscribe from '../global/Subscribe';
-import styles from './styles/StayInLoop';
+import React from "react";
+import { withStyles, Grid, Fab, FormControl } from "@material-ui/core";
+import Subscribe from "../global/Subscribe";
+import styles from "./styles/StayInLoop";
 
 let Subscriber = ({ classes, handleChange, email }) => (
   <>
@@ -36,10 +36,13 @@ const StayInLoop = ({ classes }) => (
               <div className={classes.PurpleBlock} />
             </Grid>
             <Grid item xs={7} className={classes.StayInLoopDescription}>
-              <div className={classes.NewsLetter}>Sign up to the newsletter</div>
+              <div className={classes.NewsLetter}>
+                Sign up to the newsletter
+              </div>
               <h1 className={classes.StayInLoopTitle}>Stay in the loop</h1>
               <p className={classes.StayInLoopSummary}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore.
               </p>
               <Subscribe Subscriber={Subscriber} />
             </Grid>

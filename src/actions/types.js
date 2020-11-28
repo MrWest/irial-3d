@@ -49,7 +49,6 @@ export const FETCH_SECTIONS = "FETCH_SECTIONS";
 export const SELECT_SECTION = "SELECT_SECTION";
 export const UPDATE_SECTION = "UPDATE_SECTION";
 
-
 //tours
 export const FETCH_TOURS = "FETCH_TOURS";
 export const SELECT_TOUR = "SELECT_TOUR";
@@ -60,9 +59,6 @@ export const CHANGE_TOUR_PROGRAM = "CHANGE_TOUR_PROGRAM";
 export const CHANGE_TOUR_COMMENT = "CHANGE_TOUR_COMMENT";
 export const ADD_TOUR_COMMENT = "ADD_TOUR_COMMENT";
 export const DELETE_TOUR_COMMENT = "DELETE_TOUR_COMMENT";
-
-
-
 
 //attractions
 export const FETCH_ATTRACTIONS = "FETCH_ATTRACTIONS";
@@ -123,7 +119,6 @@ export const DELETE_SCENE_COMMENT = "DELETE_SCENE_COMMENT";
 export const CHANGE_SCENE_COMMENT = "CHANGE_SCENE_COMMENT";
 export const UPDATE_SCENE_TAGS = "UPDATE_SCENE_TAGS";
 
-
 //categories
 export const FETCH_CATEGORIES = "FETCH_CATEGORIES";
 export const SELECT_CATEGORY = "SELECT_CATEGORY";
@@ -135,7 +130,7 @@ export const SET_LANG_EN = "SET_LANG_EN";
 export const SET_LANG_ES = "SET_LANG_ES";
 
 //rating
-export const SET_USER_SERVICE_RATE = "SET_USER_SERVICE_RATE;"
+export const SET_USER_SERVICE_RATE = "SET_USER_SERVICE_RATE;";
 
 // blog
 export const FETCH_POSTS = "FETCH_POSTS";
@@ -150,6 +145,3 @@ export const TOGGLE_OPEN = "TOGGLE_OPEN";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const EMPY_CART = "EMPY_CART";
-
-
-

@@ -1,7 +1,7 @@
-import React from 'react';
-import { withStyles, Grid, Fab, FormControl } from '@material-ui/core';
-import { HashLink } from 'react-router-hash-link';
-import styles from './styles/Subscribe';
+import React from "react";
+import { withStyles, Grid, Fab, FormControl } from "@material-ui/core";
+import { HashLink } from "react-router-hash-link";
+import styles from "./styles/Subscribe";
 
 const thisYear = () => new Date().getFullYear();
 
@@ -11,35 +11,39 @@ const Socials = ({ classes }) => (
       <p>Follow along on our journey!</p>
       <Grid container justify="flex-start">
         <Grid item xs={1}>
-        <a
-                href="https://www.facebook.com/vinalestraveler"
-                className={classes.mobileSocials}
-              >
-                <img 
-                className={classes.mobileSocials} src="../static/images/public/facebook.svg" />
-              </a>
+          <a
+            href="https://www.facebook.com/vinalestraveler"
+            className={classes.mobileSocials}
+          >
+            <img
+              className={classes.mobileSocials}
+              src="../static/images/public/facebook.svg"
+            />
+          </a>
         </Grid>
         <Grid item xs={1}>
-        <a
-                href="https://www.tripadvisor.com/company/swagup"
-                className={classes.mobileSocials}
-              >
-               <img 
-                className={classes.mobileSocials} src="../static/images/public/tripadvisor.svg" />
-              </a>
+          <a
+            href="https://www.tripadvisor.com/company/swagup"
+            className={classes.mobileSocials}
+          >
+            <img
+              className={classes.mobileSocials}
+              src="../static/images/public/tripadvisor.svg"
+            />
+          </a>
         </Grid>
         <Grid item xs={1}>
-        <a
-                href="https://www.instagram.com/swagup"
-                className={classes.mobileSocials}
-                style={{ paddingLeft: 16 }}
-              >
-                 <img 
-                className={classes.mobileSocials} src="../static/images/public/linkedin.svg" />
-               
-              </a>
+          <a
+            href="https://www.instagram.com/swagup"
+            className={classes.mobileSocials}
+            style={{ paddingLeft: 16 }}
+          >
+            <img
+              className={classes.mobileSocials}
+              src="../static/images/public/linkedin.svg"
+            />
+          </a>
         </Grid>
-       
       </Grid>
     </div>
   </Grid>
@@ -64,7 +68,6 @@ const PagesList = ({ classes }) => (
     </li>
   </ul>
 );
-
 
 let Subscriber = ({ classes, handleChange, email }) => (
   <div style={{ paddingRight: 64 }}>
@@ -106,22 +109,23 @@ export default withStyles(styles)(({ classes }) => (
         <div className={classes.sectionContainer}>
           <Grid container>
             <Grid item xs={12} md={10} style={{}}>
-            <h3 className={classes.SubscribeTitle}>You are always welcome</h3>
-            <Grid container>
-              <Grid item xs>
-              <div className={classes.SubscribeActions}>
-                <HashLink to="/#contactus" className={classes.SubscribeButton}>
-                  Contact Us
-                </HashLink>
-              </div>
-              </Grid>
-              <Grid>
-               <Socials classes={classes} />
+              <h3 className={classes.SubscribeTitle}>You are always welcome</h3>
+              <Grid container>
+                <Grid item xs>
+                  <div className={classes.SubscribeActions}>
+                    <HashLink
+                      to="/#contactus"
+                      className={classes.SubscribeButton}
+                    >
+                      Contact Us
+                    </HashLink>
+                  </div>
+                </Grid>
+                <Grid>
+                  <Socials classes={classes} />
+                </Grid>
               </Grid>
             </Grid>
-              
-            </Grid>
-           
           </Grid>
         </div>
       </main>

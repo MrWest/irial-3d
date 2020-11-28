@@ -7,25 +7,25 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Grid, Link } from "@material-ui/core";
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     ...theme.mixins.gutters(),
     paddingTop: 8,
     paddingBottom: 8,
-    background: "transparent"
+    background: "transparent",
   },
   orderButton: {
     background: "#ffffff",
     color: "#3577D4",
     fontWeight: "bold",
-    width: "100%"
+    width: "100%",
   },
   orderBottomButton: {
     color: "#ffffff",
     borderColor: "#ffffff",
     width: "100%",
     fontWeight: "bold",
-    marginTop: 20
+    marginTop: 20,
   },
   hrBar: {
     background: "#ffffff",
@@ -35,61 +35,69 @@ const styles = theme => ({
     marginBottom: 20,
     height: 3,
     width: "20%",
-    textAlign: "left !important"
+    textAlign: "left !important",
   },
   typographyText: {
     color: "#ffffff !important",
-    margin: "20px 0px"
+    margin: "20px 0px",
   },
   typographyTextSmall: {
     color: "#ffffff !important",
     marginBottom: 40,
-    fontSize: 16
+    fontSize: 16,
   },
   linkItem: {
-    fontFamily: 'Arial',
+    fontFamily: "Arial",
     fontSize: 22,
-    color: '#ffffff',
-    border: '4px solid #ffffff',
+    color: "#ffffff",
+    border: "4px solid #ffffff",
     height: 42,
     borderRadius: 21,
-    padding: '0px 22px',
-    background: 'rgba(0,0,0,0.5)',
-    '&&:hover': {
-      background: 'rgba(0,0,0,0.7)',
-      color: '#ffff00',
+    padding: "0px 22px",
+    background: "rgba(0,0,0,0.5)",
+    "&&:hover": {
+      background: "rgba(0,0,0,0.7)",
+      color: "#ffff00",
       fontSize: 24,
       borderRadius: 24,
-      height: 48
-    }
-  }
+      height: 48,
+    },
+  },
 });
 
-const links = [ 
-  { name: 'Desktop App', to: '/app'},
-  { name: 'Best Selling', to: '/upcoming'},
-  { name: 'Upcoming', to: '/upcoming'},
-  { name: 'Blog', to: '/blog'}
-]
+const links = [
+  { name: "Desktop App", to: "/app" },
+  { name: "Best Selling", to: "/upcoming" },
+  { name: "Upcoming", to: "/upcoming" },
+  { name: "Blog", to: "/blog" },
+];
 
-const PromoLinks = ({ classes }) =>  (
-        <Grid container direction="column" alignItems="flex-end">
-          {links.map(link => (
-            <Grid key={link.name} item >
-              <Grid container justify="center" alignItems="center" style={{ height: 56 }}>
-               <Grid item>
-                  <Link href={link.to}>
-                    <Grid container justify="center" alignItems="center"  className={classes.linkItem}>
-                      <Grid item>
-                        {link.name}
-                      </Grid>
-                    </Grid>
-                  </Link>
+const PromoLinks = ({ classes }) => (
+  <Grid container direction="column" alignItems="flex-end">
+    {links.map((link) => (
+      <Grid key={link.name} item>
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          style={{ height: 56 }}
+        >
+          <Grid item>
+            <Link href={link.to}>
+              <Grid
+                container
+                justify="center"
+                alignItems="center"
+                className={classes.linkItem}
+              >
+                <Grid item>{link.name}</Grid>
               </Grid>
-              </Grid>
-            </Grid>
-          ))}
+            </Link>
+          </Grid>
         </Grid>
-    );
+      </Grid>
+    ))}
+  </Grid>
+);
 
 export default withStyles(styles)(PromoLinks);

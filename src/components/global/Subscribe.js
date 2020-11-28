@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core';
-import { HashLink } from 'react-router-hash-link';
-import styles from './styles/home';
-import { CustomWidthButtonLink } from '../buttons';
+import React, { Component } from "react";
+import { withStyles } from "@material-ui/core";
+import { HashLink } from "react-router-hash-link";
+import styles from "./styles/home";
+import { CustomWidthButtonLink } from "../buttons";
 // email with corporate validation
 // (?!gmail\.com)(?!yahoo\.com)(?!hotmail\.com)(?!aol\.com)(?!outlook\.com)(?!icloud\.com)(?!inbox\.com)(?!mail\.com)
 // Reusable with any other form
 
 class Subscribe extends Component {
-  state = { didSubscribe: false, email: '' };
+  state = { didSubscribe: false, email: "" };
 
   render() {
     const { classes } = this.props;
     return (
       <div>
-         <div className={classes.SubscribeActions}>
+        <div className={classes.SubscribeActions}>
           <HashLink to="/#contactus" className={classes.SubscribeButton}>
             Contact Us
           </HashLink>

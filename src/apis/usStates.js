@@ -1,240 +1,240 @@
 const states = [
   {
     name: "Alabama",
-    abbreviation: "AL"
+    abbreviation: "AL",
   },
   {
     name: "Alaska",
-    abbreviation: "AK"
+    abbreviation: "AK",
   },
   {
     name: "American Samoa",
-    abbreviation: "AS"
+    abbreviation: "AS",
   },
   {
     name: "Arizona",
-    abbreviation: "AZ"
+    abbreviation: "AZ",
   },
   {
     name: "Arkansas",
-    abbreviation: "AR"
+    abbreviation: "AR",
   },
   {
     name: "California",
-    abbreviation: "CA"
+    abbreviation: "CA",
   },
   {
     name: "Colorado",
-    abbreviation: "CO"
+    abbreviation: "CO",
   },
   {
     name: "Connecticut",
-    abbreviation: "CT"
+    abbreviation: "CT",
   },
   {
     name: "Delaware",
-    abbreviation: "DE"
+    abbreviation: "DE",
   },
   {
     name: "District Of Columbia",
-    abbreviation: "DC"
+    abbreviation: "DC",
   },
   {
     name: "Federated States Of Micronesia",
-    abbreviation: "FM"
+    abbreviation: "FM",
   },
   {
     name: "Florida",
-    abbreviation: "FL"
+    abbreviation: "FL",
   },
   {
     name: "Georgia",
-    abbreviation: "GA"
+    abbreviation: "GA",
   },
   {
     name: "Guam",
-    abbreviation: "GU"
+    abbreviation: "GU",
   },
   {
     name: "Hawaii",
-    abbreviation: "HI"
+    abbreviation: "HI",
   },
   {
     name: "Idaho",
-    abbreviation: "ID"
+    abbreviation: "ID",
   },
   {
     name: "Illinois",
-    abbreviation: "IL"
+    abbreviation: "IL",
   },
   {
     name: "Indiana",
-    abbreviation: "IN"
+    abbreviation: "IN",
   },
   {
     name: "Iowa",
-    abbreviation: "IA"
+    abbreviation: "IA",
   },
   {
     name: "Kansas",
-    abbreviation: "KS"
+    abbreviation: "KS",
   },
   {
     name: "Kentucky",
-    abbreviation: "KY"
+    abbreviation: "KY",
   },
   {
     name: "Louisiana",
-    abbreviation: "LA"
+    abbreviation: "LA",
   },
   {
     name: "Maine",
-    abbreviation: "ME"
+    abbreviation: "ME",
   },
   {
     name: "Marshall Islands",
-    abbreviation: "MH"
+    abbreviation: "MH",
   },
   {
     name: "Maryland",
-    abbreviation: "MD"
+    abbreviation: "MD",
   },
   {
     name: "Massachusetts",
-    abbreviation: "MA"
+    abbreviation: "MA",
   },
   {
     name: "Michigan",
-    abbreviation: "MI"
+    abbreviation: "MI",
   },
   {
     name: "Minnesota",
-    abbreviation: "MN"
+    abbreviation: "MN",
   },
   {
     name: "Mississippi",
-    abbreviation: "MS"
+    abbreviation: "MS",
   },
   {
     name: "Missouri",
-    abbreviation: "MO"
+    abbreviation: "MO",
   },
   {
     name: "Montana",
-    abbreviation: "MT"
+    abbreviation: "MT",
   },
   {
     name: "Nebraska",
-    abbreviation: "NE"
+    abbreviation: "NE",
   },
   {
     name: "Nevada",
-    abbreviation: "NV"
+    abbreviation: "NV",
   },
   {
     name: "New Hampshire",
-    abbreviation: "NH"
+    abbreviation: "NH",
   },
   {
     name: "New Jersey",
-    abbreviation: "NJ"
+    abbreviation: "NJ",
   },
   {
     name: "New Mexico",
-    abbreviation: "NM"
+    abbreviation: "NM",
   },
   {
     name: "New York",
-    abbreviation: "NY"
+    abbreviation: "NY",
   },
   {
     name: "North Carolina",
-    abbreviation: "NC"
+    abbreviation: "NC",
   },
   {
     name: "North Dakota",
-    abbreviation: "ND"
+    abbreviation: "ND",
   },
   {
     name: "Northern Mariana Islands",
-    abbreviation: "MP"
+    abbreviation: "MP",
   },
   {
     name: "Ohio",
-    abbreviation: "OH"
+    abbreviation: "OH",
   },
   {
     name: "Oklahoma",
-    abbreviation: "OK"
+    abbreviation: "OK",
   },
   {
     name: "Oregon",
-    abbreviation: "OR"
+    abbreviation: "OR",
   },
   {
     name: "Palau",
-    abbreviation: "PW"
+    abbreviation: "PW",
   },
   {
     name: "Pennsylvania",
-    abbreviation: "PA"
+    abbreviation: "PA",
   },
   {
     name: "Puerto Rico",
-    abbreviation: "PR"
+    abbreviation: "PR",
   },
   {
     name: "Rhode Island",
-    abbreviation: "RI"
+    abbreviation: "RI",
   },
   {
     name: "South Carolina",
-    abbreviation: "SC"
+    abbreviation: "SC",
   },
   {
     name: "South Dakota",
-    abbreviation: "SD"
+    abbreviation: "SD",
   },
   {
     name: "Tennessee",
-    abbreviation: "TN"
+    abbreviation: "TN",
   },
   {
     name: "Texas",
-    abbreviation: "TX"
+    abbreviation: "TX",
   },
   {
     name: "Utah",
-    abbreviation: "UT"
+    abbreviation: "UT",
   },
   {
     name: "Vermont",
-    abbreviation: "VT"
+    abbreviation: "VT",
   },
   {
     name: "Virgin Islands",
-    abbreviation: "VI"
+    abbreviation: "VI",
   },
   {
     name: "Virginia",
-    abbreviation: "VA"
+    abbreviation: "VA",
   },
   {
     name: "Washington",
-    abbreviation: "WA"
+    abbreviation: "WA",
   },
   {
     name: "West Virginia",
-    abbreviation: "WV"
+    abbreviation: "WV",
   },
   {
     name: "Wisconsin",
-    abbreviation: "WI"
+    abbreviation: "WI",
   },
   {
     name: "Wyoming",
-    abbreviation: "WY"
-  }
+    abbreviation: "WY",
+  },
 ];
 
 export default states;

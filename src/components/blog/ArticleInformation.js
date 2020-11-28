@@ -1,7 +1,7 @@
-import React from 'react';
-import { withStyles, Grid, Avatar } from '@material-ui/core';
-import styles from './styles/ArticleInformation';
-import Comments from './Comments';
+import React from "react";
+import { withStyles, Grid, Avatar } from "@material-ui/core";
+import styles from "./styles/ArticleInformation";
+import Comments from "./Comments";
 
 const Socials = ({ classes, post }) => (
   <Grid item xs={12} sm={4} md={6}>
@@ -9,13 +9,23 @@ const Socials = ({ classes, post }) => (
       <div className={classes.TitleText}>Share to the world</div>
       <Grid container style={{ paddingTop: 20 }}>
         <Grid item xs={3}>
-          <a href={`https://www.facebook.com/sharer/sharer.php?u=vinalestraveler.com/posts/${post.slug}`}>
-            <img src="/static/images/public/circle-facebook.svg" alt="Facebook" />
+          <a
+            href={`https://www.facebook.com/sharer/sharer.php?u=vinalestraveler.com/posts/${post.slug}`}
+          >
+            <img
+              src="/static/images/public/circle-facebook.svg"
+              alt="Facebook"
+            />
           </a>
         </Grid>
         <Grid item xs={3}>
-          <a href={`https://www.linkedin.com/shareArticle?mini=true&url=https://vinalestraveler.com/posts/${post.slug}`}>
-            <img src="/static/images/public/circle-linkedin.svg" alt="LinkedIn" />
+          <a
+            href={`https://www.linkedin.com/shareArticle?mini=true&url=https://vinalestraveler.com/posts/${post.slug}`}
+          >
+            <img
+              src="/static/images/public/circle-linkedin.svg"
+              alt="LinkedIn"
+            />
           </a>
         </Grid>
         <Grid item xs={3}>
@@ -40,23 +50,23 @@ const Author = ({ classes, author, post }) => (
     <Grid container>
       <Grid item xs={12} md={6}>
         <div className={classes.TitleText}>About the Author</div>
-       {author &&
-         <Grid container style={{ paddingTop: 20 }}>
-          <Grid item xs={4} md={2}>
-            <div className={classes.AvatarContainer}>
-              <Avatar
-                alt={author.fullname}
-                src={author.avatar}
-                className={classes.BigAvatar}
-              />
-            </div>
+        {author && (
+          <Grid container style={{ paddingTop: 20 }}>
+            <Grid item xs={4} md={2}>
+              <div className={classes.AvatarContainer}>
+                <Avatar
+                  alt={author.fullname}
+                  src={author.avatar}
+                  className={classes.BigAvatar}
+                />
+              </div>
+            </Grid>
+            <Grid item xs={8} md={10} style={{ paddingLeft: 8 }}>
+              <div className={classes.AuthorName}>{author.fullname}</div>
+              <div className={classes.AuthorTitle}>{author.title}</div>
+            </Grid>
           </Grid>
-          <Grid item xs={8} md={10} style={{ paddingLeft: 8 }}>
-            <div className={classes.AuthorName}>{author.fullname}</div>
-            <div className={classes.AuthorTitle}>{author.title}</div>
-          </Grid>
-        </Grid>
-       }
+        )}
       </Grid>
       <Socials classes={classes} post={post} />
     </Grid>

@@ -16,7 +16,7 @@ class InfoSendEmail extends Component {
   }
 }
 
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
     paddingTop: 107,
     paddingBottom: 130,
@@ -25,7 +25,7 @@ const styles = theme => ({
 });
 
 InfoSendEmail.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(InfoSendEmail);

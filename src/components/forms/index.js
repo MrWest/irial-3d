@@ -1,9 +1,6 @@
 export * from "./frontContactForm";
 export * from "./tourBookingForm";
 
-
-
-
 // import React from 'react'
 // import { Field, reduxForm } from 'redux-form';
 
@@ -24,7 +21,7 @@ export * from "./tourBookingForm";
 //                     placeholder="First Name"
 //                 />
 //             </FormControl>
-          
+
 //         </div>
 //       </div>
 //       <div>

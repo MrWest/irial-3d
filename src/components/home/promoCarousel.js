@@ -5,16 +5,14 @@ import {
   CarouselInner,
   CarouselItem,
   View,
-  Mask
+  Mask,
 } from "mdbreact";
 import PromoInfo from "./promoInfo";
 import PromoInfoMore from "./promoInfoMore";
 
 class PromoCarousel extends Component {
   render() {
-    return (
-      <PromoInfo />     
-    );
+    return <PromoInfo />;
   }
 }
 

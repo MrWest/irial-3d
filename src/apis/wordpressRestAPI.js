@@ -1,5 +1,5 @@
-import axios from 'axios';
+import axios from "axios";
 
 export default axios.create({
-  baseURL: 'https://solutiontriangle.com/wp-json/wp/v2'
+  baseURL: "https://solutiontriangle.com/wp-json/wp/v2",
 });

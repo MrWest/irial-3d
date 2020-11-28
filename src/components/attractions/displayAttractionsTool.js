@@ -3,100 +3,123 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
 import _ from "lodash";
-import { AttractionCardLeft, AttractionImageLeft, AttractionCardRight, AttractionImageRight} from './attractionSections';
+import {
+  AttractionCardLeft,
+  AttractionImageLeft,
+  AttractionCardRight,
+  AttractionImageRight,
+} from "./attractionSections";
 
 class DisplayAttractionsTool extends Component {
- 
-  handleSelectPack = pack => {
-   
-  };
+  handleSelectPack = (pack) => {};
 
   render() {
-    const { classes , attractions, language} = this.props;
+    const { classes, attractions, language } = this.props;
     return (
       <main className={classes.container}>
-        {attractions.filter( a => parseInt(a.status) > 0).map((attraction, index) => (
-          <section key={index} 
-            className={
-              index % 2 === 1 ? classes.grayBackground : classes.whiteBackground
-            }
-          >
-          
-           <div className={classes.center}>
+        {attractions
+          .filter((a) => parseInt(a.status) > 0)
+          .map((attraction, index) => (
+            <section
+              key={index}
+              className={
+                index % 2 === 1
+                  ? classes.grayBackground
+                  : classes.whiteBackground
+              }
+            >
+              <div className={classes.center}>
                 <Grid container spacing={0}>
                   {index % 2 === 0 ? (
-                     <Fragment>
-                        <AttractionCardLeft classes={classes} attraction={attraction} language={language}/>
-                        <AttractionImageLeft classes={classes} attraction={attraction}/>
-                   </Fragment>
-                  ) : (
-                     <Fragment>
-                        <Grid container spacing={0} className={classes.noMobile}>
-                          <AttractionImageRight classes={classes} attraction={attraction}/>
-                          <AttractionCardRight classes={classes} attraction={attraction} language={language}/>
-                        </Grid>
-                        <Grid container spacing={0} className={classes.onMobile}>
-                          <AttractionCardRight classes={classes} attraction={attraction} language={language}/>
-                          <AttractionImageRight classes={classes} attraction={attraction}/>
-                        </Grid>
+                    <Fragment>
+                      <AttractionCardLeft
+                        classes={classes}
+                        attraction={attraction}
+                        language={language}
+                      />
+                      <AttractionImageLeft
+                        classes={classes}
+                        attraction={attraction}
+                      />
                     </Fragment>
-
+                  ) : (
+                    <Fragment>
+                      <Grid container spacing={0} className={classes.noMobile}>
+                        <AttractionImageRight
+                          classes={classes}
+                          attraction={attraction}
+                        />
+                        <AttractionCardRight
+                          classes={classes}
+                          attraction={attraction}
+                          language={language}
+                        />
+                      </Grid>
+                      <Grid container spacing={0} className={classes.onMobile}>
+                        <AttractionCardRight
+                          classes={classes}
+                          attraction={attraction}
+                          language={language}
+                        />
+                        <AttractionImageRight
+                          classes={classes}
+                          attraction={attraction}
+                        />
+                      </Grid>
+                    </Fragment>
                   )}
-
                 </Grid>
               </div>
-         
-         
-          </section>
-        ))}
+            </section>
+          ))}
       </main>
     );
   }
 }
 
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
     paddingTop: 40,
-    paddingBottom: 80
+    paddingBottom: 80,
   },
   center: {
     [theme.breakpoints.up("lg")]: {
       maxWidth: "1280px",
       paddingLeft: "0 !important",
       paddingRight: "0 !important",
-      minWidth: "1280px"
+      minWidth: "1280px",
     },
     [theme.breakpoints.down("lg")]: {
       maxWidth: "1180px",
       paddingLeft: "0 !important",
       paddingRight: "0 !important",
-      minWidth: "1180px"
+      minWidth: "1180px",
     },
     [theme.breakpoints.down("sm")]: {
       maxWidth: "100vw",
       paddingLeft: "0 !important",
       paddingRight: "0 !important",
-      minWidth: "100vw"
-    }
+      minWidth: "100vw",
+    },
   },
   noMobile: {
-    display: 'inherit',
+    display: "inherit",
     [theme.breakpoints.down("sm")]: {
-      display: 'none',
-    }
+      display: "none",
+    },
   },
   onMobile: {
-    display: 'none',
+    display: "none",
     [theme.breakpoints.down("sm")]: {
-      display: 'inherit',
-    }
+      display: "inherit",
+    },
   },
   packNameText: {
     fontFamily: "Futura",
     fontSize: 40,
     fontWeight: "bold",
     color: "#337ab7",
-    margin: 0
+    margin: 0,
   },
   packPriceText: {
     fontFamily: "Futura",
@@ -117,7 +140,7 @@ const styles = theme => ({
     fontFamily: "Roboto",
     fontSize: 15,
     lineHeight: 1.43,
-    marginTop: 24
+    marginTop: 24,
     // maxWidth: 282
   },
   // themePadding: {
@@ -125,16 +148,15 @@ const styles = theme => ({
   //   paddingRight: "7%",
   // },
   textLeft: {
-    textAlign: "left"
+    textAlign: "left",
   },
   textRight: {
-    textAlign: "right"
+    textAlign: "right",
   },
   packImg: {
-    
     width: "100%",
     objectFit: "cover",
-    maxHeight: 360
+    maxHeight: 360,
   },
   hrBlue: {
     width: 78,
@@ -150,14 +172,13 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       marginTop: 16,
       paddingTop: 36,
-
-    }
+    },
   },
   whiteBackground: {
     backgroundColor: "#ffffff",
     border: "1px solid #ffffff",
     paddingTop: "20px",
-    paddingBottom: "20px"
+    paddingBottom: "20px",
   },
   packDisclaimer: {
     fontFamily: "Roboto",
@@ -168,8 +189,8 @@ const styles = theme => ({
     lineHeight: "normal",
     letterSpacing: "normal",
     color: "#434c5f",
-    marginTop: "16px"
-  }
+    marginTop: "16px",
+  },
   // container: {
   //   backgroundColor: "#fafafa",
   //   border: "1px solid #fafafa",
@@ -180,11 +201,12 @@ const styles = theme => ({
 // DisplayPacksTool.propTypes = {
 //   classes: PropTypes.node.isRequired
 // };
-const mapStateTopProps = state => {
+const mapStateTopProps = (state) => {
   return {
-    
-    language: state.language
+    language: state.language,
   };
 };
 
-export default connect(mapStateTopProps)(withStyles(styles)(DisplayAttractionsTool));
+export default connect(mapStateTopProps)(
+  withStyles(styles)(DisplayAttractionsTool)
+);

@@ -14,7 +14,7 @@
     url("webfonts/3842F8_0_0.woff2") format("woff2"),
     url("webfonts/3842F8_0_0.woff") format("woff"),
     url("webfonts/3842F8_0_0.ttf") format("truetype");
-} 
+}
 
 /* body {
   margin: 0;
@@ -77,7 +77,6 @@ iframe {
 }
 
 .fb-like span {
-  
   max-width: 340px !important;
   width: 340px !important;
 }

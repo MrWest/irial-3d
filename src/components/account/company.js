@@ -9,7 +9,7 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
-  FormHelperText
+  FormHelperText,
 } from "@material-ui/core";
 
 import { Field } from "redux-form";
@@ -67,20 +67,20 @@ class Company extends React.Component {
   state = {
     state: this.props.company.shipping_state,
     logo: this.props.company.logo,
-    secondary_logo: this.props.company.secondary_logo
+    secondary_logo: this.props.company.secondary_logo,
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({ state: event.target.value });
   };
-  QuickUpdateCompany = file => {
+  QuickUpdateCompany = (file) => {
     this.setState({ logo: URL.createObjectURL(file) });
   };
-  QuickUpdateCompany2 = file => {
+  QuickUpdateCompany2 = (file) => {
     this.setState({ secondary_logo: URL.createObjectURL(file) });
   };
 
-  normalizePhone = value => {
+  normalizePhone = (value) => {
     if (!value) {
       return value;
     }
@@ -126,7 +126,7 @@ class Company extends React.Component {
                     height: 78,
                     borderRadius: 39,
                     paddingLeft: 18,
-                    paddingTop: 18
+                    paddingTop: 18,
                   }}
                 >
                   <IconSULogo width={50} height={60} />
@@ -136,7 +136,7 @@ class Company extends React.Component {
                   style={{
                     width: 78,
                     height: 78,
-                    borderRadius: 39
+                    borderRadius: 39,
                   }}
                 >
                   <img
@@ -156,11 +156,11 @@ class Company extends React.Component {
                     component="label"
                     style={{
                       paddingTop: 10,
-                       paddingBottom: 10,
+                      paddingBottom: 10,
                       paddingLeft: 64,
                       paddingRight: 64,
                       color: "#3577d4",
-                      border: "2px solid #3577d4"
+                      border: "2px solid #3577d4",
                     }}
                   >
                     <strong>Upload</strong>
@@ -196,7 +196,7 @@ class Company extends React.Component {
                     height: 78,
                     borderRadius: 39,
                     paddingLeft: 18,
-                    paddingTop: 16
+                    paddingTop: 16,
                   }}
                 >
                   <IconUpload fill="#d4d9e2" width={40} height={40} />
@@ -206,7 +206,7 @@ class Company extends React.Component {
                   style={{
                     width: 78,
                     height: 78,
-                    borderRadius: 39
+                    borderRadius: 39,
                   }}
                 >
                   <img
@@ -226,11 +226,11 @@ class Company extends React.Component {
                     component="label"
                     style={{
                       paddingTop: 10,
-                       paddingBottom: 10,
+                      paddingBottom: 10,
                       paddingLeft: 64,
                       paddingRight: 64,
                       color: "#3577d4",
-                      border: "2px solid #3577d4"
+                      border: "2px solid #3577d4",
                     }}
                   >
                     <strong>Upload</strong>
@@ -252,7 +252,7 @@ class Company extends React.Component {
             style={{
               fontSize: 14,
               fontWeight: "bold",
-              textTransform: "uppercase"
+              textTransform: "uppercase",
             }}
           >
             Company information

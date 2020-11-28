@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { withStyles, Grid } from '@material-ui/core';
-import { withRouter, Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import styles from './styles/breadcrumbs';
+import React, { Component } from "react";
+import { withStyles, Grid } from "@material-ui/core";
+import { withRouter, Link } from "react-router-dom";
+import { connect } from "react-redux";
+import styles from "./styles/breadcrumbs";
 
 class Breadcrumbs extends Component {
   state = {
-    packName: 'Starter Pack'
+    packName: "Starter Pack",
   };
 
   componentDidMount() {
@@ -15,13 +15,13 @@ class Breadcrumbs extends Component {
     this.handleLastStep(id);
   }
 
-  handleLastStep = id => {
+  handleLastStep = (id) => {
     if (id !== undefined) {
       const { packs } = this.props;
-      const pack = packs.find(p => id === p.id);
+      const pack = packs.find((p) => id === p.id);
       if (pack)
         this.setState({
-          packName: pack.name
+          packName: pack.name,
         });
     }
   };
@@ -35,15 +35,18 @@ class Breadcrumbs extends Component {
           <Grid item className={classes.center}>
             <div>
               <p className={classes.breadcrumbs}>
-                {location.pathname === '/presets' && (
+                {location.pathname === "/presets" && (
                   <React.Fragment>
-                    <Link to="/">Home</Link> <span className={classes.separator}>/</span> Select Pack
+                    <Link to="/">Home</Link>{" "}
+                    <span className={classes.separator}>/</span> Select Pack
                   </React.Fragment>
                 )}
-                {match.path === '/packsdetails/:id' && (
+                {match.path === "/packsdetails/:id" && (
                   <React.Fragment>
-                    <Link to="/">Home</Link> <span className={classes.separator}>/</span>{' '}
-                    <Link to="/presets">Select Pack</Link> <span className={classes.separator}>/</span> {packName}
+                    <Link to="/">Home</Link>{" "}
+                    <span className={classes.separator}>/</span>{" "}
+                    <Link to="/presets">Select Pack</Link>{" "}
+                    <span className={classes.separator}>/</span> {packName}
                   </React.Fragment>
                 )}
               </p>
@@ -55,8 +58,10 @@ class Breadcrumbs extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  packs: state.packs
+const mapStateToProps = (state) => ({
+  packs: state.packs,
 });
 
-export default connect(mapStateToProps)(withStyles(styles)(withRouter(Breadcrumbs)));
+export default connect(mapStateToProps)(
+  withStyles(styles)(withRouter(Breadcrumbs))
+);

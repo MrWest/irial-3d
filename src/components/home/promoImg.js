@@ -12,14 +12,9 @@ class PromoImg extends React.Component {
       <div className={classes.picContainer}>
         <img
           src="./images/home/swag-up-pack.png"
-       
           className={classes.promoPic}
         />
-        <p
-          variant="p"
-          component="p"
-          className={classes.typographyText}
-        >
+        <p variant="p" component="p" className={classes.typographyText}>
           SwapUp branding for demostrative purposes only, we brand your swag for
           you.
         </p>
@@ -28,28 +23,28 @@ class PromoImg extends React.Component {
   }
 }
 
-const styles = theme => ({
+const styles = (theme) => ({
   promoPic: {
     display: "table-cell",
-    verticalAlign: "middle"
+    verticalAlign: "middle",
   },
   picContainer: {
     paddingTop: 0,
     paddingBottom: 0,
     textAlign: "center",
     display: "table-cell",
-    verticalAlign: "middle"
+    verticalAlign: "middle",
   },
   typographyText: {
     color: "#ffffff !important",
     fontSize: 12,
     fontFamily: "Roboto",
-    marginTop: 20
-  }
+    marginTop: 20,
+  },
 });
 
 PromoImg.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(PromoImg);

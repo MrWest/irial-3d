@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { withStyles, Grid, TextField, Fab } from '@material-ui/core';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import { addComment } from '../../actions';
-import styles from './styles/Comments';
+import React, { Component } from "react";
+import { withStyles, Grid, TextField, Fab } from "@material-ui/core";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import { addComment } from "../../actions";
+import styles from "./styles/Comments";
 
 const Comment = ({ classes, author, text }) => (
   <div className={classes.Comment}>
@@ -12,17 +12,17 @@ const Comment = ({ classes, author, text }) => (
 );
 
 const crappyText =
-  'In the tumultuous business of cutting-in and attending to a whale, there is much running backwards and forwards among the crew. Now hands are wanted here, and then again hands are wanted there. There is no staying in any one place;';
+  "In the tumultuous business of cutting-in and attending to a whale, there is much running backwards and forwards among the crew. Now hands are wanted here, and then again hands are wanted there. There is no staying in any one place;";
 
 const someComments = [
-  { key: 1, author: 'Bartoloměj Dohnal', text: crappyText },
-  { key: 2, author: 'Daisy Murphy', text: crappyText },
-  { key: 3, author: 'Tua Manuera', text: crappyText }
+  { key: 1, author: "Bartoloměj Dohnal", text: crappyText },
+  { key: 2, author: "Daisy Murphy", text: crappyText },
+  { key: 3, author: "Tua Manuera", text: crappyText },
 ];
 
 const CommentsList = ({ classes }) => (
   <div className={classes.CommentsList}>
-    {someComments.map(c => (
+    {someComments.map((c) => (
       <Comment key={c.key} classes={classes} author={c.author} text={c.text} />
     ))}
     <div className={classes.LoadMoreContainer}>
@@ -32,7 +32,7 @@ const CommentsList = ({ classes }) => (
 );
 
 class Comments extends Component {
-  state = { comment: '' };
+  state = { comment: "" };
 
   handleTextChanged = ({ target: { value } }) => {
     this.setState({ comment: value });
@@ -62,11 +62,11 @@ class Comments extends Component {
                   className={classes.CommentInput}
                   margin="normal"
                   placeholder="Write your comment"
-                  inputProps={{ 'aria-label': 'bare' }}
+                  inputProps={{ "aria-label": "bare" }}
                   value={comment}
                   onChange={this.handleTextChanged}
-                  validators={['required']}
-                  errorMessages={['this field is required']}
+                  validators={["required"]}
+                  errorMessages={["this field is required"]}
                 />
               </Grid>
               <Grid item>
