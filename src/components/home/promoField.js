@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import PromoInfo from "./promoInfo";
@@ -6,15 +6,9 @@ import PromoItems from "./promoItems";
 import PromoLinks from "./promoLinks";
 import { Grid } from "@material-ui/core";
 
-class PromoField extends Component {
-  state = {};
-  render() {
-    const { classes, models } = this.props;
-    // console.log(models);
-    return (
+const PromoField = ({ classes, models })  => (
       <Grid container justify="center" className={classes.promoField}>
         <Grid container className={classes.center} spacing={0}>
-        {/* <Grid item sm={12} md={3} ></Grid> */}
         <Grid container>
           <Grid item md={8} xs={12}>
             <PromoInfo />
@@ -31,9 +25,7 @@ class PromoField extends Component {
         </Grid>
       </Grid>
     );
-  }
-}
-
+    
 const styles = theme => ({
   table: {
     display: "table",

@@ -44,21 +44,7 @@ const PromoItems = ({ classes, models}) => models ? (
             </Grid>
             <Grid item xs style={{ maxWidth: 792, overflow: 'hidden' }}>
               <Grid container style={{ width: 99999 }}>
-              {models.map(item => (
-               <Grid key={item.id} item>
-                 <div className={classes.itemViewContainer}>
-                   <Grid container justify="center" alignItems="center" style={{ height: '100%', width: '100%' }}>
-                     <Grid item>
-                        <div className={classes.itemView}>
-                        <img src={imageResizedUrl(item.images[0].url, 150)} className={classes.itemImg} alt={item.name}/>
-                       </div>
-                     
-                     </Grid>
-                   </Grid>
-                 </div>
-               </Grid>
-            ))}
-             {models.map(item => (
+              {models.slice(2,6).map(item => (
                <Grid key={item.id} item>
                  <div className={classes.itemViewContainer}>
                    <Grid container justify="center" alignItems="center" style={{ height: '100%', width: '100%' }}>

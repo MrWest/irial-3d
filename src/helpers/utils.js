@@ -122,10 +122,11 @@ export function reverseString(str) {
 
 
 export function imageResizedUrl(url, size) {
-  
+
+  if(!url) return url;
   const index = url.lastIndexOf('.');
   const replacement = `-${size}.`;
-  return url && url.substring(0, index) + replacement + url.substring(index + 1);
+  return url.substring(0, index) + replacement + url.substring(index + 1);
 }
 
 
