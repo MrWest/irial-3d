@@ -1,13 +1,5 @@
-import React, { Component } from "react";
-import {
-  Grid,
-  Button,
-  Select,
-  FormControl,
-  OutlinedInput,
-  MenuItem,
-  Paper
-} from "@material-ui/core";
+import React from "react";
+import { Grid } from "@material-ui/core";
 import Masonry from 'react-masonry-css'
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
@@ -25,7 +17,8 @@ const FrontModels = ({ models, classes, sections, addToCart, language }) =>  {
   const section = sections ? sections[1] : undefined;
 
   const handleAddItem = (item, openCart) => {
-    addToCart({ id_item: item.id, name: item.name, image: item.images[0].url, price: item.price,
+    const image = item.images[0];
+    addToCart({ id_item: item.id, name: item.name, image: image  ? image.url : undefined, price: item.price,
        lumion_version: item.lumion_version, section, category: section.categories.find(c => c.id === item.id_category),
         destination: item.ownerInfo.stripe_account_id, file: item.server_path, type: 'model' }, openCart);
    };

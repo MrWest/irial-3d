@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import PromoInfo from "./promoInfo";
+import PromoItems from "./promoItems";
 import PromoLinks from "./promoLinks";
 import { Grid } from "@material-ui/core";
 
@@ -21,7 +22,7 @@ class PromoField extends Component {
         </Grid>
         <Grid container alignItems="flex-end">
           <Grid item xs={9}>
-            {/* <PromoItems models={models}/> */}
+            <PromoItems models={models}/>
           </Grid>
           <Grid item xs={3}>
             <PromoLinks />

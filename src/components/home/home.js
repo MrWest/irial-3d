@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import PromoField from "./promoField";
@@ -12,28 +12,21 @@ import _ from 'lodash';
 import {getLanguage, isServer} from "../../apis/tools";
 import { fetchSections, fetchTags, sortModels } from "../../actions";
 
-
-class HomeOut extends Component {
-  state = {};
-  componentDidMount() {
+const HomeOut =  ({ classes, language, models, fetchSections, fetchTags, sortModels }) =>  {
+ 
+  useEffect(() => {
     if(!isServer)
     {
-      const { fetchSections, fetchTags, sortModels } = this.props;
       fetchSections();
       fetchTags();
       sortModels();
     }
     
-  }
-  render() {
-    const { classes, sections, language, models } = this.props;
+  }, []);
 
-    // if(sections === undefined || sections.length < 1)
-    //  return <div/>
-    //  console.log('zz', sections);
     return (
 
-         <div className={classes.container}>
+         <div style={{ paddingBottom: 88}}>
             <Helmet>
               <meta name="language" content={getLanguage()}/>
               <title>{language.PageTittle} | {language.HomePageTittle} </title>
@@ -41,24 +34,11 @@ class HomeOut extends Component {
               <meta name="keywords" content={language.HomePageTags} /> 
             </Helmet>
           <PromoField models={models} />
-          {/* <FrontModels sections={sections} models={models}/> */}
+          <FrontModels sections={sections} models={models}/>
           <AboutContact />
         </div>
     );
-  }
-}
-const styles = theme => ({
-  container: {
-    paddingBottom: 88
-  }
-});
-
-
-
-
-HomeOut.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+  };
 
 
 const mapStateTopProps = state => {
@@ -69,4 +49,4 @@ const mapStateTopProps = state => {
   };
 };
 
-export default connect(mapStateTopProps, { fetchSections, fetchTags, sortModels })(withStyles(styles)(HomeOut));
+export default connect(mapStateTopProps, { fetchSections, fetchTags, sortModels })(HomeOut);

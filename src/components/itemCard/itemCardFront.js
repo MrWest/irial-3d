@@ -11,14 +11,14 @@ const ItemCardFront = ({ item, type, addToCart, addToCartText, buyItem }) => (
   
   <Link href={`/${type}/${item.id}`} >
       <div className="front-card-content" >
-        <img
+        {/* <img
           style={{  width: '100%', height: '100%',
           minHeight: 154,
           objectFit: 'cover'}}
-          src={imageResizedUrl(item.images ? item.images[0].url : undefined, 370)}
+          src={imageResizedUrl(item.images[0] ? item.images[0].url : undefined, 370)}
           title={item.name}
           alt={item.name}
-        />
+        /> */}
         {!isInCart(item) && (
           <div className='item-options-front'>
             <Grid container justify="flex-end" spacing={2}>
