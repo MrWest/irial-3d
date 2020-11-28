@@ -12,7 +12,7 @@ import _ from 'lodash';
 import {getLanguage, isServer} from "../../apis/tools";
 import { fetchSections, fetchTags, sortModels } from "../../actions";
 
-const HomeOut =  ({ classes, language, models, fetchSections, fetchTags, sortModels }) =>  {
+const HomeOut =  ({ classes, language, models, sections, fetchSections, fetchTags, sortModels }) =>  {
  
   useEffect(() => {
     if(!isServer)
