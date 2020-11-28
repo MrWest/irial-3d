@@ -149,7 +149,6 @@ const styles = theme => ({
 });
 
 SwitchTool.propTypes = {
-  children: PropTypes.node.isRequired,
   onChange: PropTypes.node.isRequired
 };
 

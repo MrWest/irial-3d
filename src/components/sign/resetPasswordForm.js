@@ -197,7 +197,7 @@ const styles = theme => ({
     flexDirection: "column",
     maxWidth: 496,
     alignItems: "center",
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
+    padding: `${8}px ${theme.spacing.unit * 3}px ${theme
       .spacing.unit * 3}px`,
     backgroundColor: "transparent",
     paddingBottom: 60,

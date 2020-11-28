@@ -119,7 +119,7 @@ const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
     paddingTop: 0,
-    paddingBottom: theme.spacing.unit * 2,
+    paddingBottom: 8,
     paddingRight: "0px !important",
     paddingLeft: "0px !important",
     background: "transparent",

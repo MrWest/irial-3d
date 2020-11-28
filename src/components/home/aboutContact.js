@@ -1,11 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import  FrontContactForm  from "../forms/frontContactForm";
 import { Facebook, LinkedIn, GTranslate } from "@material-ui/icons";
 import { connect } from "react-redux";
-import { FacebookProvider, Like, Share, Group, Feed } from 'react-facebook';
+import { FacebookProvider, Like } from 'react-facebook';
 // import EmbeddedPost from "react-facebook/dist/EmbeddedPost";
 // import Page from "react-facebook/dist/Page";
 
@@ -30,7 +29,7 @@ const AboutContact = ({ classes, language }) => (
                       
                       <div className={classes.typographyTextSmall} style={{ textAlign: 'justify' }}>
                       
-                      {language.AboutUsText && language.AboutUsText.split('<br/>').map(txt => (<p style={{ fontSize: 18 }}>{txt}</p>))}
+                      {language.AboutUsText && language.AboutUsText.split('<br/>').map(txt => (<p key={txt} style={{ fontSize: 18 }}>{txt}</p>))}
                       </div>
                     </div>
                   </Grid> 
@@ -47,7 +46,7 @@ const AboutContact = ({ classes, language }) => (
                       
                       <div className={classes.typographyTextSmall} style={{ textAlign: 'justify' }}>
                       
-                      {language.WhatWeOfferText && language.WhatWeOfferText.split('<br/>').map(txt => (<p style={{ fontSize: 18 }}>{txt}</p>))}
+                      {language.WhatWeOfferText && language.WhatWeOfferText.split('<br/>').map(txt => (<p key={txt} style={{ fontSize: 18 }}>{txt}</p>))}
                       </div>
                     </div>
                  </Grid>
@@ -125,7 +124,6 @@ const AboutContact = ({ classes, language }) => (
             </Grid>
           </Grid>
 
-        
        
           </Grid>
     );

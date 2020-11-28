@@ -1,21 +1,15 @@
 import React from 'react';
-import { withStyles, Grid, Card, CardContent } from '@material-ui/core';
+import {  Grid } from '@material-ui/core';
 import Link from 'next/link';
-import CategoryLabel from './categoryLabel';
 import { RoundedButtonLink } from '../buttons';
 import { AttachMoney as MoneySharp, AddShoppingCart } from '@material-ui/icons';
 import StarRatingComponent from 'react-star-rating-component';
-import { isInCart } from '../../apis/tools';
-import styles from './styles/itemCardFront';
+import { isInCart } from '../../apis/tools'
 import { thousandsSeparatedAndFixed, imageResizedUrl } from '../../helpers/utils';
 
-const descriptionLeverage = description =>
-  description && description.length > 120 ? `${description.substring(0, 120)}...` : description;
-
-const ItemCardFront = ({ classes, item, category, type, addToCart, addToCartText, buyItem }) => (
+const ItemCardFront = ({ item, type, addToCart, addToCartText, buyItem }) => (
   
   <Link href={`/${type}/${item.id}`} >
-   
       <div className="front-card-content" >
         <img
           style={{  width: '100%', height: '100%',
@@ -30,14 +24,14 @@ const ItemCardFront = ({ classes, item, category, type, addToCart, addToCartText
             <Grid container justify="flex-end" spacing={2}>
               <Grid item>
                 <div title={buyItem}>
-                  <RoundedButtonLink  color={"#ffffff"} size={24} border={0} to={`/payment`} onClick={() => addToCart(item,false)} >
+                  <RoundedButtonLink  color="#ffffff" size={24} border={0} to={`/payment`} onClick={() => addToCart(item,false)} >
                     <MoneySharp color="#ffffff" style={{fontSize: 24, color: "#ffffff"}}></MoneySharp>
                   </RoundedButtonLink>
                 </div>
               </Grid>
               <Grid item>
                 <div title={addToCartText}>
-                  <RoundedButtonLink  color={"#ffffff"} size={24} border={0} onClick={() => addToCart(item,true)} >
+                  <RoundedButtonLink  color="#ffffff" size={24} border={0} onClick={() => addToCart(item,true)} >
                       <AddShoppingCart color="#ffffff" style={{fontSize: 24, color: "#ffffff"}}></AddShoppingCart>
                   </RoundedButtonLink>
                 </div>

@@ -10,8 +10,8 @@ import { Grid, Link } from "@material-ui/core";
 const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
+    paddingTop: 8,
+    paddingBottom: 8,
     background: "transparent"
   },
   orderButton: {
@@ -65,19 +65,14 @@ const styles = theme => ({
   }
 });
 
-class PromoLinks extends React.Component {
-  state = {};
+const links = [ 
+  { name: 'Desktop App', to: '/app'},
+  { name: 'Best Selling', to: '/upcoming'},
+  { name: 'Upcoming', to: '/upcoming'},
+  { name: 'Blog', to: '/blog'}
+]
 
-  render() {
-    const { classes } = this.props;
-    const links = [ 
-      { name: 'Desktop App', to: '/app'},
-      { name: 'Best Selling', to: '/upcoming'},
-      { name: 'Upcoming', to: '/upcoming'},
-      { name: 'Blog', to: '/blog'}
-    ]
-
-    return (
+const PromoLinks = ({ classes }) =>  (
         <Grid container direction="column" alignItems="flex-end">
           {links.map(link => (
             <Grid key={link.name} item >
@@ -85,7 +80,7 @@ class PromoLinks extends React.Component {
                <Grid item>
                   <Link href={link.to}>
                     <Grid container justify="center" alignItems="center"  className={classes.linkItem}>
-                      <Grid item justify="center" alignItems="center">
+                      <Grid item>
                         {link.name}
                       </Grid>
                     </Grid>
@@ -96,11 +91,5 @@ class PromoLinks extends React.Component {
           ))}
         </Grid>
     );
-  }
-}
-
-PromoLinks.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 
 export default withStyles(styles)(PromoLinks);
