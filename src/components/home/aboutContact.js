@@ -15,12 +15,13 @@ const AboutContact = ({ classes, language }) => (
         <div className={classes.cover} >
           <Grid container id="aboutus" justify="center" >
           <Grid item className={classes.center}>
-            <Grid container spacing={8} alignItems="stretch" >
-              <Grid item xs={12} md={6} style={{ backgroundImage: 'url(../static/images/home/city-hill.svg)',
-               backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }} />
-                <Grid item xs={12} md={6} style={{ paddingBottom: 0 }}>
+            <Grid container spacing={4} alignItems="stretch" >
+                <Grid item xs={12} md={6}  >
+                  <div className={classes.aboutPic}/>
+                </Grid>
+                <Grid item xs={12} md={6}>
                   <Grid container alignItems="flex-end" className={classes.aboutContent}>
-                    <Grid item style={{ paddingBottom: 0 }}>
+                    <Grid item>
                         <h3 className={classes.typographyTextBlue} >
                           {language.AboutUs}
                         </h3>

@@ -54,6 +54,12 @@ const styles = theme => ({
          backgroundOpacity: 0.5
        }
      },
+     aboutPic: {
+        backgroundImage: 'url(../static/images/home/city-hill.svg)',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        height: '100%'
+     },
     hrBar: {
       background: "#fafafa",
       borderColor: "#fafafa",
