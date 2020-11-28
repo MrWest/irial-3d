@@ -253,7 +253,7 @@ class SceneAddForm extends React.Component {
 
   realhandleSubmit = async (data) => {
     const { sign, addScene, history } = this.props;
-    // console.log("SHIT: ", data)
+    
     data.id_category = this.state.id_category;
     data.id_user = sign.loginInfo.id;
     addScene(data).then((scene) => {

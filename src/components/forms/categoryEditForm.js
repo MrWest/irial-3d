@@ -1,21 +1,15 @@
 import React from "react";
 import {
   Grid,
-  Button,
-  Select,
-  RadioGroup,
-  FormControlLabel,
-  Checkbox,
   Input,
   FormControl,
   InputLabel,
   FormHelperText,
-  Typography,
-  TextField,
+  Typography
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
-import { FixedButton, CoolButton } from "../buttons";
+import { CoolButton } from "../buttons";
 import {
   getCategory,
   updateCategory,
@@ -33,13 +27,11 @@ import { Form, reduxForm, Field, initialize } from "redux-form";
 import {
   required,
   email,
-  date,
   length,
-  numericality,
   format,
 } from "redux-form-validators";
-
 import { Link } from "react-router-dom";
+import styles from './styles/sectionEditForm';
 
 //  var ImagePicker = require('react-native-image-picker');
 
@@ -87,124 +79,8 @@ const renderError = ({ error, touched }) => {
   }
 };
 
-const renderRadioGroup = ({ input, ...rest }) => (
-  <RadioGroup
-    {...input}
-    {...rest}
-    valueSelected={input.value}
-    onChange={(event, value) => input.onChange(value)}
-  />
-);
-
-const renderSelectField = ({
-  input,
-  label,
-  meta: { touched, error },
-  children,
-  ...custom
-}) => (
-  <Select
-    floatingLabelText={label}
-    errorText={touched && error}
-    {...input}
-    onChange={(event, index, value) => input.onChange(event)}
-    children={children}
-    {...custom}
-  />
-);
-
-const styles = (theme) => ({
-  container: {
-    paddingTop: 107,
-    paddingBottom: 130,
-  },
-  center: {
-    paddingTop: "40px !important",
-    [theme.breakpoints.up("lg")]: {
-      maxWidth: "1280px",
-      paddingLeft: "0 !important",
-      paddingRight: "0 !important",
-      minWidth: "1280px",
-    },
-    [theme.breakpoints.down("lg")]: {
-      maxWidth: "1180px",
-      paddingLeft: "0 !important",
-      paddingRight: "0 !important",
-      minWidth: "1180px",
-    },
-    [theme.breakpoints.down("sm")]: {
-      maxWidth: "100vw",
-      paddingLeft: "16px !important",
-      paddingRight: "16px !important",
-      minWidth: "100vw",
-    },
-  },
-  rightOnMobile: {
-    [theme.breakpoints.down("sm")]: {
-      marginTop: 40,
-      marginBottom: 80,
-    },
-  },
-  root: {
-    ...theme.mixins.gutters(),
-    paddingTop: 8,
-    paddingBottom: 8,
-    background: "transparent",
-  },
-  orderButton: {
-    background: "#ffffff",
-    color: "#3577D4",
-    fontWeight: "bold",
-    width: "100%",
-  },
-  orderBottomButton: {
-    color: "#ffffff",
-    borderColor: "#ffffff",
-    width: "100%",
-    fontWeight: "bold",
-    marginTop: 20,
-  },
-  hrBar: {
-    background: "#e4e400",
-    borderColor: "#337ab7",
-    color: "#337ab7 !important",
-    marginTop: 10,
-    marginBottom: 10,
-    height: 3,
-    width: "100%",
-    textAlign: "left !important",
-  },
-  typographyText: {
-    color: "#337ab7 !important",
-    textAlign: "left !important",
-    fontWeight: "bold",
-  },
-  typographyTextSmall: {
-    marginBottom: 10,
-    textAlign: "left !important",
-    fontSize: 12,
-  },
-  areaText: {
-    fontSize: 12,
-  },
-});
 
 const validations = {
-  // amount: [
-  //   required({ msg: "Required" }),
-  //   numericality({
-  //     int: true,
-  //     ">=": 50,
-  //     msg: { greaterThanOrEqualTo: "You must be at least 50 swag packs" }
-  //   })
-  // ],
-  // budget: [
-  //   required({ msg: "Required" }),
-  //   numericality({
-  //     int: true
-  //   })
-  // ],
-
   email: [
     required({ msg: "Required" }),
     email(),
@@ -245,13 +121,6 @@ const validate = (values) => {
   return errors;
 };
 
-const options = {
-  title: "Select a photo",
-  takePhotoButtonTitle: "Take a photo",
-  chooseFromLibraryButtonTitle: "Choose from gallery",
-  quantity: 1,
-};
-
 class CategoryEditForm extends React.Component {
   state = {
     selectedImage: undefined,
@@ -259,7 +128,6 @@ class CategoryEditForm extends React.Component {
   };
 
   realhandleSubmit = (data) => {
-    console.log("SHIT: ", data);
     data.id = this.props.category.id;
     this.props.updateCategory(data);
     this.props.history.push("/account");
@@ -276,7 +144,7 @@ class CategoryEditForm extends React.Component {
     reader.readAsDataURL(files[0]);
 
     reader.onload = (e) => {
-      console.log("xXx", files[0]);
+      
 
       this.setState({ imageData: e.target.result });
       this.props
@@ -299,7 +167,7 @@ class CategoryEditForm extends React.Component {
   };
 
   render() {
-    const { pristine, name, general, classes } = this.props;
+    const { classes } = this.props;
     return (
       <main className={classes.container}>
         <Grid container justify="center" spacing={0}>
@@ -515,7 +383,6 @@ class CategoryEditForm extends React.Component {
                             align="right"
                             style={{
                               width: "100%",
-                              height: "auto",
                               height: 245,
                               position: "relative",
                               textAlign: "right",

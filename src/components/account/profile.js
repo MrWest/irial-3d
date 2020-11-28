@@ -17,7 +17,7 @@ import { encryptor, isServer } from "../../apis/tools";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import {
-  FuckIngshit,
+  GetLogingUser,
   saveProfile,
   getStripeAccountLoginLink,
 } from "../../actions";
@@ -180,7 +180,7 @@ class Profile extends React.Component {
       /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(event.target.value)
     ) {
       // alert(event.target.value)
-      let response = await FuckIngshit({
+      let response = await GetLogingUser({
         email: event.target.value,
         login_type: "facebook",
         password: "values.password",

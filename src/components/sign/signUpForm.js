@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { Field, reduxForm, Form, initialize } from "redux-form";
 import {
   signUp,
-  FuckIngshit,
+  GetLogingUser,
   addAttraction,
   signFacebook,
   notifyActivity,
@@ -56,7 +56,7 @@ const validate = (values) => {
   // if(values.email)
   // {
 
-  //    let response = await FuckIngshit({email: values.email, password: values.password})
+  //    let response = await GetLogingUser({email: values.email, password: values.password})
 
   //    console.log("res", response.message)
   //   if(response.message !== "No such user is registered"){
@@ -172,7 +172,7 @@ class SignUpForm extends Component {
       /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(event.target.value)
     ) {
       // alert(event.target.value)
-      let response = await FuckIngshit({
+      let response = await GetLogingUser({
         email: event.target.value,
         login_type: "facebook",
         password: "values.password",

@@ -238,18 +238,11 @@ const validate = (values) => {
   return errors;
 };
 
-const options = {
-  title: "Select a photo",
-  takePhotoButtonTitle: "Take a photo",
-  chooseFromLibraryButtonTitle: "Choose from gallery",
-  quantity: 1,
-};
 
 class CategoryAddForm extends React.Component {
   state = { id_section: -1 };
 
   realhandleSubmit = (data) => {
-    // console.log("SHIT: ", data)
     data.id_section = this.state.id_section;
     this.props.addCategory(data);
     this.props.getCategories(this.state.id_section);
@@ -263,7 +256,7 @@ class CategoryAddForm extends React.Component {
   }
 
   render() {
-    const { pristine, name, general, classes } = this.props;
+    const { classes } = this.props;
     return (
       <main className={classes.container}>
         <Grid container justify="center" spacing={0}>

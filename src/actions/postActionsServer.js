@@ -24,7 +24,6 @@ const getCategories = (posts) => {
 export const fetchPostsServer = async (reduxStore) => {
   const lang = getLanguage();
   const language = lang === "en" ? "En" : "Es";
-  // console.log(`/posts/?filter%5Bmeta_key%5D=type&filter%5Bmeta_value%5D=VinalesTraveler&filter%5Bmeta_key%5D=language&filter%5Bmeta_value%5D=${language}`);
   const postsFullData = await WordpressRestAPI.get(
     `/posts/?filter%5Bmeta_key%5D=type&filter%5Bmeta_value%5D=VinalesTraveler&filter%5Bmeta_key%5D=language&filter%5Bmeta_value%5D=${language}`
   ).then((res) => res.data);
@@ -74,12 +73,9 @@ export const fetchPostsServer = async (reduxStore) => {
 export const fetchPosts = () => async (dispatch) => {
   const lang = getLanguage();
   const language = lang === "en" ? "En" : "Es";
-  // console.log(`/posts/?filter%5Bmeta_key%5D=type&filter%5Bmeta_value%5D=VinalesTraveler&filter%5Bmeta_key%5D=language&filter%5Bmeta_value%5D=${language}`);
   const postsFullData = await WordpressRestAPI.get(
     `/posts/?filter%5Bmeta_key%5D=type&filter%5Bmeta_value%5D=VinalesTraveler&filter%5Bmeta_key%5D=language&filter%5Bmeta_value%5D=${language}`
   ).then((res) => res.data);
-  // const blogCategories = await WordpressRestAPI.get(`/categories`).then(res => res.data);
-  // const tagsFullData = await WordpressRestAPI.get(`/tags`).then(res => res.data);
   const posts = postsFullData.map((post) => {
     const {
       id,

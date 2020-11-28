@@ -3,8 +3,6 @@ import { EMPY_CART } from "./types";
 // import StripePayments from "../apis/StripePayments";
 import DashBoard from "../apis/DashBoard";
 import {
-  generatePHPParameters,
-  getLanguage,
   generateAppendParameters,
   headers,
 } from "../apis/tools";

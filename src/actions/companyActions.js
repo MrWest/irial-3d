@@ -42,9 +42,6 @@ export const saveCompany = (company) => async (dispatch) => {
       sendCompany,
       { headers }
     );
-
-    // console.log("company2Save: ",  companyAPI.data)
-    // alert("shit")
     dispatch({
       type: SAVE_COMPANY,
       payload: companyAPI.data,

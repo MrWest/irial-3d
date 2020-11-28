@@ -315,7 +315,7 @@ class TourEditForm extends React.Component {
   };
 
   realhandleSubmit = (data) => {
-    // console.log("SHIT: ", data)
+    
     data.id = this.props.tour.id;
     this.props.updateTour(data);
     this.props.history.push("/account");
@@ -388,7 +388,7 @@ class TourEditForm extends React.Component {
       reader.readAsDataURL(files[0]);
       this.setState({ error: "", completed: 0 });
       reader.onload = (e) => {
-        //console.log("xXx", files[0]);
+        //
         if (files[0] && files[0].size < 6300000) {
           this.setState({ imageData: e.target.result });
           this.props

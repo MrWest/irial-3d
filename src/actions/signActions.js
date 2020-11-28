@@ -9,7 +9,7 @@ import {
 import { okAndLog, errorAndLog, contentAppJSON } from "../helpers/utils";
 import wordpress from "../apis/wordpressRestAPI";
 
-export const FuckIngshit = async (logIn) => {
+export const GetLogingUser = async (logIn) => {
   const logInDb = await DashBoard.get(
     "/users/login.php" + generatePHPParameters(logIn)
   );

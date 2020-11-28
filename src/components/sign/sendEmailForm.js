@@ -14,7 +14,7 @@ import { CoolButton } from "../buttons";
 import { connect } from "react-redux";
 import { Form, reduxForm, initialize, Field } from "redux-form";
 import {
-  FuckIngshit,
+  GetLogingUser,
   prepareRecoveryEmail,
   confirmActivity,
 } from "../../actions";
@@ -102,7 +102,7 @@ class SendEmailForm extends Component {
       /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(event.target.value)
     ) {
       // alert(event.target.value)
-      let response = await FuckIngshit({
+      let response = await GetLogingUser({
         email: event.target.value,
         login_type: "facebook",
         password: "values.password",

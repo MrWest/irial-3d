@@ -131,7 +131,7 @@ class TourAddForm extends React.Component {
     // alert(value)
   };
   realhandleSubmit = (data) => {
-    // console.log("SHIT: ", data)
+    
     data.id_category = this.state.id_category;
     this.props.addTour(data);
     this.props.history.push("/account");
