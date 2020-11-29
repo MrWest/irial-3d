@@ -27,8 +27,7 @@ export const downloadFile = async (info) => {
   console.log("downloadFile: ", paymentInfo);
   const checkout = await DashBoard.post(
     "/payments/download_purchase.php",
-    paymentInfo,
-    { headers }
+    paymentInfo
   );
   console.log("downloadFile: ", checkout);
 
