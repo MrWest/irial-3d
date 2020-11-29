@@ -18,7 +18,7 @@ import {
   fieldValidation,
   runFieldValidations,
 } from "../../helpers/commonValidations";
-import { isServer } from "../../apis/tools"
+import { isServer } from "../../apis/tools";
 // Specify a string key:
 // Don't do this though, your keys should most likely be stored in env variables
 // and accessed via process.env.MY_SECRET_KEY
@@ -130,11 +130,7 @@ class Billing extends React.Component {
 
   render() {
     const { expanded, loginLink } = this.state;
-    const {
-      classes,
-      profile,
-      stripe_account_status,
-    } = this.props;
+    const { classes, profile, stripe_account_status } = this.props;
 
     return (
       <Grid container spacing={4}>

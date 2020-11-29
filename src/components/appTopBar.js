@@ -126,7 +126,13 @@ class AppTopBar extends Component {
           className={classes.center}
           style={{ textAlign: "center !important" }}
         >
-          <div style={{ width: "100%", textAlign: "center  !important", paddingBottom: 5 }}>
+          <div
+            style={{
+              width: "100%",
+              textAlign: "center  !important",
+              paddingBottom: 5,
+            }}
+          >
             <Link className={classes.logo} color="inherit" to="/">
               <IconVTLogo
                 height={60}
@@ -677,7 +683,7 @@ const styles = (theme) => ({
       paddingLeft: 10,
       paddingRight: 10,
       minHeight: "40px !important",
-      minWidth: "80px !important"
+      minWidth: "80px !important",
     },
   },
   ripplingLogoStyle: {
@@ -703,7 +709,7 @@ const styles = (theme) => ({
     borderRadius: 10,
     fontSize: 10,
     padding: 3,
-    border: "1px solid #434c5f"
+    border: "1px solid #434c5f",
   },
   bagContainer: {
     maxHeight: "200px",

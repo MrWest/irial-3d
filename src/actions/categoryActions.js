@@ -145,7 +145,7 @@ export const uploadCategoryImage = (info) => async (dispatch) => {
       { headers }
     );
 
-   return categoryAPI;
+    return categoryAPI;
   }
 };
 

@@ -11,12 +11,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { sendEmail } from "../../actions";
 import { Form, reduxForm, Field, initialize } from "redux-form";
 
-import {
-  required,
-  email,
-  length,
-  format,
-} from "redux-form-validators";
+import { required, email, length, format } from "redux-form-validators";
 
 const renderTextField = ({ input, label, placeholder, classes, meta }) => {
   return (
@@ -115,13 +110,12 @@ const styles = (theme) => ({
   },
   formInner: {
     [theme.breakpoints.down("xs")]: {
-     paddingBottom: 124
-    }
-  }
+      paddingBottom: 124,
+    },
+  },
 });
 
 const validations = {
-
   email: [
     required({ msg: "Required" }),
     email(),
@@ -299,7 +293,7 @@ const mapStateToProps = (state) => {
     company: state.company,
     userInfo: state.sign.userInfo,
     language: state.language,
-    initialValues: state.signFacebook
+    initialValues: state.signFacebook,
   };
 };
 export default connect(mapStateToProps, { initialize, sendEmail })(

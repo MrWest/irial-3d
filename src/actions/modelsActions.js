@@ -6,7 +6,7 @@ import {
   ADD_MODEL,
   ADD_MODEL_COMMENT,
   DELETE_MODEL_COMMENT,
-  CHANGE_MODEL_COMMENT
+  CHANGE_MODEL_COMMENT,
 } from "./types";
 
 import DashBoard from "../apis/DashBoard";

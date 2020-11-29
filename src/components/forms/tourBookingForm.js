@@ -5,18 +5,13 @@ import {
   FormControl,
   InputLabel,
   FormHelperText,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import { CoolButton } from "../buttons";
 import { Form, reduxForm, Field, initialize } from "redux-form";
-import {
-  required,
-  email,
-  length,
-  numericality
-} from "redux-form-validators";
+import { required, email, length, numericality } from "redux-form-validators";
 import { sendEmail } from "../../actions";
 
 const renderTextField = ({ input, label, placeholder, classes, meta }) => {
@@ -79,7 +74,6 @@ const renderDateField = ({ input, label, placeholder, classes, meta }) => {
   );
 };
 
-
 const styles = (theme) => ({
   root: {
     ...theme.mixins.gutters(),
@@ -132,10 +126,7 @@ const validations = {
     }),
   ],
 
-  email: [
-    required({ msg: "Required" }),
-    email()
-  ],
+  email: [required({ msg: "Required" }), email()],
   first_name: [required({ msg: "Required" }), length({ min: 3 })],
 };
 

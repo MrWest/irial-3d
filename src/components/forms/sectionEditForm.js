@@ -16,13 +16,8 @@ import { getSection, updateSection } from "../../actions";
 import SectionIcon from "@material-ui/icons/School";
 import { withRouter } from "react-router-dom";
 import { Form, reduxForm, Field, initialize } from "redux-form";
-import {
-  required,
-  email,
-  length,
-  format,
-} from "redux-form-validators";
-import styles from './styles/sectionEditForm';
+import { required, email, length, format } from "redux-form-validators";
+import styles from "./styles/sectionEditForm";
 
 const renderTextField = ({ input, label, placeholder, classes, meta }) => {
   return (
@@ -64,7 +59,6 @@ const renderError = ({ error, touched }) => {
     );
   }
 };
-
 
 const validations = {
   email: [

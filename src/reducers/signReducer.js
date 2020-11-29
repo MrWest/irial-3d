@@ -1,4 +1,4 @@
-import _ from "lodash";
+
 
 const SignReducer = (state = { isLogged: false, loginInfo: {} }, action) => {
   switch (action.type) {

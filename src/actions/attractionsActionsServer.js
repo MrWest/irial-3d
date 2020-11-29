@@ -1,13 +1,7 @@
-import {
-  FETCH_ATTRACTIONS,
-  SELECT_ATTRACTION
-} from "./types";
+import { FETCH_ATTRACTIONS, SELECT_ATTRACTION } from "./types";
 
 import DashBoard from "../apis/DashBoard";
-import {
-  generatePHPParameters,
-  getLanguage
-} from "../apis/tools";
+import { generatePHPParameters, getLanguage } from "../apis/tools";
 
 export const fetchAttractionsServer = async (reduxStore) => {
   const attractionsDb = await DashBoard.get("/attractions/get_attractions.php");
@@ -27,8 +21,8 @@ export const sortAttractionsServer = async (category, reduxStore) => {
   let completeUrl =
     category === "all"
       ? generatePHPParameters({ lang })
-      : generatePHPParameters({ category, lang })
-      
+      : generatePHPParameters({ category, lang });
+
   await DashBoard.get("/attractions/get_attractions.php" + completeUrl).then(
     async (attractionsDb) => {
       var attractionsRslt = attractionsDb.data.slice();

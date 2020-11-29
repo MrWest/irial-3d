@@ -267,7 +267,9 @@ class UserAdministration extends Component {
                       size={40}
                       border={0}
                       to={
-                        categoryIndex !== -1 ? `/modeladd/${categoryIndex}` : "#"
+                        categoryIndex !== -1
+                          ? `/modeladd/${categoryIndex}`
+                          : "#"
                       }
                     >
                       <AddIcon

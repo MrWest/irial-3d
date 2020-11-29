@@ -72,7 +72,7 @@ const styles = (theme) => ({
     backgroundColor: "#032D46",
     height: 28,
     [theme.breakpoints.down("xs")]: {
-      height: 64
+      height: 64,
     },
   },
   grow: {
@@ -166,7 +166,7 @@ const styles = (theme) => ({
     },
     [theme.breakpoints.down("sm")]: {
       fontSize: 12,
-      padding: "3px 8px"
+      padding: "3px 8px",
     },
   },
   appBarButtonHovered: {

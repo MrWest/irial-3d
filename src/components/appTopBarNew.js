@@ -49,13 +49,12 @@ class AppTopBar extends Component {
   listenToScroll = () => {
     const winScroll =
       document.body.scrollTop || document.documentElement.scrollTop;
-
+      const { location } = this.props;
     const height =
       document.documentElement.scrollHeight -
       document.documentElement.clientHeight;
     if (height && !isServer && this.props) {
       const scrolled = winScroll / height;
-      const { location } = this.props;
       this.setState({
         transparency: scrolled === 0 && location.pathname === "/",
       });
@@ -181,7 +180,11 @@ class AppTopBar extends Component {
                     <IrialLogo classes={classes} />
                   </Grid>
                   <Grid item xs>
-                    <p className={transparency ? classes.logoText : classes.logoTextBlue}>
+                    <p
+                      className={
+                        transparency ? classes.logoText : classes.logoTextBlue
+                      }
+                    >
                       Irial 3D
                     </p>
                   </Grid>
@@ -238,7 +241,11 @@ class AppTopBar extends Component {
                         onClose={this.handleClose}
                         className={classes.paper}
                         placement={"bottom-end"}
-                        style={{ width: 282, paddingLeft: 30, paddingRight: 40 }}
+                        style={{
+                          width: 282,
+                          paddingLeft: 30,
+                          paddingRight: 40,
+                        }}
                       >
                         {signInfo.loginInfo &&
                           signInfo.loginInfo.type !== "visitor" && (

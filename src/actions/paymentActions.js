@@ -2,10 +2,7 @@ import { EMPY_CART } from "./types";
 
 // import StripePayments from "../apis/StripePayments";
 import DashBoard from "../apis/DashBoard";
-import {
-  generateAppendParameters,
-  headers,
-} from "../apis/tools";
+import { generateAppendParameters, headers } from "../apis/tools";
 var fileDownload = require("js-file-download");
 
 //employee-orders_list

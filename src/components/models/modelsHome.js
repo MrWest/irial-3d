@@ -118,8 +118,14 @@ class ModelsHome extends Component {
           <Grid item className={classes.center}>
             <Grid container spacing={4} alignItems="center">
               <Grid item xs>
-                <p style={{ fontSize: 16, lineHeight: 1.3, color: "#1c5375 !important",
-                    fontFamily: "Roboto !important" }}>
+                <p
+                  style={{
+                    fontSize: 16,
+                    lineHeight: 1.3,
+                    color: "#1c5375 !important",
+                    fontFamily: "Roboto !important",
+                  }}
+                >
                   <h1
                     variant="p"
                     align="left"
@@ -250,8 +256,8 @@ const styles = (theme) => ({
     paddingTop: 56,
     paddingBottom: 130,
     [theme.breakpoints.down("sm")]: {
-paddingTop: 92
-}
+      paddingTop: 92,
+    },
   },
   mobilePadding: {
     [theme.breakpoints.down("sm")]: {
@@ -276,11 +282,11 @@ paddingTop: 92
       maxWidth: "100vw",
       minWidth: "100vw",
       paddingLeft: "24px !important",
-      paddingRight: "24px !important"
+      paddingRight: "24px !important",
     },
     [theme.breakpoints.down("xs")]: {
       paddingLeft: "8px !important",
-      paddingRight: "8px !important"
+      paddingRight: "8px !important",
     },
   },
   seletcTool: {

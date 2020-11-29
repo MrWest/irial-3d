@@ -253,7 +253,7 @@ class ProjectAddForm extends React.Component {
 
   realhandleSubmit = async (data) => {
     const { sign, addProject, history } = this.props;
-    
+
     data.id_category = this.state.id_category;
     data.id_user = sign.loginInfo.id;
     addProject(data).then((project) => {

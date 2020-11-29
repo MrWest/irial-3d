@@ -315,7 +315,6 @@ class TourEditForm extends React.Component {
   };
 
   realhandleSubmit = (data) => {
-    
     data.id = this.props.tour.id;
     this.props.updateTour(data);
     this.props.history.push("/account");

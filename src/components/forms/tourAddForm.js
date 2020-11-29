@@ -17,14 +17,9 @@ import SectionIcon from "@material-ui/icons/CardTravel";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import { Form, reduxForm, Field, initialize } from "redux-form";
 import { withRouter } from "react-router-dom";
-import {
-  required,
-  email,
-  length,
-  format,
-} from "redux-form-validators";
+import { required, email, length, format } from "redux-form-validators";
 import { Link } from "react-router-dom";
-import styles from './styles/tourAddForm';
+import styles from "./styles/tourAddForm";
 
 //  var ImagePicker = require('react-native-image-picker');
 
@@ -131,7 +126,6 @@ class TourAddForm extends React.Component {
     // alert(value)
   };
   realhandleSubmit = (data) => {
-    
     data.id_category = this.state.id_category;
     this.props.addTour(data);
     this.props.history.push("/account");

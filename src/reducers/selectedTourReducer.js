@@ -5,7 +5,6 @@ import {
   ADD_TOUR_COMMENT,
   DELETE_TOUR_COMMENT,
 } from "../actions/types";
-import _ from "lodash";
 
 const SelectedTourReducer = (state = {}, action) => {
   switch (action.type) {
@@ -20,7 +19,6 @@ const SelectedTourReducer = (state = {}, action) => {
         }
       });
       tour.newProgramText = action.payload.content;
-      // console.log("here:", lodging.program)
       return tour;
     case CHANGE_TOUR_COMMENT:
       tour = Object.assign({}, state);
@@ -34,7 +32,6 @@ const SelectedTourReducer = (state = {}, action) => {
         newComments.push(comment);
       });
       tour.comments = newComments;
-      // console.log("here:", lodging.program)
       return tour;
     case ADD_TOUR_COMMENT:
       tour = Object.assign({}, state);
@@ -47,7 +44,6 @@ const SelectedTourReducer = (state = {}, action) => {
       });
 
       tour.comments = newComments;
-      // console.log("here:", lodging.program)
       return tour;
 
     case DELETE_TOUR_COMMENT:
@@ -60,7 +56,6 @@ const SelectedTourReducer = (state = {}, action) => {
       });
 
       tour.comments = newComments;
-      // console.log("here:", lodging.program)
       return tour;
 
     default:

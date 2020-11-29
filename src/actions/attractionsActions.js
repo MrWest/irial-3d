@@ -7,7 +7,7 @@ import {
   CHANGE_ATTRACTION_PROGRAM,
   ADD_ATTRACTION_COMMENT,
   DELETE_ATTRACTION_COMMENT,
-  CHANGE_ATTRACTION_COMMENT
+  CHANGE_ATTRACTION_COMMENT,
 } from "./types";
 
 import DashBoard from "../apis/DashBoard";
@@ -45,7 +45,7 @@ export const sortAttractions = (category) => async (dispatch) => {
             generatePHPParameters({ idAttraction: attraction.id })
         );
         attraction.images = attractionImagesDb.data;
-        
+
         const attractionsRateDb = await DashBoard.get(
           "/attractions/get_attraction_rate.php" +
             generatePHPParameters({ idAttraction: attraction.id })
@@ -301,7 +301,8 @@ export const selectAttraction = (id) => async (dispatch) => {
 
 export const deleteAttraction = (id) => async (dispatch) => {
   const rslt = await DashBoard.post(
-    "/attractions/delete_attraction.php" + generatePHPParameters({ id }));
+    "/attractions/delete_attraction.php" + generatePHPParameters({ id })
+  );
 
   dispatch({
     type: DELETE_ATTRACTION,
@@ -335,8 +336,9 @@ export const uploadAttractionImage = (info) => async (dispatch) => {
 
 export const deleteAttractionImage = (id) => async (dispatch) => {
   const attractionAPI = await DashBoard.post(
-    "/attractions/delete_attraction_image.php" + generatePHPParameters({ id }));
-  
+    "/attractions/delete_attraction_image.php" + generatePHPParameters({ id })
+  );
+
   return attractionAPI;
 };
 
@@ -359,7 +361,7 @@ export const uploadAttractionVideo = (info) => async (dispatch) => {
       { headers, onUploadProgress: info.onProgress }
     );
 
-   return attractionAPI;
+    return attractionAPI;
   }
 };
 

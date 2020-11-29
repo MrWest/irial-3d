@@ -6,7 +6,6 @@ import {
   CHANGE_TEXTURE_COMMENT,
   UPDATE_TEXTURE_TAGS,
 } from "../actions/types";
-import _ from "lodash";
 
 const SelectedTexturesReducer = (state = {}, action) => {
   switch (action.type) {

@@ -71,7 +71,7 @@ export const toggleProjectTags = (project, tag, toogle) => async (dispatch) => {
       "/tags/delete_project_tag.php" +
         generatePHPParameters({ lang, idProject: project.id, idTag: tag })
     );
-     tags = tagsDb.data.slice();
+    tags = tagsDb.data.slice();
   }
 
   dispatch({

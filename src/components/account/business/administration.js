@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core"
+import { Grid } from "@material-ui/core";
 import Nameable from "./nameable";
 import { connect } from "react-redux";
 import {
@@ -170,7 +170,7 @@ class Administration extends Component {
                 style={{
                   paddingRight: 15,
                   visibility:
-                    this.state.sectionIndex !==-1 ? "inherit" : "hidden",
+                    this.state.sectionIndex !== -1 ? "inherit" : "hidden",
                 }}
               >
                 <RoundedButtonLink
@@ -178,7 +178,7 @@ class Administration extends Component {
                   size={40}
                   border={0}
                   to={
-                    this.state.sectionIndex !==-1
+                    this.state.sectionIndex !== -1
                       ? "/categoryadd/" + this.state.sectionIndex
                       : "#"
                   }
@@ -234,7 +234,7 @@ class Administration extends Component {
                 style={{
                   paddingRight: 15,
                   visibility:
-                    this.state.categoryIndex !==-1 ? "inherit" : "hidden",
+                    this.state.categoryIndex !== -1 ? "inherit" : "hidden",
                 }}
               >
                 {this.state.services === "tours" && (
@@ -243,7 +243,7 @@ class Administration extends Component {
                     size={40}
                     border={0}
                     to={
-                      this.state.categoryIndex !==-1
+                      this.state.categoryIndex !== -1
                         ? "/touradd/" + this.state.categoryIndex
                         : "#"
                     }
@@ -260,7 +260,7 @@ class Administration extends Component {
                     size={40}
                     border={0}
                     to={
-                      this.state.categoryIndex !==-1
+                      this.state.categoryIndex !== -1
                         ? "/attractionadd/" + this.state.categoryIndex
                         : "#"
                     }
@@ -278,7 +278,7 @@ class Administration extends Component {
                     size={40}
                     border={0}
                     to={
-                      this.state.categoryIndex !==-1
+                      this.state.categoryIndex !== -1
                         ? "/modeladd/" + this.state.categoryIndex
                         : "#"
                     }
@@ -348,8 +348,6 @@ class Administration extends Component {
     );
   }
 }
-
-
 
 Administration.propTypes = {
   classes: PropTypes.object.isRequired,

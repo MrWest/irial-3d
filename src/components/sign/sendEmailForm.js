@@ -14,11 +14,7 @@ import {
   prepareRecoveryEmail,
   confirmActivity,
 } from "../../actions";
-import {
-  required,
-  email,
-  format,
-} from "redux-form-validators";
+import { required, email, format } from "redux-form-validators";
 import { FormHelperText } from "@material-ui/core";
 
 const validations = {

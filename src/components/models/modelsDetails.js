@@ -22,7 +22,7 @@ import CommentsTool from "../tools/commentsTool";
 import Loader from "../global/loader";
 import { isServer, isInCart } from "../../apis/tools";
 import { imageResizedUrl } from "../../helpers/utils";
-import styles from './styles/modelsDetails';
+import styles from "./styles/modelsDetails";
 // import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 const Tag = ({ classes, tag }) => (
@@ -31,11 +31,29 @@ const Tag = ({ classes, tag }) => (
 
 const RelatedModelCard = ({ classes, model }) => (
   <Link to={`/model/${model.id}`}>
-    <div style={{ padding: 4, border: "1px solid #dddddd", borderRadius: 4, cursor: "pointer" }} >
+    <div
+      style={{
+        padding: 4,
+        border: "1px solid #dddddd",
+        borderRadius: 4,
+        cursor: "pointer",
+      }}
+    >
       <div className={classes.modelCard}>
-        <img src={imageResizedUrl(model.image, 150)} className={classes.modelCardImg} alt={model.name} />
+        <img
+          src={imageResizedUrl(model.image, 150)}
+          className={classes.modelCardImg}
+          alt={model.name}
+        />
       </div>
-      <p style={{ textAlign: "center",  marginTop: 4, color: "#4d4e53", fontFamily: "Arial" }}>
+      <p
+        style={{
+          textAlign: "center",
+          marginTop: 4,
+          color: "#4d4e53",
+          fontFamily: "Arial",
+        }}
+      >
         {model.name}
       </p>
     </div>
@@ -44,21 +62,19 @@ const RelatedModelCard = ({ classes, model }) => (
 
 const ItemDetails = ({ classes, model, section, category, language }) => (
   <div>
-      <p className={classes.modelName}>{model.name}</p>
-        <p
-          className={classes.modelText}
-        >{`${section.name}/${category.name}`}</p>
-        <p className={classes.modelText}>{model.full_description}</p>
-        <p className={classes.modelText}>
-          <strong>{language.LumionVersion}: </strong>
-          {model.lumion_version}
-        </p>
-        <p className={classes.modelPrice}>
-          <strong>{language.Price}: </strong>
-          {`${model.price} ${model.currency}`}
-        </p>
+    <p className={classes.modelName}>{model.name}</p>
+    <p className={classes.modelText}>{`${section.name}/${category.name}`}</p>
+    <p className={classes.modelText}>{model.full_description}</p>
+    <p className={classes.modelText}>
+      <strong>{language.LumionVersion}: </strong>
+      {model.lumion_version}
+    </p>
+    <p className={classes.modelPrice}>
+      <strong>{language.Price}: </strong>
+      {`${model.price} ${model.currency}`}
+    </p>
   </div>
-)
+);
 
 class ModelDetails extends Component {
   state = {
@@ -153,52 +169,57 @@ class ModelDetails extends Component {
             <Grid item xs={12} className={classes.onMobile}>
               <Grid container spacing={2}>
                 <Grid item xs={8}>
-                 <ItemDetails classes={classes} model={model} section={section} language={language} category={category} />
+                  <ItemDetails
+                    classes={classes}
+                    model={model}
+                    section={section}
+                    language={language}
+                    category={category}
+                  />
                 </Grid>
                 <Grid item xs={4}>
-                      <Button
+                  <Button
+                    className={
+                      cantAddToCart
+                        ? classes.actionButtonDisabled
+                        : classes.actionButton
+                    }
+                    endIcon={
+                      <AddShoppingCart
                         className={
                           cantAddToCart
-                            ? classes.actionButtonDisabled
-                            : classes.actionButton
+                            ? classes.actionIconDisabled
+                            : classes.actionIcon
                         }
-                        endIcon={
-                          <AddShoppingCart
-                            className={
-                              cantAddToCart
-                                ? classes.actionIconDisabled
-                                : classes.actionIcon
-                            }
-                          />
-                        }
-                        onClick={this.handleAddItem}
-                        disabled={cantAddToCart}
-                      >
-                        {language.AddToCart}
+                      />
+                    }
+                    onClick={this.handleAddItem}
+                    disabled={cantAddToCart}
+                  >
+                    {language.AddToCart}
                   </Button>
-                   <div style={{ height: 8 }} />
+                  <div style={{ height: 8 }} />
                   <Button
-                        className={classes.actionButton}
-                        endIcon={
-                          <MoneySharp
-                            className={
-                              cantAddToCart
-                                ? classes.actionIconDisabled
-                                : classes.actionIcon
-                            }
-                          />
+                    className={classes.actionButton}
+                    endIcon={
+                      <MoneySharp
+                        className={
+                          cantAddToCart
+                            ? classes.actionIconDisabled
+                            : classes.actionIcon
                         }
-                        onClick={() => {
-                          if (!cantAddToCart) this.handleAddItem(false);
-                        }}
-                        to={cantAddToCart || "/payment"}
-                        disabled={cantAddToCart}
-                      >
-                        {language.Buy}
-                      </Button>
+                      />
+                    }
+                    onClick={() => {
+                      if (!cantAddToCart) this.handleAddItem(false);
+                    }}
+                    to={cantAddToCart || "/payment"}
+                    disabled={cantAddToCart}
+                  >
+                    {language.Buy}
+                  </Button>
                 </Grid>
               </Grid>
-               
             </Grid>
             <Grid item md={8} xs={12}>
               <ImageGallery
@@ -223,126 +244,156 @@ class ModelDetails extends Component {
             </Grid>
             <Grid item md={4} xs={12}>
               <div className={classes.noMobile}>
-                  <ItemDetails classes={classes} model={model} section={section} language={language} category={category} />
-                  <Grid container spacing={2} style={{ paddingTop: 24 }}>
-                <Grid item xs={6}>
-                  <Link
-                    endIcon={
-                      <MoneySharp
+                <ItemDetails
+                  classes={classes}
+                  model={model}
+                  section={section}
+                  language={language}
+                  category={category}
+                />
+                <Grid container spacing={2} style={{ paddingTop: 24 }}>
+                  <Grid item xs={6}>
+                    <Link
+                      endIcon={
+                        <MoneySharp
+                          className={
+                            cantAddToCart
+                              ? classes.actionIconDisabled
+                              : classes.actionIcon
+                          }
+                        />
+                      }
+                      onClick={() => {
+                        if (!cantAddToCart) this.handleAddItem(false);
+                      }}
+                      to={cantAddToCart || "/payment"}
+                      disabled={cantAddToCart}
+                    >
+                      <Grid
+                        container
+                        justify="center"
+                        alignItems="center"
                         className={
                           cantAddToCart
-                            ? classes.actionIconDisabled
-                            : classes.actionIcon
+                            ? classes.actionButtonDisabled
+                            : classes.actionButton
                         }
-                      />
-                    }
-                    onClick={() => {
-                      if (!cantAddToCart) this.handleAddItem(false);
-                    }}
-                    to={cantAddToCart || "/payment"}
-                    disabled={cantAddToCart}
-                  >
-                    <Grid
-                      container
-                      justify="center"
-                      alignItems="center"
+                      >
+                        {language.Buy}
+                      </Grid>
+                    </Link>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Button
                       className={
                         cantAddToCart
                           ? classes.actionButtonDisabled
                           : classes.actionButton
                       }
+                      endIcon={
+                        <AddShoppingCart
+                          className={
+                            cantAddToCart
+                              ? classes.actionIconDisabled
+                              : classes.actionIcon
+                          }
+                        />
+                      }
+                      onClick={this.handleAddItem}
+                      disabled={cantAddToCart}
                     >
-                      {language.Buy}
-                    </Grid>
-                  </Link>
-                </Grid>
-                <Grid item xs={6}>
-                  <Button
-                    className={
-                      cantAddToCart
-                        ? classes.actionButtonDisabled
-                        : classes.actionButton
-                    }
-                    endIcon={
-                      <AddShoppingCart
-                        className={
-                          cantAddToCart
-                            ? classes.actionIconDisabled
-                            : classes.actionIcon
-                        }
-                      />
-                    }
-                    onClick={this.handleAddItem}
-                    disabled={cantAddToCart}
-                  >
-                    {language.AddToCart}
-                  </Button>
-                </Grid>
-                {model.ownerInfo && (
-                  <Grid xs={12}>
-                    <p className={classes.modelText} style={{ marginTop: 24 }}>
-                      <strong>{language.CreatorInfo}: </strong>
-                    </p>
-                    <Grid container spacing={2} itemsAlign="center">
-                      <Grid item>
-                        <img style={{ height: 38, width: 38, borderRadius: 19 }} src={model.ownerInfo.picture || "./static/images/public/user.png"}
-                          alt="user" />
-                      </Grid>
-                      <Grid item>
-                        <p className={classes.modelText} style={{ marginBottom: 8 }}>
-                          {model.ownerInfo.first_name}
-                        </p>
-                        <p className={classes.modelText} style={{ marginBottom: 0 }}>
-                          {model.ownerInfo.last_name}
-                        </p>
-                      </Grid>
-                      <Grid item>
-                        <p className={classes.modelText} style={{ marginBottom: 8 }} >
-                          <strong>{section.name}</strong>
-                        </p>
-                        <p className={classes.modelText} style={{ marginBottom: 0, textAlign: "center" }} >
-                          {model.ownerInfo.owner_models}
-                        </p>
-                      </Grid>
-                    </Grid>
+                      {language.AddToCart}
+                    </Button>
                   </Grid>
-                )}
+                  {model.ownerInfo && (
+                    <Grid xs={12}>
+                      <p
+                        className={classes.modelText}
+                        style={{ marginTop: 24 }}
+                      >
+                        <strong>{language.CreatorInfo}: </strong>
+                      </p>
+                      <Grid container spacing={2} itemsAlign="center">
+                        <Grid item>
+                          <img
+                            style={{ height: 38, width: 38, borderRadius: 19 }}
+                            src={
+                              model.ownerInfo.picture ||
+                              "./static/images/public/user.png"
+                            }
+                            alt="user"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <p
+                            className={classes.modelText}
+                            style={{ marginBottom: 8 }}
+                          >
+                            {model.ownerInfo.first_name}
+                          </p>
+                          <p
+                            className={classes.modelText}
+                            style={{ marginBottom: 0 }}
+                          >
+                            {model.ownerInfo.last_name}
+                          </p>
+                        </Grid>
+                        <Grid item>
+                          <p
+                            className={classes.modelText}
+                            style={{ marginBottom: 8 }}
+                          >
+                            <strong>{section.name}</strong>
+                          </p>
+                          <p
+                            className={classes.modelText}
+                            style={{ marginBottom: 0, textAlign: "center" }}
+                          >
+                            {model.ownerInfo.owner_models}
+                          </p>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  )}
 
-                {model.tags && (
-                  <Grid container>
-                    <p
-                      className={classes.modelText}
-                      style={{ marginBottom: 16, marginTop: 24 }}
-                    >
-                      <strong>{language.Tags}:</strong>
-                    </p>
-                    <Grid container spacing={2}>
-                      {model.tags.map((tag) => (
-                        <Grid key={tag.name} xs={3}>
-                          <Tag classes={classes} tag={tag} />
-                        </Grid>
-                      ))}
+                  {model.tags && (
+                    <Grid container>
+                      <p
+                        className={classes.modelText}
+                        style={{ marginBottom: 16, marginTop: 24 }}
+                      >
+                        <strong>{language.Tags}:</strong>
+                      </p>
+                      <Grid container spacing={2}>
+                        {model.tags.map((tag) => (
+                          <Grid key={tag.name} xs={3}>
+                            <Tag classes={classes} tag={tag} />
+                          </Grid>
+                        ))}
+                      </Grid>
                     </Grid>
-                  </Grid>
-                )}
-                {model.relatedModels && (
-                  <Grid container>
-                    <p
-                      className={classes.modelText}
-                      style={{ marginBottom: 16, marginTop: 24 }}
-                    >
-                      <strong>{language.RelatedModels}:</strong>
-                    </p>
-                    <Grid container spacing={2}>
-                      {model.relatedModels.map((rmodel) => (
-                        <Grid key={rmodel.id} item xs={6}>
-                          <RelatedModelCard classes={classes} model={rmodel} />
-                        </Grid>
-                      ))}
+                  )}
+                  {model.relatedModels && (
+                    <Grid container>
+                      <p
+                        className={classes.modelText}
+                        style={{ marginBottom: 16, marginTop: 24 }}
+                      >
+                        <strong>{language.RelatedModels}:</strong>
+                      </p>
+                      <Grid container spacing={2}>
+                        {model.relatedModels.map((rmodel) => (
+                          <Grid key={rmodel.id} item xs={6}>
+                            <RelatedModelCard
+                              classes={classes}
+                              model={rmodel}
+                            />
+                          </Grid>
+                        ))}
+                      </Grid>
                     </Grid>
-                  </Grid>
-                )}
-              </Grid>
+                  )}
+                </Grid>
               </div>
             </Grid>
           </Grid>

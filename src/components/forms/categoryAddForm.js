@@ -238,7 +238,6 @@ const validate = (values) => {
   return errors;
 };
 
-
 class CategoryAddForm extends React.Component {
   state = { id_section: -1 };
 

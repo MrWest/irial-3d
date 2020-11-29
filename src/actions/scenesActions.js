@@ -6,7 +6,7 @@ import {
   ADD_SCENE,
   ADD_SCENE_COMMENT,
   DELETE_SCENE_COMMENT,
-  CHANGE_SCENE_COMMENT
+  CHANGE_SCENE_COMMENT,
 } from "./types";
 
 import DashBoard from "../apis/DashBoard";

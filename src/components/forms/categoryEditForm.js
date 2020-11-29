@@ -5,7 +5,7 @@ import {
   FormControl,
   InputLabel,
   FormHelperText,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
@@ -24,14 +24,9 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { RoundedButtonLink } from "../buttons";
 import { withRouter } from "react-router-dom";
 import { Form, reduxForm, Field, initialize } from "redux-form";
-import {
-  required,
-  email,
-  length,
-  format,
-} from "redux-form-validators";
+import { required, email, length, format } from "redux-form-validators";
 import { Link } from "react-router-dom";
-import styles from './styles/sectionEditForm';
+import styles from "./styles/sectionEditForm";
 
 //  var ImagePicker = require('react-native-image-picker');
 
@@ -78,7 +73,6 @@ const renderError = ({ error, touched }) => {
     );
   }
 };
-
 
 const validations = {
   email: [
@@ -144,8 +138,6 @@ class CategoryEditForm extends React.Component {
     reader.readAsDataURL(files[0]);
 
     reader.onload = (e) => {
-      
-
       this.setState({ imageData: e.target.result });
       this.props
         .uploadCategoryImage({

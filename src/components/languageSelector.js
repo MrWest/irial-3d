@@ -2,9 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import SwitchTool from "./switchTool";
-import {
-  Grid
-} from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import {
   setLanguageEn,
   setLanguageEs,
@@ -63,7 +61,7 @@ const styles = (theme) => ({
     fontSize: 12,
     marginRight: 8,
     [theme.breakpoints.down("sm")]: {
-      fontSize: 10
+      fontSize: 10,
     },
   },
 });

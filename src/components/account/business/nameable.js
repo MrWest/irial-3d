@@ -34,7 +34,11 @@ class Nameable extends Component {
     if (size === "medium") innerPadding = "30px 10px";
 
     return (
-      <StylessButton id={id} onClick={onClick} style={{ cursor: "pointer", width: "100%" }}>
+      <StylessButton
+        id={id}
+        onClick={onClick}
+        style={{ cursor: "pointer", width: "100%" }}
+      >
         <main
           style={{ marginBottom: 5, padding: innerPadding }}
           className={selected ? classes.selected : classes.normal}
@@ -59,7 +63,9 @@ class Nameable extends Component {
                     width: "100%",
                   }}
                 >
-                  <div style={{ textAlign: "center", width: 20, margin: "auto" }}>
+                  <div
+                    style={{ textAlign: "center", width: 20, margin: "auto" }}
+                  >
                     <RoundedButtonLink
                       id={id}
                       color={"#cccccc"}

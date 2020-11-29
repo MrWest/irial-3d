@@ -33,7 +33,10 @@ const AboutContact = ({ classes, language }) => (
                     <div className={classes.hrBarGold} />
                   </div>
 
-                  <div className={classes.typographyTextSmall} style={{ textAlign: "justify" }}>
+                  <div
+                    className={classes.typographyTextSmall}
+                    style={{ textAlign: "justify" }}
+                  >
                     {language.AboutUsText &&
                       language.AboutUsText.split("<br/>").map((txt) => (
                         <p key={txt} style={{ fontSize: 18 }}>
@@ -52,7 +55,10 @@ const AboutContact = ({ classes, language }) => (
                 <div className={classes.typographyTextSmall}>
                   <div className={classes.hrBarGold} />
                 </div>
-                <div className={classes.typographyTextSmall} style={{ textAlign: "justify" }}>
+                <div
+                  className={classes.typographyTextSmall}
+                  style={{ textAlign: "justify" }}
+                >
                   {language.WhatWeOfferText &&
                     language.WhatWeOfferText.split("<br/>").map((txt) => (
                       <p key={txt} style={{ fontSize: 18 }}>
@@ -92,7 +98,7 @@ const AboutContact = ({ classes, language }) => (
               className={classes.contactUsForm}
             >
               <Grid item xs={12}>
-                <div  className={classes.noMobile}>
+                <div className={classes.noMobile}>
                   <h3 className={classes.typographyTextBlue}>
                     {language.ContactUs}
                   </h3>

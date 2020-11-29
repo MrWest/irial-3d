@@ -253,7 +253,7 @@ class TextureAddForm extends React.Component {
 
   realhandleSubmit = (data) => {
     const { sign, addTexture, history } = this.props;
-    
+
     data.id_category = this.state.id_category;
     data.id_user = sign.loginInfo.id;
     addTexture(data).then((texture) => {

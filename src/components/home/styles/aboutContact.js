@@ -46,15 +46,15 @@ const styles = (theme) => ({
     },
   },
   coverContact: {
-      backgroundImage: "url(../static/images/home/about-us-background.png)",
-      backgroundRepeat: "no-repeat !important",
-      display: "inherit",
-      backgroundSize: "cover",
-      backgroundPosition: "left top  !important",
-      width: "100%",
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundOpacity: 0.5
+    backgroundImage: "url(../static/images/home/about-us-background.png)",
+    backgroundRepeat: "no-repeat !important",
+    display: "inherit",
+    backgroundSize: "cover",
+    backgroundPosition: "left top  !important",
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundOpacity: 0.5,
   },
   aboutPic: {
     backgroundImage: "url(../static/images/home/city-hill.svg)",
@@ -107,7 +107,7 @@ const styles = (theme) => ({
     letterSpacing: 2,
     textShadow: "1px 1px 0 rgba(20, 20, 20, 0.75)",
     [theme.breakpoints.down("xs")]: {
-      fontSize: 16
+      fontSize: 16,
     },
   },
   formContainer: {
@@ -115,12 +115,12 @@ const styles = (theme) => ({
     [theme.breakpoints.down("xs")]: {
       paddingLeft: 8,
       paddingRight: 8,
-      paddingBottom: 56
+      paddingBottom: 56,
     },
   },
   noMobile: {
     [theme.breakpoints.down("xs")]: {
-      display: 'none'
+      display: "none",
     },
   },
   typographyTextSmall: {
@@ -144,7 +144,7 @@ const styles = (theme) => ({
     [theme.breakpoints.down("xs")]: {
       paddingLeft: 16,
     },
-  }
+  },
 });
 
 export default styles;

@@ -337,20 +337,32 @@ class CommentsTool extends React.Component {
                       <StylessButton
                         id={comment.id}
                         className={classes.link}
-                        style={{ marginRight: 8, color: "#3577d4", fontSize: 12,
-                          cursor: "pointer", fontWeight: "normal" }}
-                        onClick={this.handleOnClickEdit.bind(this)}>
+                        style={{
+                          marginRight: 8,
+                          color: "#3577d4",
+                          fontSize: 12,
+                          cursor: "pointer",
+                          fontWeight: "normal",
+                        }}
+                        onClick={this.handleOnClickEdit.bind(this)}
+                      >
                         {language.Edit}
                       </StylessButton>
                       |
                       {this.state.toEdit ? (
                         <StylessButton
                           className={classes.link}
-                          style={{ marginLeft: 0, color: "#434c5f", fontSize: 12,
-                            cursor: "pointer", fontWeight: "normal" }}
+                          style={{
+                            marginLeft: 0,
+                            color: "#434c5f",
+                            fontSize: 12,
+                            cursor: "pointer",
+                            fontWeight: "normal",
+                          }}
                           onClick={() =>
                             this.setState({ newComment: "", toEdit: undefined })
-                          }>
+                          }
+                        >
                           {language.Cancel}
                         </StylessButton>
                       ) : (
