@@ -30,8 +30,7 @@ export const downloadFile = async (info) => {
     paymentInfo
   );
   console.log("downloadFile: ", checkout);
-
-  //fileDownload(checkout.data, `${info.name}.pdf`);
+  fileDownload(checkout.data, `${info.name}.pdf`);
 };
 
 //employee-orders_list
