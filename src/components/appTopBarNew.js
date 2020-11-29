@@ -49,16 +49,18 @@ class AppTopBar extends Component {
   listenToScroll = () => {
     const winScroll =
       document.body.scrollTop || document.documentElement.scrollTop;
-      const { location } = this.props;
+     
     const height =
       document.documentElement.scrollHeight -
       document.documentElement.clientHeight;
     if (height && !isServer && this.props) {
+      const { location } = this.props;
       const scrolled = winScroll / height;
       this.setState({
         transparency: scrolled === 0 && location.pathname === "/",
       });
     } else if (!isServer && this.props) {
+      const { location } = this.props;
       this.setState({
         transparency: location.pathname === "/",
       });
