@@ -174,7 +174,7 @@ class FrontContactForm extends React.Component {
       // data.service = this.props.tour.name + " Booking"
 
       const { change } = this.props;
-
+      
       this.props
         .sendEmail(data)
         .then((rslt) => {
@@ -257,6 +257,7 @@ class FrontContactForm extends React.Component {
               className={
                 pristine ? classes.actionButtonDisabled : classes.actionButton
               }
+              type="submit"
               disabled={pristine}
             >
               {this.state.isSending

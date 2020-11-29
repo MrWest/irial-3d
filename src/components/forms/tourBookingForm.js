@@ -168,7 +168,6 @@ class TourBookingForm extends React.Component {
       data.service = this.props.tour.name + " Booking";
 
       const { change } = this.props;
-
       this.props
         .sendEmail(data)
         .then((rslt) => {

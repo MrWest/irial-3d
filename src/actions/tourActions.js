@@ -478,7 +478,6 @@ export const sendEmail = (data) => async (dispatch) => {
   if (data.subject) sendData.subject += " (" + lang + ")";
 
   let uploadInfo = generateAppendParameters(sendData);
-
   const promises = await DashBoard.post(
     "/mail/sendemailcross.php",
     uploadInfo,
