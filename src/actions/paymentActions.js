@@ -25,7 +25,7 @@ export const payCart = (info) => async (dispatch) => {
 export const downloadFile = async (info) => {
   const paymentInfo = generateAppendParameters(info);
   console.log("downloadFile: ", paymentInfo);
-  const checkout = await DashBoard.post(
+  const checkout = await DashBoard.get(
     "/payments/download_purchase.php",
     paymentInfo,
     { headers }
