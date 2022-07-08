@@ -31,7 +31,7 @@
     "js-file-download": "^0.4.12",
     "lodash": "^4.17.15",
     "mdbreact": "^4.20.0",
-    "moment": "^2.27.0",
+    "moment": "^2.29.4",
     "next": "^9.0.2",
     "next-fonts": "^0.18.0",
     "next-redux-wrapper": "^3.0.0",
