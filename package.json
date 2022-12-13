@@ -24,7 +24,7 @@
     "classnames": "^2.2.6",
     "cookie-parser": "^1.4.4",
     "cssnano": "^4.1.10",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "glamor": "^2.20.40",
     "heroku-ssl-redirect": "0.0.4",
     "isomorphic-unfetch": "^3.0.0",
